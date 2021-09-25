@@ -1,24 +1,28 @@
-package org.project;
+package org.project.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * JavaFX App
+ * JavaFX AppMain
  */
-public class App extends Application {
+public class AppMain extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("appmain"));
+        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -27,7 +31,7 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AppMain.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
