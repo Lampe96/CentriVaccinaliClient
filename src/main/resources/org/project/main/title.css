@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Titillium Web', sans-serif;
+    src: url('TitilliumWeb-SemiBoldItalic.ttf');
+}
+
+.label {
+    -fx-font-family: 'Titillium Web', sans-serif;;
+}

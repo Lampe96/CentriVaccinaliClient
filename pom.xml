@@ -26,9 +26,51 @@
         </dependency>
 
         <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
             <version>9.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reactfx</groupId>
+            <artifactId>reactfx</artifactId>
+            <version>2.0-M5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vanniktech</groupId>
+            <artifactId>gradle-maven-publish-plugin</artifactId>
+            <version>0.18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.12.0</version>
         </dependency>
     </dependencies>
 

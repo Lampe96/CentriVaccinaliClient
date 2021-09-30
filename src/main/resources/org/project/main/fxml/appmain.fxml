@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -13,47 +13,64 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.main.AppMainController">
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.main.AppMainController">
     <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
-        <AnchorPane layoutX="305.0" layoutY="47.0" prefHeight="400.0" prefWidth="335.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="56.0">
-            <Label layoutX="77.0" layoutY="67.0" text="ACCEDI" wrapText="true" AnchorPane.bottomAnchor="280.0" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="67.0">
-                <font>
-                    <Font size="32.0" />
-                </font>
-            </Label>
-            <JFXTextField focusColor="#886bf2" labelFloat="true" layoutX="77.0" layoutY="140.0" prefHeight="30.0" prefWidth="199.0" promptText="Email" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="140.0">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </JFXTextField>
-            <ImageView layoutX="47.0" layoutY="143.0" AnchorPane.bottomAnchor="243.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="143.0">
-                <Image url="@../../drawable/person_24.png" />
+        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #F9F9F9; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="62.0" layoutY="157.0" preserveRatio="true" AnchorPane.bottomAnchor="214.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="248.0" AnchorPane.topAnchor="159.0">
+                <Image url="@../../drawable/user.png" />
             </ImageView>
-            <ImageView layoutX="47.0" layoutY="211.0" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="264.0" AnchorPane.topAnchor="211.0">
-                <Image url="@../../drawable/lock_24.png" />
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="64.0" layoutY="213.0" preserveRatio="true" AnchorPane.bottomAnchor="158.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="246.0" AnchorPane.topAnchor="215.0">
+                <Image url="@../../drawable/padlock.png" />
             </ImageView>
-            <ImageView layoutX="282.0" layoutY="211.0" AnchorPane.bottomAnchor="159.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="211.0">
-                <Image url="@../../drawable/visible_on_24dp.png" />
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
+            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/minimize.png" />
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
             </ImageView>
-            <JFXPasswordField focusColor="#886bf2" labelFloat="true" layoutX="77.0" layoutY="208.0" prefHeight="30.0" prefWidth="199.0" promptText="Password" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="77.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="208.0">
+            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/quit.png" />
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            </ImageView>
+         <MFXTextField layoutX="90.0" layoutY="151.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="189.0" promptText="Email" validated="true" validatorTitle="Non vuoto" AnchorPane.bottomAnchor="212.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="151.0">
             <font>
-               <Font size="14.0" />
-            </font>
-         </JFXPasswordField>
-            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="141.0" layoutY="274.0" ripplerFill="#745eca" style="-fx-background-color: #05dbf2; -fx-background-radius: 1em;" text="ACCEDI" wrapText="true">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
+               <Font size="15.0" />
+            </font></MFXTextField>
+         <MFXPasswordField layoutX="90.0" layoutY="208.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="156.0" promptText="Password" validated="true" validatorTitle="Password errata" AnchorPane.bottomAnchor="155.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="87.0" AnchorPane.topAnchor="208.0">
             <font>
-               <Font size="14.0" />
+               <Font size="15.0" />
+            </font></MFXPasswordField>
+         <MFXButton fx:id="BT_login" buttonType="RAISED" layoutX="144.0" layoutY="264.0" onMouseClicked="#login" rippleColor="#745eca" style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;" text="ACCEDI">
+            <font>
+               <Font name="System Bold" size="14.0" />
             </font>
-            </JFXButton>
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor></MFXButton>
+            <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="59.0" layoutY="75.0" preserveRatio="true" AnchorPane.bottomAnchor="283.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="75.0">
+                <Image url="@../../drawable/face-mask.png" />
+            </ImageView>
+         <Label fx:id="BT_signUp" layoutX="152.0" layoutY="348.0" onMouseClicked="#signUp" text="Registrati" textFill="#0645ad" underline="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Label>
+         <Label fx:id="BT_login_guest" layoutX="126.0" layoutY="318.0" onMouseClicked="#loginGuest" text="Accedi come ospite" textFill="#0645ad" underline="true">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+         </Label>
+         <Label layoutX="107.0" layoutY="76.0" stylesheets="@../title.css" text="BENVENUTO">
+            <font>
+               <Font size="26.0" />
+            </font>
+         </Label>
+         <AnchorPane layoutX="90.0" layoutY="108.0" prefHeight="3.0" prefWidth="185.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" AnchorPane.bottomAnchor="283.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="108.0" />
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: linear-gradient(to right top, #0476d9, #0081df, #008ce5, #0097ea, #00a1ee, #00acf2, #00b7f5, #00c2f7, #00cff7, #00dcf2, #00e7e9, #05f2db); -fx-background-radius: 3em;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
-            <GridPane layoutX="27.0" layoutY="99.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="75.0">
+            <GridPane layoutX="27.0" layoutY="99.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0">
                 <columnConstraints>
                     <ColumnConstraints hgrow="ALWAYS" />
                     <ColumnConstraints hgrow="ALWAYS" />
@@ -68,15 +85,18 @@
                <font>
                   <Font size="20.0" />
                </font></Label>
-                <Label text="VACCINALI" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <Label stylesheets="@../title.css" text="VACCINALI" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Bauhaus 93" size="20.0" />
                </font></Label>
                 <Label text="ITALIANI" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <font>
                   <Font size="20.0" />
                </font></Label>
             </GridPane>
+            <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="252.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="25.0">
+                <Image url="@../../drawable/hospital.png" />
+            </ImageView>
         </AnchorPane>
     </AnchorPane>
 </AnchorPane>
