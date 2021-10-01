@@ -7,33 +7,31 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.jetbrains.annotations.NotNull;
+
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * JavaFX AppMain
  */
 public class AppMain extends Application {
 
-    private static Scene scene;
     private double xOffset, yOffset;
-
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppMain.class.getResource("fxml/" + fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
 
     public static void main(String[] args) {
         launch();
     }
 
+    private static Parent loadFXML(URL fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(fxml);
+        return fxmlLoader.load();
+    }
+
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("appmain"));
+    public void start(@NotNull Stage stage) throws IOException {
+        Scene scene = new Scene(loadFXML(AppMain.class.getResource("fxml/app_main.fxml")));
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);

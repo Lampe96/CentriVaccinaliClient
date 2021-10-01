@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Affirmative';
+    src: url('fonts/Affirmative.otf');
+}
+
+.title {
+    -fx-font-family: 'Affirmative';
+}
+
+#welcome {
+    -fx-font-family: 'Affirmative';
+}
+
+.clickLabel:hover {
+    -fx-text-fill: '#0B0080';
+    -fx-font-size: 14;
+}
