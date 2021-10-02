@@ -1,5 +1,4 @@
-package org.project.homeUser;
+package org.project.user;
 
 public class UserHomeController {
-
 }

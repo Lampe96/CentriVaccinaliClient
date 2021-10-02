@@ -12,6 +12,5 @@
 }
 
 .clickLabel:hover {
-    -fx-text-fill: '#0B0080';
-    -fx-font-size: 14;
+    -fx-text-fill: #0B0080;
 }

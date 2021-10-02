@@ -10,12 +10,15 @@ import java.net.URL;
 
 public class WindowUtility {
 
+    public static Parent newScene(URL fxml) throws IOException {
+        return loadFXML(fxml);
+    }
+
     public static void setRoot(URL fxml, @NotNull Scene scene) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(URL fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(fxml);
-        return fxmlLoader.load();
+        return FXMLLoader.load(fxml);
     }
 }

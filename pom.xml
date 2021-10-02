@@ -90,7 +90,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>org.project.main.AppMain</mainClass>
+                    <mainClass>org.project.login.LoginMain</mainClass>
                 </configuration>
             </plugin>
         </plugins>
