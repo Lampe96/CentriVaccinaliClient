@@ -108,7 +108,7 @@ public class LoginMainController {
             TF_password.getPassword();
         }
 
-        /*try {
+        try {
             if (1 == 0) {
                 WindowUtility.setRoot(UserHomeController.class.getResource("fxml/user_home.fxml"), AP_ext.getScene());
             } else {
@@ -116,7 +116,7 @@ public class LoginMainController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     @FXML

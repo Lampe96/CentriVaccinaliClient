@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.login.LoginMainController">
     <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
-        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #DDDDDD; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
+        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #DDDDDD; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-border-radius: 1.8em; -fx-border-width: 5;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
             <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="23.0">
                 <Image url="@../../drawable/minimize.png" />
                 <cursor>
@@ -28,26 +28,25 @@
                 </cursor>
             </ImageView>
             <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="59.0" layoutY="66.0" preserveRatio="true" AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="66.0">
-                <Image url="@../../drawable/face-mask.png" />
+                <Image url="@../../drawable/face_mask.png" />
             </ImageView>
             <Label id="welcome" layoutX="107.0" layoutY="67.0" stylesheets="@../login.css" text="BENVENUTO">
                 <font>
                     <Font size="26.0" />
                 </font>
             </Label>
-            <AnchorPane layoutX="90.0" layoutY="99.0" prefHeight="3.0" prefWidth="185.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="99.0" />
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="58.0" layoutY="137.0" preserveRatio="true" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="137.0">
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="54.0" layoutY="133.0" preserveRatio="true" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="133.0">
                 <Image url="@../../drawable/user.png" />
             </ImageView>
-            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="189.0" promptText="Email" validated="true" validatorTitle="Non vuoto" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="129.0">
+            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="198.0" promptText="Email" validated="true" validatorTitle="Non vuoto">
                 <font>
                     <Font size="15.0" />
                 </font>
             </MFXTextField>
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="60.0" layoutY="193.0" preserveRatio="true" AnchorPane.bottomAnchor="178.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="193.0">
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="53.0" layoutY="190.0" preserveRatio="true" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="190.0">
                 <Image url="@../../drawable/padlock.png" />
             </ImageView>
-            <MFXPasswordField fx:id="TF_password" layoutX="86.0" layoutY="186.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="164.0" promptText="Password" textLimit="20" validated="true" validatorTitle="Password errata" AnchorPane.bottomAnchor="177.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="186.0">
+            <MFXPasswordField fx:id="TF_password" layoutX="86.0" layoutY="186.0" lineColor="#886bf2" promptText="Password" textLimit="20" validated="true" validatorTitle="Password errata">
                 <font>
                     <Font size="15.0" />
                 </font>
@@ -78,6 +77,7 @@
                     <Cursor fx:constant="HAND" />
                 </cursor>
             </JFXCheckBox>
+         <AnchorPane layoutX="108.0" layoutY="100.0" prefHeight="2.0" prefWidth="154.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-background-radius: 3em;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
             <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="35.0">
