@@ -67,22 +67,8 @@ public class LoginMainController {
     }
 
     @FXML
-    private void quit() {
-        System.exit(0);
-    }
-
-    @FXML
     private void darkStyleMinimize() {
         setDarkHover(BT_minimize);
-    }
-
-    @FXML
-    private void darkStyleQuit() {
-        setDarkHover(BT_quit);
-    }
-
-    private void setDarkHover(@NotNull ImageView iv) {
-        iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     @FXML
@@ -91,8 +77,22 @@ public class LoginMainController {
     }
 
     @FXML
+    private void quit() {
+        System.exit(0);
+    }
+
+    @FXML
+    private void darkStyleQuit() {
+        setDarkHover(BT_quit);
+    }
+
+    @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
+    }
+
+    private void setDarkHover(@NotNull ImageView iv) {
+        iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     private void resetDarkExit(@NotNull ImageView iv) {

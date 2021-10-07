@@ -7,13 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
-import org.project.user.UserHomeController;
 import org.project.windowUtility.WindowUtility;
 
 import java.io.IOException;
@@ -21,7 +19,10 @@ import java.io.IOException;
 public class HubSignUpController {
 
     @FXML
-    public MFXButton BT_sing_up;
+    public AnchorPane AP_ext;
+
+    @FXML
+    public ImageView BT_back;
 
     @FXML
     public ImageView BT_minimize;
@@ -36,14 +37,12 @@ public class HubSignUpController {
     public MFXTextField TF_address;
 
     @FXML
-    public JFXComboBox CB_typology;
+    public JFXComboBox<String> CB_typology;
 
     @FXML
-    public ImageView BT_back;
+    public MFXButton BT_sing_up;
 
     @FXML
-    public AnchorPane AP_ext;
-
     public void back() {
         try {
             WindowUtility.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
@@ -52,9 +51,15 @@ public class HubSignUpController {
         }
     }
 
-    public void darkStyleBack() {setDarkHover(BT_back); }
+    @FXML
+    public void darkStyleBack() {
+        setDarkHover(BT_back);
+    }
 
-    public void restoreStyleBack() {resetDarkExit(BT_back);}
+    @FXML
+    public void restoreStyleBack() {
+        resetDarkExit(BT_back);
+    }
 
     @FXML
     private void minimize() {
@@ -63,22 +68,8 @@ public class HubSignUpController {
     }
 
     @FXML
-    private void quit() {
-        System.exit(0);
-    }
-
-    @FXML
     private void darkStyleMinimize() {
         setDarkHover(BT_minimize);
-    }
-
-    @FXML
-    private void darkStyleQuit() {
-        setDarkHover(BT_quit);
-    }
-
-    private void setDarkHover(@NotNull ImageView iv) {
-        iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     @FXML
@@ -87,8 +78,22 @@ public class HubSignUpController {
     }
 
     @FXML
+    private void quit() {
+        System.exit(0);
+    }
+
+    @FXML
+    private void darkStyleQuit() {
+        setDarkHover(BT_quit);
+    }
+
+    @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
+    }
+
+    private void setDarkHover(@NotNull ImageView iv) {
+        iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     private void resetDarkExit(@NotNull ImageView iv) {

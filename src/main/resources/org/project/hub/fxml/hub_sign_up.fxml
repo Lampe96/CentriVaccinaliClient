@@ -1,123 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
-<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubSignUpController">
-    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
-        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: #DDDDDD; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
-         <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#sign_up" rippleColor="#745eca" style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;" text="REGISTRATI" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="345.0">
-            <font>
-               <Font name="System Bold" size="14.0" />
-            </font>
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </MFXButton>
-            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/minimize.png" />
+    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0"
+                AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
+        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0"
+                    style="-fx-background-color: #DDDDDD; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;"
+                    AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0"
+                    AnchorPane.topAnchor="56.0">
+            <ImageView fx:id="BT_back" layoutX="36.0" layoutY="27.0" onMouseClicked="#back"
+                       onMouseEntered="#darkStyleBack" onMouseExited="#restoreStyleBack" preserveRatio="true">
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <Image url="@../../drawable/back_arrow.png"/>
+            </ImageView>
+            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize"
+                       onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true"
+                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0"
+                       AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/minimize.png"/>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
             </ImageView>
-            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/quit.png" />
+            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit"
+                       onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true"
+                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0"
+                       AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/quit.png"/>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
             </ImageView>
-            <Label id="welcome" layoutX="69.0" layoutY="61.0" prefHeight="34.0" prefWidth="207.0" stylesheets="@../hub_sign_up.css" text="REGISTRAZIONE">
+            <Label id="welcome" layoutX="69.0" layoutY="61.0" prefWidth="207.0" stylesheets="@../hub_sign_up.css"
+                   text="REGISTRAZIONE">
                 <font>
-                    <Font size="26.0" />
+                    <Font size="26.0"/>
                 </font>
             </Label>
-            <MFXScrollPane layoutX="32.0" layoutY="102.0" prefHeight="228.0" prefWidth="280.0" style="-fx-background-color: #DDDDDD;" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
-                <AnchorPane prefHeight="300.0" prefWidth="254.0" style="-fx-background-color: #DDDDDD;">
-                    <MFXTextField id="promptTextColor" fx:id="TF_name_hub" layoutX="39.0" layoutY="14.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="189.0" promptText="Nome Hub" validated="true" validatorTitle="Non vuoto">
+            <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0"
+                        style="-fx-background-color: #4243ce; -fx-background-radius: 3em;"/>
+            <MFXScrollPane layoutX="32.0" layoutY="102.0" prefWidth="280.0" thumbColor="#00c402"
+                           thumbHoverColor="#745eca" trackColor="#96f887" AnchorPane.bottomAnchor="55.0"
+                           AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
+                <AnchorPane prefHeight="275.0" prefWidth="254.0" style="-fx-background-color: #DDDDDD;">
+                    <MFXTextField id="promptTextColor" fx:id="TF_name_hub" layoutX="43.0" layoutY="14.0"
+                                  lineColor="#886bf2" prefWidth="189.0" promptText="Nome Hub" validated="true"
+                                  validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0" />
+                            <Font size="15.0"/>
                         </font>
                     </MFXTextField>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="13.0" layoutY="79.0" preserveRatio="true">
-                        <Image url="@../../drawable/padlock.png" />
-                    </ImageView>
-                    <MFXPasswordField layoutX="40.0" layoutY="75.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="158.0" promptText="Password" textLimit="20" validated="true" validatorTitle="Password errata">
+                    <MFXPasswordField accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="68.0" lineColor="#886bf2"
+                                      prefWidth="158.0" promptText="Password" textLimit="20" validated="true">
                         <font>
-                            <Font size="15.0" />
+                            <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
-                    <MFXPasswordField layoutX="38.0" layoutY="132.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="164.0" promptText="Conferma Password" textLimit="20" validated="true" validatorTitle="Password errata">
+                    <MFXPasswordField accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="125.0" lineColor="#886bf2"
+                                      prefWidth="158.0" promptText="Conferma Password" textLimit="20" validated="true">
                         <font>
-                            <Font size="15.0" />
+                            <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
-                    <MFXTextField fx:id="TF_address" layoutX="38.0" layoutY="197.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="196.0" promptText="Indrizzo Hub" validated="true" validatorTitle="Non vuoto">
+                    <MFXTextField fx:id="TF_address" layoutX="43.0" layoutY="182.0" lineColor="#886bf2"
+                                  prefWidth="189.0" promptText="Indrizzo Hub" validated="true"
+                                  validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0" />
+                            <Font size="15.0"/>
                         </font>
                     </MFXTextField>
-                    <JFXComboBox id="typology" fx:id="CB_typology" labelFloat="true" layoutX="42.0" layoutY="254.0" prefHeight="25.0" prefWidth="195.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css" />
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="13.0" layoutY="18.0" preserveRatio="true">
-                        <Image url="@../../drawable/home.png" />
+                    <JFXComboBox id="typology" fx:id="CB_typology" labelFloat="true" layoutX="43.0" layoutY="237.0"
+                                 prefWidth="198.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css"/>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="18.0" preserveRatio="true">
+                        <Image url="@../../drawable/home.png"/>
                     </ImageView>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="201.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png" />
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="72.0" preserveRatio="true">
+                        <Image url="@../../drawable/padlock.png"/>
                     </ImageView>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="13.0" layoutY="255.0" preserveRatio="true">
-                        <Image url="@../../drawable/typology.png" />
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="129.0" preserveRatio="true">
+                        <Image url="@../../drawable/check.png"/>
                     </ImageView>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="136.0" preserveRatio="true">
-                        <Image url="@../../drawable/check.png" />
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="186.0" preserveRatio="true">
+                        <Image url="@../../drawable/address.png"/>
+                    </ImageView>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="238.0" preserveRatio="true">
+                        <Image url="@../../drawable/typology.png"/>
                     </ImageView>
                 </AnchorPane>
             </MFXScrollPane>
-            <ImageView fx:id="BT_back" layoutX="54.0" layoutY="23.0" onMouseClicked="#back" onMouseEntered="#darkStyleBack" onMouseExited="#restoreStyleBack" preserveRatio="true">
+            <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#sign_up" rippleColor="#745eca"
+                       style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRATI"
+                       AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0"
+                       AnchorPane.topAnchor="345.0">
+                <font>
+                    <Font name="System Bold" size="14.0"/>
+                </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
-                <Image url="@../../drawable/back_arrow.png" />
-            </ImageView>
-         <AnchorPane layoutX="71.0" layoutY="94.0" prefHeight="2.0" prefWidth="199.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
+            </MFXButton>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 3em;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
             <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="35.0">
                 <Image url="@../../drawable/primula.png" />
             </ImageView>
-            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
-                <Label prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="CENTRI" wrapText="true">
+            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0"
+                  AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
+                <Label prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="CENTRI"
+                       wrapText="true">
                     <font>
-                        <Font size="40.0" />
+                        <Font size="40.0"/>
                     </font>
                 </Label>
-                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="VACCINALI" wrapText="true">
+                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css"
+                       text="VACCINALI" wrapText="true">
                     <font>
-                        <Font name="Arial Rounded MT Bold" size="40.0" />
+                        <Font name="Arial Rounded MT Bold" size="40.0"/>
                     </font>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="ITALIANI" wrapText="true">
+                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css"
+                       text="ITALIANI" wrapText="true">
                     <font>
-                        <Font size="40.0" />
+                        <Font size="40.0"/>
                     </font>
                 </Label>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="138.0" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="Hub version" wrapText="true">
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="15.0" />
-               </VBox.margin>
-            </Label>
+                <Label alignment="CENTER" layoutX="10.0" layoutY="138.0" prefWidth="300.0" styleClass="title"
+                       stylesheets="@../hub_sign_up.css" text="Hub version" wrapText="true">
+                    <font>
+                        <Font size="13.0"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets top="15.0"/>
+                    </VBox.margin>
+                </Label>
             </VBox>
         </AnchorPane>
     </AnchorPane>
