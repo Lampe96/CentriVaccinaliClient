@@ -2,13 +2,16 @@ package org.project.login;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
+import org.project.UserType;
 import org.project.windowUtility.WindowUtility;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginMain extends Application {
 
@@ -25,6 +28,8 @@ public class LoginMain extends Application {
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("CVI");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.show();
 
         scene.setOnMousePressed(mouseEvent -> {

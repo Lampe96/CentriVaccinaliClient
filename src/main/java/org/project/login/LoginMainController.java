@@ -1,12 +1,15 @@
 package org.project.login;
 
+import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -31,13 +34,22 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LoginMainController {
 
     @FXML
+    public AnchorPane AP_ext;
+
+    @FXML
     public ImageView BT_minimize;
 
     @FXML
     public ImageView BT_quit;
 
     @FXML
-    public AnchorPane AP_ext;
+    public MFXTextField TF_email;
+
+    @FXML
+    public MFXPasswordField TF_password;
+
+    @FXML
+    public JFXCheckBox CB_remember_me;
 
     @FXML
     public MFXButton BT_login;
@@ -47,9 +59,6 @@ public class LoginMainController {
 
     @FXML
     public Label BT_signUp;
-
-    @FXML
-    public MFXTextField TF_email;
 
     @FXML
     private void minimize() {
@@ -94,7 +103,12 @@ public class LoginMainController {
     private void login() {
         System.out.println(TF_email.getText());
         //controllare nel database se hub o cittadino
-        try {
+        if (CB_remember_me.isSelected()) {
+            System.out.println(TF_password.getPassword());
+            TF_password.getPassword();
+        }
+
+        /*try {
             if (1 == 0) {
                 WindowUtility.setRoot(UserHomeController.class.getResource("fxml/user_home.fxml"), AP_ext.getScene());
             } else {
@@ -102,7 +116,7 @@ public class LoginMainController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @FXML
@@ -136,7 +150,7 @@ public class LoginMainController {
     private UserType choiceAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Registrazione");
-        alert.setHeaderText("Scegli tra:");
+        alert.setHeaderText("Scegli come registrarti:");
         alert.initStyle(StageStyle.TRANSPARENT);
         alert.initModality(Modality.APPLICATION_MODAL);
 
@@ -150,7 +164,7 @@ public class LoginMainController {
         dialogPane.setPrefSize(0, 0);
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
         dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert.css")).toExternalForm());
-        dialogPane.getStyleClass().add("myDialog");
+        dialogPane.getStyleClass().add("alert");
 
         Scene dialogScene = dialogPane.getScene();
         dialogScene.setFill(Color.TRANSPARENT);
@@ -167,6 +181,9 @@ public class LoginMainController {
             dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
             dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
         });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
 
         Optional<ButtonType> result = alert.showAndWait();
 
