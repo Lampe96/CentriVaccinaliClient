@@ -24,7 +24,7 @@ import org.project.hub.HubHomeController;
 import org.project.hub.HubSignUpController;
 import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
-import org.project.windowUtility.WindowUtility;
+import org.project.utility.WindowUtility;
 
 import java.io.IOException;
 import java.util.Objects;

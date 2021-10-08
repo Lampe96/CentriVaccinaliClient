@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.windowUtility.WindowUtility;
+import org.project.utility.WindowUtility;
 
 import java.io.IOException;
 import java.util.Objects;

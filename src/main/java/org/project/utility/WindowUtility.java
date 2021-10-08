@@ -1,4 +1,4 @@
-package org.project.windowUtility;
+package org.project.utility;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

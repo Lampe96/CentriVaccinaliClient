@@ -14,3 +14,8 @@
 .clickLabel:hover {
     -fx-text-fill: #0B0080;
 }
+
+.jfx-combo-box {
+    -fx-prompt-text-fill: #4d4d4d;
+    -fx-font-size: 15;
+}

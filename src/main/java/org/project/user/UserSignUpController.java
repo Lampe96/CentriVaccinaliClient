@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
-import org.project.windowUtility.WindowUtility;
+import org.project.utility.WindowUtility;
 
 import java.io.IOException;
 
@@ -53,6 +54,24 @@ public class UserSignUpController {
 
     @FXML
     public MFXButton BT_sing_up;
+
+    @FXML
+    public Label LB_error_name;
+
+    @FXML
+    public Label LB_error_surname;
+
+    @FXML
+    public Label LB_error_code;
+
+    @FXML
+    public Label LB_error_email;
+
+    @FXML
+    public Label LB_error_nickname;
+
+    @FXML
+    public Label LB_error_confirmed_password;
 
     @FXML
     public void sign_up() {
