@@ -72,6 +72,12 @@
             <artifactId>materialfx</artifactId>
             <version>11.12.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.password4j</groupId>
+            <artifactId>password4j</artifactId>
+            <version>1.5.3</version>
+        </dependency>
     </dependencies>
 
     <build>

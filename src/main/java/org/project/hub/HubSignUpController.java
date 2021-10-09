@@ -1,15 +1,10 @@
 package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
+import org.project.models.Hub;
 import org.project.utility.RegistrationUtility;
 import org.project.utility.WindowUtility;
 
@@ -142,48 +138,52 @@ public class HubSignUpController implements Initializable {
     @FXML
     public void sign_up() {
 
-        Boolean saveOk = false;
+        boolean saveOk = true;
+        String hub_name = TF_name_hub.getText().trim();
+        String pwd = PF_password.getText().trim();
+        String confirm_pwd = PF_confirmed_password.getText().trim();
+        String address = TF_address.getText().trim();
+        String typology = CB_typology.getValue();
 
-        if (RegistrationUtility.checkName(TF_name_hub.getText().trim())) {
+        if (RegistrationUtility.checkName(hub_name)) {
             LB_error_name.setVisible(false);
-            saveOk = true;
         } else {
             LB_error_name.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPassword(PF_password.getText().trim())) {
+        if (RegistrationUtility.checkPassword(pwd)) {
             LB_error_password.setVisible(false);
-            saveOk = true;
         } else {
             LB_error_password.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPasswordConfirmed(PF_password.getText().trim(), PF_confirmed_password.getText().trim())) {
+        if (RegistrationUtility.checkPasswordConfirmed(pwd, confirm_pwd)) {
             Lb_error_confirmed_password.setVisible(false);
-            saveOk = true;
         } else {
             Lb_error_confirmed_password.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkAddress(TF_address.getText().trim())) {
+        if (RegistrationUtility.checkAddress(address)) {
             LB_error_address.setVisible(false);
-            saveOk = true;
         } else {
             LB_error_address.setVisible(true);
             saveOk = false;
         }
 
-        if (CB_typology.getValue() != null) {
+        if (typology != null) {
             LB_error_typology.setVisible(false);
-            saveOk = true;
         } else {
             LB_error_typology.setVisible(true);
             saveOk = false;
         }
 
-
+        if(saveOk){
+            String crypt_pwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+            TF_name_hub.setText("CIAOAOOA");
+            Hub hub = new Hub(hub_name, crypt_pwd, address, typology);
+        }
     }
 }

@@ -4,7 +4,9 @@ import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
@@ -26,12 +28,15 @@ import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
 import org.project.utility.WindowUtility;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class LoginMainController {
+public class LoginMainController implements Initializable {
 
     @FXML
     public AnchorPane AP_ext;
@@ -99,14 +104,44 @@ public class LoginMainController {
         iv.setEffect(null);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        InputStream is = LoginMainController.class.getResourceAsStream("Remember_me.txt");
+        assert is != null;
+        InputStreamReader isr = new InputStreamReader(is);
+        try {
+            BufferedReader br = new BufferedReader(isr);
+            if (LoginMainController.class.getResource("Remember_me.txt").getFile().length() > 0) {
+                System.out.println("SONO QIO");
+                TF_email.setText(br.readLine());
+                TF_password.setText(br.readLine());
+                br.close();
+           }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void login() {
-        System.out.println(TF_email.getText());
-        //controllare nel database se hub o cittadino
-        if (CB_remember_me.isSelected()) {
-            System.out.println(TF_password.getPassword());
-            TF_password.getPassword();
-        }
+
+        //GUARDA IN INIZIALAIZE E FAI SPECCHIO
+
+//        String pwd =  TF_password.getPassword().trim();
+//        String email_e_hub = TF_email.getText().trim();
+//
+//        System.out.println(TF_email.getText());
+//        //TODO controllare nel database se hub o cittadino e poi fare ciò
+//        if (CB_remember_me.isSelected()) {
+//            File savedData = new File((LoginMainController.class.getResource("Remember_me.txt")).getFile());
+//            try {
+//                BufferedWriter bw = new BufferedWriter(new FileWriter(savedData));
+//                bw.write(email_e_hub);
+//                bw.write(pwd);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         try {
             if (1 == 0) {

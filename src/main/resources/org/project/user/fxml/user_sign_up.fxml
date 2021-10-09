@@ -40,8 +40,8 @@
                 </font>
             </Label>
             <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
-            <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#fc4a1a" thumbHoverColor="#755eca" trackColor="#ffdf00" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="106.0">
-                <AnchorPane prefHeight="425.0" prefWidth="245.0" style="-fx-background-color: white;">
+            <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#fc4a1a" thumbHoverColor="#755eca" trackColor="#ffdf00" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
+                <AnchorPane prefHeight="425.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <MFXTextField id="promptTextColor" fx:id="TF_name" layoutX="43.0" layoutY="14.0" lineColor="#886bf2" prefWidth="189.0" promptText="Nome" validated="true" validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0" />
@@ -123,7 +123,7 @@
                      <Font size="10.0" />
                   </font>
                </Label>
-               <Label layoutX="43.0" layoutY="332.0" prefWidth="200.0" text="Minimo 6 caratteri, 1 carattere speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="RED" visible="false" wrapText="true">
+               <Label fx:id="LB_error_password" layoutX="43.0" layoutY="332.0" prefWidth="205.0" text="Minimo 6 caratteri, 1 carattere speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="RED" visible="false" wrapText="true">
                   <font>
                      <Font size="10.0" />
                   </font>

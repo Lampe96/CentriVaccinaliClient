@@ -38,7 +38,7 @@
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="54.0" layoutY="133.0" preserveRatio="true" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="133.0">
                 <Image url="@../../drawable/user.png" />
             </ImageView>
-            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="198.0" promptText="Email" validated="true" validatorTitle="Non vuoto">
+            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="198.0" promptText="Email/Nome Hub" validated="true" validatorTitle="Non vuoto">
                 <font>
                     <Font size="15.0" />
                 </font>
