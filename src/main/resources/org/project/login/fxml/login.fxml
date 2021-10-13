@@ -4,99 +4,144 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.login.LoginMainController">
-    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
-        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-border-radius: 1.8em; -fx-border-width: 5;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
-            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/minimize.png" />
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
+            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="org.project.login.LoginMainController">
+    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0"
+                AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
+        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0"
+                    style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-border-radius: 1.8em; -fx-border-width: 5;"
+                    AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0"
+                    AnchorPane.topAnchor="56.0">
+            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize"
+                       onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true"
+                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0"
+                       AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/minimize.png"/>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
             </ImageView>
-            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/quit.png" />
+            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit"
+                       onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true"
+                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0"
+                       AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/quit.png"/>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
             </ImageView>
-            <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="59.0" layoutY="66.0" preserveRatio="true" AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="66.0">
-                <Image url="@../../drawable/face_mask.png" />
+            <ImageView fitHeight="45.0" fitWidth="36.0" layoutX="59.0" layoutY="66.0" preserveRatio="true"
+                       AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="59.0" AnchorPane.rightAnchor="238.0"
+                       AnchorPane.topAnchor="66.0">
+                <Image url="@../../drawable/face_mask.png"/>
             </ImageView>
             <Label id="welcome" layoutX="107.0" layoutY="67.0" stylesheets="@../login.css" text="BENVENUTO">
                 <font>
-                    <Font size="26.0" />
+                    <Font size="26.0"/>
                 </font>
             </Label>
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="54.0" layoutY="133.0" preserveRatio="true" AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="256.0" AnchorPane.topAnchor="133.0">
-                <Image url="@../../drawable/user.png" />
+            <AnchorPane layoutX="108.0" layoutY="100.0" prefHeight="2.0" prefWidth="154.0"
+                        style="-fx-background-color: #4243ce; -fx-background-radius: 3em;"/>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="54.0" layoutY="133.0" preserveRatio="true"
+                       AnchorPane.bottomAnchor="238.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="256.0"
+                       AnchorPane.topAnchor="133.0">
+                <Image url="@../../drawable/user.png"/>
             </ImageView>
-            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0" prefWidth="198.0" promptText="Email/Nome Hub" validated="true" validatorTitle="Non vuoto">
+            <MFXTextField fx:id="TF_email" layoutX="86.0" layoutY="129.0" lineColor="#886bf2" prefHeight="31.0"
+                          prefWidth="198.0" promptText="Email/Nome Hub" validatorTitle="Non vuoto">
                 <font>
-                    <Font size="15.0" />
+                    <Font size="15.0"/>
                 </font>
             </MFXTextField>
-            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="53.0" layoutY="190.0" preserveRatio="true" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="257.0" AnchorPane.topAnchor="190.0">
-                <Image url="@../../drawable/padlock.png" />
-            </ImageView>
-            <MFXPasswordField fx:id="TF_password" layoutX="86.0" layoutY="186.0" lineColor="#886bf2" promptText="Password" textLimit="20" validated="true" validatorTitle="Password errata">
+            <Label fx:id="LB_error_email" layoutX="86.0" layoutY="161.0" text="Credenziali non corrette" textFill="RED"
+                   visible="false">
                 <font>
-                    <Font size="15.0" />
+                    <Font size="10.0"/>
+                </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="53.0" layoutY="190.0" preserveRatio="true"
+                       AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="53.0" AnchorPane.rightAnchor="257.0"
+                       AnchorPane.topAnchor="190.0">
+                <Image url="@../../drawable/padlock.png"/>
+            </ImageView>
+            <MFXPasswordField fx:id="PF_password" layoutX="86.0" layoutY="186.0" lineColor="#886bf2"
+                              promptText="Password" textLimit="20" validatorTitle="Password errata">
+                <font>
+                    <Font size="15.0"/>
                 </font>
             </MFXPasswordField>
-            <MFXButton fx:id="BT_login" buttonType="RAISED" layoutX="142.0" layoutY="270.0" onMouseClicked="#login" rippleColor="#745eca" style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;" text="ACCEDI">
+            <Label fx:id="LB_error_password" layoutX="86.0" layoutY="218.0" text="Credenziali non corrette"
+                   textFill="RED" visible="false">
                 <font>
-                    <Font name="System Bold" size="14.0" />
+                    <Font size="10.0"/>
+                </font>
+            </Label>
+            <JFXCheckBox fx:id="CB_remember_me" checkedColor="#05bdf2" layoutX="63.0" layoutY="239.0" text="Ricordami"
+                         unCheckedColor="#4d4d4d">
+                <font>
+                    <Font size="14.0"/>
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </MFXButton>
-            <Label fx:id="BT_login_guest" layoutX="125.0" layoutY="318.0" onMouseClicked="#loginGuest" styleClass="clickLabel" stylesheets="@../login.css" text="Accedi come ospite" textFill="#0645ad" underline="true">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Label>
-            <Label fx:id="BT_signUp" layoutX="152.0" layoutY="348.0" onMouseClicked="#signUp" styleClass="clickLabel" stylesheets="@../login.css" text="Registrati" textFill="#0645ad" underline="true">
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Label>
-            <JFXCheckBox fx:id="CB_remember_me" checkedColor="#05bdf2" layoutX="63.0" layoutY="239.0" text="Ricordami" unCheckedColor="#4d4d4d">
-                <font>
-                    <Font size="14.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
+                    <Cursor fx:constant="HAND"/>
                 </cursor>
             </JFXCheckBox>
-            <AnchorPane layoutX="108.0" layoutY="100.0" prefHeight="2.0" prefWidth="154.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
+            <MFXButton fx:id="BT_login" buttonType="RAISED" layoutX="142.0" layoutY="270.0" onMouseClicked="#login"
+                       rippleColor="#745eca" style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;"
+                       text="ACCEDI">
+                <font>
+                    <Font name="System Bold" size="14.0"/>
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </MFXButton>
+            <Label fx:id="BT_login_guest" layoutX="125.0" layoutY="318.0" onMouseClicked="#loginGuest"
+                   styleClass="clickLabel" stylesheets="@../login.css" text="Accedi come ospite" textFill="#0645ad"
+                   underline="true">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Label>
+            <Label fx:id="BT_signUp" layoutX="152.0" layoutY="348.0" onMouseClicked="#signUp" styleClass="clickLabel"
+                   stylesheets="@../login.css" text="Registrati" textFill="#0645ad" underline="true">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+            </Label>
         </AnchorPane>
-        <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-background-radius: 3em;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
-            <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="35.0">
-                <Image url="@../../drawable/primula.png" />
+        <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0"
+                    style="-fx-background-color: linear-gradient(to right top, #43cea2, #00b5b3, #0099bb, #007ab4, #185a9d); -fx-background-radius: 3em;"
+                    AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
+            <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true"
+                       AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0"
+                       AnchorPane.topAnchor="35.0">
+                <Image url="@../../drawable/primula.png"/>
             </ImageView>
-            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
+            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0"
+                  AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
                 <Label prefWidth="300.0" styleClass="title" stylesheets="@../login.css" text="CENTRI" wrapText="true">
                     <font>
-                        <Font size="40.0" />
+                        <Font size="40.0"/>
                     </font>
                 </Label>
-                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../login.css" text="VACCINALI" wrapText="true">
+                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../login.css"
+                       text="VACCINALI" wrapText="true">
                     <font>
-                        <Font name="Arial Rounded MT Bold" size="40.0" />
+                        <Font name="Arial Rounded MT Bold" size="40.0"/>
                     </font>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../login.css" text="ITALIANI" wrapText="true">
+                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../login.css"
+                       text="ITALIANI" wrapText="true">
                     <font>
-                        <Font size="40.0" />
+                        <Font size="40.0"/>
                     </font>
                 </Label>
             </VBox>

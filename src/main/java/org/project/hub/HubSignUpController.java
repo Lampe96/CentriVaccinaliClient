@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
 import org.project.models.Hub;
-import org.project.utility.RegistrationUtility;
-import org.project.utility.WindowUtility;
+import org.project.utils.RegistrationUtil;
+import org.project.utils.WindowUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,7 +63,7 @@ public class HubSignUpController implements Initializable {
     public Label LB_error_password;
 
     @FXML
-    public Label Lb_error_confirmed_password;
+    public Label LB_error_confirmed_password;
 
     @FXML
     public Label LB_error_address;
@@ -73,14 +73,13 @@ public class HubSignUpController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CB_typology.getItems().removeAll(CB_typology.getItems());
         CB_typology.getItems().addAll("Ospedaliero", "Aziendale", "Hub");
     }
 
     @FXML
     public void back() {
         try {
-            WindowUtility.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,37 +135,36 @@ public class HubSignUpController implements Initializable {
     }
 
     @FXML
-    public void sign_up() {
-
+    public void signUp() {
         boolean saveOk = true;
-        String hub_name = TF_name_hub.getText().trim();
-        String pwd = PF_password.getText().trim();
-        String confirm_pwd = PF_confirmed_password.getText().trim();
-        String address = TF_address.getText().trim();
+        String hub_name = TF_name_hub.getText().strip();
+        String pwd = PF_password.getText().strip();
+        String confirm_pwd = PF_confirmed_password.getText().strip();
+        String address = TF_address.getText().strip();
         String typology = CB_typology.getValue();
 
-        if (RegistrationUtility.checkName(hub_name)) {
+        if (RegistrationUtil.checkName(hub_name)) {
             LB_error_name.setVisible(false);
         } else {
             LB_error_name.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPassword(pwd)) {
+        if (RegistrationUtil.checkPassword(pwd)) {
             LB_error_password.setVisible(false);
         } else {
             LB_error_password.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPasswordConfirmed(pwd, confirm_pwd)) {
-            Lb_error_confirmed_password.setVisible(false);
+        if (RegistrationUtil.checkPasswordConfirmed(pwd, confirm_pwd)) {
+            LB_error_confirmed_password.setVisible(false);
         } else {
-            Lb_error_confirmed_password.setVisible(true);
+            LB_error_confirmed_password.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkAddress(address)) {
+        if (RegistrationUtil.checkAddress(address)) {
             LB_error_address.setVisible(false);
         } else {
             LB_error_address.setVisible(true);
@@ -180,10 +178,10 @@ public class HubSignUpController implements Initializable {
             saveOk = false;
         }
 
-        if(saveOk){
-            String crypt_pwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            TF_name_hub.setText("CIAOAOOA");
-            Hub hub = new Hub(hub_name, crypt_pwd, address, typology);
+        if (saveOk) {
+            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+            Hub hub = new Hub(hub_name, cryptPwd, address, typology);
+            System.out.println(hub);
         }
     }
 }

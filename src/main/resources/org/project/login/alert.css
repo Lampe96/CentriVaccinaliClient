@@ -7,7 +7,9 @@
     -fx-background-radius: 0.5em;
     -fx-background-color: #05BDF2;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 5);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 7);
+    -fx-translate-x: -5;
+    -fx-translate-y: -5;
 }
 
 .alert > *.button-bar > *.container > *.button:hover{
@@ -28,4 +30,5 @@
 .alert:header *.header-panel *.label{
     -fx-font-size: 16px;
     -fx-text-fill: black;
+    -fx-translate-x: 7;
 }

@@ -1,5 +1,6 @@
 package org.project.user;
 
+import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -11,12 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import com.password4j.Password;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
 import org.project.models.User;
-import org.project.utility.RegistrationUtility;
-import org.project.utility.WindowUtility;
+import org.project.utils.RegistrationUtil;
+import org.project.utils.WindowUtil;
 
 import java.io.IOException;
 
@@ -82,7 +82,7 @@ public class UserSignUpController {
     @FXML
     public void back() {
         try {
-            WindowUtility.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,68 +138,69 @@ public class UserSignUpController {
     }
 
     @FXML
-    public void sign_up() {
+    public void signUp() {
         boolean saveOk = true;
-        String name = TF_name.getText().trim();
-        String surname = TF_surname.getText().trim();
-        String fiscal_code = TF_fiscal_code.getText().trim();
-        String email = TF_email.getText().trim();
-        String nickname = TF_nickname.getText().trim();
-        String pwd = PF_password.getText().trim();
-        String confirm_pwd = PF_confirm_pwd.getText().trim();
+        String name = TF_name.getText().strip();
+        String surname = TF_surname.getText().strip();
+        String fiscalCode = TF_fiscal_code.getText().strip();
+        String email = TF_email.getText().strip();
+        String nickname = TF_nickname.getText().strip();
+        String pwd = PF_password.getText().strip();
+        String confirmPwd = PF_confirm_pwd.getText().strip();
 
-        if (RegistrationUtility.checkName(name)){
+        if (RegistrationUtil.checkName(name)) {
             LB_error_name.setVisible(false);
-        }else {
+        } else {
             LB_error_name.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkName(surname)){
+        if (RegistrationUtil.checkName(surname)) {
             LB_error_surname.setVisible(false);
-        }else {
+        } else {
             LB_error_surname.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkFiscalCode(fiscal_code)){
+        if (RegistrationUtil.checkFiscalCode(fiscalCode)) {
             LB_error_code.setVisible(false);
-        }else {
+        } else {
             LB_error_code.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkEmail(email)){
+        if (RegistrationUtil.checkEmail(email)) {
             LB_error_email.setVisible(false);
-        }else {
+        } else {
             LB_error_email.setVisible(true);
             saveOk = false;
         }
 
-        //TODO fare checknickname con controllo se è vuoto + vedere se esiste su DB
-        if (RegistrationUtility.checkName(nickname)){
+        //TODO fare check nickname con controllo se è vuoto + vedere se esiste già su DB
+        if (RegistrationUtil.checkName(nickname)) {
             LB_error_nickname.setVisible(false);
-        }else {
+        } else {
             LB_error_nickname.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPassword(pwd)){
+        if (RegistrationUtil.checkPassword(pwd)) {
             LB_error_password.setVisible(false);
-        }else {
+        } else {
             LB_error_password.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtility.checkPasswordConfirmed(pwd, confirm_pwd)){
+        if (RegistrationUtil.checkPasswordConfirmed(pwd, confirmPwd)) {
             LB_error_confirmed_password.setVisible(false);
-        }else {
+        } else {
             LB_error_confirmed_password.setVisible(true);
             saveOk = false;
         }
-        if(saveOk) {
-            String crypt_pwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            User user = new User(name, surname, fiscal_code, email, nickname, crypt_pwd);
+        if (saveOk) {
+            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+            User user = new User(name, surname, fiscalCode, email, nickname, cryptPwd);
+            System.out.println(user);
         }
     }
 }

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.utility.WindowUtility;
+import org.project.utils.WindowUtil;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class LoginMain extends Application {
 
     @Override
     public void start(@NotNull Stage stage) throws IOException {
-        Scene scene = new Scene(WindowUtility.newScene(LoginMain.class.getResource("fxml/login.fxml")));
+        Scene scene = new Scene(WindowUtil.newScene(LoginMain.class.getResource("fxml/login.fxml")));
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);

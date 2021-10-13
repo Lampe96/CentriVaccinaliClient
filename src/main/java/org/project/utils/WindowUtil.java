@@ -1,4 +1,4 @@
-package org.project.utility;
+package org.project.utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.URL;
 
-public class WindowUtility {
+public class WindowUtil {
 
     public static Parent newScene(URL fxml) throws IOException {
         return loadFXML(fxml);
