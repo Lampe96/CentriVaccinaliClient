@@ -1,6 +1,8 @@
 package org.project.models;
 
-public class Hub {
+import java.io.Serializable;
+
+public class Hub implements Serializable {
 
     private String nameHub;
     private String password;
