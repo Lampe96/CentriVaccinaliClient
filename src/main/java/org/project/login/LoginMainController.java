@@ -1,6 +1,5 @@
 package org.project.login;
 
-import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -30,7 +29,7 @@ import org.project.user.UserSignUpController;
 import org.project.utils.WindowUtil;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -62,9 +61,6 @@ public class LoginMainController implements Initializable {
     public Label LB_error_password;
 
     @FXML
-    public JFXCheckBox CB_remember_me;
-
-    @FXML
     public MFXButton BT_login;
 
     @FXML
@@ -90,19 +86,16 @@ public class LoginMainController implements Initializable {
             }
         });
 
-        /*InputStream is = LoginMainController.class.getResourceAsStream("Remember_me.txt");
-        assert is != null;
-        InputStreamReader isr = new InputStreamReader(is);
-        try {
-            BufferedReader br = new BufferedReader(isr);
-            if (Objects.requireNonNull(LoginMainController.class.getResource("Remember_me.txt")).getFile().length() > 0) {
+        File rememberMe = new File(Objects.requireNonNull(getPath()));
+        if (rememberMe.exists()) {
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(rememberMe));
                 TF_email.setText(br.readLine());
-                PF_password.setText(br.readLine());
                 br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        }
     }
 
     private void startUpLocation(double windowWidth, double windowHeight) {
@@ -178,16 +171,26 @@ public class LoginMainController implements Initializable {
 
         //TODO controllare nel database se hub o cittadino e poi fare login
 
-//        if (CB_remember_me.isSelected()) {
-//            File savedData = new File((LoginMainController.class.getResource("Remember_me.txt")).getFile());
-//            try {
-//                BufferedWriter bw = new BufferedWriter(new FileWriter(savedData));
-//                bw.write(email_e_hub);
-//                bw.write(pwd);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        //if (Db.existAccount(email, pwd)) {
+        File rememberMe = new File(Objects.requireNonNull(getPath()));
+
+        if (!rememberMe.exists()) {
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                rememberMe.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(rememberMe));
+            bw.write(email);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //}
 
         /*try {
             if (1 == 0) {
@@ -198,6 +201,22 @@ public class LoginMainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+    }
+
+    @Nullable
+    private String getPath() {
+        String os = System.getProperty("os.name");
+
+        if (os.contains("Win")) {
+            return System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Remember_me.txt";
+        }
+        if (os.contains("Mac")) {
+            return System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Remember_me.txt";
+        }
+        if (os.contains("Li")) {
+            return System.getProperty("user.home") + File.separator + "Documenti" + File.separator + "Remember_me.txt";
+        }
+        return null;
     }
 
     @FXML
