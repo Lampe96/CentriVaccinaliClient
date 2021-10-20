@@ -15,10 +15,13 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
 import org.project.models.User;
+import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
 import org.project.utils.WindowUtil;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 public class UserSignUpController {
 
@@ -201,6 +204,12 @@ public class UserSignUpController {
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
             User user = new User(name, surname, fiscalCode, email, nickname, cryptPwd);
             System.out.println(user);
+
+            try {
+                ServerReference.getServer().insertDataUser(user);
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

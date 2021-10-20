@@ -7,7 +7,7 @@ public class RegistrationUtil {
 
     private static final String RX_PWD = "^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.:;,-])[A-Za-z\\d@$!%*?&.:;,-]{6,})$";
 
-    private static final String RX_ADDRESS = "^((Via|via|Corso|corso|Viale|viale|Piazza|piazza) [a-zA-Z ]+ \\d+, \\w+ \\(\\w+\\))$";
+    private static final String RX_ADDRESS = "^((Via|via|Corso|corso|Viale|viale|Piazza|piazza) [a-zA-Z]+ \\d+, \\w+ \\(\\w+\\))$";
 
     private static final String RX_FISCAL_CODE = "^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST][0-9lmnpqrstuvLMNPQRSTUV]{2}" +
             "[A-Za-z][0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]$|([0-9]{11}))$";

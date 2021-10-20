@@ -86,7 +86,7 @@ public class LoginMainController implements Initializable {
             }
         });
 
-        File rememberMe = new File(Objects.requireNonNull(getPath()));
+        File rememberMe = new File(getPathRememberMe());
         if (rememberMe.exists()) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(rememberMe));
@@ -99,20 +99,13 @@ public class LoginMainController implements Initializable {
     }
 
     private void startUpLocation(double windowWidth, double windowHeight) {
-        // Get current mouse location, could return null if mouse is moving Super-Man fast
         Point p = MouseInfo.getPointerInfo().getLocation();
-        // Get list of available screens
         List<Screen> screens = Screen.getScreens();
         if (p != null && screens != null && screens.size() > 1) {
-            // Screen bounds as rectangle
             Rectangle2D screenBounds;
-            // Go through each screen to see if the mouse is currently on that screen
             for (Screen screen : screens) {
                 screenBounds = screen.getVisualBounds();
-                // Trying to compute Left Top X-Y position for the Application Window
-                // If the Point p is in the Bounds
                 if (screenBounds.contains(p.x, p.y)) {
-                    // Fixed Size Window Width and Height
                     xPos = screenBounds.getMinX() + ((screenBounds.getMaxX() - screenBounds.getMinX() - windowWidth) / 2);
                     yPos = screenBounds.getMinY() + ((screenBounds.getMaxY() - screenBounds.getMinY() - windowHeight) / 2);
                 }
@@ -160,7 +153,6 @@ public class LoginMainController implements Initializable {
 
     @FXML
     private void login() {
-        //GUARDA IN INIZIALAIZE E FAI SPECCHIO
         String email = TF_email.getText().strip();
         String pwd = PF_password.getPassword().strip();
 
@@ -172,8 +164,7 @@ public class LoginMainController implements Initializable {
         //TODO controllare nel database se hub o cittadino e poi fare login
 
         //if (Db.existAccount(email, pwd)) {
-        File rememberMe = new File(Objects.requireNonNull(getPath()));
-
+        File rememberMe = new File(getPathRememberMe());
         if (!rememberMe.exists()) {
             try {
                 //noinspection ResultOfMethodCallIgnored
@@ -203,20 +194,9 @@ public class LoginMainController implements Initializable {
         }*/
     }
 
-    @Nullable
-    private String getPath() {
-        String os = System.getProperty("os.name");
-
-        if (os.contains("Win")) {
-            return System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Remember_me.txt";
-        }
-        if (os.contains("Mac")) {
-            return System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Remember_me.txt";
-        }
-        if (os.contains("Li")) {
-            return System.getProperty("user.home") + File.separator + "Documenti" + File.separator + "Remember_me.txt";
-        }
-        return null;
+    @NotNull
+    private String getPathRememberMe() {
+        return System.getProperty("user.dir") + File.separator + "Remember_me";
     }
 
     @FXML
