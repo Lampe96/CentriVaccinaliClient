@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.login.LoginMainController;
 import org.project.models.User;
@@ -22,6 +23,7 @@ import org.project.utils.WindowUtil;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Locale;
 
 public class UserSignUpController {
 
@@ -143,22 +145,22 @@ public class UserSignUpController {
     @FXML
     public void signUp() {
         boolean saveOk = true;
-        String name = TF_name.getText().strip();
-        String surname = TF_surname.getText().strip();
+        String name = StringUtils.capitalize(TF_name.getText().strip());
+        String surname = StringUtils.capitalize(TF_surname.getText().strip());
         String fiscalCode = TF_fiscal_code.getText().strip();
         String email = TF_email.getText().strip();
         String nickname = TF_nickname.getText().strip();
         String pwd = PF_password.getText().strip();
         String confirmPwd = PF_confirm_pwd.getText().strip();
 
-        if (RegistrationUtil.checkName(name)) {
+        if (RegistrationUtil.checkLength(name)) {
             LB_error_name.setVisible(false);
         } else {
             LB_error_name.setVisible(true);
             saveOk = false;
         }
 
-        if (RegistrationUtil.checkName(surname)) {
+        if (RegistrationUtil.checkLength(surname)) {
             LB_error_surname.setVisible(false);
         } else {
             LB_error_surname.setVisible(true);
@@ -167,22 +169,45 @@ public class UserSignUpController {
 
         if (RegistrationUtil.checkFiscalCode(fiscalCode)) {
             LB_error_code.setVisible(false);
+            if (RegistrationUtil.checkDuplicateFiscalCode(fiscalCode)) {
+                LB_error_code.setVisible(false);
+            } else {
+                LB_error_code.setText("Questo codice fiscale è già in uso!");
+                LB_error_code.setVisible(true);
+                saveOk = false;
+            }
         } else {
+            LB_error_code.setText("Questo codice fiscale non è valido!");
             LB_error_code.setVisible(true);
             saveOk = false;
         }
 
         if (RegistrationUtil.checkEmail(email)) {
             LB_error_email.setVisible(false);
+            if (RegistrationUtil.checkDuplicateEmail(email)) {
+                LB_error_email.setVisible(false);
+            } else {
+                LB_error_email.setText("Questa email è già in uso!");
+                LB_error_email.setVisible(true);
+                saveOk = false;
+            }
         } else {
+            LB_error_email.setText("Questa email non è valida!");
             LB_error_email.setVisible(true);
             saveOk = false;
         }
 
-        //TODO fare check nickname con controllo se è vuoto + vedere se esiste già su DB
-        if (RegistrationUtil.checkName(nickname)) {
+        if (RegistrationUtil.checkLength(nickname)) {
             LB_error_nickname.setVisible(false);
+            if (RegistrationUtil.checkDuplicateNickname(nickname)) {
+                LB_error_nickname.setVisible(false);
+            } else {
+                LB_error_nickname.setText("Il nickname è già in uso!");
+                LB_error_nickname.setVisible(true);
+                saveOk = false;
+            }
         } else {
+            LB_error_nickname.setText("Il nickname non può essere vuoto!");
             LB_error_nickname.setVisible(true);
             saveOk = false;
         }
@@ -202,7 +227,7 @@ public class UserSignUpController {
         }
         if (saveOk) {
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            User user = new User(name, surname, fiscalCode, email, nickname, cryptPwd);
+            User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
             System.out.println(user);
 
             try {

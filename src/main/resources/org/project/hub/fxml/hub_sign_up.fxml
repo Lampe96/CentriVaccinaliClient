@@ -8,8 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.hub.HubSignUpController">
@@ -56,7 +55,7 @@
                            thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887"
                            AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0"
                            AnchorPane.topAnchor="102.0">
-                <AnchorPane prefHeight="290.0" prefWidth="252.0" style="-fx-background-color: white;">
+                <AnchorPane prefHeight="500.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="18.0" preserveRatio="true">
                         <Image url="@../../drawable/home.png"/>
                     </ImageView>
@@ -108,26 +107,77 @@
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="186.0" preserveRatio="true">
                         <Image url="@../../drawable/address.png"/>
                     </ImageView>
-                    <MFXTextField fx:id="TF_address" layoutX="43.0" layoutY="182.0" lineColor="#886bf2"
-                                  prefWidth="189.0" promptText="Es: Via Binda 13, Torino (TO)"
-                                  validatorTitle="Non vuoto">
-                        <font>
-                            <Font size="15.0"/>
-                        </font>
-                    </MFXTextField>
-                    <Label fx:id="LB_error_address" layoutX="43.0" layoutY="213.0" prefWidth="180.0"
-                           text="Questo campo deve essere compilato come da esempio!" textFill="RED" visible="false"
-                           wrapText="true">
+                    <JFXComboBox id="typology" fx:id="CB_qualificator" labelFloat="true" layoutX="43.0" layoutY="179.0"
+                                 prefWidth="195.0" promptText="Qualificatore indirizzo"
+                                 stylesheets="@../hub_sign_up.css"/>
+                    <Label fx:id="LB_error_qualificator" layoutX="43.0" layoutY="213.0" prefWidth="180.0"
+                           text="Selezionare un qualificatore!" textFill="RED" visible="false" wrapText="true">
                         <font>
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="242.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="240.0" preserveRatio="true">
+                        <Image url="@../../drawable/address.png"/>
+                    </ImageView>
+                    <MFXTextField fx:id="TF_address" layoutX="43.0" layoutY="233.0" lineColor="#886bf2"
+                                  prefWidth="189.0" promptText="Indirizzo" validatorTitle="Non vuoto">
+                        <font>
+                            <Font size="15.0"/>
+                        </font>
+                    </MFXTextField>
+                    <Label fx:id="LB_error_address" layoutX="43.0" layoutY="263.0" text="Inserire un indirizzo valido!"
+                           textFill="RED" visible="false">
+                        <font>
+                            <Font size="10.0"/>
+                        </font>
+                    </Label>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="294.0" preserveRatio="true">
+                        <Image url="@../../drawable/address.png"/>
+                    </ImageView>
+                    <MFXTextField fx:id="TF_number" layoutX="43.0" layoutY="287.0" lineColor="#886bf2" prefWidth="189.0"
+                                  promptText="Numero" validatorTitle="Non vuoto">
+                        <font>
+                            <Font size="15.0"/>
+                        </font>
+                    </MFXTextField>
+                    <Label fx:id="LB_error_number" layoutX="43.0" layoutY="318.0" text="Inserire un numero valido!"
+                           textFill="RED" visible="false">
+                        <font>
+                            <Font size="10.0"/>
+                        </font>
+                    </Label>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="348.0" preserveRatio="true">
+                        <Image url="@../../drawable/address.png"/>
+                    </ImageView>
+                    <MFXTextField fx:id="TF_city" layoutX="43.0" layoutY="341.0" lineColor="#886bf2" prefWidth="189.0"
+                                  promptText="Città" validatorTitle="Non vuoto">
+                        <font>
+                            <Font size="15.0"/>
+                        </font>
+                    </MFXTextField>
+                    <Label fx:id="LB_error_city" layoutX="43.0" layoutY="373.0"
+                           text="Questo campo non può essere vuoto!" textFill="RED" visible="false">
+                        <font>
+                            <Font size="10.0"/>
+                        </font>
+                    </Label>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="402.0" preserveRatio="true">
+                        <Image url="@../../drawable/address.png"/>
+                    </ImageView>
+                    <JFXComboBox id="typology" fx:id="CB_province" labelFloat="true" layoutX="43.0" layoutY="395.0"
+                                 prefWidth="195.0" promptText="Provincia" stylesheets="@../hub_sign_up.css"/>
+                    <Label fx:id="LB_error_province" layoutX="43.0" layoutY="428.0" text="Selezionare una provincia!"
+                           textFill="RED" visible="false">
+                        <font>
+                            <Font size="10.0"/>
+                        </font>
+                    </Label>
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="13.0" layoutY="456.0" preserveRatio="true">
                         <Image url="@../../drawable/typology.png"/>
                     </ImageView>
-                    <JFXComboBox id="typology" fx:id="CB_typology" labelFloat="true" layoutX="43.0" layoutY="237.0"
-                                 prefWidth="198.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css"/>
-                    <Label fx:id="LB_error_typology" layoutX="43.0" layoutY="272.0" text="Selezionare una tipologia!"
+                    <JFXComboBox id="typology" fx:id="CB_typology" labelFloat="true" layoutX="43.0" layoutY="449.0"
+                                 prefWidth="195.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css"/>
+                    <Label fx:id="LB_error_typology" layoutX="43.0" layoutY="482.0" text="Selezionare una tipologia!"
                            textFill="RED" visible="false">
                         <font>
                             <Font size="10.0"/>
