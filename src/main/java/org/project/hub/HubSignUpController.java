@@ -5,17 +5,23 @@ import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
+import org.project.UserType;
 import org.project.login.LoginMainController;
 import org.project.models.Address;
 import org.project.models.Hub;
@@ -28,7 +34,10 @@ import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HubSignUpController implements Initializable {
 
@@ -117,8 +126,13 @@ public class HubSignUpController implements Initializable {
     @FXML
     public Label LB_error_typology;
 
+    private Stage stage;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
+        });
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
         CB_typology.getItems().addAll(TYPOLOGY);
@@ -222,18 +236,24 @@ public class HubSignUpController implements Initializable {
     @FXML
     public void signUp() {
         boolean saveOk = true;
-        String hub_name = StringUtils.capitalize(TF_name_hub.getText().strip());
-        String pwd = PF_password.getText().strip();
-        String confirm_pwd = PF_confirmed_password.getText().strip();
+        String hubName = StringUtils.capitalize(TF_name_hub.getText().toLowerCase(Locale.ROOT).strip());
+        String pwd = PF_password.getPassword().strip();
+        String confirm_pwd = PF_confirmed_password.getPassword().strip();
         String quali = CB_qualificator.getValue();
-        String address = StringUtils.capitalize(TF_address.getText().strip());
+        String address = StringUtils.capitalize(TF_address.getText().toLowerCase(Locale.ROOT).strip());
         String number = TF_number.getText().strip().toUpperCase(Locale.ROOT);
-        String city = StringUtils.capitalize(TF_city.getText().strip());
+        String city = StringUtils.capitalize(TF_city.getText().toLowerCase(Locale.ROOT).strip());
         String prov = CB_province.getValue();
         String typology = CB_typology.getValue();
 
-        if (RegistrationUtil.checkLength(hub_name)) {
+        if (RegistrationUtil.checkLength(hubName)) {
             LB_error_name.setVisible(false);
+            if (RegistrationUtil.checkDuplicateHubName(hubName)) {
+                LB_error_name.setVisible(false);
+            } else {
+                LB_error_name.setText("Questo centro vaccinale esiste già!");
+                LB_error_name.setVisible(true);
+            }
         } else {
             LB_error_name.setVisible(true);
             saveOk = false;
@@ -246,12 +266,20 @@ public class HubSignUpController implements Initializable {
             saveOk = false;
         }
 
-        if (RegistrationUtil.checkPasswordConfirmed(pwd, confirm_pwd)) {
-            LB_error_confirmed_password.setVisible(false);
+        if (RegistrationUtil.checkLength(confirm_pwd)) {
+            if (RegistrationUtil.checkPasswordConfirmed(pwd, confirm_pwd)) {
+                LB_error_confirmed_password.setVisible(false);
+            } else {
+                LB_error_confirmed_password.setText("La password non coincide!");
+                LB_error_confirmed_password.setVisible(true);
+                saveOk = false;
+            }
         } else {
+            LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
             LB_error_confirmed_password.setVisible(true);
             saveOk = false;
         }
+
 
         if (quali != null) {
             LB_error_qualificator.setVisible(false);
@@ -295,10 +323,21 @@ public class HubSignUpController implements Initializable {
             saveOk = false;
         }
 
+
+        String checkAddress = quali + address + number + city + prov;
+        if (!RegistrationUtil.checkDuplicateAddress(checkAddress)) {
+            errorAlert();
+        }
+
         if (saveOk) {
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
             Address finalAddress = new Address(quali, address, number, city, prov);
-            Hub hub = new Hub(hub_name, cryptPwd, finalAddress, typology);
+            Hub hub = new Hub(hubName, cryptPwd, finalAddress, typology);
+            try {
+                WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.println(hub);
 
             try {
@@ -307,5 +346,46 @@ public class HubSignUpController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void errorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore Indirizzo");
+        alert.setHeaderText("Errore nell'indirizzo: ");
+        alert.setContentText("L'indirizzo digitato esiste già!");
+        alert.initStyle(StageStyle.TRANSPARENT);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+
+
+        ButtonType buttonTypeCancel = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeCancel);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert_error.css")).toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Scene dialogScene = dialogPane.getScene();
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        dialogScene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        dialogScene.setOnMouseDragged(mouseEvent -> {
+            dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
+            dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
+        alert.showAndWait();
     }
 }

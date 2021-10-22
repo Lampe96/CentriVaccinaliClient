@@ -24,13 +24,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.project.UserType;
 import org.project.guest.GuestHomeController;
+import org.project.hub.HubHomeController;
 import org.project.hub.HubSignUpController;
+import org.project.server.ServerReference;
+import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
 import org.project.utils.WindowUtil;
 
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -155,15 +160,8 @@ public class LoginMainController implements Initializable {
     private void login() {
         String email = TF_email.getText().strip();
         String pwd = PF_password.getPassword().strip();
+        UserType userHub = null;
 
-        System.out.println(email + " ///// " + pwd);
-
-        LB_error_email.setVisible(true);
-        LB_error_password.setVisible(true);
-
-        //TODO controllare nel database se hub o cittadino e poi fare login
-
-        //if (Db.existAccount(email, pwd)) {
         File rememberMe = new File(getPathRememberMe());
         if (!rememberMe.exists()) {
             try {
@@ -181,17 +179,29 @@ public class LoginMainController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //}
 
-        /*try {
-            if (1 == 0) {
-                WindowUtil.setRoot(UserHomeController.class.getResource("fxml/user_home.fxml"), AP_ext.getScene());
-            } else {
-                WindowUtil.setRoot(HubHomeController.class.getResource("fxml/hub_home.fxml"), AP_ext.getScene());
-            }
-        } catch (IOException e) {
+        try {
+            userHub = ServerReference.getServer().checkCredential(email, pwd);
+        } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
-        }*/
+        }
+
+        if (userHub == null) {
+            LB_error_email.setVisible(true);
+            LB_error_password.setVisible(true);
+        } else if (userHub == UserType.HUB){
+            try {
+                WindowUtil.setRoot(HubHomeController.class.getResource("fxml/hub_home.fxml"), AP_ext.getScene());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                WindowUtil.setRoot(UserHomeController.class.getResource("fxml/user_home.fxml"), AP_ext.getScene());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @NotNull
@@ -244,7 +254,7 @@ public class LoginMainController implements Initializable {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.setMaxSize(2, 2);
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
-        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert.css")).toExternalForm());
+        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert_choice.css")).toExternalForm());
         dialogPane.getStyleClass().add("alert");
 
         Scene dialogScene = dialogPane.getScene();

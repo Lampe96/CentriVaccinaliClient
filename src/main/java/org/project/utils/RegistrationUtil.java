@@ -1,6 +1,7 @@
 package org.project.utils;
 
 import org.jetbrains.annotations.NotNull;
+import org.project.models.Address;
 import org.project.server.ServerReference;
 
 import java.rmi.NotBoundException;
@@ -10,11 +11,9 @@ public class RegistrationUtil {
 
     private static final String RX_PWD = "^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.:;,-])[A-Za-z\\d@$!%*?&.:;,-]{6,})$";
 
-    private static final String RX_ADDRESS = "^[a-zA-Z]+( [a-zA-Z]+)*$";
+    private static final String RX_ADDRESS_CITY = "^[a-zA-Z]+( [a-zA-Z]+)*$";
 
-    private static final String RX_NUMBER = "^\\d+[a-zA-Z]$";
-
-    private static final String RX_CITY = "^\\w+$";
+    private static final String RX_NUMBER = "^\\d+[a-zA-Z]*$";
 
     private static final String RX_FISCAL_CODE = "^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST][0-9lmnpqrstuvLMNPQRSTUV]{2}" +
             "[A-Za-z][0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]$|([0-9]{11}))$";
@@ -33,11 +32,11 @@ public class RegistrationUtil {
     }
 
     public static boolean checkPasswordConfirmed(@NotNull String password, String confirmedPassword) {
-        return password.equals(confirmedPassword) && confirmedPassword.length() > 0;
+        return password.equals(confirmedPassword);
     }
 
     public static boolean checkAddress(@NotNull String address) {
-        return address.matches(RX_ADDRESS);
+        return address.matches(RX_ADDRESS_CITY);
     }
 
     public static boolean checkNumberAddress(@NotNull String number) {
@@ -45,7 +44,7 @@ public class RegistrationUtil {
     }
 
     public static boolean checkCityAddress(@NotNull String city) {
-        return city.matches(RX_CITY);
+        return city.matches(RX_ADDRESS_CITY);
     }
 
     public static boolean checkFiscalCode(@NotNull String fiscalCode) {
@@ -58,7 +57,6 @@ public class RegistrationUtil {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -79,6 +77,26 @@ public class RegistrationUtil {
     public static boolean checkDuplicateNickname(String nickname) {
         try {
             return ServerReference.getServer().checkDuplicateNickname(nickname);
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean checkDuplicateHubName(String name) {
+        try {
+            return ServerReference.getServer().checkDuplicateHubName(name);
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean checkDuplicateAddress(String address) {
+        try {
+            return ServerReference.getServer().checkDuplicateAddress(address);
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }

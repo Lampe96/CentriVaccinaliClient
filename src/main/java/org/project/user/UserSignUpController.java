@@ -145,13 +145,13 @@ public class UserSignUpController {
     @FXML
     public void signUp() {
         boolean saveOk = true;
-        String name = StringUtils.capitalize(TF_name.getText().strip());
-        String surname = StringUtils.capitalize(TF_surname.getText().strip());
+        String name = StringUtils.capitalize(TF_name.getText().toLowerCase(Locale.ROOT).strip());
+        String surname = StringUtils.capitalize(TF_surname.getText().toLowerCase(Locale.ROOT).strip());
         String fiscalCode = TF_fiscal_code.getText().strip();
         String email = TF_email.getText().strip();
         String nickname = TF_nickname.getText().strip();
-        String pwd = PF_password.getText().strip();
-        String confirmPwd = PF_confirm_pwd.getText().strip();
+        String pwd = PF_password.getPassword().strip();
+        String confirmPwd = PF_confirm_pwd.getPassword().strip();
 
         if (RegistrationUtil.checkLength(name)) {
             LB_error_name.setVisible(false);
@@ -219,15 +219,28 @@ public class UserSignUpController {
             saveOk = false;
         }
 
-        if (RegistrationUtil.checkPasswordConfirmed(pwd, confirmPwd)) {
-            LB_error_confirmed_password.setVisible(false);
+        if(RegistrationUtil.checkLength(confirmPwd)){
+            if (RegistrationUtil.checkPasswordConfirmed(pwd, confirmPwd)) {
+                LB_error_confirmed_password.setVisible(false);
+            } else {
+                LB_error_confirmed_password.setText("La password non coincide!");
+                LB_error_confirmed_password.setVisible(true);
+                saveOk = false;
+            }
         } else {
+            LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
             LB_error_confirmed_password.setVisible(true);
             saveOk = false;
         }
+
         if (saveOk) {
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
             User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
+            try {
+                WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             System.out.println(user);
 
             try {
