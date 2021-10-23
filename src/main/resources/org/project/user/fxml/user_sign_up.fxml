@@ -7,8 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.user.UserSignUpController">
@@ -59,11 +58,15 @@
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
                     <MFXTextField id="promptTextColor" fx:id="TF_name" layoutX="43.0" layoutY="14.0" lineColor="#886bf2"
-                                  prefWidth="189.0" promptText="Nome" validatorTitle="Non vuoto">
+                                  prefWidth="189.0" promptText="Nome" textLimit="25" validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
+                    <ImageView fx:id="IV_check_name" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="21.0"
+                               preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_name" layoutX="43.0" layoutY="45.0"
                            text="Questo campo deve essere compilato!" textFill="RED" visible="false">
                         <font>
@@ -74,11 +77,16 @@
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
                     <MFXTextField id="promptTextColor" fx:id="TF_surname" layoutX="43.0" layoutY="68.0"
-                                  lineColor="#886bf2" prefWidth="189.0" promptText="Cognome" validatorTitle="Non vuoto">
+                                  lineColor="#886bf2" prefWidth="189.0" promptText="Cognome" textLimit="25"
+                                  validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
+                    <ImageView fx:id="IV_check_surname" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="75.0"
+                               preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_surname" layoutX="43.0" layoutY="99.0"
                            text="Questo campo deve essere compilato!" textFill="RED" visible="false">
                         <font>
@@ -89,11 +97,15 @@
                         <Image url="@../../drawable/card.png"/>
                     </ImageView>
                     <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" layoutX="43.0" layoutY="125.0"
-                                  lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale">
+                                  lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale" textLimit="16">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
+                    <ImageView fx:id="IV_check_fiscal_code" fitHeight="17.0" fitWidth="24.0" layoutX="212.0"
+                               layoutY="132.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_code" layoutX="43.0" layoutY="156.0" text="Il codice fiscale non è valido"
                            textFill="RED" visible="false">
                         <font>
@@ -104,11 +116,16 @@
                         <Image url="@../../drawable/email.png"/>
                     </ImageView>
                     <MFXTextField id="promptTextColor" fx:id="TF_email" layoutX="43.0" layoutY="182.0"
-                                  lineColor="#886bf2" prefWidth="189.0" promptText="Email" validatorTitle="Non vuoto">
+                                  lineColor="#886bf2" prefWidth="189.0" promptText="Email" textLimit="50"
+                                  validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
+                    <ImageView fx:id="IV_check_email" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="189.0"
+                               preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_email" layoutX="43.0" layoutY="213.0" text="Questa mail non è valida!"
                            textFill="RED" visible="false">
                         <font>
@@ -119,11 +136,15 @@
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
                     <MFXTextField fx:id="TF_nickname" layoutX="43.0" layoutY="237.0" lineColor="#886bf2"
-                                  prefWidth="189.0" promptText="Nickname" validatorTitle="Non vuoto">
+                                  prefWidth="189.0" promptText="Nickname" textLimit="25" validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
+                    <ImageView fx:id="IV_check_nickname" fitHeight="17.0" fitWidth="24.0" layoutX="212.0"
+                               layoutY="244.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_nickname" layoutX="43.0" layoutY="268.0" text="Questo nickname è già in uso!"
                            textFill="RED" visible="false">
                         <font>
@@ -139,6 +160,10 @@
                             <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
+                    <ImageView fx:id="IV_check_password" fitHeight="17.0" fitWidth="24.0" layoutX="190.0"
+                               layoutY="306.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_password" layoutX="43.0" layoutY="332.0" prefWidth="205.0"
                            text="Minimo 6 caratteri, 1 speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="RED"
                            visible="false" wrapText="true">
@@ -156,6 +181,10 @@
                             <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
+                    <ImageView fx:id="IV_check_confirmed_password" fitHeight="17.0" fitWidth="24.0" layoutX="190.0"
+                               layoutY="372.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png"/>
+                    </ImageView>
                     <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="398.0"
                            text="La password non coincide!" textFill="RED" visible="false">
                         <font>

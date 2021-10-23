@@ -35,7 +35,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -125,17 +124,139 @@ public class HubSignUpController implements Initializable {
 
     @FXML
     public Label LB_error_typology;
+    public ImageView IV_check_name;
+    public ImageView IV_check_password;
+    public ImageView IV_check_confirmed_password;
+    public ImageView IV_check_address;
+    public ImageView IV_check_number;
+    public ImageView IV_check_city;
 
     private Stage stage;
+    private boolean saveOk = true;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-            stage = (Stage) AP_ext.getScene().getWindow();
-        });
+        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
         CB_typology.getItems().addAll(TYPOLOGY);
+
+        TF_name_hub.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_name.setVisible(false);
+                if (RegistrationUtil.checkDuplicateHubName(value)) {
+                    LB_error_name.setVisible(false);
+                    IV_check_name.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_name.setText("Questo centro vaccinale esiste già");
+                    LB_error_name.setVisible(true);
+                    IV_check_name.setVisible(false);
+                }
+            } else {
+                LB_error_name.setText("Questo campo non può essere vuoto");
+                LB_error_name.setVisible(true);
+                IV_check_name.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        PF_password.textProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(() -> {
+                    String value = PF_password.getPassword().strip();
+                    if (RegistrationUtil.checkPassword(value)) {
+                        LB_error_password.setVisible(false);
+                        IV_check_password.setVisible(true);
+                        saveOk = true;
+                    } else {
+                        LB_error_password.setVisible(true);
+                        IV_check_password.setVisible(false);
+                        saveOk = false;
+                    }
+                })
+        );
+
+        PF_confirmed_password.textProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(() -> {
+                    String value = PF_confirmed_password.getPassword().strip();
+                    if (RegistrationUtil.checkLength(value)) {
+                        if (RegistrationUtil.checkPasswordConfirmed(PF_password.getPassword().strip(), value)) {
+                            LB_error_confirmed_password.setVisible(false);
+                            IV_check_confirmed_password.setVisible(true);
+                            saveOk = true;
+                        } else {
+                            LB_error_confirmed_password.setText("La password non coincide");
+                            LB_error_confirmed_password.setVisible(true);
+                            IV_check_confirmed_password.setVisible(false);
+                            saveOk = false;
+                        }
+                    } else {
+                        LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
+                        LB_error_confirmed_password.setVisible(true);
+                        IV_check_confirmed_password.setVisible(false);
+                        saveOk = false;
+                    }
+                })
+        );
+
+        TF_address.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_address.setVisible(false);
+                if (RegistrationUtil.checkAddress(value)) {
+                    LB_error_address.setVisible(false);
+                    IV_check_address.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_address.setText("Campo non corretto");
+                    LB_error_address.setVisible(true);
+                    IV_check_address.setVisible(false);
+                    saveOk = false;
+                }
+            } else {
+                LB_error_address.setText("Questo campo non può essere vuoto");
+                LB_error_address.setVisible(true);
+                IV_check_address.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_number.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkNumberAddress(value)) {
+                LB_error_number.setVisible(false);
+                IV_check_number.setVisible(true);
+                saveOk = true;
+            } else {
+                LB_error_number.setVisible(true);
+                IV_check_number.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_city.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_city.setVisible(false);
+                if (RegistrationUtil.checkCityAddress(value)) {
+                    LB_error_city.setVisible(false);
+                    IV_check_city.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_city.setText("Campo non corretto");
+                    LB_error_city.setVisible(true);
+                    IV_check_city.setVisible(false);
+                    saveOk = false;
+                }
+            } else {
+                LB_error_city.setText("Questo campo non può essere vuoto");
+                LB_error_city.setVisible(true);
+                IV_check_city.setVisible(false);
+                saveOk = false;
+            }
+        });
     }
 
     /**
@@ -171,7 +292,6 @@ public class HubSignUpController implements Initializable {
      */
     @FXML
     private void minimize() {
-        Stage stage = (Stage) AP_ext.getScene().getWindow();
         stage.setIconified(true);
     }
 
@@ -235,10 +355,8 @@ public class HubSignUpController implements Initializable {
      */
     @FXML
     public void signUp() {
-        boolean saveOk = true;
-        String hubName = StringUtils.capitalize(TF_name_hub.getText().toLowerCase(Locale.ROOT).strip());
+        String hubName = TF_name_hub.getText().strip();
         String pwd = PF_password.getPassword().strip();
-        String confirm_pwd = PF_confirmed_password.getPassword().strip();
         String quali = CB_qualificator.getValue();
         String address = StringUtils.capitalize(TF_address.getText().toLowerCase(Locale.ROOT).strip());
         String number = TF_number.getText().strip().toUpperCase(Locale.ROOT);
@@ -246,66 +364,10 @@ public class HubSignUpController implements Initializable {
         String prov = CB_province.getValue();
         String typology = CB_typology.getValue();
 
-        if (RegistrationUtil.checkLength(hubName)) {
-            LB_error_name.setVisible(false);
-            if (RegistrationUtil.checkDuplicateHubName(hubName)) {
-                LB_error_name.setVisible(false);
-            } else {
-                LB_error_name.setText("Questo centro vaccinale esiste già!");
-                LB_error_name.setVisible(true);
-            }
-        } else {
-            LB_error_name.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkPassword(pwd)) {
-            LB_error_password.setVisible(false);
-        } else {
-            LB_error_password.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkLength(confirm_pwd)) {
-            if (RegistrationUtil.checkPasswordConfirmed(pwd, confirm_pwd)) {
-                LB_error_confirmed_password.setVisible(false);
-            } else {
-                LB_error_confirmed_password.setText("La password non coincide!");
-                LB_error_confirmed_password.setVisible(true);
-                saveOk = false;
-            }
-        } else {
-            LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
-            LB_error_confirmed_password.setVisible(true);
-            saveOk = false;
-        }
-
-
         if (quali != null) {
             LB_error_qualificator.setVisible(false);
         } else {
             LB_error_qualificator.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkAddress(address)) {
-            LB_error_address.setVisible(false);
-        } else {
-            LB_error_address.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkNumberAddress(number)) {
-            LB_error_number.setVisible(false);
-        } else {
-            LB_error_number.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkCityAddress(city)) {
-            LB_error_city.setVisible(false);
-        } else {
-            LB_error_city.setVisible(true);
             saveOk = false;
         }
 
@@ -323,21 +385,21 @@ public class HubSignUpController implements Initializable {
             saveOk = false;
         }
 
-
         String checkAddress = quali + address + number + city + prov;
         if (!RegistrationUtil.checkDuplicateAddress(checkAddress)) {
             errorAlert();
         }
 
         if (saveOk) {
-            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            Address finalAddress = new Address(quali, address, number, city, prov);
-            Hub hub = new Hub(hubName, cryptPwd, finalAddress, typology);
             try {
                 WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+            Address finalAddress = new Address(quali, address, number, city, prov);
+            Hub hub = new Hub(hubName, cryptPwd, finalAddress, typology);
             System.out.println(hub);
 
             try {
@@ -351,12 +413,11 @@ public class HubSignUpController implements Initializable {
     private void errorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore Indirizzo");
-        alert.setHeaderText("Errore nell'indirizzo: ");
+        alert.setHeaderText("Errore nell'indirizzo:");
         alert.setContentText("L'indirizzo digitato esiste già!");
         alert.initStyle(StageStyle.TRANSPARENT);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);
-
 
         ButtonType buttonTypeCancel = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
 

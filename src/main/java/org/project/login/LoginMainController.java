@@ -101,6 +101,16 @@ public class LoginMainController implements Initializable {
                 e.printStackTrace();
             }
         }
+
+        TF_email.textProperty().addListener((observable, oldValue, newValue) -> {
+            LB_error_email.setVisible(false);
+            LB_error_password.setVisible(false);
+        });
+
+        PF_password.textProperty().addListener((observable, oldValue, newValue) -> {
+            LB_error_email.setVisible(false);
+            LB_error_password.setVisible(false);
+        });
     }
 
     private void startUpLocation(double windowWidth, double windowHeight) {
@@ -160,7 +170,6 @@ public class LoginMainController implements Initializable {
     private void login() {
         String email = TF_email.getText().strip();
         String pwd = PF_password.getPassword().strip();
-        UserType userHub = null;
 
         File rememberMe = new File(getPathRememberMe());
         if (!rememberMe.exists()) {
@@ -180,6 +189,7 @@ public class LoginMainController implements Initializable {
             e.printStackTrace();
         }
 
+        UserType userHub = null;
         try {
             userHub = ServerReference.getServer().checkCredential(email, pwd);
         } catch (RemoteException | NotBoundException e) {
@@ -189,7 +199,7 @@ public class LoginMainController implements Initializable {
         if (userHub == null) {
             LB_error_email.setVisible(true);
             LB_error_password.setVisible(true);
-        } else if (userHub == UserType.HUB){
+        } else if (userHub == UserType.HUB) {
             try {
                 WindowUtil.setRoot(HubHomeController.class.getResource("fxml/hub_home.fxml"), AP_ext.getScene());
             } catch (IOException e) {

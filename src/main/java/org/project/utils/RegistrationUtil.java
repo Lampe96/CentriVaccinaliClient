@@ -1,7 +1,6 @@
 package org.project.utils;
 
 import org.jetbrains.annotations.NotNull;
-import org.project.models.Address;
 import org.project.server.ServerReference;
 
 import java.rmi.NotBoundException;
@@ -13,7 +12,7 @@ public class RegistrationUtil {
 
     private static final String RX_ADDRESS_CITY = "^[a-zA-Z]+( [a-zA-Z]+)*$";
 
-    private static final String RX_NUMBER = "^\\d+[a-zA-Z]*$";
+    private static final String RX_NUMBER = "^\\d+[a-zA-Z]?$";
 
     private static final String RX_FISCAL_CODE = "^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST][0-9lmnpqrstuvLMNPQRSTUV]{2}" +
             "[A-Za-z][0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]$|([0-9]{11}))$";

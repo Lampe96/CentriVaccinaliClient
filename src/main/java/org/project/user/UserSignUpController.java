@@ -4,7 +4,9 @@ import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
@@ -21,11 +23,13 @@ import org.project.utils.RegistrationUtil;
 import org.project.utils.WindowUtil;
 
 import java.io.IOException;
+import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class UserSignUpController {
+public class UserSignUpController implements Initializable {
 
     @FXML
     public AnchorPane AP_ext;
@@ -84,6 +88,154 @@ public class UserSignUpController {
     @FXML
     public Label LB_error_password;
 
+    public ImageView IV_check_name;
+    public ImageView IV_check_surname;
+    public ImageView IV_check_fiscal_code;
+    public ImageView IV_check_email;
+    public ImageView IV_check_nickname;
+    public ImageView IV_check_password;
+    public ImageView IV_check_confirmed_password;
+
+    private Stage stage;
+    private boolean saveOk = true;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+
+        TF_name.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_name.setVisible(false);
+                IV_check_name.setVisible(true);
+                saveOk = true;
+            } else {
+                LB_error_name.setVisible(true);
+                IV_check_name.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_surname.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_surname.setVisible(false);
+                IV_check_surname.setVisible(true);
+                saveOk = true;
+
+            } else {
+                LB_error_surname.setVisible(true);
+                IV_check_surname.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_fiscal_code.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkFiscalCode(value)) {
+                LB_error_code.setVisible(false);
+                if (RegistrationUtil.checkDuplicateFiscalCode(value)) {
+                    LB_error_code.setVisible(false);
+                    IV_check_fiscal_code.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_code.setText("Questo codice fiscale è già in uso");
+                    LB_error_code.setVisible(true);
+                    IV_check_fiscal_code.setVisible(false);
+                    saveOk = false;
+                }
+            } else {
+                LB_error_code.setText("Questo codice fiscale non è valido");
+                LB_error_code.setVisible(true);
+                IV_check_fiscal_code.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_email.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkEmail(value)) {
+                LB_error_email.setVisible(false);
+                if (RegistrationUtil.checkDuplicateEmail(value)) {
+                    LB_error_email.setVisible(false);
+                    IV_check_email.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_email.setText("Questa email è già in uso");
+                    LB_error_email.setVisible(true);
+                    IV_check_email.setVisible(false);
+                    saveOk = false;
+                }
+            } else {
+                LB_error_email.setText("Questa email non è valida");
+                LB_error_email.setVisible(true);
+                IV_check_email.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+        TF_nickname.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_nickname.setVisible(false);
+                if (RegistrationUtil.checkDuplicateNickname(value)) {
+                    LB_error_nickname.setVisible(false);
+                    IV_check_nickname.setVisible(true);
+                    saveOk = true;
+                } else {
+                    LB_error_nickname.setText("Il nickname è già in uso");
+                    LB_error_nickname.setVisible(true);
+                    IV_check_nickname.setVisible(false);
+                    saveOk = false;
+                }
+            } else {
+                LB_error_nickname.setText("Il nickname non può essere vuoto");
+                LB_error_nickname.setVisible(true);
+                IV_check_nickname.setVisible(false);
+                saveOk = false;
+            }
+        });
+
+
+        PF_password.textProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(() -> {
+                    String value = PF_password.getPassword().strip();
+                    if (RegistrationUtil.checkPassword(value)) {
+                        LB_error_password.setVisible(false);
+                        IV_check_password.setVisible(true);
+                        saveOk = true;
+                    } else {
+                        LB_error_password.setVisible(true);
+                        IV_check_password.setVisible(false);
+                        saveOk = false;
+                    }
+                })
+        );
+
+        PF_confirm_pwd.textProperty().addListener((observable, oldValue, newValue) ->
+                Platform.runLater(() -> {
+                    String value = PF_confirm_pwd.getPassword().strip();
+                    if (RegistrationUtil.checkLength(value)) {
+                        if (RegistrationUtil.checkPasswordConfirmed(PF_password.getPassword().strip(), value)) {
+                            LB_error_confirmed_password.setVisible(false);
+                            IV_check_confirmed_password.setVisible(true);
+                            saveOk = true;
+                        } else {
+                            LB_error_confirmed_password.setText("La password non coincide");
+                            LB_error_confirmed_password.setVisible(true);
+                            IV_check_confirmed_password.setVisible(false);
+                            saveOk = false;
+                        }
+                    } else {
+                        LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
+                        LB_error_confirmed_password.setVisible(true);
+                        IV_check_confirmed_password.setVisible(false);
+                        saveOk = false;
+                    }
+                })
+        );
+    }
+
     @FXML
     public void back() {
         try {
@@ -105,7 +257,6 @@ public class UserSignUpController {
 
     @FXML
     private void minimize() {
-        Stage stage = (Stage) AP_ext.getScene().getWindow();
         stage.setIconified(true);
     }
 
@@ -144,103 +295,22 @@ public class UserSignUpController {
 
     @FXML
     public void signUp() {
-        boolean saveOk = true;
         String name = StringUtils.capitalize(TF_name.getText().toLowerCase(Locale.ROOT).strip());
         String surname = StringUtils.capitalize(TF_surname.getText().toLowerCase(Locale.ROOT).strip());
         String fiscalCode = TF_fiscal_code.getText().strip();
         String email = TF_email.getText().strip();
         String nickname = TF_nickname.getText().strip();
         String pwd = PF_password.getPassword().strip();
-        String confirmPwd = PF_confirm_pwd.getPassword().strip();
-
-        if (RegistrationUtil.checkLength(name)) {
-            LB_error_name.setVisible(false);
-        } else {
-            LB_error_name.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkLength(surname)) {
-            LB_error_surname.setVisible(false);
-        } else {
-            LB_error_surname.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkFiscalCode(fiscalCode)) {
-            LB_error_code.setVisible(false);
-            if (RegistrationUtil.checkDuplicateFiscalCode(fiscalCode)) {
-                LB_error_code.setVisible(false);
-            } else {
-                LB_error_code.setText("Questo codice fiscale è già in uso!");
-                LB_error_code.setVisible(true);
-                saveOk = false;
-            }
-        } else {
-            LB_error_code.setText("Questo codice fiscale non è valido!");
-            LB_error_code.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkEmail(email)) {
-            LB_error_email.setVisible(false);
-            if (RegistrationUtil.checkDuplicateEmail(email)) {
-                LB_error_email.setVisible(false);
-            } else {
-                LB_error_email.setText("Questa email è già in uso!");
-                LB_error_email.setVisible(true);
-                saveOk = false;
-            }
-        } else {
-            LB_error_email.setText("Questa email non è valida!");
-            LB_error_email.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkLength(nickname)) {
-            LB_error_nickname.setVisible(false);
-            if (RegistrationUtil.checkDuplicateNickname(nickname)) {
-                LB_error_nickname.setVisible(false);
-            } else {
-                LB_error_nickname.setText("Il nickname è già in uso!");
-                LB_error_nickname.setVisible(true);
-                saveOk = false;
-            }
-        } else {
-            LB_error_nickname.setText("Il nickname non può essere vuoto!");
-            LB_error_nickname.setVisible(true);
-            saveOk = false;
-        }
-
-        if (RegistrationUtil.checkPassword(pwd)) {
-            LB_error_password.setVisible(false);
-        } else {
-            LB_error_password.setVisible(true);
-            saveOk = false;
-        }
-
-        if(RegistrationUtil.checkLength(confirmPwd)){
-            if (RegistrationUtil.checkPasswordConfirmed(pwd, confirmPwd)) {
-                LB_error_confirmed_password.setVisible(false);
-            } else {
-                LB_error_confirmed_password.setText("La password non coincide!");
-                LB_error_confirmed_password.setVisible(true);
-                saveOk = false;
-            }
-        } else {
-            LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
-            LB_error_confirmed_password.setVisible(true);
-            saveOk = false;
-        }
 
         if (saveOk) {
-            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
             try {
                 WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+            User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
             System.out.println(user);
 
             try {
