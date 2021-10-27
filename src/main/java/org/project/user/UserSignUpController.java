@@ -88,12 +88,25 @@ public class UserSignUpController implements Initializable {
     @FXML
     public Label LB_error_password;
 
+    @FXML
     public ImageView IV_check_name;
+
+    @FXML
     public ImageView IV_check_surname;
+
+    @FXML
     public ImageView IV_check_fiscal_code;
+
+    @FXML
     public ImageView IV_check_email;
+
+    @FXML
     public ImageView IV_check_nickname;
+
+    @FXML
     public ImageView IV_check_password;
+
+    @FXML
     public ImageView IV_check_confirmed_password;
 
     private Stage stage;
@@ -183,13 +196,13 @@ public class UserSignUpController implements Initializable {
                     IV_check_nickname.setVisible(true);
                     saveOk = true;
                 } else {
-                    LB_error_nickname.setText("Il nickname è già in uso");
+                    LB_error_nickname.setText("Questo nickname è già in uso");
                     LB_error_nickname.setVisible(true);
                     IV_check_nickname.setVisible(false);
                     saveOk = false;
                 }
             } else {
-                LB_error_nickname.setText("Il nickname non può essere vuoto");
+                LB_error_nickname.setText("Questo nickname non può essere vuoto");
                 LB_error_nickname.setVisible(true);
                 IV_check_nickname.setVisible(false);
                 saveOk = false;

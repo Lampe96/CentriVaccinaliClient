@@ -124,11 +124,23 @@ public class HubSignUpController implements Initializable {
 
     @FXML
     public Label LB_error_typology;
+
+    @FXML
     public ImageView IV_check_name;
+
+    @FXML
     public ImageView IV_check_password;
+
+    @FXML
     public ImageView IV_check_confirmed_password;
+
+    @FXML
     public ImageView IV_check_address;
+
+    @FXML
     public ImageView IV_check_number;
+
+    @FXML
     public ImageView IV_check_city;
 
     private Stage stage;
@@ -414,7 +426,7 @@ public class HubSignUpController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore Indirizzo");
         alert.setHeaderText("Errore nell'indirizzo:");
-        alert.setContentText("L'indirizzo digitato esiste già!");
+        alert.setContentText("All'indirizzo inserito esiste già un centro vaccinale!");
         alert.initStyle(StageStyle.TRANSPARENT);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);

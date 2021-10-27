@@ -53,7 +53,7 @@
             <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#fc4a1a"
                            thumbHoverColor="#755eca" trackColor="#ffdf00" AnchorPane.bottomAnchor="55.0"
                            AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
-                <AnchorPane prefHeight="425.0" prefWidth="252.0" style="-fx-background-color: white;">
+                <AnchorPane prefHeight="410.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="18.0" preserveRatio="true">
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
@@ -73,17 +73,17 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="72.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="73.0" preserveRatio="true">
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
-                    <MFXTextField id="promptTextColor" fx:id="TF_surname" layoutX="43.0" layoutY="68.0"
+                    <MFXTextField id="promptTextColor" fx:id="TF_surname" layoutX="43.0" layoutY="69.0"
                                   lineColor="#886bf2" prefWidth="189.0" promptText="Cognome" textLimit="25"
                                   validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_surname" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="75.0"
+                    <ImageView fx:id="IV_check_surname" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="76.0"
                                preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
@@ -93,17 +93,17 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="129.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="128.0" preserveRatio="true">
                         <Image url="@../../drawable/card.png"/>
                     </ImageView>
-                    <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" layoutX="43.0" layoutY="125.0"
+                    <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" layoutX="43.0" layoutY="123.0"
                                   lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale" textLimit="16">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
                     <ImageView fx:id="IV_check_fiscal_code" fitHeight="17.0" fitWidth="24.0" layoutX="212.0"
-                               layoutY="132.0" preserveRatio="true" visible="false">
+                               layoutY="131.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_code" layoutX="43.0" layoutY="156.0" text="Il codice fiscale non è valido"
@@ -112,17 +112,17 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="186.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="183.0" preserveRatio="true">
                         <Image url="@../../drawable/email.png"/>
                     </ImageView>
-                    <MFXTextField id="promptTextColor" fx:id="TF_email" layoutX="43.0" layoutY="182.0"
+                    <MFXTextField id="promptTextColor" fx:id="TF_email" layoutX="43.0" layoutY="178.0"
                                   lineColor="#886bf2" prefWidth="189.0" promptText="Email" textLimit="50"
                                   validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_email" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="189.0"
+                    <ImageView fx:id="IV_check_email" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="186.0"
                                preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
@@ -132,17 +132,17 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="241.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="238.0" preserveRatio="true">
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
-                    <MFXTextField fx:id="TF_nickname" layoutX="43.0" layoutY="237.0" lineColor="#886bf2"
+                    <MFXTextField fx:id="TF_nickname" layoutX="43.0" layoutY="233.0" lineColor="#886bf2"
                                   prefWidth="189.0" promptText="Nickname" textLimit="25" validatorTitle="Non vuoto">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXTextField>
                     <ImageView fx:id="IV_check_nickname" fitHeight="17.0" fitWidth="24.0" layoutX="212.0"
-                               layoutY="244.0" preserveRatio="true" visible="false">
+                               layoutY="241.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_nickname" layoutX="43.0" layoutY="268.0" text="Questo nickname è già in uso!"
@@ -151,17 +151,17 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="305.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="293.0" preserveRatio="true">
                         <Image url="@../../drawable/padlock.png"/>
                     </ImageView>
-                    <MFXPasswordField fx:id="PF_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="301.0"
+                    <MFXPasswordField fx:id="PF_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="288.0"
                                       lineColor="#886bf2" prefWidth="158.0" promptText="Password" textLimit="20">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
                     <ImageView fx:id="IV_check_password" fitHeight="17.0" fitWidth="24.0" layoutX="190.0"
-                               layoutY="306.0" preserveRatio="true" visible="false">
+                               layoutY="293.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_password" layoutX="43.0" layoutY="332.0" prefWidth="205.0"
@@ -171,18 +171,18 @@
                             <Font size="10.0"/>
                         </font>
                     </Label>
-                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="371.0" preserveRatio="true">
+                    <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="348.0" preserveRatio="true">
                         <Image url="@../../drawable/check.png"/>
                     </ImageView>
                     <MFXPasswordField fx:id="PF_confirm_pwd" accessibleRole="PASSWORD_FIELD" layoutX="43.0"
-                                      layoutY="367.0" lineColor="#886bf2" prefWidth="158.0"
+                                      layoutY="343.0" lineColor="#886bf2" prefWidth="158.0"
                                       promptText="Conferma Password" textLimit="20">
                         <font>
                             <Font size="15.0"/>
                         </font>
                     </MFXPasswordField>
                     <ImageView fx:id="IV_check_confirmed_password" fitHeight="17.0" fitWidth="24.0" layoutX="190.0"
-                               layoutY="372.0" preserveRatio="true" visible="false">
+                               layoutY="348.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="398.0"

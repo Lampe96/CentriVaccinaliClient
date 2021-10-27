@@ -26,7 +26,7 @@ public class LoginMain extends Application {
             launch();
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
-            //poi togliere questo launch dal catch e mettere un alert per no connessione
+            //TODO poi togliere questo launch dal catch e mettere un alert per no connessione
             launch();
         }
     }
