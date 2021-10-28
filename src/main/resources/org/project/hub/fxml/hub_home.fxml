@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="400.0" maxWidth="600.0" prefHeight="400.0"
-            prefWidth="600.0"
-            style="-fx-border-color: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12); -fx-border-width: 25; -fx-border-radius: 2em; -fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/15.0.1">
-    <AnchorPane layoutX="43.0" layoutY="22.0" prefHeight="400.0" prefWidth="600.0"
-                style="-fx-background-color: white; -fx-background-radius: 0.9em;" AnchorPane.bottomAnchor="0.0"
-                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="450.0" prefWidth="700.0" style="-fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane layoutX="21.0" layoutY="60.0" style="-fx-background-color: white; -fx-background-radius: 0.9em;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+         <AnchorPane layoutX="-2.0" style="-fx-background-radius: 1em;">
+            <children>
+               <AnchorPane layoutY="168.0" prefHeight="250.0" prefWidth="260.0" style="-fx-background-color: #BBBBBB; -fx-background-radius: 1em;">
+                  <children>
+                     <VBox alignment="TOP_CENTER" fillWidth="false" layoutY="51.0" spacing="10.0">
+                        <children>
+                           <Label alignment="CENTER" contentDisplay="CENTER" text="HOME" />
+                           <AnchorPane prefHeight="6.0" prefWidth="240.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 1em;">
+                              <VBox.margin>
+                                 <Insets right="7.0" />
+                              </VBox.margin>
+                           </AnchorPane>
+                           <Label text="IMPOSTAZIONI" />
+                        </children>
+                        <padding>
+                           <Insets top="20.0" />
+                        </padding>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+               <AnchorPane prefHeight="200.0" prefWidth="260.0" style="-fx-background-color: #999999; -fx-background-radius: 1em;">
+                  <children>
+                     <VBox alignment="TOP_CENTER" fillWidth="false" layoutY="-6.0" spacing="15.0">
+                        <children>
+                           <ImageView fitHeight="79.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../drawable/home_hub_hospital.png" />
+                              </image>
+                           </ImageView>
+                           <Label alignment="CENTER" contentDisplay="CENTER" text="NOME CENTRO" />
+                        </children>
+                        <padding>
+                           <Insets top="20.0" />
+                        </padding>
+                     </VBox>
+                  </children>
+               </AnchorPane>
+            </children>
+         </AnchorPane>
+      </children></AnchorPane>
 </AnchorPane>
