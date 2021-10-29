@@ -77,6 +77,7 @@ public class LoginMainController implements Initializable {
     private Stage stage;
     private double xPos = 0;
     private double yPos = 0;
+    private double xOffset, yOffset;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -168,6 +169,12 @@ public class LoginMainController implements Initializable {
 
     @FXML
     private void login() {
+        try {
+            startRightStage(UserType.HUB);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String email = TF_email.getText().strip();
         String pwd = PF_password.getPassword().strip();
 
@@ -201,17 +208,46 @@ public class LoginMainController implements Initializable {
             LB_error_password.setVisible(true);
         } else if (userHub == UserType.HUB) {
             try {
-                WindowUtil.setRoot(HubHomeController.class.getResource("fxml/hub_home.fxml"), AP_ext.getScene());
+                startRightStage(UserType.HUB);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                WindowUtil.setRoot(UserHomeController.class.getResource("fxml/user_home.fxml"), AP_ext.getScene());
+                startRightStage(UserType.USER);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void startRightStage(UserType userType) throws IOException {
+        Scene scene;
+        if (userType == UserType.HUB) {
+            scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home.fxml")));
+        } else {
+            scene = new Scene(WindowUtil.newScene(UserHomeController.class.getResource("fxml/user_home.fxml")));
+        }
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("CVI");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+        this.stage.hide();
+        stage.show();
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
     }
 
     @NotNull
@@ -233,6 +269,7 @@ public class LoginMainController implements Initializable {
         UserType userType = choiceAlert();
         if (userType == UserType.HUB) {
             try {
+
                 WindowUtil.setRoot(HubSignUpController.class.getResource("fxml/hub_sign_up.fxml"), AP_ext.getScene());
             } catch (IOException e) {
                 e.printStackTrace();

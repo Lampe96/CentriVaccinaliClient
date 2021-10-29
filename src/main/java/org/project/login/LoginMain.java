@@ -21,14 +21,15 @@ public class LoginMain extends Application {
     private double xOffset, yOffset;
 
     public static void main(String[] args) {
-        try {
+        launch();
+        /*try {
             ServerReference.initializeServer();
             launch();
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
             //TODO poi togliere questo launch dal catch e mettere un alert per no connessione
             launch();
-        }
+        }*/
     }
 
     @Override

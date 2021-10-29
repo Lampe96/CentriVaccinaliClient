@@ -1,0 +1,16 @@
+#left_anchor {
+   -fx-background-radius: 10 0 0 10;
+}
+
+#right_anchor{
+    -fx-background-radius: 0 10 10 0;
+}
+
+#top_vBox {
+    -fx-background-radius: 10 0 0 0;
+}
+
+#bottom_anchor {
+    -fx-background-radius: 0 0 0 10;
+}
+

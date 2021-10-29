@@ -1,41 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AP_ext" prefHeight="650.0" prefWidth="900.0" style="-fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeController">
-   <AnchorPane layoutX="153.0" layoutY="113.0" prefHeight="630.0" prefWidth="880.0" style="-fx-background-color: white; -fx-background-radius: 0.9em;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <AnchorPane layoutX="-2.0" prefHeight="610.0" prefWidth="260.0" style="-fx-background-radius: 1em;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-2.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutY="194.0" prefHeight="416.0" prefWidth="261.0" style="-fx-background-color: #BBBBBB; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="194.0">
-               <VBox alignment="TOP_CENTER" fillWidth="false" layoutX="1.0" layoutY="113.0" prefHeight="158.0" prefWidth="260.0" spacing="10.0">
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="HOME" />
-                  <AnchorPane prefHeight="2.0" prefWidth="291.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 1em;">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </AnchorPane>
-                  <Label text="IMPOSTAZIONI" />
-                  <AnchorPane prefHeight="2.0" prefWidth="268.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 1em;" />
-               </VBox>
-            </AnchorPane>
-            <AnchorPane prefHeight="241.0" prefWidth="261.0" style="-fx-background-color: #999999; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="369.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <VBox alignment="TOP_CENTER" fillWidth="false" layoutY="32.0" prefHeight="178.0" prefWidth="260.0" spacing="10.0">
-                  <ImageView fitHeight="79.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../../drawable/home_hub_hospital.png" />
-                  </ImageView>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="NOME CENTRO" />
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="104.0" text="INDIRIZZO" />
-               </VBox>
-            </AnchorPane>
-         </children>
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeController">
+   <AnchorPane layoutX="178.0" layoutY="79.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-radius: 3em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="left_anchor" layoutX="55.0" layoutY="69.0" prefWidth="242.0" style="-fx-background-color: white;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <VBox id="top_vBox" alignment="TOP_CENTER" layoutX="83.0" layoutY="47.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: D0F0C0;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+               <Insets top="10.0" />
+            </padding>
+            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../drawable/home_hub_hospital.png" />
+            </ImageView>
+            <Label text="OSPEDALE" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="25.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="INDIRIZZO" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets top="27.0" />
+               </padding>
+            </Label>
+         </VBox>
+         <AnchorPane id="bottom_anchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ACE1AF;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0">
+            <AnchorPane layoutY="52.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button id="btn_home" fx:id="BT_home" layoutY="4.0" mnemonicParsing="false" onMouseClicked="#switchToHome" prefHeight="50.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="HOME" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button layoutY="56.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;" text="IMPOSTAZIONI" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutY="104.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <AnchorPane prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutX="63.0" layoutY="108.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;" text="LOGOUT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutY="156.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutX="63.0" layoutY="160.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;" text="ABOUT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <AnchorPane layoutX="-15.0" layoutY="206.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="-15.0" AnchorPane.rightAnchor="15.0" />
+         </AnchorPane>
       </AnchorPane>
-      <AnchorPane layoutX="234.0" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #999999;" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="599.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane layoutX="239.0" prefHeight="26.0" prefWidth="21.0" style="-fx-background-color: #BBBBBB;" AnchorPane.bottomAnchor="0.0" />
-      <AnchorPane layoutX="287.0" prefHeight="610.0" prefWidth="10.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="565.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="262.0" layoutY="72.0" prefHeight="620.0" prefWidth="14.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane id="right_anchor" layoutX="598.0" layoutY="158.0" prefWidth="503.0" style="-fx-background-color: white;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <ImageView fx:id="BT_quit" layoutX="561.0" layoutY="19.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@../../drawable/quit.png" />
+         </ImageView>
+         <ImageView fx:id="BT_minimize" layoutX="531.0" layoutY="18.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@../../drawable/minimize.png" />
+         </ImageView>
+      </AnchorPane>
    </AnchorPane>
 </AnchorPane>
