@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.project.utils.*?>
+<AnchorPane fx:id="AP_ext" prefHeight="240.0" prefWidth="294.0"
+            style="-fx-background-radius: 1em; -fx-background-color: #999999;" xmlns="http://javafx.com/javafx/15.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.user.UserVerifyEmailController">
+    <Label layoutX="79.0" layoutY="20.0" text="Verifica email" AnchorPane.leftAnchor="70.0"
+           AnchorPane.rightAnchor="70.0">
+        <graphic>
+            <ImageView fitHeight="52.0" fitWidth="27.0" preserveRatio="true">
+                <Image url="@../../drawable/primula.png"/>
+            </ImageView>
+        </graphic>
+        <font>
+            <Font name="System Bold" size="18.0"/>
+        </font>
+    </Label>
+    <Label alignment="CENTER" layoutX="15.0" layoutY="55.0"
+           text="Inserisci qui sotto il codice numerico che ti abbiamo inviato tramite email" textAlignment="CENTER"
+           wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Label>
+    <TextFieldLimited fx:id="TF_one" alignment="CENTER" layoutX="12.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <TextFieldLimited fx:id="TF_two" alignment="CENTER" layoutX="58.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <TextFieldLimited fx:id="TF_three" alignment="CENTER" layoutX="104.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <TextFieldLimited fx:id="TF_four" alignment="CENTER" layoutX="150.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <TextFieldLimited fx:id="TF_five" alignment="CENTER" layoutX="196.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <TextFieldLimited fx:id="TF_six" alignment="CENTER" layoutX="242.0" layoutY="125.0" prefHeight="40.0"
+                      prefWidth="40.0">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </TextFieldLimited>
+    <MFXButton fx:id="BT_confirmed" buttonType="RAISED" depthLevel="LEVEL1" layoutX="85.0" layoutY="178.0"
+               onMouseClicked="#confirmed" rippleColor="#745eca"
+               style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="CONFERMA"
+               AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </MFXButton>
+    <Label fx:id="BT_new_code" alignment="CENTER" layoutX="95.0" layoutY="215.0" onMouseClicked="#newCode"
+           styleClass="clickLabel" stylesheets="@../../login/login.css" text="Nuovo codice" textFill="#0645ad"
+           underline="true" AnchorPane.leftAnchor="105.0" AnchorPane.rightAnchor="105.0">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </Label>
+    <ImageView fx:id="BT_quit" layoutX="256.0" layoutY="14.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
+               onMouseExited="#restoreStyleQuit" preserveRatio="true">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+        <Image url="@../../drawable/quit.png"/>
+    </ImageView>
+</AnchorPane>

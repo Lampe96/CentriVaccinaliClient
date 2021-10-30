@@ -1,261 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
-            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
-            fx:controller="org.project.hub.HubSignUpController">
-    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0"
-                AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
-        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0"
-                    style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;"
-                    AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0"
-                    AnchorPane.topAnchor="56.0">
-            <ImageView fx:id="BT_back" layoutX="36.0" layoutY="27.0" onMouseClicked="#back"
-                       onMouseEntered="#darkStyleBack" onMouseExited="#restoreStyleBack" preserveRatio="true">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubSignUpController">
+    <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="47.0">
+        <AnchorPane layoutX="305.0" layoutY="56.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="56.0">
+            <ImageView fx:id="BT_back" layoutX="36.0" layoutY="27.0" onMouseClicked="#back" onMouseEntered="#darkStyleBack" onMouseExited="#restoreStyleBack" preserveRatio="true">
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
-                <Image url="@../../drawable/back_arrow.png"/>
+                <Image url="@../../drawable/back_arrow.png" />
             </ImageView>
-            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize"
-                       onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true"
-                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0"
-                       AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/minimize.png"/>
+            <ImageView fx:id="BT_minimize" layoutX="252.0" layoutY="23.0" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="252.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/minimize.png" />
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
             </ImageView>
-            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit"
-                       onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true"
-                       AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0"
-                       AnchorPane.topAnchor="23.0">
-                <Image url="@../../drawable/quit.png"/>
+            <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="23.0">
+                <Image url="@../../drawable/quit.png" />
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
             </ImageView>
-            <Label id="welcome" layoutX="69.0" layoutY="61.0" prefWidth="207.0" stylesheets="@../hub_sign_up.css"
-                   text="REGISTRAZIONE">
+            <Label id="welcome" layoutX="69.0" layoutY="61.0" prefWidth="207.0" stylesheets="@../hub_sign_up.css" text="REGISTRAZIONE">
                 <font>
-                    <Font size="26.0"/>
+                    <Font size="26.0" />
                 </font>
             </Label>
-            <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0"
-                        style="-fx-background-color: #4243ce; -fx-background-radius: 3em;"/>
-            <MFXScrollPane layoutX="32.0" layoutY="102.0" prefWidth="280.0" stylesheets="@../hub_sign_up.css"
-                           thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887"
-                           AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0"
-                           AnchorPane.topAnchor="102.0">
+            <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
+            <MFXScrollPane layoutX="32.0" layoutY="102.0" prefWidth="280.0" stylesheets="@../hub_sign_up.css" thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
                 <AnchorPane prefHeight="500.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="18.0" preserveRatio="true">
-                        <Image url="@../../drawable/home.png"/>
+                        <Image url="@../../drawable/home.png" />
                     </ImageView>
-                    <MFXTextField id="promptTextColor" fx:id="TF_name_hub" layoutX="43.0" layoutY="14.0"
-                                  lineColor="#886bf2" prefWidth="189.0" promptText="Nome Hub" textLimit="50"
-                                  validatorTitle="Non vuoto">
+                    <MFXTextField id="promptTextColor" fx:id="TF_name_hub" layoutX="43.0" layoutY="14.0" lineColor="#886bf2" prefWidth="189.0" promptText="Nome Hub" textLimit="50" validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_name" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="21.0"
-                               preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_name" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="21.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_name" layoutX="43.0" layoutY="45.0" text="Questo campo devo esser compilato"
-                           textFill="#f20303" visible="false">
+                    <Label fx:id="LB_error_name" layoutX="43.0" layoutY="46.0" text="Questo campo devo esser compilato" textFill="#f20303" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="73.0" preserveRatio="true">
-                        <Image url="@../../drawable/padlock.png"/>
+                        <Image url="@../../drawable/padlock.png" />
                     </ImageView>
-                    <MFXPasswordField fx:id="PF_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="69.0"
-                                      lineColor="#886bf2" prefWidth="158.0" promptText="Password" textLimit="20">
+                    <MFXPasswordField fx:id="PF_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="69.0" lineColor="#886bf2" prefWidth="158.0" promptText="Password" textLimit="20">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXPasswordField>
-                    <ImageView fx:id="IV_check_password" fitHeight="17.0" fitWidth="24.0" layoutX="191.0" layoutY="74.0"
-                               preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_password" fitHeight="17.0" fitWidth="24.0" layoutX="191.0" layoutY="74.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_password" layoutX="43.0" layoutY="99.0" prefWidth="205.0"
-                           text="Minimo 6 caratteri, 1 speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="#f50202"
-                           visible="false" wrapText="true">
+                    <Label fx:id="LB_error_password" layoutX="43.0" layoutY="102.0" prefWidth="205.0" text="Minimo 6 caratteri, 1 speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="#f50202" visible="false" wrapText="true">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="128.0" preserveRatio="true">
-                        <Image url="@../../drawable/check.png"/>
+                        <Image url="@../../drawable/check.png" />
                     </ImageView>
-                    <MFXPasswordField fx:id="PF_confirmed_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0"
-                                      layoutY="124.0" lineColor="#886bf2" prefWidth="158.0"
-                                      promptText="Conferma Password" textLimit="20">
+                    <MFXPasswordField fx:id="PF_confirmed_password" accessibleRole="PASSWORD_FIELD" layoutX="43.0" layoutY="124.0" lineColor="#886bf2" prefWidth="158.0" promptText="Conferma Password" textLimit="20">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXPasswordField>
-                    <ImageView fx:id="IV_check_confirmed_password" fitHeight="17.0" fitWidth="24.0" layoutX="191.0"
-                               layoutY="129.0" preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_confirmed_password" fitHeight="17.0" fitWidth="24.0" layoutX="191.0" layoutY="129.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="156.0" prefWidth="205.0"
-                           text="La password non coincide!" textFill="#f50202" visible="false" wrapText="true">
+                    <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="157.0" prefWidth="205.0" text="La password non coincide!" textFill="#f50202" visible="false" wrapText="true">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="183.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png"/>
+                        <Image url="@../../drawable/address.png" />
                     </ImageView>
-                    <JFXComboBox id="typology" fx:id="CB_qualificator" focusColor="#886bf2" layoutX="43.0"
-                                 layoutY="179.0" prefWidth="195.0" promptText="Qualificatore indirizzo"
-                                 stylesheets="@../hub_sign_up.css"/>
-                    <Label fx:id="LB_error_qualificator" layoutX="43.0" layoutY="213.0" prefWidth="180.0"
-                           text="Selezionare un qualificatore!" textFill="RED" visible="false" wrapText="true">
+                    <JFXComboBox id="typology" fx:id="CB_qualificator" focusColor="#886bf2" layoutX="43.0" layoutY="179.0" prefWidth="195.0" promptText="Qualificatore indirizzo" stylesheets="@../hub_sign_up.css" />
+                    <Label fx:id="LB_error_qualificator" layoutX="43.0" layoutY="215.0" prefWidth="180.0" text="Selezionare un qualificatore!" textFill="RED" visible="false" wrapText="true">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="238.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png"/>
+                        <Image url="@../../drawable/address.png" />
                     </ImageView>
-                    <MFXTextField fx:id="TF_address" layoutX="43.0" layoutY="234.0" lineColor="#886bf2"
-                                  prefWidth="189.0" promptText="Indirizzo" textLimit="50" validatorTitle="Non vuoto">
+                    <MFXTextField fx:id="TF_address" layoutX="43.0" layoutY="234.0" lineColor="#886bf2" prefWidth="189.0" promptText="Indirizzo" textLimit="50" validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_address" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="241.0"
-                               preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_address" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="241.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_address" layoutX="43.0" layoutY="263.0" text="Inserire un indirizzo valido!"
-                           textFill="RED" visible="false">
+                    <Label fx:id="LB_error_address" layoutX="43.0" layoutY="267.0" text="Inserire un indirizzo valido!" textFill="RED" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="293.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png"/>
+                        <Image url="@../../drawable/address.png" />
                     </ImageView>
-                    <MFXTextField fx:id="TF_number" layoutX="43.0" layoutY="289.0" lineColor="#886bf2" prefWidth="189.0"
-                                  promptText="Numero" textLimit="10" validatorTitle="Non vuoto">
+                    <MFXTextField fx:id="TF_number" layoutX="43.0" layoutY="289.0" lineColor="#886bf2" prefWidth="189.0" promptText="Numero" textLimit="10" validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_number" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="296.0"
-                               preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_number" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="296.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_number" layoutX="43.0" layoutY="318.0" text="Inserire un numero valido!"
-                           textFill="RED" visible="false">
+                    <Label fx:id="LB_error_number" layoutX="43.0" layoutY="321.0" text="Inserire un numero valido!" textFill="RED" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="348.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png"/>
+                        <Image url="@../../drawable/address.png" />
                     </ImageView>
-                    <MFXTextField fx:id="TF_city" layoutX="43.0" layoutY="344.0" lineColor="#886bf2" prefWidth="189.0"
-                                  promptText="Città" textLimit="30" validatorTitle="Non vuoto">
+                    <MFXTextField fx:id="TF_city" layoutX="43.0" layoutY="344.0" lineColor="#886bf2" prefWidth="189.0" promptText="Città" textLimit="30" validatorTitle="Non vuoto">
                         <font>
-                            <Font size="15.0"/>
+                            <Font size="15.0" />
                         </font>
                     </MFXTextField>
-                    <ImageView fx:id="IV_check_city" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="351.0"
-                               preserveRatio="true" visible="false">
-                        <Image url="@../../drawable/valid_check.png"/>
+                    <ImageView fx:id="IV_check_city" fitHeight="17.0" fitWidth="24.0" layoutX="212.0" layoutY="351.0" preserveRatio="true" visible="false">
+                        <Image url="@../../drawable/valid_check.png" />
                     </ImageView>
-                    <Label fx:id="LB_error_city" layoutX="43.0" layoutY="373.0"
-                           text="Questo campo non può essere vuoto!" textFill="RED" visible="false">
+                    <Label fx:id="LB_error_city" layoutX="43.0" layoutY="376.0" text="Questo campo non può essere vuoto!" textFill="RED" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="403.0" preserveRatio="true">
-                        <Image url="@../../drawable/address.png"/>
+                        <Image url="@../../drawable/address.png" />
                     </ImageView>
-                    <JFXComboBox id="typology" fx:id="CB_province" focusColor="#886bf2" layoutX="43.0" layoutY="399.0"
-                                 prefWidth="195.0" promptText="Provincia" stylesheets="@../hub_sign_up.css"/>
-                    <Label fx:id="LB_error_province" layoutX="43.0" layoutY="428.0" text="Selezionare una provincia!"
-                           textFill="RED" visible="false">
+                    <JFXComboBox id="typology" fx:id="CB_province" focusColor="#886bf2" layoutX="43.0" layoutY="399.0" prefWidth="195.0" promptText="Provincia" stylesheets="@../hub_sign_up.css" />
+                    <Label fx:id="LB_error_province" layoutX="43.0" layoutY="434.0" text="Selezionare una provincia!" textFill="RED" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="13.0" layoutY="458.0" preserveRatio="true">
-                        <Image url="@../../drawable/typology.png"/>
+                        <Image url="@../../drawable/typology.png" />
                     </ImageView>
-                    <JFXComboBox id="typology" fx:id="CB_typology" focusColor="#886bf2" layoutX="43.0" layoutY="454.0"
-                                 prefWidth="195.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css"/>
-                    <Label fx:id="LB_error_typology" layoutX="43.0" layoutY="482.0" text="Selezionare una tipologia!"
-                           textFill="RED" visible="false">
+                    <JFXComboBox id="typology" fx:id="CB_typology" focusColor="#886bf2" layoutX="43.0" layoutY="454.0" prefWidth="195.0" promptText="Tipologia" stylesheets="@../hub_sign_up.css" />
+                    <Label fx:id="LB_error_typology" layoutX="42.0" layoutY="489.0" text="Selezionare una tipologia!" textFill="RED" visible="false">
                         <font>
-                            <Font size="10.0"/>
+                            <Font size="10.0" />
                         </font>
                     </Label>
                 </AnchorPane>
             </MFXScrollPane>
-            <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#signUp" rippleColor="#745eca"
-                       style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRATI"
-                       AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0"
-                       AnchorPane.topAnchor="345.0">
+            <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#signUp" rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRATI" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="345.0">
                 <font>
-                    <Font name="System Bold" size="14.0"/>
+                    <Font name="System Bold" size="14.0" />
                 </font>
                 <cursor>
-                    <Cursor fx:constant="HAND"/>
+                    <Cursor fx:constant="HAND" />
                 </cursor>
             </MFXButton>
         </AnchorPane>
-        <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0"
-                    style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 3em;"
-                    AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
-            <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true"
-                       AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0"
-                       AnchorPane.topAnchor="35.0">
-                <Image url="@../../drawable/primula.png"/>
+        <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 3em;" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="24.0">
+            <ImageView fitHeight="185.0" fitWidth="181.0" layoutX="69.0" layoutY="25.0" preserveRatio="true" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="35.0">
+                <Image url="@../../drawable/primula.png" />
             </ImageView>
-            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0"
-                  AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
-                <Label prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="CENTRI"
-                       wrapText="true">
+            <VBox alignment="CENTER" layoutX="107.0" layoutY="283.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="230.0">
+                <Label prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="CENTRI" wrapText="true">
                     <font>
-                        <Font size="40.0"/>
+                        <Font size="40.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css"
-                       text="VACCINALI" wrapText="true">
+                <Label alignment="CENTER" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="VACCINALI" wrapText="true">
                     <font>
-                        <Font name="Arial Rounded MT Bold" size="40.0"/>
+                        <Font name="Arial Rounded MT Bold" size="40.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css"
-                       text="ITALIANI" wrapText="true">
+                <Label alignment="CENTER_RIGHT" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="ITALIANI" wrapText="true">
                     <font>
-                        <Font size="40.0"/>
+                        <Font size="40.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="10.0" layoutY="138.0" prefWidth="300.0" styleClass="title"
-                       stylesheets="@../hub_sign_up.css" text="Hub version" wrapText="true">
+                <Label alignment="CENTER" layoutX="10.0" layoutY="138.0" prefWidth="300.0" styleClass="title" stylesheets="@../hub_sign_up.css" text="Hub version" wrapText="true">
                     <font>
-                        <Font size="13.0"/>
+                        <Font size="13.0" />
                     </font>
                     <VBox.margin>
-                        <Insets top="15.0"/>
+                        <Insets top="15.0" />
                     </VBox.margin>
                 </Label>
             </VBox>

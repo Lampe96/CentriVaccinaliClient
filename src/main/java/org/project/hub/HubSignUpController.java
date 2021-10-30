@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -144,11 +145,17 @@ public class HubSignUpController implements Initializable {
     public ImageView IV_check_city;
 
     private Stage stage;
-    private boolean saveOk = true;
+    private final HashMap<String, Boolean> saveOk = new HashMap<>();
+    private int countOk = 0;
+    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "typology"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+
+        for (String s : hubField) {
+            saveOk.put(s, false);
+        }
 
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
@@ -161,17 +168,18 @@ public class HubSignUpController implements Initializable {
                 if (RegistrationUtil.checkDuplicateHubName(value)) {
                     LB_error_name.setVisible(false);
                     IV_check_name.setVisible(true);
-                    saveOk = true;
+                    saveOk.put("name", true);
                 } else {
                     LB_error_name.setText("Questo centro vaccinale esiste già");
                     LB_error_name.setVisible(true);
                     IV_check_name.setVisible(false);
+                    saveOk.put("name", false);
                 }
             } else {
                 LB_error_name.setText("Questo campo non può essere vuoto");
                 LB_error_name.setVisible(true);
                 IV_check_name.setVisible(false);
-                saveOk = false;
+                saveOk.put("name", false);
             }
         });
 
@@ -181,11 +189,11 @@ public class HubSignUpController implements Initializable {
                     if (RegistrationUtil.checkPassword(value)) {
                         LB_error_password.setVisible(false);
                         IV_check_password.setVisible(true);
-                        saveOk = true;
+                        saveOk.put("pwd", true);
                     } else {
                         LB_error_password.setVisible(true);
                         IV_check_password.setVisible(false);
-                        saveOk = false;
+                        saveOk.put("pwd", false);
                     }
                 })
         );
@@ -197,18 +205,18 @@ public class HubSignUpController implements Initializable {
                         if (RegistrationUtil.checkPasswordConfirmed(PF_password.getPassword().strip(), value)) {
                             LB_error_confirmed_password.setVisible(false);
                             IV_check_confirmed_password.setVisible(true);
-                            saveOk = true;
+                            saveOk.put("confirmedPwd", true);
                         } else {
                             LB_error_confirmed_password.setText("La password non coincide");
                             LB_error_confirmed_password.setVisible(true);
                             IV_check_confirmed_password.setVisible(false);
-                            saveOk = false;
+                            saveOk.put("confirmedPwd", false);
                         }
                     } else {
                         LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
                         LB_error_confirmed_password.setVisible(true);
                         IV_check_confirmed_password.setVisible(false);
-                        saveOk = false;
+                        saveOk.put("confirmedPwd", false);
                     }
                 })
         );
@@ -220,18 +228,18 @@ public class HubSignUpController implements Initializable {
                 if (RegistrationUtil.checkAddress(value)) {
                     LB_error_address.setVisible(false);
                     IV_check_address.setVisible(true);
-                    saveOk = true;
+                    saveOk.put("address", true);
                 } else {
                     LB_error_address.setText("Campo non corretto");
                     LB_error_address.setVisible(true);
                     IV_check_address.setVisible(false);
-                    saveOk = false;
+                    saveOk.put("address", false);
                 }
             } else {
                 LB_error_address.setText("Questo campo non può essere vuoto");
                 LB_error_address.setVisible(true);
                 IV_check_address.setVisible(false);
-                saveOk = false;
+                saveOk.put("address", false);
             }
         });
 
@@ -240,11 +248,11 @@ public class HubSignUpController implements Initializable {
             if (RegistrationUtil.checkNumberAddress(value)) {
                 LB_error_number.setVisible(false);
                 IV_check_number.setVisible(true);
-                saveOk = true;
+                saveOk.put("number", true);
             } else {
                 LB_error_number.setVisible(true);
                 IV_check_number.setVisible(false);
-                saveOk = false;
+                saveOk.put("number", false);
             }
         });
 
@@ -255,18 +263,18 @@ public class HubSignUpController implements Initializable {
                 if (RegistrationUtil.checkCityAddress(value)) {
                     LB_error_city.setVisible(false);
                     IV_check_city.setVisible(true);
-                    saveOk = true;
+                    saveOk.put("city", true);
                 } else {
                     LB_error_city.setText("Campo non corretto");
                     LB_error_city.setVisible(true);
                     IV_check_city.setVisible(false);
-                    saveOk = false;
+                    saveOk.put("city", false);
                 }
             } else {
                 LB_error_city.setText("Questo campo non può essere vuoto");
                 LB_error_city.setVisible(true);
                 IV_check_city.setVisible(false);
-                saveOk = false;
+                saveOk.put("city", false);
             }
         });
     }
@@ -378,31 +386,40 @@ public class HubSignUpController implements Initializable {
 
         if (quali != null) {
             LB_error_qualificator.setVisible(false);
+            saveOk.put("quali", true);
         } else {
             LB_error_qualificator.setVisible(true);
-            saveOk = false;
+            saveOk.put("quali", false);
         }
 
         if (prov != null) {
             LB_error_province.setVisible(false);
+            saveOk.put("prov", true);
         } else {
             LB_error_province.setVisible(true);
-            saveOk = false;
+            saveOk.put("prov", false);
         }
 
         if (typology != null) {
             LB_error_typology.setVisible(false);
+            saveOk.put("typology", true);
         } else {
             LB_error_typology.setVisible(true);
-            saveOk = false;
+            saveOk.put("typology", false);
         }
 
         String checkAddress = quali + address + number + city + prov;
         if (!RegistrationUtil.checkDuplicateAddress(checkAddress)) {
-            errorAlert();
+            errorAlertAddress();
         }
 
-        if (saveOk) {
+        for (String s : hubField) {
+            if (saveOk.get(s)) {
+                countOk++;
+            }
+        }
+
+        if (countOk == 9) {
             try {
                 WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
             } catch (IOException e) {
@@ -419,10 +436,16 @@ public class HubSignUpController implements Initializable {
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
             }
+        } else {
+            countOk = 0;
+            errorAlertField();
+            LB_error_qualificator.setVisible(false);
+            LB_error_province.setVisible(false);
+            LB_error_typology.setVisible(false);
         }
     }
 
-    private void errorAlert() {
+    private void errorAlertAddress() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore Indirizzo");
         alert.setHeaderText("Errore nell'indirizzo:");
@@ -438,6 +461,46 @@ public class HubSignUpController implements Initializable {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
         dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert_error.css")).toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Scene dialogScene = dialogPane.getScene();
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        dialogScene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        dialogScene.setOnMouseDragged(mouseEvent -> {
+            dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
+            dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
+        alert.showAndWait();
+    }
+
+    private void errorAlertField() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore in fase di registrazione");
+        alert.setHeaderText("Errore nei campi:");
+        alert.setContentText("Uno o piu campi non sono corretti. Riprova!");
+        alert.initStyle(StageStyle.TRANSPARENT);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+
+        ButtonType buttonTypeCancel = new ButtonType("OK", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeCancel);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
+        dialogPane.getStylesheets().add(Objects.requireNonNull(HubSignUpController.class.getResource("alert_error.css")).toExternalForm());
         dialogPane.getStyleClass().add("alert");
 
         Scene dialogScene = dialogPane.getScene();

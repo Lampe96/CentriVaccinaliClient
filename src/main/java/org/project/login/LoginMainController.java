@@ -170,7 +170,7 @@ public class LoginMainController implements Initializable {
     @FXML
     private void login() {
         try {
-            startRightStage(UserType.HUB);
+            startRightHomeStage(UserType.HUB);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -208,20 +208,20 @@ public class LoginMainController implements Initializable {
             LB_error_password.setVisible(true);
         } else if (userHub == UserType.HUB) {
             try {
-                startRightStage(UserType.HUB);
+                startRightHomeStage(UserType.HUB);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                startRightStage(UserType.USER);
+                startRightHomeStage(UserType.USER);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void startRightStage(UserType userType) throws IOException {
+    private void startRightHomeStage(UserType userType) throws IOException {
         Scene scene;
         if (userType == UserType.HUB) {
             scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home.fxml")));

@@ -1,22 +1,25 @@
 package org.project.hub;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
+import javafx.scene.Scene;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
-import org.project.UserType;
+import org.project.guest.GuestHomeController;
+import org.project.utils.WindowUtil;
 
 import java.awt.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,7 +36,13 @@ public class HubHomeController implements Initializable {
     public ImageView BT_quit;
 
     @FXML
-    public Button BT_home;
+    public MFXButton BT_setting;
+
+    @FXML
+    public MFXButton BT_logout;
+
+    @FXML
+    public MFXButton BT_about;
 
     private Stage stage;
     private double xPos = 0;
@@ -51,9 +60,6 @@ public class HubHomeController implements Initializable {
                 stage.setY(yPos);
             }
         });
-
-        BT_home.setGraphic(new ImageView(String.valueOf(UserType.class.getResource("drawable/quit.png"))));
-        BT_home.setGraphicTextGap(150);
     }
 
     private void startUpLocation(double windowWidth, double windowHeight) {
@@ -109,6 +115,32 @@ public class HubHomeController implements Initializable {
         iv.setEffect(null);
     }
 
-    public void switchToHome(MouseEvent mouseEvent) {
+    @FXML
+    public void openSetting() {
+        try {
+            startSetting();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startSetting() throws IOException {
+        Scene scene = new Scene(WindowUtil.newScene(GuestHomeController.class.getResource("fxml/guest_home.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("My modal window");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.show();
+    }
+
+    @FXML
+    public void logout() {
+
+    }
+
+    @FXML
+    public void openAbout() {
+
     }
 }
