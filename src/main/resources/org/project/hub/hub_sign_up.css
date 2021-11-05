@@ -19,3 +19,7 @@
     -fx-prompt-text-fill: #4d4d4d;
     -fx-font-size: 15;
 }
+
+#spinner .track{
+    -fx-stroke: #96f887;
+}

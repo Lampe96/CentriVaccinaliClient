@@ -9,11 +9,15 @@ import java.util.Locale;
 
 public class RegistrationUtil {
 
+    private static final String RX_NAME = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+    
     private static final String RX_PWD = "^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.:;,-])[A-Za-z\\d@$!%*?&.:;,-]{6,})$";
 
     private static final String RX_ADDRESS_CITY = "^[a-zA-Z]+( [a-zA-Z]+)*$";
 
-    private static final String RX_NUMBER = "^\\d+[a-zA-Z]?$";
+    private static final String RX_NUMBER = "^\\d{1,4}[a-zA-Z]?$";
+
+    private static final String RX_CAP = "^[0-9]{5}$";
 
     private static final String RX_FISCAL_CODE = "^([A-Za-z]{6}[0-9lmnpqrstuvLMNPQRSTUV]{2}[abcdehlmprstABCDEHLMPRST][0-9lmnpqrstuvLMNPQRSTUV]{2}" +
             "[A-Za-z][0-9lmnpqrstuvLMNPQRSTUV]{3}[A-Za-z]$|([0-9]{11}))$";
@@ -27,6 +31,10 @@ public class RegistrationUtil {
         return string.length() > 0;
     }
 
+    public static boolean checkName(@NotNull String name) {
+        return name.matches(RX_NAME);
+    }
+    
     public static boolean checkPassword(@NotNull String password) {
         return password.matches(RX_PWD);
     }
@@ -45,6 +53,10 @@ public class RegistrationUtil {
 
     public static boolean checkCityAddress(@NotNull String city) {
         return city.matches(RX_ADDRESS_CITY);
+    }
+
+    public static boolean checkCap(@NotNull String cap) {
+        return cap.matches(RX_CAP);
     }
 
     public static boolean checkFiscalCode(@NotNull String fiscalCode) {
@@ -80,7 +92,6 @@ public class RegistrationUtil {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 

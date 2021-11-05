@@ -149,7 +149,7 @@ public class UserSignUpController implements Initializable {
     }
 
     private void checkName(String value) {
-        if (RegistrationUtil.checkLength(value)) {
+        if (RegistrationUtil.checkLength(value) && RegistrationUtil.checkName(value)) {
             LB_error_name.setVisible(false);
             IV_check_name.setVisible(true);
             saveOk.put("name", true);
@@ -162,7 +162,7 @@ public class UserSignUpController implements Initializable {
     }
 
     private void checkSurname(String value) {
-        if (RegistrationUtil.checkLength(value)) {
+        if (RegistrationUtil.checkLength(value) && RegistrationUtil.checkName(value)) {
             LB_error_surname.setVisible(false);
             IV_check_surname.setVisible(true);
             saveOk.put("surname", true);
@@ -241,6 +241,15 @@ public class UserSignUpController implements Initializable {
             LB_error_password.setVisible(false);
             IV_check_password.setVisible(true);
             saveOk.put("password", true);
+            if (RegistrationUtil.checkPasswordConfirmed(value, PF_confirm_pwd.getPassword().strip())) {
+                LB_error_confirmed_password.setVisible(false);
+                IV_check_confirmed_password.setVisible(true);
+                saveOk.put("confirm_password", true);
+            } else {
+                LB_error_confirmed_password.setText("La password non coincide");
+                LB_error_confirmed_password.setVisible(true);
+                IV_check_confirmed_password.setVisible(false);
+            }
         } else {
             LB_error_password.setVisible(true);
             IV_check_password.setVisible(false);
@@ -347,7 +356,7 @@ public class UserSignUpController implements Initializable {
         }
 
         try {
-            if (countOk == 7) {
+            if (countOk == userField.length) {
                 if (!ServerReference.getServer().checkDuplicateTempEmail(email)) {
                     verifyEmail();
                     if (TempUser.getEmailIsVerified()) {

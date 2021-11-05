@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -56,7 +57,7 @@ public class HubSignUpController implements Initializable {
     private final static String[] TYPOLOGY = {
             "OSPEDALIERO", "AZIENDALE", "HUB"
     };
-    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "typology"};
+    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "cap", "typology"};
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
     @FXML
     public AnchorPane AP_ext;
@@ -116,6 +117,16 @@ public class HubSignUpController implements Initializable {
     public ImageView IV_check_number;
     @FXML
     public ImageView IV_check_city;
+    @FXML
+    public MFXProgressSpinner PS_spinner;
+    @FXML
+    public MFXTextField TF_cap;
+    @FXML
+    public Label LB_error_cap;
+    @FXML
+    public ImageView IV_check_cap;
+
+
     private Stage stage;
     private int countOk = 0;
 
@@ -127,13 +138,19 @@ public class HubSignUpController implements Initializable {
             saveOk.put(s, false);
         }
 
+        TF_cap.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                TF_cap.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
         CB_typology.getItems().addAll(TYPOLOGY);
 
         TF_name_hub.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkLength(value)) {
+            if (RegistrationUtil.checkLength(value) && RegistrationUtil.checkName(value)) {
                 LB_error_name.setVisible(false);
                 if (RegistrationUtil.checkDuplicateHubName(value)) {
                     LB_error_name.setVisible(false);
@@ -146,7 +163,7 @@ public class HubSignUpController implements Initializable {
                     saveOk.put("name", false);
                 }
             } else {
-                LB_error_name.setText("Questo campo non può essere vuoto");
+                LB_error_name.setText("Questo campo non può essere vuoto o contenere numeri");
                 LB_error_name.setVisible(true);
                 IV_check_name.setVisible(false);
                 saveOk.put("name", false);
@@ -160,6 +177,16 @@ public class HubSignUpController implements Initializable {
                         LB_error_password.setVisible(false);
                         IV_check_password.setVisible(true);
                         saveOk.put("pwd", true);
+                        if (RegistrationUtil.checkPasswordConfirmed(value, PF_confirmed_password.getPassword().strip())) {
+                            LB_error_confirmed_password.setVisible(false);
+                            IV_check_confirmed_password.setVisible(true);
+                            saveOk.put("confirmedPwd", true);
+                        } else {
+                            LB_error_confirmed_password.setText("La password non coincide");
+                            LB_error_confirmed_password.setVisible(true);
+                            IV_check_confirmed_password.setVisible(false);
+                            saveOk.put("confirmedPwd", false);
+                        }
                     } else {
                         LB_error_password.setVisible(true);
                         IV_check_password.setVisible(false);
@@ -245,6 +272,28 @@ public class HubSignUpController implements Initializable {
                 LB_error_city.setVisible(true);
                 IV_check_city.setVisible(false);
                 saveOk.put("city", false);
+            }
+        });
+
+        TF_cap.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip();
+            if (RegistrationUtil.checkLength(value)) {
+                LB_error_cap.setVisible(false);
+                if (RegistrationUtil.checkCap(value)) {
+                    LB_error_cap.setVisible(false);
+                    IV_check_cap.setVisible(true);
+                    saveOk.put("cap", true);
+                } else {
+                    LB_error_cap.setText("Campo non corretto");
+                    LB_error_cap.setVisible(true);
+                    IV_check_cap.setVisible(false);
+                    saveOk.put("cap", false);
+                }
+            } else {
+                LB_error_cap.setText("Questo campo non può essere vuoto");
+                LB_error_cap.setVisible(true);
+                IV_check_cap.setVisible(false);
+                saveOk.put("cap", false);
             }
         });
     }
@@ -345,12 +394,17 @@ public class HubSignUpController implements Initializable {
      */
     @FXML
     public void signUp() {
+        BT_sing_up.setText("");
+        PS_spinner.setVisible(true);
+
         String hubName = TF_name_hub.getText().strip();
         String pwd = PF_password.getPassword().strip();
+        String confirmedPwd = PF_confirmed_password.getPassword().strip();
         String quali = CB_qualificator.getValue();
         String address = StringUtils.capitalize(TF_address.getText().toLowerCase(Locale.ROOT).strip());
         String number = TF_number.getText().strip().toUpperCase(Locale.ROOT);
         String city = StringUtils.capitalize(TF_city.getText().toLowerCase(Locale.ROOT).strip());
+        String cap = TF_cap.getText().strip();
         String prov = CB_province.getValue();
         String typology = CB_typology.getValue();
 
@@ -378,9 +432,12 @@ public class HubSignUpController implements Initializable {
             saveOk.put("typology", false);
         }
 
-        String checkAddress = quali + address + number + city + prov;
-        if (!RegistrationUtil.checkDuplicateAddress(checkAddress)) {
-            errorAlertAddress();
+        if (RegistrationUtil.checkPasswordConfirmed(pwd, confirmedPwd)) {
+            LB_error_confirmed_password.setVisible(false);
+            saveOk.put("confirmedPwd", true);
+        } else {
+            LB_error_confirmed_password.setVisible(true);
+            saveOk.put("confirmedPwd", false);
         }
 
         for (String s : hubField) {
@@ -389,7 +446,16 @@ public class HubSignUpController implements Initializable {
             }
         }
 
-        if (countOk == 9) {
+        String checkAddress = quali + address + number + city + cap + prov;
+        if (!RegistrationUtil.checkDuplicateAddress(checkAddress)) {
+            errorAlertAddress();
+            countOk = 0;
+            LB_error_qualificator.setVisible(false);
+            LB_error_province.setVisible(false);
+            LB_error_typology.setVisible(false);
+            BT_sing_up.setText("REGISTRATI");
+            PS_spinner.setVisible(false);
+        } else if (countOk == hubField.length) {
             try {
                 WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
             } catch (IOException e) {
@@ -397,7 +463,7 @@ public class HubSignUpController implements Initializable {
             }
 
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-            Address finalAddress = new Address(quali, address, number, city, prov);
+            Address finalAddress = new Address(quali, address, number, city, cap, prov);
             Hub hub = new Hub(hubName, cryptPwd, finalAddress, typology);
             System.out.println(hub);
 
@@ -412,6 +478,8 @@ public class HubSignUpController implements Initializable {
             LB_error_qualificator.setVisible(false);
             LB_error_province.setVisible(false);
             LB_error_typology.setVisible(false);
+            BT_sing_up.setText("REGISTRATI");
+            PS_spinner.setVisible(false);
         }
     }
 
