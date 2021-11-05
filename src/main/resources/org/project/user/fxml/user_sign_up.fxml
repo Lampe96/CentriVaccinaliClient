@@ -54,7 +54,7 @@
             <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#fc4a1a"
                            thumbHoverColor="#755eca" trackColor="#ffdf00" AnchorPane.bottomAnchor="55.0"
                            AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
-                <AnchorPane prefHeight="410.0" prefWidth="252.0" style="-fx-background-color: white;">
+                <AnchorPane prefHeight="395.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="18.0" preserveRatio="true">
                         <Image url="@../../drawable/user.png"/>
                     </ImageView>
@@ -69,7 +69,8 @@
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_name" layoutX="43.0" layoutY="45.0"
-                           text="Questo campo deve essere compilato!" textFill="RED" visible="false">
+                           text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true"
+                           AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -89,7 +90,8 @@
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_surname" layoutX="43.0" layoutY="99.0"
-                           text="Questo campo deve essere compilato!" textFill="RED" visible="false">
+                           text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true"
+                           AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -108,7 +110,8 @@
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_code" layoutX="43.0" layoutY="156.0" text="Il codice fiscale non è valido"
-                           textFill="RED" visible="false">
+                           textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0"
+                           AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -127,8 +130,9 @@
                                preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
-                    <Label fx:id="LB_error_email" layoutX="43.0" layoutY="213.0" text="Questa mail non è valida!"
-                           textFill="RED" visible="false">
+                    <Label fx:id="LB_error_email" layoutX="43.0" layoutY="211.0" text="Questa mail non è valida!"
+                           textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0"
+                           AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -147,7 +151,8 @@
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
                     <Label fx:id="LB_error_nickname" layoutX="43.0" layoutY="268.0" text="Questo nickname è già in uso!"
-                           textFill="RED" visible="false">
+                           textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0"
+                           AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -165,9 +170,9 @@
                                layoutY="293.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
-                    <Label fx:id="LB_error_password" layoutX="43.0" layoutY="332.0" prefWidth="205.0"
+                    <Label fx:id="LB_error_password" layoutX="43.0" layoutY="320.0" prefWidth="205.0"
                            text="Minimo 6 caratteri, 1 speciale, 1 minuscolo, 1 maiuscolo, 1 numero" textFill="RED"
-                           visible="false" wrapText="true">
+                           visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -186,8 +191,9 @@
                                layoutY="348.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
-                    <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="398.0"
-                           text="La password non coincide!" textFill="RED" visible="false">
+                    <Label fx:id="LB_error_confirmed_password" layoutX="43.0" layoutY="375.0"
+                           text="La password non coincide!" textFill="RED" visible="false" wrapText="true"
+                           AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
                         <font>
                             <Font size="10.0"/>
                         </font>
@@ -205,6 +211,8 @@
                     <Cursor fx:constant="HAND"/>
                 </cursor>
             </MFXButton>
+            <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="352.0" prefHeight="24.0"
+                                prefWidth="24.0" stylesheets="@../user_sign_up.css" visible="false"/>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0"
                     style="-fx-background-color: linear-gradient(to right top, #fc4a1a, #ffdf00); -fx-background-radius: 3em;"

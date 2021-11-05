@@ -3,6 +3,7 @@ package org.project.user;
 import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -40,88 +41,64 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class UserSignUpController implements Initializable {
 
+    private final static String[] userField = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
+    private final HashMap<String, Boolean> saveOk = new HashMap<>();
     @FXML
     public AnchorPane AP_ext;
-
     @FXML
     public ImageView BT_back;
-
     @FXML
     public ImageView BT_minimize;
-
     @FXML
     public ImageView BT_quit;
-
     @FXML
     public MFXTextField TF_name;
-
     @FXML
     public MFXTextField TF_surname;
-
     @FXML
     public MFXTextField TF_fiscal_code;
-
     @FXML
     public MFXTextField TF_email;
-
     @FXML
     public MFXTextField TF_nickname;
-
     @FXML
     public MFXPasswordField PF_password;
-
     @FXML
     public MFXPasswordField PF_confirm_pwd;
-
     @FXML
     public MFXButton BT_sing_up;
-
+    @FXML
+    public MFXProgressSpinner PS_spinner;
     @FXML
     public Label LB_error_name;
-
     @FXML
     public Label LB_error_surname;
-
     @FXML
     public Label LB_error_code;
-
     @FXML
     public Label LB_error_email;
-
     @FXML
     public Label LB_error_nickname;
-
     @FXML
     public Label LB_error_confirmed_password;
-
     @FXML
     public Label LB_error_password;
-
     @FXML
     public ImageView IV_check_name;
-
     @FXML
     public ImageView IV_check_surname;
-
     @FXML
     public ImageView IV_check_fiscal_code;
-
     @FXML
     public ImageView IV_check_email;
-
     @FXML
     public ImageView IV_check_nickname;
-
     @FXML
     public ImageView IV_check_password;
-
     @FXML
     public ImageView IV_check_confirmed_password;
-
     private Stage stage;
-    private final HashMap<String, Boolean> saveOk = new HashMap<>();
     private int countOk = 0;
-    private final static String[] userField = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,135 +110,161 @@ public class UserSignUpController implements Initializable {
 
         TF_name.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkLength(value)) {
-                LB_error_name.setVisible(false);
-                IV_check_name.setVisible(true);
-                saveOk.put("name", true);
-            } else {
-                LB_error_name.setVisible(true);
-                IV_check_name.setVisible(false);
-                saveOk.put("name", false);
-            }
+            checkName(value);
         });
 
         TF_surname.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkLength(value)) {
-                LB_error_surname.setVisible(false);
-                IV_check_surname.setVisible(true);
-                saveOk.put("surname", true);
-
-            } else {
-                LB_error_surname.setVisible(true);
-                IV_check_surname.setVisible(false);
-                saveOk.put("surname", false);
-            }
+            checkSurname(value);
         });
 
         TF_fiscal_code.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkFiscalCode(value)) {
-                LB_error_code.setVisible(false);
-                if (RegistrationUtil.checkDuplicateFiscalCode(value)) {
-                    LB_error_code.setVisible(false);
-                    IV_check_fiscal_code.setVisible(true);
-                    saveOk.put("fiscalCode", true);
-                } else {
-                    LB_error_code.setText("Questo codice fiscale è già in uso");
-                    LB_error_code.setVisible(true);
-                    IV_check_fiscal_code.setVisible(false);
-                    saveOk.put("fiscalCode", false);
-                }
-            } else {
-                LB_error_code.setText("Questo codice fiscale non è valido");
-                LB_error_code.setVisible(true);
-                IV_check_fiscal_code.setVisible(false);
-                saveOk.put("fiscalCode", false);
-            }
+            checkFiscalCode(value);
         });
 
         TF_email.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkEmail(value)) {
-                LB_error_email.setVisible(false);
-                if (RegistrationUtil.checkDuplicateEmail(value)) {
-                    LB_error_email.setVisible(false);
-                    IV_check_email.setVisible(true);
-                    saveOk.put("email", true);
-                } else {
-                    LB_error_email.setText("Questa email è già in uso");
-                    LB_error_email.setVisible(true);
-                    IV_check_email.setVisible(false);
-                    saveOk.put("email", false);
-                }
-            } else {
-                LB_error_email.setText("Questa email non è valida");
-                LB_error_email.setVisible(true);
-                IV_check_email.setVisible(false);
-                saveOk.put("email", false);
-            }
+            checkEmail(value);
         });
 
         TF_nickname.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            if (RegistrationUtil.checkLength(value)) {
-                LB_error_nickname.setVisible(false);
-                if (RegistrationUtil.checkDuplicateNickname(value)) {
-                    LB_error_nickname.setVisible(false);
-                    IV_check_nickname.setVisible(true);
-                    saveOk.put("nickname", true);
-                } else {
-                    LB_error_nickname.setText("Questo nickname è già in uso");
-                    LB_error_nickname.setVisible(true);
-                    IV_check_nickname.setVisible(false);
-                    saveOk.put("nickname", false);
-                }
-            } else {
-                LB_error_nickname.setText("Questo nickname non può essere vuoto");
-                LB_error_nickname.setVisible(true);
-                IV_check_nickname.setVisible(false);
-                saveOk.put("nickname", false);
-            }
+            checkNickname(value);
         });
-
 
         PF_password.textProperty().addListener((observable, oldValue, newValue) ->
                 Platform.runLater(() -> {
                     String value = PF_password.getPassword().strip();
-                    if (RegistrationUtil.checkPassword(value)) {
-                        LB_error_password.setVisible(false);
-                        IV_check_password.setVisible(true);
-                        saveOk.put("password", true);
-                    } else {
-                        LB_error_password.setVisible(true);
-                        IV_check_password.setVisible(false);
-                        saveOk.put("password", false);
-                    }
+                    checkPassword(value);
                 })
         );
 
         PF_confirm_pwd.textProperty().addListener((observable, oldValue, newValue) ->
                 Platform.runLater(() -> {
                     String value = PF_confirm_pwd.getPassword().strip();
-                    if (RegistrationUtil.checkLength(value)) {
-                        if (RegistrationUtil.checkPasswordConfirmed(PF_password.getPassword().strip(), value)) {
-                            LB_error_confirmed_password.setVisible(false);
-                            IV_check_confirmed_password.setVisible(true);
-                            saveOk.put("confirm_password", true);
-                        } else {
-                            LB_error_confirmed_password.setText("La password non coincide");
-                            LB_error_confirmed_password.setVisible(true);
-                            IV_check_confirmed_password.setVisible(false);
-                        }
-                    } else {
-                        LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
-                        LB_error_confirmed_password.setVisible(true);
-                        IV_check_confirmed_password.setVisible(false);
-                        saveOk.put("confirm_password", false);
-
-                    }
+                    checkConfirmedPassword(value);
                 })
         );
+    }
+
+    private void checkName(String value) {
+        if (RegistrationUtil.checkLength(value)) {
+            LB_error_name.setVisible(false);
+            IV_check_name.setVisible(true);
+            saveOk.put("name", true);
+        } else {
+            LB_error_name.setVisible(true);
+            IV_check_name.setVisible(false);
+            saveOk.put("name", false);
+        }
+
+    }
+
+    private void checkSurname(String value) {
+        if (RegistrationUtil.checkLength(value)) {
+            LB_error_surname.setVisible(false);
+            IV_check_surname.setVisible(true);
+            saveOk.put("surname", true);
+        } else {
+            LB_error_surname.setVisible(true);
+            IV_check_surname.setVisible(false);
+            saveOk.put("surname", false);
+        }
+    }
+
+    private void checkFiscalCode(String value) {
+        if (RegistrationUtil.checkFiscalCode(value)) {
+            LB_error_code.setVisible(false);
+            if (RegistrationUtil.checkDuplicateFiscalCode(value)) {
+                LB_error_code.setVisible(false);
+                IV_check_fiscal_code.setVisible(true);
+                saveOk.put("fiscalCode", true);
+            } else {
+                LB_error_code.setText("Questo codice fiscale è già in uso");
+                LB_error_code.setVisible(true);
+                IV_check_fiscal_code.setVisible(false);
+                saveOk.put("fiscalCode", false);
+            }
+        } else {
+            LB_error_code.setText("Questo codice fiscale non è valido");
+            LB_error_code.setVisible(true);
+            IV_check_fiscal_code.setVisible(false);
+            saveOk.put("fiscalCode", false);
+        }
+    }
+
+    private void checkEmail(String value) {
+        if (RegistrationUtil.checkEmail(value)) {
+            LB_error_email.setVisible(false);
+            if (RegistrationUtil.checkDuplicateEmail(value)) {
+                LB_error_email.setVisible(false);
+                IV_check_email.setVisible(true);
+                saveOk.put("email", true);
+            } else {
+                LB_error_email.setText("Questa email è già in uso");
+                LB_error_email.setVisible(true);
+                IV_check_email.setVisible(false);
+                saveOk.put("email", false);
+            }
+        } else {
+            LB_error_email.setText("Questa email non è valida");
+            LB_error_email.setVisible(true);
+            IV_check_email.setVisible(false);
+            saveOk.put("email", false);
+        }
+    }
+
+    private void checkNickname(String value) {
+        if (RegistrationUtil.checkLength(value)) {
+            LB_error_nickname.setVisible(false);
+            if (RegistrationUtil.checkDuplicateNickname(value)) {
+                LB_error_nickname.setVisible(false);
+                IV_check_nickname.setVisible(true);
+                saveOk.put("nickname", true);
+            } else {
+                LB_error_nickname.setText("Questo nickname è già in uso");
+                LB_error_nickname.setVisible(true);
+                IV_check_nickname.setVisible(false);
+                saveOk.put("nickname", false);
+            }
+        } else {
+            LB_error_nickname.setText("Questo nickname non può essere vuoto");
+            LB_error_nickname.setVisible(true);
+            IV_check_nickname.setVisible(false);
+            saveOk.put("nickname", false);
+        }
+    }
+
+    private void checkPassword(String value) {
+        if (RegistrationUtil.checkPassword(value)) {
+            LB_error_password.setVisible(false);
+            IV_check_password.setVisible(true);
+            saveOk.put("password", true);
+        } else {
+            LB_error_password.setVisible(true);
+            IV_check_password.setVisible(false);
+            saveOk.put("password", false);
+        }
+    }
+
+    private void checkConfirmedPassword(String value) {
+        if (RegistrationUtil.checkLength(value)) {
+            if (RegistrationUtil.checkPasswordConfirmed(PF_password.getPassword().strip(), value)) {
+                LB_error_confirmed_password.setVisible(false);
+                IV_check_confirmed_password.setVisible(true);
+                saveOk.put("confirm_password", true);
+            } else {
+                LB_error_confirmed_password.setText("La password non coincide");
+                LB_error_confirmed_password.setVisible(true);
+                IV_check_confirmed_password.setVisible(false);
+            }
+        } else {
+            LB_error_confirmed_password.setText("Questo campo non può essere vuoto");
+            LB_error_confirmed_password.setVisible(true);
+            IV_check_confirmed_password.setVisible(false);
+            saveOk.put("confirm_password", false);
+        }
     }
 
     @FXML
@@ -323,12 +326,19 @@ public class UserSignUpController implements Initializable {
 
     @FXML
     public void signUp() {
+        BT_sing_up.setText("");
+        PS_spinner.setVisible(true);
+
         String name = StringUtils.capitalize(TF_name.getText().toLowerCase(Locale.ROOT).strip());
         String surname = StringUtils.capitalize(TF_surname.getText().toLowerCase(Locale.ROOT).strip());
         String fiscalCode = TF_fiscal_code.getText().strip();
         String email = TF_email.getText().strip();
         String nickname = TF_nickname.getText().strip();
         String pwd = PF_password.getPassword().strip();
+
+        checkFiscalCode(fiscalCode);
+        checkEmail(email);
+        checkNickname(nickname);
 
         for (String s : userField) {
             if (saveOk.get(s)) {
@@ -338,28 +348,46 @@ public class UserSignUpController implements Initializable {
 
         try {
             if (countOk == 7) {
-                verifyEmail();
-                try {
-                    WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                if (!ServerReference.getServer().checkDuplicateTempEmail(email)) {
+                    verifyEmail();
+                    if (TempUser.getEmailIsVerified()) {
+                        try {
+                            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-                User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
-                System.out.println(user);
+                        String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
+                        User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
+                        System.out.println(user);
 
-                try {
-                    ServerReference.getServer().insertDataUser(user);
-                } catch (RemoteException | NotBoundException e) {
-                    e.printStackTrace();
+                        try {
+                            ServerReference.getServer().insertDataUser(user);
+                        } catch (RemoteException | NotBoundException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        countOk = 0;
+                        BT_sing_up.setText("REGISTRATI");
+                        PS_spinner.setVisible(false);
+                    }
+                } else {
+                    LB_error_email.setText("Un altro utente sta creando un account con questa email");
+                    LB_error_email.setVisible(true);
+                    countOk = 0;
+                    BT_sing_up.setText("REGISTRATI");
+                    PS_spinner.setVisible(false);
                 }
             } else {
                 countOk = 0;
                 errorAlert();
+                BT_sing_up.setText("REGISTRATI");
+                PS_spinner.setVisible(false);
             }
-        } catch (IOException e) {
+        } catch (IOException | NotBoundException e) {
             e.printStackTrace();
+            BT_sing_up.setText("REGISTRATI");
+            PS_spinner.setVisible(false);
         }
     }
 
@@ -404,13 +432,17 @@ public class UserSignUpController implements Initializable {
     }
 
     private void verifyEmail() throws IOException {
+        String email = TF_email.getText().strip();
+        String nickname = TF_nickname.getText().strip();
+
         try {
-            ServerReference.getServer().sendEmail(TF_email.getText().strip());
+            ServerReference.getServer().sendVerifyEmail(email, nickname);
         } catch (NotBoundException | RemoteException e) {
             e.printStackTrace();
         }
 
-        TempUser.setEmail(TF_email.getText().strip());
+        TempUser.setEmail(email);
+        TempUser.setNickname(nickname);
 
         Scene scene = new Scene(WindowUtil.newScene(UserHomeController.class.getResource("fxml/verify_email.fxml")));
         Stage stage = new Stage();
@@ -421,7 +453,6 @@ public class UserSignUpController implements Initializable {
         stage.initOwner(this.stage);
         stage.setTitle("Verifica email");
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
-        stage.showAndWait();
 
         AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
         AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
@@ -435,5 +466,7 @@ public class UserSignUpController implements Initializable {
             stage.setX(mouseEvent.getScreenX() - xOffset.get());
             stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
+
+        stage.showAndWait();
     }
 }

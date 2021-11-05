@@ -56,98 +56,68 @@ public class HubSignUpController implements Initializable {
     private final static String[] TYPOLOGY = {
             "OSPEDALIERO", "AZIENDALE", "HUB"
     };
-
+    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "typology"};
+    private final HashMap<String, Boolean> saveOk = new HashMap<>();
     @FXML
     public AnchorPane AP_ext;
-
     @FXML
     public ImageView BT_back;
-
     @FXML
     public ImageView BT_minimize;
-
     @FXML
     public ImageView BT_quit;
-
     @FXML
     public MFXTextField TF_name_hub;
-
     @FXML
     public MFXPasswordField PF_password;
-
     @FXML
     public MFXPasswordField PF_confirmed_password;
-
     @FXML
     public JFXComboBox<String> CB_qualificator;
-
     @FXML
     public MFXTextField TF_address;
-
     @FXML
     public MFXTextField TF_number;
-
     @FXML
     public MFXTextField TF_city;
-
     @FXML
     public JFXComboBox<String> CB_province;
-
     @FXML
     public JFXComboBox<String> CB_typology;
-
     @FXML
     public MFXButton BT_sing_up;
-
     @FXML
     public Label LB_error_name;
-
     @FXML
     public Label LB_error_password;
-
     @FXML
     public Label LB_error_confirmed_password;
-
     @FXML
     public Label LB_error_qualificator;
-
     @FXML
     public Label LB_error_address;
-
     @FXML
     public Label LB_error_number;
-
     @FXML
     public Label LB_error_city;
-
     @FXML
     public Label LB_error_province;
-
     @FXML
     public Label LB_error_typology;
-
     @FXML
     public ImageView IV_check_name;
-
     @FXML
     public ImageView IV_check_password;
-
     @FXML
     public ImageView IV_check_confirmed_password;
-
     @FXML
     public ImageView IV_check_address;
-
     @FXML
     public ImageView IV_check_number;
-
     @FXML
     public ImageView IV_check_city;
-
     private Stage stage;
-    private final HashMap<String, Boolean> saveOk = new HashMap<>();
     private int countOk = 0;
-    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "typology"};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

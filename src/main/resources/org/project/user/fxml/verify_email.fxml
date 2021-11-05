@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.project.utils.*?>
-<AnchorPane fx:id="AP_ext" prefHeight="240.0" prefWidth="294.0"
-            style="-fx-background-radius: 1em; -fx-background-color: #999999;" xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.user.UserVerifyEmailController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" prefHeight="240.0"
+            prefWidth="294.0" style="-fx-background-radius: 1em; -fx-background-color: #999999;"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.user.UserVerifyEmailController">
     <Label layoutX="79.0" layoutY="20.0" text="Verifica email" AnchorPane.leftAnchor="70.0"
            AnchorPane.rightAnchor="70.0">
         <graphic>
@@ -29,42 +29,43 @@
             <Font size="16.0"/>
         </font>
     </Label>
-    <TextFieldLimited fx:id="TF_one" alignment="CENTER" layoutX="12.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_one" alignment="CENTER" layoutX="12.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <TextFieldLimited fx:id="TF_two" alignment="CENTER" layoutX="58.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_two" alignment="CENTER" layoutX="58.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <TextFieldLimited fx:id="TF_three" alignment="CENTER" layoutX="104.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_three" alignment="CENTER" layoutX="104.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <TextFieldLimited fx:id="TF_four" alignment="CENTER" layoutX="150.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_four" alignment="CENTER" layoutX="150.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <TextFieldLimited fx:id="TF_five" alignment="CENTER" layoutX="196.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_five" alignment="CENTER" layoutX="196.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <TextFieldLimited fx:id="TF_six" alignment="CENTER" layoutX="242.0" layoutY="125.0" prefHeight="40.0"
+    <TextFieldLimited fx:id="TF_six" alignment="CENTER" layoutX="242.0" layoutY="118.0" prefHeight="40.0"
                       prefWidth="40.0">
         <font>
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
+    <Label fx:id="LB_error_code" layoutX="112.0" layoutY="158.0" text="Codice errato" textFill="RED" visible="false"/>
     <MFXButton fx:id="BT_confirmed" buttonType="RAISED" depthLevel="LEVEL1" layoutX="85.0" layoutY="178.0"
                onMouseClicked="#confirmed" rippleColor="#745eca"
                style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="CONFERMA"
@@ -90,4 +91,5 @@
         </cursor>
         <Image url="@../../drawable/quit.png"/>
     </ImageView>
+    <Label fx:id="LB_timer" layoutX="190.0" layoutY="216.0" text="00" visible="false"/>
 </AnchorPane>

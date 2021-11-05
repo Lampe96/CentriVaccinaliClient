@@ -14,3 +14,7 @@
 .clickLabel:hover {
     -fx-text-fill: #0B0080;
 }
+
+#spinner .track{
+    -fx-stroke: #ffdf00;
+}

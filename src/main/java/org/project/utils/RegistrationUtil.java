@@ -5,6 +5,7 @@ import org.project.server.ServerReference;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Locale;
 
 public class RegistrationUtil {
 
@@ -50,9 +51,9 @@ public class RegistrationUtil {
         return fiscalCode.matches(RX_FISCAL_CODE);
     }
 
-    public static boolean checkDuplicateFiscalCode(String fiscalCode) {
+    public static boolean checkDuplicateFiscalCode(@NotNull String fiscalCode) {
         try {
-            return ServerReference.getServer().checkDuplicateFiscalCode(fiscalCode);
+            return ServerReference.getServer().checkDuplicateFiscalCode(fiscalCode.toUpperCase(Locale.ROOT));
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
