@@ -91,5 +91,5 @@
         </cursor>
         <Image url="@../../drawable/quit.png"/>
     </ImageView>
-    <Label fx:id="LB_timer" layoutX="190.0" layoutY="216.0" text="00" visible="false"/>
+    <Label fx:id="LB_timer" layoutX="190.0" layoutY="216.0" visible="false"/>
 </AnchorPane>

@@ -441,17 +441,8 @@ public class UserSignUpController implements Initializable {
     }
 
     private void verifyEmail() throws IOException {
-        String email = TF_email.getText().strip();
-        String nickname = TF_nickname.getText().strip();
-
-        try {
-            ServerReference.getServer().sendVerifyEmail(email, nickname);
-        } catch (NotBoundException | RemoteException e) {
-            e.printStackTrace();
-        }
-
-        TempUser.setEmail(email);
-        TempUser.setNickname(nickname);
+        TempUser.setEmail(TF_email.getText().strip());
+        TempUser.setNickname(TF_nickname.getText().strip());
 
         Scene scene = new Scene(WindowUtil.newScene(UserHomeController.class.getResource("fxml/verify_email.fxml")));
         Stage stage = new Stage();

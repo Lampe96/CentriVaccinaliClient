@@ -57,43 +57,50 @@ public class UserVerifyEmailController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            ServerReference.getServer().sendVerifyEmail(TempUser.getEmail(), TempUser.getNickname());
+        } catch (NotBoundException | RemoteException e) {
+            e.printStackTrace();
+        }
+
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+
         TF_one.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_one.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         TF_two.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_two.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         TF_three.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_three.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         TF_four.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_four.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         TF_five.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_five.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
 
         TF_six.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.matches("\\d*")){
+            if (!newValue.matches("\\d*")) {
                 TF_six.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-
     }
 
     @FXML
@@ -154,7 +161,6 @@ public class UserVerifyEmailController implements Initializable {
     @FXML
     public void newCode() {
         if (resend) {
-
             LB_error_code.setVisible(false);
             TF_one.setText("");
             TF_two.setText("");

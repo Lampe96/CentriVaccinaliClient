@@ -1,6 +1,8 @@
 package org.project.hub;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXLabel;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +45,24 @@ public class HubHomeController implements Initializable {
 
     @FXML
     public MFXButton BT_about;
+
+    @FXML
+    public MFXLabel LB_total_vaccinated;
+
+    @FXML
+    public MFXLabel LB_total_vaccinated_center;
+
+    @FXML
+    public MFXLabel LB_vaccinated_first;
+
+    @FXML
+    public MFXLabel LB_vaccinated_second;
+
+    @FXML
+    public MFXButton BT_registration_citizen;
+
+    @FXML
+    public MFXTextField TF_search_citizen;
 
     private Stage stage;
     private double xPos = 0;
@@ -125,10 +145,11 @@ public class HubHomeController implements Initializable {
     }
 
     private void startSetting() throws IOException {
+        //todo fare fxml impostazioni
         Scene scene = new Scene(WindowUtil.newScene(GuestHomeController.class.getResource("fxml/guest_home.fxml")));
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("My modal window");
+        stage.setTitle("Impostazioni");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.show();
@@ -136,11 +157,26 @@ public class HubHomeController implements Initializable {
 
     @FXML
     public void logout() {
-
+        //todo fare popup sei sicuro di voler uscire
     }
 
     @FXML
     public void openAbout() {
+        try {
+            startAbout();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void startAbout() throws IOException {
+        //todo fare fxml about
+        Scene scene = new Scene(WindowUtil.newScene(GuestHomeController.class.getResource("fxml/guest_home.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("About");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.show();
     }
 }

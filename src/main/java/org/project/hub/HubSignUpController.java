@@ -126,7 +126,6 @@ public class HubSignUpController implements Initializable {
     @FXML
     public ImageView IV_check_cap;
 
-
     private Stage stage;
     private int countOk = 0;
 

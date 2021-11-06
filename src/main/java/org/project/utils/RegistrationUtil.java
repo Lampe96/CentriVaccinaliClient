@@ -10,8 +10,6 @@ import java.util.Locale;
 public class RegistrationUtil {
 
     private static final String RX_NAME = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
-    
-    private static final String RX_PWD = "^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.:;,-])[A-Za-z\\d@$!%*?&.:;,-]{6,})$";
 
     private static final String RX_ADDRESS_CITY = "^[a-zA-Z]+( [a-zA-Z]+)*$";
 
@@ -27,20 +25,14 @@ public class RegistrationUtil {
             "@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}" +
             "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)]))$";
 
+    private static final String RX_PWD = "^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.:;,-])[A-Za-z\\d@$!%*?&.:;,-]{6,})$";
+
     public static boolean checkLength(@NotNull String string) {
         return string.length() > 0;
     }
 
     public static boolean checkName(@NotNull String name) {
         return name.matches(RX_NAME);
-    }
-    
-    public static boolean checkPassword(@NotNull String password) {
-        return password.matches(RX_PWD);
-    }
-
-    public static boolean checkPasswordConfirmed(@NotNull String password, String confirmedPassword) {
-        return password.equals(confirmedPassword);
     }
 
     public static boolean checkAddress(@NotNull String address) {
@@ -63,6 +55,18 @@ public class RegistrationUtil {
         return fiscalCode.matches(RX_FISCAL_CODE);
     }
 
+    public static boolean checkEmail(@NotNull String email) {
+        return email.matches(RX_EMAIL);
+    }
+
+    public static boolean checkPassword(@NotNull String password) {
+        return password.matches(RX_PWD);
+    }
+
+    public static boolean checkPasswordConfirmed(@NotNull String password, String confirmedPassword) {
+        return password.equals(confirmedPassword);
+    }
+
     public static boolean checkDuplicateFiscalCode(@NotNull String fiscalCode) {
         try {
             return ServerReference.getServer().checkDuplicateFiscalCode(fiscalCode.toUpperCase(Locale.ROOT));
@@ -70,10 +74,6 @@ public class RegistrationUtil {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static boolean checkEmail(@NotNull String email) {
-        return email.matches(RX_EMAIL);
     }
 
     public static boolean checkDuplicateEmail(String email) {

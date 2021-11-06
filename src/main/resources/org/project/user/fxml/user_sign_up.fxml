@@ -202,8 +202,7 @@
             </MFXScrollPane>
             <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#signUp" rippleColor="#745eca"
                        style="-fx-background-color: #fc4a1a; -fx-background-radius: 0.4em;" text="REGISTRATI"
-                       AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0"
-                       AnchorPane.topAnchor="345.0">
+                       AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0">
                 <font>
                     <Font name="System Bold" size="14.0"/>
                 </font>
@@ -211,7 +210,7 @@
                     <Cursor fx:constant="HAND"/>
                 </cursor>
             </MFXButton>
-            <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="352.0" prefHeight="24.0"
+            <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="348.0" prefHeight="24.0"
                                 prefWidth="24.0" stylesheets="@../user_sign_up.css" visible="false"/>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0"
@@ -245,7 +244,7 @@
                 <Label alignment="CENTER" layoutX="10.0" layoutY="138.0" prefWidth="300.0" styleClass="title"
                        stylesheets="@../user_sign_up.css" text="User version" wrapText="true">
                     <font>
-                        <Font size="13.0"/>
+                        <Font size="14.0"/>
                     </font>
                     <VBox.margin>
                         <Insets top="15.0"/>
