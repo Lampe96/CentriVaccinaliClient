@@ -5,64 +5,80 @@ import io.github.palexdev.materialfx.controls.MFXLabel;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.guest.GuestHomeController;
+import org.project.models.VaccinatedUser;
+import org.project.server.ServerReference;
 import org.project.utils.WindowUtil;
 
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class HubHomeController implements Initializable {
 
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
 
     @FXML
-    public ImageView BT_minimize;
+    private MFXButton BT_setting;
 
     @FXML
-    public ImageView BT_quit;
+    private MFXButton BT_about;
 
     @FXML
-    public MFXButton BT_setting;
+    private MFXButton BT_logout;
 
     @FXML
-    public MFXButton BT_logout;
+    private ImageView BT_quit;
 
     @FXML
-    public MFXButton BT_about;
+    private ImageView BT_minimize;
 
     @FXML
-    public MFXLabel LB_total_vaccinated;
+    private Label LB_hub_name;
 
     @FXML
-    public MFXLabel LB_total_vaccinated_center;
+    private MFXLabel LB_total_vaccinated;
 
     @FXML
-    public MFXLabel LB_vaccinated_first;
+    private MFXLabel LB_total_vaccinated_center;
 
     @FXML
-    public MFXLabel LB_vaccinated_second;
+    private MFXLabel LB_vaccinated_first;
 
     @FXML
-    public MFXButton BT_registration_citizen;
+    private MFXLabel LB_vaccinated_second;
 
     @FXML
-    public MFXTextField TF_search_citizen;
+    private MFXButton BT_registration_citizen;
+
+    @FXML
+    private MFXTextField TF_search_citizen;
+
+    @FXML
+    private VBox VB_vaccinated_layout;
+
 
     private Stage stage;
     private double xPos = 0;
@@ -79,8 +95,32 @@ public class HubHomeController implements Initializable {
                 stage.setX(xPos);
                 stage.setY(yPos);
             }
+
+            String hubName = TempHub.getHubName();
+            LB_hub_name.setText(hubName);
+            System.out.println(hubName);
+
+            try {
+                ArrayList<VaccinatedUser>  vc = new ArrayList<>(ServerReference.getServer().fetchHubVaccinatedUser(hubName));
+                for (VaccinatedUser vaccinatedUser : vc) {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+
+                    try {
+                        HBox hBox = fxmlLoader.load();
+                        HubItemRowController hirc = fxmlLoader.getController();
+                        hirc.setData(vaccinatedUser);
+                        VB_vaccinated_layout.getChildren().add(hBox);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
         });
     }
+
 
     private void startUpLocation(double windowWidth, double windowHeight) {
         Point p = MouseInfo.getPointerInfo().getLocation();

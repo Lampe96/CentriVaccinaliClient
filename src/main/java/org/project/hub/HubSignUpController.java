@@ -60,71 +60,103 @@ public class HubSignUpController implements Initializable {
     private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "cap", "typology"};
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
+
     @FXML
-    public ImageView BT_back;
+    private ImageView BT_back;
+
     @FXML
-    public ImageView BT_minimize;
+    private ImageView BT_minimize;
+
     @FXML
-    public ImageView BT_quit;
+    private ImageView BT_quit;
+
     @FXML
-    public MFXTextField TF_name_hub;
+    private MFXTextField TF_name_hub;
+
     @FXML
-    public MFXPasswordField PF_password;
+    private ImageView IV_check_name;
+
     @FXML
-    public MFXPasswordField PF_confirmed_password;
+    private Label LB_error_name;
+
     @FXML
-    public JFXComboBox<String> CB_qualificator;
+    private MFXPasswordField PF_password;
+
     @FXML
-    public MFXTextField TF_address;
+    private ImageView IV_check_password;
+
     @FXML
-    public MFXTextField TF_number;
+    private Label LB_error_password;
+
     @FXML
-    public MFXTextField TF_city;
+    private MFXPasswordField PF_confirmed_password;
+
     @FXML
-    public JFXComboBox<String> CB_province;
+    private ImageView IV_check_confirmed_password;
+
     @FXML
-    public JFXComboBox<String> CB_typology;
+    private Label LB_error_confirmed_password;
+
     @FXML
-    public MFXButton BT_sing_up;
+    private JFXComboBox<String> CB_qualificator;
+
     @FXML
-    public Label LB_error_name;
+    private Label LB_error_qualificator;
+
     @FXML
-    public Label LB_error_password;
+    private MFXTextField TF_address;
+
     @FXML
-    public Label LB_error_confirmed_password;
+    private ImageView IV_check_address;
+
     @FXML
-    public Label LB_error_qualificator;
+    private Label LB_error_address;
+
     @FXML
-    public Label LB_error_address;
+    private MFXTextField TF_number;
+
     @FXML
-    public Label LB_error_number;
+    private ImageView IV_check_number;
+
     @FXML
-    public Label LB_error_city;
+    private Label LB_error_number;
+
     @FXML
-    public Label LB_error_province;
+    private MFXTextField TF_city;
+
     @FXML
-    public Label LB_error_typology;
+    private ImageView IV_check_city;
+
     @FXML
-    public ImageView IV_check_name;
+    private Label LB_error_city;
+
     @FXML
-    public ImageView IV_check_password;
+    private JFXComboBox<String> CB_province;
+
     @FXML
-    public ImageView IV_check_confirmed_password;
+    private Label LB_error_province;
+
     @FXML
-    public ImageView IV_check_address;
+    private MFXTextField TF_cap;
+
     @FXML
-    public ImageView IV_check_number;
+    private ImageView IV_check_cap;
+
     @FXML
-    public ImageView IV_check_city;
+    private Label LB_error_cap;
+
     @FXML
-    public MFXProgressSpinner PS_spinner;
+    private JFXComboBox<String> CB_typology;
+
     @FXML
-    public MFXTextField TF_cap;
+    private Label LB_error_typology;
+
     @FXML
-    public Label LB_error_cap;
+    private MFXButton BT_sing_up;
+
     @FXML
-    public ImageView IV_check_cap;
+    private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
     private int countOk = 0;

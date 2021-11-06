@@ -43,60 +43,88 @@ public class UserSignUpController implements Initializable {
 
     private final static String[] userField = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
+
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
+
     @FXML
-    public ImageView BT_back;
+    private ImageView BT_back;
+
     @FXML
-    public ImageView BT_minimize;
+    private ImageView BT_minimize;
+
     @FXML
-    public ImageView BT_quit;
+    private ImageView BT_quit;
+
     @FXML
-    public MFXTextField TF_name;
+    private MFXTextField TF_name;
+
     @FXML
-    public MFXTextField TF_surname;
+    private ImageView IV_check_name;
+
     @FXML
-    public MFXTextField TF_fiscal_code;
+    private Label LB_error_name;
+
     @FXML
-    public MFXTextField TF_email;
+    private MFXTextField TF_surname;
+
     @FXML
-    public MFXTextField TF_nickname;
+    private ImageView IV_check_surname;
+
     @FXML
-    public MFXPasswordField PF_password;
+    private Label LB_error_surname;
+
     @FXML
-    public MFXPasswordField PF_confirm_pwd;
+    private MFXTextField TF_fiscal_code;
+
     @FXML
-    public MFXButton BT_sing_up;
+    private ImageView IV_check_fiscal_code;
+
     @FXML
-    public MFXProgressSpinner PS_spinner;
+    private Label LB_error_code;
+
     @FXML
-    public Label LB_error_name;
+    private MFXTextField TF_email;
+
     @FXML
-    public Label LB_error_surname;
+    private ImageView IV_check_email;
+
     @FXML
-    public Label LB_error_code;
+    private Label LB_error_email;
+
     @FXML
-    public Label LB_error_email;
+    private MFXTextField TF_nickname;
+
     @FXML
-    public Label LB_error_nickname;
+    private ImageView IV_check_nickname;
+
     @FXML
-    public Label LB_error_confirmed_password;
+    private Label LB_error_nickname;
+
     @FXML
-    public Label LB_error_password;
+    private MFXPasswordField PF_password;
+
     @FXML
-    public ImageView IV_check_name;
+    private ImageView IV_check_password;
+
     @FXML
-    public ImageView IV_check_surname;
+    private Label LB_error_password;
+
     @FXML
-    public ImageView IV_check_fiscal_code;
+    private MFXPasswordField PF_confirm_pwd;
+
     @FXML
-    public ImageView IV_check_email;
+    private ImageView IV_check_confirmed_password;
+
     @FXML
-    public ImageView IV_check_nickname;
+    private Label LB_error_confirmed_password;
+
     @FXML
-    public ImageView IV_check_password;
+    private MFXButton BT_sing_up;
+
     @FXML
-    public ImageView IV_check_confirmed_password;
+    private MFXProgressSpinner PS_spinner;
+
     private Stage stage;
     private int countOk = 0;
 

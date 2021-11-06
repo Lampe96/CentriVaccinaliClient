@@ -28,30 +28,42 @@ public class UserVerifyEmailController implements Initializable {
     private static final Timer HIDDENTIMER = new Timer();
     private static final Timer VISIBLETIMER = new Timer();
     private static boolean resend = true;
+
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
+
     @FXML
-    public ImageView BT_quit;
+    private ImageView BT_quit;
+
     @FXML
-    public TextField TF_one;
+    private TextField TF_one;
+
     @FXML
-    public TextField TF_two;
+    private TextField TF_two;
+
     @FXML
-    public TextField TF_three;
+    private TextField TF_three;
+
     @FXML
-    public TextField TF_four;
+    private TextField TF_four;
+
     @FXML
-    public TextField TF_five;
+    private TextField TF_five;
+
     @FXML
-    public TextField TF_six;
+    private TextField TF_six;
+
     @FXML
-    public MFXButton BT_confirmed;
+    private MFXButton BT_confirmed;
+
     @FXML
-    public Label BT_new_code;
+    private Label BT_new_code;
+
     @FXML
-    public Label LB_error_code;
+    private Label LB_error_code;
+
     @FXML
-    public Label LB_timer;
+    private Label LB_timer;
 
     private Stage stage;
 
@@ -69,36 +81,48 @@ public class UserVerifyEmailController implements Initializable {
         TF_one.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_one.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_two.requestFocus();
             }
         });
 
         TF_two.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_two.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_three.requestFocus();
             }
         });
 
         TF_three.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_three.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_four.requestFocus();
             }
         });
 
         TF_four.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_four.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_five.requestFocus();
             }
         });
 
         TF_five.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_five.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_six.requestFocus();
             }
         });
 
-        TF_six.textProperty().addListener((observable, oldValue, newValue) -> {
+        TF_six.textProperty().addListener((observable, oldValue, newValue) -> {//row
             if (!newValue.matches("\\d*")) {
                 TF_six.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                TF_one.requestFocus();
             }
         });
     }

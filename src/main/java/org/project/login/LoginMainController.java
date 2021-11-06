@@ -26,6 +26,7 @@ import org.project.UserType;
 import org.project.guest.GuestHomeController;
 import org.project.hub.HubHomeController;
 import org.project.hub.HubSignUpController;
+import org.project.hub.TempHub;
 import org.project.server.ServerReference;
 import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
@@ -45,34 +46,34 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LoginMainController implements Initializable {
 
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
 
     @FXML
-    public ImageView BT_minimize;
+    private ImageView BT_minimize;
 
     @FXML
-    public ImageView BT_quit;
+    private ImageView BT_quit;
 
     @FXML
-    public MFXTextField TF_email;
+    private MFXTextField TF_email;
 
     @FXML
-    public Label LB_error_email;
+    private Label LB_error_email;
 
     @FXML
-    public MFXPasswordField PF_password;
+    private MFXPasswordField PF_password;
 
     @FXML
-    public Label LB_error_password;
+    private Label LB_error_password;
 
     @FXML
-    public MFXButton BT_login;
+    private MFXButton BT_login;
 
     @FXML
-    public Label BT_login_guest;
+    private Label BT_login_guest;
 
     @FXML
-    public Label BT_signUp;
+    private Label BT_signUp;
 
     private Stage stage;
     private double xPos = 0;
@@ -269,7 +270,7 @@ public class LoginMainController implements Initializable {
         UserType userType = choiceAlert();
         if (userType == UserType.HUB) {
             try {
-
+                TempHub.setHubName(TF_email.getText().strip());
                 WindowUtil.setRoot(HubSignUpController.class.getResource("fxml/hub_sign_up.fxml"), AP_ext.getScene());
             } catch (IOException e) {
                 e.printStackTrace();
