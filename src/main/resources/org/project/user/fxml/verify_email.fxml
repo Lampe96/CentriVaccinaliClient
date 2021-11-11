@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.project.utils.*?>
+<?import org.project.utils.TextFieldLimited?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" prefHeight="240.0"
             prefWidth="294.0" style="-fx-background-radius: 1em; -fx-background-color: #999999;"
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.user.UserVerifyEmailController">
@@ -65,7 +65,9 @@
             <Font size="18.0"/>
         </font>
     </TextFieldLimited>
-    <Label fx:id="LB_error_code" layoutX="112.0" layoutY="158.0" text="Codice errato" textFill="RED" visible="false"/>
+    <Label fx:id="LB_error_code" alignment="CENTER" layoutX="112.0" layoutY="158.0"
+           text="Codice errato o non più valido" textFill="RED" visible="false" AnchorPane.leftAnchor="0.0"
+           AnchorPane.rightAnchor="0.0"/>
     <MFXButton fx:id="BT_confirmed" buttonType="RAISED" depthLevel="LEVEL1" layoutX="85.0" layoutY="178.0"
                onMouseClicked="#confirmed" rippleColor="#745eca"
                style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="CONFERMA"

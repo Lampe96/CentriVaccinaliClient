@@ -10,8 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -20,8 +22,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
-import org.project.guest.GuestHomeController;
+import org.project.UserType;
+import org.project.login.LoginMainController;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
 import org.project.utils.WindowUtil;
@@ -31,14 +35,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HubHomeController implements Initializable {
 
     @FXML
     private AnchorPane AP_ext;
+
+    @FXML
+    private Label LB_hub_name;
+
+    @FXML
+    private Label LB_hub_address;
 
     @FXML
     private MFXButton BT_setting;
@@ -56,9 +68,6 @@ public class HubHomeController implements Initializable {
     private ImageView BT_minimize;
 
     @FXML
-    private Label LB_hub_name;
-
-    @FXML
     private MFXLabel LB_total_vaccinated;
 
     @FXML
@@ -71,18 +80,21 @@ public class HubHomeController implements Initializable {
     private MFXLabel LB_vaccinated_second;
 
     @FXML
-    private MFXButton BT_registration_citizen;
+    private MFXButton BT_open_chart;
 
     @FXML
     private MFXTextField TF_search_citizen;
 
     @FXML
-    private VBox VB_vaccinated_layout;
+    private MFXButton BT_registration_citizen;
 
+    @FXML
+    private VBox VB_vaccinated_layout;
 
     private Stage stage;
     private double xPos = 0;
     private double yPos = 0;
+    private double xOffset, yOffset;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -98,29 +110,32 @@ public class HubHomeController implements Initializable {
 
             String hubName = TempHub.getHubName();
             LB_hub_name.setText(hubName);
-            System.out.println(hubName);
+
+            //TODO inserire indirizzo
+            //LB_hub_address.setText(address);
 
             try {
-                ArrayList<VaccinatedUser>  vc = new ArrayList<>(ServerReference.getServer().fetchHubVaccinatedUser(hubName));
-                for (VaccinatedUser vaccinatedUser : vc) {
-                    FXMLLoader fxmlLoader = new FXMLLoader();
-                    fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+                for (VaccinatedUser vaccinatedUser : ServerReference.getServer().fetchHubVaccinatedUser(hubName)) {
 
-                    try {
-                        HBox hBox = fxmlLoader.load();
-                        HubItemRowController hirc = fxmlLoader.getController();
-                        hirc.setData(vaccinatedUser);
-                        VB_vaccinated_layout.getChildren().add(hBox);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    for (int i = 0; i < 10; i++) {
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+                        try {
+                            HBox hBox = fxmlLoader.load();
+                            HubHomeItemRowController hirc = fxmlLoader.getController();
+                            hirc.setData(vaccinatedUser, i % 2 == 0);
+                            VB_vaccinated_layout.getChildren().add(hBox);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+
                 }
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
             }
         });
     }
-
 
     private void startUpLocation(double windowWidth, double windowHeight) {
         Point p = MouseInfo.getPointerInfo().getLocation();
@@ -185,8 +200,7 @@ public class HubHomeController implements Initializable {
     }
 
     private void startSetting() throws IOException {
-        //todo fare fxml impostazioni
-        Scene scene = new Scene(WindowUtil.newScene(GuestHomeController.class.getResource("fxml/guest_home.fxml")));
+        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_settings.fxml")));
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Impostazioni");
@@ -197,7 +211,79 @@ public class HubHomeController implements Initializable {
 
     @FXML
     public void logout() {
-        //todo fare popup sei sicuro di voler uscire
+        if (logoutAlert()) {
+            try {
+                startLogin();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private boolean logoutAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Sei sicuro di voler effettuare il logout?");
+        alert.initStyle(StageStyle.TRANSPARENT);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+
+        ButtonType buttonTypeOk = new ButtonType("OK");
+        ButtonType buttonTypeCancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOk, buttonTypeCancel);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(255, 0);
+        dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
+        dialogPane.getStylesheets().add(Objects.requireNonNull(HubHomeController.class.getResource("alert_error.css")).toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Scene dialogScene = dialogPane.getScene();
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        dialogScene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        dialogScene.setOnMouseDragged(mouseEvent -> {
+            dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
+            dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        return result.orElse(null) == buttonTypeOk;
+    }
+
+    private void startLogin() throws IOException {
+        Scene scene = new Scene(WindowUtil.newScene(LoginMainController.class.getResource("fxml/login.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("CVI");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+        this.stage.hide();
+        stage.show();
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
     }
 
     @FXML
@@ -210,11 +296,29 @@ public class HubHomeController implements Initializable {
     }
 
     private void startAbout() throws IOException {
-        //todo fare fxml about
-        Scene scene = new Scene(WindowUtil.newScene(GuestHomeController.class.getResource("fxml/guest_home.fxml")));
+        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_about.fxml")));
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("About");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.show();
+    }
+
+    @FXML
+    public void openChart() {
+        try {
+            startChart();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startChart() throws IOException {
+        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_chart.fxml")));
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Grafico vaccinazioni");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.show();

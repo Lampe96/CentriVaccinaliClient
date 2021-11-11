@@ -14,6 +14,8 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -169,13 +171,14 @@ public class LoginMainController implements Initializable {
     }
 
     @FXML
-    private void login() {
-        try {
-            startRightHomeStage(UserType.HUB);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void pressEnter(@NotNull KeyEvent keyEvent) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+            login();
         }
+    }
 
+    @FXML
+    private void login() {
         String email = TF_email.getText().strip();
         String pwd = PF_password.getPassword().strip();
 
@@ -209,6 +212,7 @@ public class LoginMainController implements Initializable {
             LB_error_password.setVisible(true);
         } else if (userHub == UserType.HUB) {
             try {
+                TempHub.setHubName(TF_email.getText().strip());
                 startRightHomeStage(UserType.HUB);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -270,7 +274,6 @@ public class LoginMainController implements Initializable {
         UserType userType = choiceAlert();
         if (userType == UserType.HUB) {
             try {
-                TempHub.setHubName(TF_email.getText().strip());
                 WindowUtil.setRoot(HubSignUpController.class.getResource("fxml/hub_sign_up.fxml"), AP_ext.getScene());
             } catch (IOException e) {
                 e.printStackTrace();

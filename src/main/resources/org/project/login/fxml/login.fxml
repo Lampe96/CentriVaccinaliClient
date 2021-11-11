@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
+            minWidth="-Infinity" onKeyPressed="#pressEnter" prefHeight="600.0" prefWidth="700.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.login.LoginMainController">
     <AnchorPane layoutX="14.0" layoutY="14.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="47.0"

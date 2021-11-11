@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.hub.HubHomeChartController">
+    <StackedBarChart fx:id="barChart" animated="false" title="Riepilogo" AnchorPane.bottomAnchor="0.0"
+                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <xAxis>
+            <CategoryAxis side="BOTTOM" tickLabelGap="1.0" tickLength="6.0">
+                <tickLabelFont>
+                    <Font size="12.0"/>
+                </tickLabelFont>
+            </CategoryAxis>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Numero di vaccinazioni" minorTickLength="4.0" side="LEFT" tickLabelGap="1.0"
+                        tickLength="6.0" upperBound="30.0">
+                <tickLabelFont>
+                    <Font name="System Italic" size="14.0"/>
+                </tickLabelFont>
+            </NumberAxis>
+        </yAxis>
+    </StackedBarChart>
+</AnchorPane>

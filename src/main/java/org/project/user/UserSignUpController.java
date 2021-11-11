@@ -417,7 +417,7 @@ public class UserSignUpController implements Initializable {
                 }
             } else {
                 countOk = 0;
-                errorAlert();
+                errorAlertField();
                 BT_sing_up.setText("REGISTRATI");
                 PS_spinner.setVisible(false);
             }
@@ -428,7 +428,7 @@ public class UserSignUpController implements Initializable {
         }
     }
 
-    private void errorAlert() {
+    private void errorAlertField() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore in fase di registrazione");
         alert.setHeaderText("Errore nei campi:");
@@ -442,6 +442,7 @@ public class UserSignUpController implements Initializable {
         alert.getButtonTypes().setAll(buttonTypeCancel);
 
         DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(290, 125);
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
         dialogPane.getStylesheets().add(Objects.requireNonNull(HubSignUpController.class.getResource("alert_error.css")).toExternalForm());
         dialogPane.getStyleClass().add("alert");

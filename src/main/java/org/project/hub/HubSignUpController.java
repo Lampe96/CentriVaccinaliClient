@@ -528,6 +528,7 @@ public class HubSignUpController implements Initializable {
         alert.getButtonTypes().setAll(buttonTypeCancel);
 
         DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(290, 185);
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
         dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("alert_error.css")).toExternalForm());
         dialogPane.getStyleClass().add("alert");
@@ -558,7 +559,7 @@ public class HubSignUpController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errore in fase di registrazione");
         alert.setHeaderText("Errore nei campi:");
-        alert.setContentText("Uno o piu campi non sono corretti. Riprova!");
+        alert.setContentText("Uno o piu campi non sono corretti!");
         alert.initStyle(StageStyle.TRANSPARENT);
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);
@@ -568,6 +569,7 @@ public class HubSignUpController implements Initializable {
         alert.getButtonTypes().setAll(buttonTypeCancel);
 
         DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(290, 125);
         dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
         dialogPane.getStylesheets().add(Objects.requireNonNull(HubSignUpController.class.getResource("alert_error.css")).toExternalForm());
         dialogPane.getStyleClass().add("alert");

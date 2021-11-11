@@ -121,8 +121,6 @@ public class UserVerifyEmailController implements Initializable {
         TF_six.textProperty().addListener((observable, oldValue, newValue) -> {//row
             if (!newValue.matches("\\d*")) {
                 TF_six.setText(newValue.replaceAll("[^\\d]", ""));
-            } else {
-                TF_one.requestFocus();
             }
         });
     }
