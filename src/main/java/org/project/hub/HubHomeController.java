@@ -335,10 +335,24 @@ public class HubHomeController implements Initializable {
         Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_about.fxml")));
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
         stage.setTitle("About");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.show();
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
     }
 
     @FXML

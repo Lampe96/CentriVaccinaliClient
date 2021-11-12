@@ -1,0 +1,8 @@
+#header_anchor{
+    -fx-background-image: url("../drawable/header_about.gif");
+}
+
+#text_anchor{
+    -fx-background-image: url("../drawable/text_about.png");
+}
+
