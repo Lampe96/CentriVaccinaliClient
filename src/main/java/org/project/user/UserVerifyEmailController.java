@@ -21,7 +21,6 @@ import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserVerifyEmailController implements Initializable {
 
@@ -118,7 +117,7 @@ public class UserVerifyEmailController implements Initializable {
             }
         });
 
-        TF_six.textProperty().addListener((observable, oldValue, newValue) -> {//row
+        TF_six.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 TF_six.setText(newValue.replaceAll("[^\\d]", ""));
             }
@@ -130,6 +129,7 @@ public class UserVerifyEmailController implements Initializable {
         TempUser.setEmailIsVerified(false);
         try {
             ServerReference.getServer().deleteReferenceVerifyEmail(TempUser.getEmail());
+            VISIBLETIMER.cancel();
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
@@ -162,6 +162,7 @@ public class UserVerifyEmailController implements Initializable {
                 boolean verified = ServerReference.getServer().verifyCodeEmail(TempUser.getEmail(), code);
                 if (verified) {
                     TempUser.setEmailIsVerified(true);
+                    VISIBLETIMER.cancel();
                     stage.hide();
                 } else {
                     LB_error_code.setVisible(true);
@@ -180,6 +181,8 @@ public class UserVerifyEmailController implements Initializable {
         }
     }
 
+    private int countdown;
+
     @FXML
     public void newCode() {
         if (resend) {
@@ -192,6 +195,7 @@ public class UserVerifyEmailController implements Initializable {
             TF_six.setText("");
 
             try {
+                ServerReference.getServer().deleteReferenceVerifyEmail(TempUser.getEmail());
                 ServerReference.getServer().sendVerifyEmail(TempUser.getEmail(), TempUser.getNickname());
                 resend = false;
 
@@ -202,19 +206,19 @@ public class UserVerifyEmailController implements Initializable {
                     }
                 }, 60 * 1000);
 
-                AtomicInteger countdown = new AtomicInteger(60);
+                countdown = 60;
                 LB_timer.setVisible(true);
+                System.out.println(countdown);
                 VISIBLETIMER.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Platform.runLater(() -> {
-                            LB_timer.setText(String.valueOf(countdown.get()));
-                            countdown.getAndDecrement();
+                        Platform.runLater(() -> LB_timer.setText(String.valueOf(--countdown)));
 
-                            if (countdown.get() == 0) {
-                                LB_timer.setVisible(false);
-                            }
-                        });
+                        if (countdown == 0) {
+                            LB_timer.setVisible(false);
+                            cancel();
+                        }
+
                     }
                 }, 0, 1000);
             } catch (RemoteException | NotBoundException e) {

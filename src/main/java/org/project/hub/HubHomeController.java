@@ -23,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
@@ -36,10 +37,9 @@ import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class HubHomeController implements Initializable {
 
@@ -95,6 +95,7 @@ public class HubHomeController implements Initializable {
     private double xPos = 0;
     private double yPos = 0;
     private double xOffset, yOffset;
+    private ArrayList<VaccinatedUser> avu;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,28 +112,53 @@ public class HubHomeController implements Initializable {
             String hubName = TempHub.getHubName();
             LB_hub_name.setText(hubName);
 
-            //TODO inserire indirizzo
-            //LB_hub_address.setText(address);
+            try {
+                LB_hub_address.setText(ServerReference.getServer().getAddress(hubName).toStringCustom());
+            } catch (NotBoundException | RemoteException e) {
+                e.printStackTrace();
+            }
 
             try {
-                for (VaccinatedUser vaccinatedUser : ServerReference.getServer().fetchHubVaccinatedUser(hubName)) {
-
-                    for (int i = 0; i < 10; i++) {
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
-                        try {
-                            HBox hBox = fxmlLoader.load();
-                            HubHomeItemRowController hirc = fxmlLoader.getController();
-                            hirc.setData(vaccinatedUser, i % 2 == 0);
-                            VB_vaccinated_layout.getChildren().add(hBox);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                avu = ServerReference.getServer().fetchHubVaccinatedUser(hubName);
+                avu.forEach(vu -> {
+                    try {
+                        loadVaccinatedUserRow(vu, avu.indexOf(vu) % 2 == 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                }
+                });
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
+            }
+        });
+
+        TF_search_citizen.textProperty().addListener((observable, oldValue, newValue) -> {
+            String value = newValue.strip().replaceAll("\\s+", "");
+            if (!value.equals("")) {
+                ArrayList<VaccinatedUser> vuf = (ArrayList<VaccinatedUser>) avu.stream().filter(vu ->
+                        StringUtils.containsIgnoreCase(vu.getSurname() + vu.getName() + vu.getNickname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getSurname() + vu.getNickname() + vu.getName(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getName() + vu.getSurname() +  vu.getNickname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getName() + vu.getNickname() + vu.getSurname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getNickname() + vu.getSurname() + vu.getName(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getNickname() + vu.getName() + vu.getSurname(), (value))).collect(Collectors.toList());
+                VB_vaccinated_layout.getChildren().clear();
+                vuf.forEach(vu -> {
+                    try {
+                        loadVaccinatedUserRow(vu, vuf.indexOf(vu) % 2 == 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } else {
+                VB_vaccinated_layout.getChildren().clear();
+                avu.forEach(vu -> {
+                    try {
+                        loadVaccinatedUserRow(vu, avu.indexOf(vu) % 2 == 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }
@@ -150,6 +176,16 @@ public class HubHomeController implements Initializable {
                 }
             }
         }
+    }
+
+    private void loadVaccinatedUserRow(VaccinatedUser vu, boolean applyGrey) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+
+        HBox hBox = fxmlLoader.load();
+        HubHomeItemRowController hirc = fxmlLoader.getController();
+        hirc.setData(vu, applyGrey);
+        VB_vaccinated_layout.getChildren().add(hBox);
     }
 
     @FXML

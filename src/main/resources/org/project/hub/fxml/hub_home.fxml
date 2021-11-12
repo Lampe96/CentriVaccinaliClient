@@ -1,269 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
-            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
-            fx:controller="org.project.hub.HubHomeController">
-    <AnchorPane layoutX="178.0" layoutY="79.0" prefHeight="650.0" prefWidth="900.0"
-                style="-fx-background-radius: 3em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: white;"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                AnchorPane.topAnchor="0.0">
-        <AnchorPane id="left_anchor" layoutX="55.0" layoutY="69.0" prefWidth="200.0"
-                    style="-fx-background-color: white;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <VBox id="top_vBox" alignment="TOP_CENTER" layoutX="83.0" layoutY="47.0" prefHeight="200.0"
-                  prefWidth="100.0" style="-fx-background-color: #D0F0C0;" stylesheets="@../hub_home.css"
-                  AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                  AnchorPane.topAnchor="0.0">
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXLabel?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeController">
+    <AnchorPane layoutX="178.0" layoutY="79.0" prefHeight="650.0" prefWidth="900.0" style="-fx-background-radius: 3em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane id="left_anchor" layoutX="55.0" layoutY="69.0" prefWidth="200.0" style="-fx-background-color: white;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox id="top_vBox" alignment="TOP_CENTER" layoutX="83.0" layoutY="47.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #D0F0C0;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="320.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <padding>
-                    <Insets top="10.0"/>
+                    <Insets top="10.0" />
                 </padding>
                 <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../drawable/home_hub_hospital.png"/>
+                    <Image url="@../../drawable/home_hub_hospital.png" />
                     <VBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </VBox.margin>
                 </ImageView>
-                <Label fx:id="LB_hub_name" text="OSPEDALE" textAlignment="CENTER" wrapText="true">
-                    <font>
-                        <Font name="System Bold Italic" size="15.0"/>
-                    </font>
-                    <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="25.0"/>
-                    </VBox.margin>
-                </Label>
-                <Label fx:id="LB_hub_address" text="INDIRIZZO" wrapText="true">
-                    <font>
-                        <Font name="System Italic" size="13.0"/>
-                    </font>
-                    <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="25.0"/>
-                    </VBox.margin>
-                </Label>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <children>
+                      <Label fx:id="LB_hub_name" alignment="CENTER" text="OSPEDALE" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <font>
+                              <Font name="System Bold Italic" size="15.0" />
+                          </font>
+                      </Label>
+                      <Label fx:id="LB_hub_address" alignment="CENTER" text="INDIRIZZO" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+                          <font>
+                              <Font name="System Italic" size="13.0" />
+                          </font>
+                      </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="15.0" />
+               </VBox.margin>
+            </AnchorPane>
             </VBox>
-            <AnchorPane id="bottom_anchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ACE1AF;"
-                        stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0">
-                <AnchorPane prefHeight="4.0"
-                            style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <MFXButton fx:id="BT_setting" buttonType="RAISED" depthLevel="LEVEL1" layoutY="4.0"
-                           onMouseClicked="#openSetting" prefHeight="50.0" rippleColor="#745eca"
-                           style="-fx-background-color: transparent;" text="IMPOSTAZIONI" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0">
+            <AnchorPane id="bottom_anchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ACE1AF;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0">
+                <AnchorPane prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <MFXButton fx:id="BT_setting" buttonType="RAISED" depthLevel="LEVEL1" layoutY="4.0" onMouseClicked="#openSetting" prefHeight="50.0" rippleColor="#745eca" style="-fx-background-color: transparent;" text="IMPOSTAZIONI" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </MFXButton>
-                <AnchorPane layoutY="54.0" prefHeight="4.0"
-                            style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <AnchorPane layoutY="107.0" prefHeight="4.0"
-                            style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <MFXButton fx:id="BT_about" buttonType="RAISED" depthLevel="LEVEL1" layoutY="110.0"
-                           onMouseClicked="#openAbout" prefHeight="50.0" rippleColor="#745eca"
-                           style="-fx-background-color: transparent;" text="ABOUT" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0">
+                <AnchorPane layoutY="54.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <AnchorPane layoutY="107.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <MFXButton fx:id="BT_about" buttonType="RAISED" depthLevel="LEVEL1" layoutY="110.0" onMouseClicked="#openAbout" prefHeight="50.0" rippleColor="#745eca" style="-fx-background-color: transparent;" text="ABOUT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </MFXButton>
-                <AnchorPane layoutY="160.0" prefHeight="4.0"
-                            style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <MFXButton fx:id="BT_logout" buttonType="RAISED" depthLevel="LEVEL1" layoutY="57.0"
-                           onMouseClicked="#logout" prefHeight="50.0" rippleColor="#745eca"
-                           style="-fx-background-color: transparent;" text="LOGOUT" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0">
+                <AnchorPane layoutY="160.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <MFXButton fx:id="BT_logout" buttonType="RAISED" depthLevel="LEVEL1" layoutY="57.0" onMouseClicked="#logout" prefHeight="50.0" rippleColor="#745eca" style="-fx-background-color: transparent;" text="LOGOUT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <font>
-                        <Font name="System Bold" size="14.0"/>
+                        <Font name="System Bold" size="14.0" />
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </MFXButton>
                 <Label layoutX="13.0" layoutY="296.0" text="CENTRI VACCINALI ITALIANI">
                     <font>
-                        <Font name="System Bold Italic" size="11.0"/>
+                        <Font name="System Bold Italic" size="11.0" />
                     </font>
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="20.0" preserveRatio="true">
-                            <Image url="@../../drawable/primula.png"/>
+                            <Image url="@../../drawable/primula.png" />
                         </ImageView>
                     </graphic>
                 </Label>
             </AnchorPane>
         </AnchorPane>
-        <AnchorPane layoutX="220.0" layoutY="20.0" prefHeight="620.0" prefWidth="10.0"
-                    style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-        <AnchorPane id="right_anchor" layoutX="598.0" layoutY="158.0" prefWidth="550.0"
-                    style="-fx-background-color: #eeeeee;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <AnchorPane layoutX="175.0" layoutY="34.0" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="0.0"
-                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <ImageView fx:id="BT_quit" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
-                           onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.rightAnchor="10.0"
-                           AnchorPane.topAnchor="10.0">
+        <AnchorPane layoutX="220.0" layoutY="20.0" prefHeight="620.0" prefWidth="10.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <AnchorPane id="right_anchor" layoutX="598.0" layoutY="158.0" prefWidth="550.0" style="-fx-background-color: #eeeeee;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="175.0" layoutY="34.0" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ImageView fx:id="BT_quit" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
-                    <Image url="@../../drawable/quit.png"/>
+                    <Image url="@../../drawable/quit.png" />
                 </ImageView>
-                <ImageView fx:id="BT_minimize" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize"
-                           onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.rightAnchor="40.0"
-                           AnchorPane.topAnchor="10.0">
+                <ImageView fx:id="BT_minimize" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize" onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
-                    <Image url="@../../drawable/minimize.png"/>
+                    <Image url="@../../drawable/minimize.png" />
                 </ImageView>
-                <Label layoutX="14.0" layoutY="36.0" text="Totale vaccinati:" AnchorPane.leftAnchor="14.0"
-                       AnchorPane.topAnchor="36.0">
+                <Label layoutX="14.0" layoutY="36.0" text="Totale vaccinati:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="36.0">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <MFXLabel fx:id="LB_total_vaccinated" labelStyle="STYLE2" layoutX="270.0" layoutY="35.0"
-                          lineColor="#349a47" prefWidth="190.0" text="54654685468467" unfocusedLineColor="#349a47"/>
-                <Label layoutX="14.0" layoutY="76.0" text="Totale vaccinati presso il centro:"
-                       AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="76.0">
+                <MFXLabel fx:id="LB_total_vaccinated" labelStyle="STYLE2" layoutX="270.0" layoutY="35.0" lineColor="#349a47" prefWidth="190.0" text="54654685468467" unfocusedLineColor="#349a47" />
+                <Label layoutX="14.0" layoutY="76.0" text="Totale vaccinati presso il centro:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="76.0">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <MFXLabel fx:id="LB_total_vaccinated_center" animateLines="false" labelStyle="STYLE2" layoutX="270.0"
-                          layoutY="75.0" lineColor="#349a47" prefWidth="190.0" text="5454"
-                          unfocusedLineColor="#349a47"/>
-                <Label layoutX="14.0" layoutY="116.0" text="Vaccinati prima dose:" AnchorPane.leftAnchor="14.0"
-                       AnchorPane.topAnchor="116.0">
+                <MFXLabel fx:id="LB_total_vaccinated_center" animateLines="false" labelStyle="STYLE2" layoutX="270.0" layoutY="75.0" lineColor="#349a47" prefWidth="190.0" text="5454" unfocusedLineColor="#349a47" />
+                <Label layoutX="14.0" layoutY="116.0" text="Vaccinati prima dose:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="116.0">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <MFXLabel fx:id="LB_vaccinated_first" labelStyle="STYLE2" layoutX="270.0" layoutY="115.0"
-                          lineColor="#349a47" prefWidth="190.0" text="15111" unfocusedLineColor="#349a47"/>
-                <Label layoutX="14.0" layoutY="156.0" text="Vaccinati seconda dose:" AnchorPane.leftAnchor="14.0"
-                       AnchorPane.topAnchor="156.0">
+                <MFXLabel fx:id="LB_vaccinated_first" labelStyle="STYLE2" layoutX="270.0" layoutY="115.0" lineColor="#349a47" prefWidth="190.0" text="15111" unfocusedLineColor="#349a47" />
+                <Label layoutX="14.0" layoutY="156.0" text="Vaccinati seconda dose:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="156.0">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
-                <MFXLabel fx:id="LB_vaccinated_second" labelStyle="STYLE2" layoutX="270.0" layoutY="155.0"
-                          lineColor="#349a47" prefWidth="190.0" text="546546546" unfocusedLineColor="#349a47"/>
-                <MFXButton fx:id="BT_open_chart" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL1"
-                           graphicTextGap="0.0" layoutX="486.0" layoutY="131.0" onMouseClicked="#openChart"
-                           prefHeight="50.0" prefWidth="58.0" rippleColor="#745eca"
-                           style="-fx-border-color: #349a47; -fx-border-radius: 0.4em; -fx-background-color: #ACE1AF; -fx-background-radius: 0.4em;"
-                           textAlignment="CENTER" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="482.0"
-                           AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="131.0">
+                <MFXLabel fx:id="LB_vaccinated_second" labelStyle="STYLE2" layoutX="270.0" layoutY="155.0" lineColor="#349a47" prefWidth="190.0" text="546546546" unfocusedLineColor="#349a47" />
+                <MFXButton fx:id="BT_open_chart" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" depthLevel="LEVEL1" graphicTextGap="0.0" layoutX="486.0" layoutY="131.0" onMouseClicked="#openChart" prefHeight="50.0" prefWidth="58.0" rippleColor="#745eca" style="-fx-border-color: #349a47; -fx-border-radius: 0.4em; -fx-background-color: #ACE1AF; -fx-background-radius: 0.4em;" textAlignment="CENTER" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="482.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="131.0">
                     <graphic>
                         <ImageView fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../../drawable/bar_chart.png"/>
+                            <Image url="@../../drawable/bar_chart.png" />
                         </ImageView>
                     </graphic>
                     <cursor>
-                        <Cursor fx:constant="HAND"/>
+                        <Cursor fx:constant="HAND" />
                     </cursor>
                 </MFXButton>
-                <AnchorPane layoutY="187.0" prefHeight="4.0"
-                            style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <AnchorPane layoutY="190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="191.0">
-                    <Label alignment="CENTER" layoutY="5.0" text="Vaccinati presso il centro"
-                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <AnchorPane layoutY="187.0" prefHeight="4.0" style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <AnchorPane layoutY="190.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="191.0">
+                    <Label alignment="CENTER" layoutY="5.0" text="Vaccinati presso il centro" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                         <font>
-                            <Font name="Corbel Bold" size="24.0"/>
+                            <Font name="Corbel Bold" size="24.0" />
                         </font>
                     </Label>
-                    <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="5.0" layoutY="42.0" pickOnBounds="true"
-                               preserveRatio="true">
-                        <Image url="@../../drawable/search_user.png"/>
+                    <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="5.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../drawable/search_user.png" />
                     </ImageView>
-                    <MFXTextField fx:id="TF_search_citizen" layoutX="31.0" layoutY="35.0" lineColor="#886bf2"
-                                  prefWidth="300.0" promptText="Cerca cittadino">
+                    <MFXTextField fx:id="TF_search_citizen" layoutX="31.0" layoutY="35.0" lineColor="#886bf2" prefWidth="300.0" promptText="Cerca cittadino">
                         <font>
-                            <Font size="16.0"/>
+                            <Font size="16.0" />
                         </font>
                     </MFXTextField>
-                    <MFXButton fx:id="BT_registration_citizen" buttonType="RAISED" depthLevel="LEVEL1" layoutX="342.0"
-                               layoutY="39.0" rippleColor="#745eca"
-                               style="-fx-background-color: #349a47; -fx-background-radius: 0.4em;"
-                               text="REGISTRA VACCINATO" textFill="WHITE">
+                    <MFXButton fx:id="BT_registration_citizen" buttonType="RAISED" depthLevel="LEVEL1" layoutX="342.0" layoutY="39.0" rippleColor="#745eca" style="-fx-background-color: #349a47; -fx-background-radius: 0.4em;" text="REGISTRA VACCINATO" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="15.0"/>
+                            <Font name="System Bold" size="15.0" />
                         </font>
                         <cursor>
-                            <Cursor fx:constant="HAND"/>
+                            <Cursor fx:constant="HAND" />
                         </cursor>
                     </MFXButton>
                 </AnchorPane>
             </AnchorPane>
-            <VBox spacing="4.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0"
-                  AnchorPane.topAnchor="267.0">
+            <VBox spacing="4.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="267.0">
                 <HBox alignment="CENTER_LEFT" prefWidth="520.0" style="-fx-background-color: #dddddd;">
                     <VBox.margin>
-                        <Insets top="5.0"/>
+                        <Insets top="5.0" />
                     </VBox.margin>
                     <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Cognome">
                         <font>
-                            <Font name="Corbel Bold" size="16.0"/>
+                            <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
-                            <Insets bottom="5.0" left="10.0" top="5.0"/>
+                            <Insets bottom="5.0" left="10.0" top="5.0" />
                         </HBox.margin>
                     </Label>
                     <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Nome">
                         <font>
-                            <Font name="Corbel Bold" size="16.0"/>
+                            <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
-                            <Insets bottom="5.0" top="5.0"/>
+                            <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
                     <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Nickname">
                         <font>
-                            <Font name="Corbel Bold" size="16.0"/>
+                            <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
-                            <Insets bottom="5.0" top="5.0"/>
+                            <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
                     <Label alignment="CENTER" prefWidth="50.0" style="-fx-background-color: transparent;" text="Dosi">
                         <font>
-                            <Font name="Corbel Bold" size="16.0"/>
+                            <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
-                            <Insets bottom="5.0" top="5.0"/>
+                            <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
                     <Label prefWidth="98.0" style="-fx-background-color: transparent;" text="Eventi avversi">
                         <font>
-                            <Font name="Corbel Bold" size="16.0"/>
+                            <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
-                            <Insets bottom="5.0" right="32.0" top="5.0"/>
+                            <Insets bottom="5.0" right="32.0" top="5.0" />
                         </HBox.margin>
                     </Label>
                 </HBox>
-                <MFXScrollPane fitToHeight="true" fitToWidth="true" prefWidth="542.0" thumbColor="#349a47"
-                               thumbHoverColor="#349a47" trackColor="#d0f0c0" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="VB_vaccinated_layout" prefWidth="520.0" spacing="4.0"/>
+                <MFXScrollPane fitToHeight="true" fitToWidth="true" prefWidth="542.0" thumbColor="#349a47" thumbHoverColor="#349a47" trackColor="#d0f0c0" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="VB_vaccinated_layout" prefWidth="520.0" spacing="4.0" />
                 </MFXScrollPane>
             </VBox>
         </AnchorPane>
