@@ -1,0 +1,9 @@
+#header_anchor{
+    -fx-background-image: url("../drawable/header_about.gif");
+}
+
+#grid{
+    -fx-border-style: solid hidden solid hidden;
+    -fx-border-width: 2;
+    -fx-border-color: gray;
+}

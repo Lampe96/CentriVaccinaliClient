@@ -22,27 +22,25 @@
                     <Insets top="10.0" />
                 </padding>
                 <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../drawable/home_hub_hospital.png" />
+                    <Image url="@../../drawable/hospital_icon_0.png" />
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
                 </ImageView>
                 <AnchorPane VBox.vgrow="ALWAYS">
-                    <children>
-                        <Label fx:id="LB_hub_name" alignment="CENTER" text="OSPEDALE" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                            <font>
-                                <Font name="System Bold Italic" size="15.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="LB_hub_address" alignment="CENTER" text="INDIRIZZO" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
-                            <font>
-                                <Font name="System Italic" size="13.0" />
-                            </font>
-                        </Label>
-                    </children>
                     <VBox.margin>
                         <Insets bottom="5.0" top="15.0" />
                     </VBox.margin>
+                    <Label fx:id="LB_hub_name" alignment="CENTER" text="OSPEDALE" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <font>
+                            <Font name="System Bold Italic" size="15.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="LB_hub_address" alignment="CENTER" text="INDIRIZZO" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0">
+                        <font>
+                            <Font name="System Italic" size="13.0" />
+                        </font>
+                    </Label>
                 </AnchorPane>
             </VBox>
             <AnchorPane id="bottom_anchor" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ACE1AF;" stylesheets="@../hub_home.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0">
@@ -165,7 +163,7 @@
                     <VBox.margin>
                         <Insets top="5.0" />
                     </VBox.margin>
-                    <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Cognome">
+                    <Label id="LB_data" prefWidth="120.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="Cognome">
                         <font>
                             <Font name="Corbel Bold" size="16.0" />
                         </font>
@@ -173,7 +171,7 @@
                             <Insets bottom="5.0" left="10.0" top="5.0" />
                         </HBox.margin>
                     </Label>
-                    <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Nome">
+                    <Label id="LB_data" prefWidth="120.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="Nome">
                         <font>
                             <Font name="Corbel Bold" size="16.0" />
                         </font>
@@ -181,7 +179,7 @@
                             <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
-                    <Label prefWidth="120.0" style="-fx-background-color: transparent;" text="Nickname">
+                    <Label id="LB_data" prefWidth="120.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="Nickname">
                         <font>
                             <Font name="Corbel Bold" size="16.0" />
                         </font>
@@ -189,7 +187,7 @@
                             <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
-                    <Label alignment="CENTER" prefWidth="50.0" style="-fx-background-color: transparent;" text="Dosi">
+                    <Label id="LB_data" alignment="CENTER" prefWidth="50.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="Dosi">
                         <font>
                             <Font name="Corbel Bold" size="16.0" />
                         </font>
@@ -197,21 +195,22 @@
                             <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
                     </Label>
-                    <Label prefWidth="98.0" style="-fx-background-color: transparent;" text="Eventi avversi">
+                    <Label prefWidth="98.0" style="-fx-background-color: transparent;" stylesheets="@../hub_home.css" text="Eventi avversi">
                         <font>
                             <Font name="Corbel Bold" size="16.0" />
                         </font>
                         <HBox.margin>
                             <Insets bottom="5.0" top="5.0" />
                         </HBox.margin>
+                  <padding>
+                     <Insets left="2.0" />
+                  </padding>
                     </Label>
                     <ImageView fitHeight="29.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <HBox.margin>
-                            <Insets left="2.0" />
+                            <Insets left="5.0" />
                         </HBox.margin>
-                        <image>
-                            <Image url="@../../drawable/scroll.png" />
-                        </image>
+                        <Image url="@../../drawable/scroll.png" />
                     </ImageView>
                 </HBox>
                 <MFXScrollPane fitToHeight="true" prefWidth="542.0" thumbColor="#349a47" thumbHoverColor="#349a47" trackColor="#d0f0c0" VBox.vgrow="ALWAYS">

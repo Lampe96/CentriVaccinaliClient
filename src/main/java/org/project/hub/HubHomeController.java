@@ -179,13 +179,13 @@ public class HubHomeController implements Initializable {
     }
 
     private void loadVaccinatedUserRow(VaccinatedUser vu, boolean applyGrey) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
 
-        HBox hBox = fxmlLoader.load();
-        HubHomeItemRowController hirc = fxmlLoader.getController();
-        hirc.setData(vu, applyGrey);
-        VB_vaccinated_layout.getChildren().add(hBox);
+            HBox hBox = fxmlLoader.load();
+            HubHomeItemRowController hirc = fxmlLoader.getController();
+            hirc.setData(vu, applyGrey);
+            VB_vaccinated_layout.getChildren().add(hBox);
     }
 
     @FXML
@@ -239,10 +239,24 @@ public class HubHomeController implements Initializable {
         Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_settings.fxml")));
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
         stage.setTitle("Impostazioni");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.show();
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
     }
 
     @FXML

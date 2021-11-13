@@ -13,3 +13,9 @@
 #bottom_anchor {
     -fx-background-radius: 0 0 0 10;
 }
+
+#LB_data {
+    -fx-border-style: hidden solid hidden hidden;
+    -fx-border-width: 2;
+    -fx-border-color: gray;
+}
