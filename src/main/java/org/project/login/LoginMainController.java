@@ -171,7 +171,7 @@ public class LoginMainController implements Initializable {
     }
 
     @FXML
-    public void pressEnter(@NotNull KeyEvent keyEvent) {
+    private void pressEnter(@NotNull KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             login();
         }

@@ -65,6 +65,7 @@ public class UserVerifyEmailController implements Initializable {
     private Label LB_timer;
 
     private Stage stage;
+    private int countdown;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -155,7 +156,7 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     @FXML
-    public void confirmed() {
+    private void confirmed() {
         try {
             int code = Integer.parseInt(TF_one.getText() + TF_two.getText() + TF_three.getText() + TF_four.getText() + TF_five.getText() + TF_six.getText());
             try {
@@ -181,10 +182,8 @@ public class UserVerifyEmailController implements Initializable {
         }
     }
 
-    private int countdown;
-
     @FXML
-    public void newCode() {
+    private void newCode() {
         if (resend) {
             LB_error_code.setVisible(false);
             TF_one.setText("");

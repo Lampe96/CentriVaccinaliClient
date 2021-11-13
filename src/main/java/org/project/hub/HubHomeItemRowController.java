@@ -34,8 +34,7 @@ public class HubHomeItemRowController {
     @FXML
     private ImageView IV_event;
 
-    public void setData(@NotNull VaccinatedUser vaccinatedUser, boolean applyGrey) {
-        System.out.println(vaccinatedUser);
+    void setData(@NotNull VaccinatedUser vaccinatedUser, boolean applyGrey) {
         LB_name.setText(vaccinatedUser.getName());
         LB_surname.setText(vaccinatedUser.getSurname());
         LB_nickname.setText(vaccinatedUser.getNickname());

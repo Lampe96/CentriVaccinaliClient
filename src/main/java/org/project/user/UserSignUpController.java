@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UserSignUpController implements Initializable {
 
     private final static String[] userField = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
+
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
 
     @FXML
@@ -305,7 +306,7 @@ public class UserSignUpController implements Initializable {
     }
 
     @FXML
-    public void back() {
+    private void back() {
         try {
             WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
         } catch (IOException e) {
@@ -314,12 +315,12 @@ public class UserSignUpController implements Initializable {
     }
 
     @FXML
-    public void darkStyleBack() {
+    private void darkStyleBack() {
         setDarkHover(BT_back);
     }
 
     @FXML
-    public void restoreStyleBack() {
+    private void restoreStyleBack() {
         resetDarkExit(BT_back);
     }
 
@@ -362,7 +363,7 @@ public class UserSignUpController implements Initializable {
     }
 
     @FXML
-    public void signUp() {
+    private void signUp() {
         BT_sing_up.setText("");
         PS_spinner.setVisible(true);
 

@@ -1,64 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane fx:id="AP_ext" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeAboutController">
-   <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-      <AnchorPane id="header_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <ImageView fitHeight="110.0" fitWidth="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-            <Image url="@../../drawable/primula.png" />
-         </ImageView>
-         <Label layoutX="130.0" layoutY="40.0" text="Centri Vaccinali Italiani">
-            <font>
-               <Font name="System Bold Italic" size="28.0" />
-            </font>
-         </Label>
-         <ImageView fx:id="BT_quit" layoutX="414.0" layoutY="11.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true">
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-            <image>
-               <Image url="@../../drawable/quit.png" />
-            </image>
-         </ImageView>
-      </AnchorPane>
-      <AnchorPane id="text_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
-         <Label layoutX="35.0" layoutY="14.0" text="Questo programma è stato creato in concomitanza con la pandemia globale di Covid19 che ha stravolto il mondo intero. Il progetto nasce dall’idea di poter monitorare in maniera efficiente e rapida l’andamento del piano vaccinale italiano, dando la possibilità alle strutture sanitarie di tenere sotto controllo tutti gli effetti collaterali riscontrati dagli utenti che hanno effettuato un certo tipo di vaccino." wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
-            <font>
-               <Font name="System Italic" size="12.0" />
-            </font>
-         </Label>
-         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="7.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="195.0">
-            <Label text="Powered by:" />
-            <Label fx:id="BT_git_fede" onMouseClicked="#gitFede" styleClass="clickLabel" stylesheets="@../../login/login.css" text="Mainini Federico" textFill="WHITE" underline="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" prefHeight="350.0" prefWidth="450.0"
+            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
+            fx:controller="org.project.hub.HubHomeAboutController">
+    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;"
+                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="0.0">
+        <AnchorPane id="header_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css"
+                    AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="110.0" fitWidth="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                       AnchorPane.topAnchor="5.0">
+                <Image url="@../../drawable/primula.png"/>
+            </ImageView>
+            <Label layoutX="130.0" layoutY="40.0" text="Centri Vaccinali Italiani">
+                <font>
+                    <Font name="System Bold Italic" size="28.0"/>
+                </font>
             </Label>
-            <Label fx:id="BT_git_enri" onMouseClicked="#gitEnri" styleClass="clickLabel" stylesheets="@../../login/login.css" text="Lamperti Enrico" textFill="#f6f7f8" underline="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+            <ImageView fx:id="BT_quit" layoutX="414.0" layoutY="11.0" onMouseClicked="#quit"
+                       onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true">
+                <cursor>
+                    <Cursor fx:constant="HAND"/>
+                </cursor>
+                <Image url="@../../drawable/quit.png"/>
+            </ImageView>
+        </AnchorPane>
+        <AnchorPane id="text_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css"
+                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                    AnchorPane.topAnchor="120.0">
+            <Label layoutX="35.0" layoutY="14.0"
+                   text="Questo programma è stato creato in concomitanza della pandemia globale da Covid19, che ha stravolto il mondo intero. Il progetto nasce dall’idea di poter monitorare in maniera efficace e rapida l’andamento del piano vaccinale italiano, dando la possibilità alle strutture sanitarie di tenere sotto controllo tutti gli effetti collaterali riscontrati dagli utenti, che hanno effettuato la vaccinazione."
+                   wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"
+                   AnchorPane.topAnchor="7.0">
+                <font>
+                    <Font name="System Italic" size="13.5"/>
+                </font>
             </Label>
-            <Label fx:id="BT_git_marc" onMouseClicked="#gitMarc" styleClass="clickLabel" stylesheets="@../../login/login.css" text="Orlando Marc" textFill="#eff0f2" underline="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-            <Label fx:id="BT_git_gian" onMouseClicked="#gitGian" styleClass="clickLabel" stylesheets="@../../login/login.css" text="Latronico Gianluca" textFill="WHITE" underline="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </HBox>
-         <Label layoutX="6.0" layoutY="153.0" text="Versione: 0.0.1" />
-         <Label layoutX="6.0" layoutY="177.0" text="Anno: 2021-12" />
-      </AnchorPane>
-   </AnchorPane>
+            <VBox spacing="7.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                <Label text="Versione: 0.1" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="7.0"/>
+                    </VBox.margin>
+                </Label>
+                <Label text="Anno: 2021" textFill="WHITE">
+                    <VBox.margin>
+                        <Insets left="7.0"/>
+                    </VBox.margin>
+                </Label>
+                <HBox alignment="CENTER" spacing="7.0" style="-fx-background-color: transparent;">
+                    <Label text="Powered by:" textFill="WHITE"/>
+                    <Label fx:id="BT_git_fede" onMouseClicked="#gitFede" styleClass="clickLabel"
+                           stylesheets="@../../login/login.css" text="Mainini Federico" textFill="WHITE"
+                           underline="true">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Label>
+                    <Label fx:id="BT_git_enri" onMouseClicked="#gitEnri" styleClass="clickLabel"
+                           stylesheets="@../../login/login.css" text="Lamperti Enrico" textFill="WHITE"
+                           underline="true">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Label>
+                    <Label fx:id="BT_git_marc" onMouseClicked="#gitMarc" styleClass="clickLabel"
+                           stylesheets="@../../login/login.css" text="Orlando Marc" textFill="WHITE"
+                           underline="true">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Label>
+                    <Label fx:id="BT_git_gian" onMouseClicked="#gitGian" styleClass="clickLabel"
+                           stylesheets="@../../login/login.css" text="Latronico Gianluca" textFill="WHITE"
+                           underline="true">
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Label>
+                </HBox>
+            </VBox>
+        </AnchorPane>
+    </AnchorPane>
 </AnchorPane>

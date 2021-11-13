@@ -43,8 +43,12 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubSignUpController implements Initializable {
 
     private final static String[] QUALIFICATOR = {
-            "Via", "Corso", "Viale", "Piazza"
+            "Via",
+            "Corso",
+            "Viale",
+            "Piazza"
     };
+
     private final static String[] PROVINCES = {
             "AG", "AL", "AN", "AO", "AR", "AP", "AT", "AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS",
             "BS", "CA", "CL", "CB", "CI", "CE", "CT", "CZ", "CH", "CO", "CS", "CR", "KR", "CN", "EN", "FM", "FE",
@@ -54,11 +58,17 @@ public class HubSignUpController implements Initializable {
             "RM", "RO", "SA", "SS", "SV", "SI", "SR", "SO", "TA", "TE", "TR", "TO", "TP", "TN", "TV", "TS", "UD",
             "VA", "VE", "VB", "VC", "VR", "VV", "VI", "VT"
     };
+
     private final static String[] TYPOLOGY = {
-            "OSPEDALIERO", "AZIENDALE", "HUB"
+            "OSPEDALIERO",
+            "AZIENDALE",
+            "HUB"
     };
+
     private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "cap", "typology"};
+
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
+
     @FXML
     private AnchorPane AP_ext;
 
@@ -333,7 +343,7 @@ public class HubSignUpController implements Initializable {
      * Metodo per inizializzare la backarrow
      */
     @FXML
-    public void back() {
+    private void back() {
         try {
             WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
         } catch (IOException e) {
@@ -345,7 +355,7 @@ public class HubSignUpController implements Initializable {
      * Metodo per scurire il pulsante backarrow quando ci si passa sopra
      */
     @FXML
-    public void darkStyleBack() {
+    private void darkStyleBack() {
         setDarkHover(BT_back);
     }
 
@@ -353,7 +363,7 @@ public class HubSignUpController implements Initializable {
      * Metodo per resettare il colore del pulsante backarrow quando ci si toglie dal pulsante
      */
     @FXML
-    public void restoreStyleBack() {
+    private void restoreStyleBack() {
         resetDarkExit(BT_back);
     }
 
@@ -424,7 +434,7 @@ public class HubSignUpController implements Initializable {
      * richiamati dalla classe RegistrationUtil
      */
     @FXML
-    public void signUp() {
+    private void signUp() {
         BT_sing_up.setText("");
         PS_spinner.setVisible(true);
 

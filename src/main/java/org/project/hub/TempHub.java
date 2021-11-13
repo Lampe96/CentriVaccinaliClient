@@ -4,7 +4,7 @@ public class TempHub {
 
     private static String hubName;
 
-    public static String getHubName() {
+    static String getHubName() {
         return hubName;
     }
 

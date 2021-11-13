@@ -138,7 +138,7 @@ public class HubHomeController implements Initializable {
                 ArrayList<VaccinatedUser> vuf = (ArrayList<VaccinatedUser>) avu.stream().filter(vu ->
                         StringUtils.containsIgnoreCase(vu.getSurname() + vu.getName() + vu.getNickname(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getSurname() + vu.getNickname() + vu.getName(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getName() + vu.getSurname() +  vu.getNickname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getName() + vu.getSurname() + vu.getNickname(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getName() + vu.getNickname() + vu.getSurname(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getNickname() + vu.getSurname() + vu.getName(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getNickname() + vu.getName() + vu.getSurname(), (value))).collect(Collectors.toList());
@@ -227,7 +227,7 @@ public class HubHomeController implements Initializable {
     }
 
     @FXML
-    public void openSetting() {
+    private void openSetting() {
         try {
             startSetting();
         } catch (IOException e) {
@@ -246,7 +246,7 @@ public class HubHomeController implements Initializable {
     }
 
     @FXML
-    public void logout() {
+    private void logout() {
         if (logoutAlert()) {
             try {
                 startLogin();
@@ -323,7 +323,7 @@ public class HubHomeController implements Initializable {
     }
 
     @FXML
-    public void openAbout() {
+    private void openAbout() {
         try {
             startAbout();
         } catch (IOException e) {
@@ -356,7 +356,7 @@ public class HubHomeController implements Initializable {
     }
 
     @FXML
-    public void openChart() {
+    private void openChart() {
         try {
             startChart();
         } catch (IOException e) {
