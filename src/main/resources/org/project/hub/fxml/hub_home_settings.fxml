@@ -17,9 +17,8 @@
 <AnchorPane fx:id="AP_ext" prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeSettingsController">
    <AnchorPane style="-fx-background-color: #eeeeee;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <AnchorPane id="header_anchor" stylesheets="@../hub_settings.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <ImageView fitHeight="80.0" fitWidth="80.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0"
-                    AnchorPane.topAnchor="5.0">
-            <Image url="@../../drawable/primula.png"/>
+         <ImageView fitHeight="80.0" fitWidth="80.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+            <Image url="@../../drawable/primula.png" />
          </ImageView>
          <Label alignment="CENTER" layoutX="150.0" layoutY="20.0" text="Impostazioni" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <font>
@@ -47,68 +46,59 @@
          <padding>
             <Insets bottom="10.0" top="10.0" />
          </padding>
-         <ImageView fx:id="IV_zero" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageZero" onMouseEntered="#darkStyleIVZero" onMouseExited="#restoreStyleIVZero" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-            <Image url="@../../drawable/hospital_icon_0.png" />
-            <cursor>
-               <Cursor fx:constant="HAND" />
-            </cursor>
-         </ImageView>
-         <ImageView fx:id="IV_one" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageOne" onMouseEntered="#darkStyleIVOne" onMouseExited="#restoreStyleIVOne" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_one" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageOne" onMouseEntered="#darkStyleIVOne" onMouseExited="#restoreStyleIVOne" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <Image url="@../../drawable/hospital_icon_1.png" />
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <ImageView fx:id="IV_two" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageTwo" onMouseEntered="#darkStyleIVTwo" onMouseExited="#restoreStyleIVTwo" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_two" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageTwo" onMouseEntered="#darkStyleIVTwo" onMouseExited="#restoreStyleIVTwo" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <Image url="@../../drawable/hospital_icon_2.png" />
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <ImageView fx:id="IV_three" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageThree" onMouseEntered="#darkStyleIVThree" onMouseExited="#restoreStyleIVThree" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_three" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageThree" onMouseEntered="#darkStyleIVThree" onMouseExited="#restoreStyleIVThree" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <Image url="@../../drawable/hospital_icon_3.png" />
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <ImageView fx:id="IV_four" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageFour" onMouseEntered="#darkStyleIVFour" onMouseExited="#restoreStyleIVFour" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_four" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageFour" onMouseEntered="#darkStyleIVFour" onMouseExited="#restoreStyleIVFour" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <Image url="@../../drawable/hospital_icon_4.png" />
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <ImageView fx:id="IV_five" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageFive" onMouseEntered="#darkStyleIVFive" onMouseExited="#restoreStyleIVFive" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_five" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageFive" onMouseEntered="#darkStyleIVFive" onMouseExited="#restoreStyleIVFive" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <Image url="@../../drawable/hospital_icon_5.png" />
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>
          </ImageView>
-         <ImageView fx:id="IV_six" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageSix"
-                    onMouseEntered="#darkStyleIVSix" onMouseExited="#restoreStyleIVSix" pickOnBounds="true"
-                    preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER"
-                    GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_six" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageSix" onMouseEntered="#darkStyleIVSix" onMouseExited="#restoreStyleIVSix" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <Image url="@../../drawable/hospital_icon_6.png" />
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../../drawable/hospital_icon_6.png"/>
          </ImageView>
-         <ImageView fx:id="IV_seven" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageSeven"
-                    onMouseEntered="#darkStyleIVSeven" onMouseExited="#restoreStyleIVSeven" pickOnBounds="true"
-                    preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2"
-                    GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_seven" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageSeven" onMouseEntered="#darkStyleIVSeven" onMouseExited="#restoreStyleIVSeven" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../../drawable/hospital_icon_7.png"/>
+            <Image url="@../../drawable/hospital_icon_7.png" />
          </ImageView>
-         <ImageView fx:id="IV_eigth" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageEigth"
-                    onMouseEntered="#darkStyleIVEigth" onMouseExited="#restoreStyleIVEigth" pickOnBounds="true"
-                    preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2"
-                    GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+         <ImageView fx:id="IV_eight" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageEight" onMouseEntered="#darkStyleIVEight" onMouseExited="#restoreStyleIVEight" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
             <cursor>
-               <Cursor fx:constant="HAND"/>
+               <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../../drawable/hospital_icon_8.png"/>
+            <Image url="@../../drawable/hospital_icon_8.png" />
+         </ImageView>
+         <ImageView fx:id="IV_nine" fitHeight="58.0" fitWidth="150.0" onMouseClicked="#selectImageNine" onMouseEntered="#darkStyleIVNine" onMouseExited="#restoreStyleIVNine" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <cursor>
+               <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@../../drawable/hospital_icon_9.png" />
          </ImageView>
       </GridPane>
       <Label layoutX="14.0" layoutY="99.0" prefHeight="27.0" prefWidth="158.0" text="Cambia immagine:">
@@ -116,42 +106,34 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="111.0" layoutY="341.0" prefHeight="159.0" prefWidth="450.0" stylesheets="@../hub_settings.css"
-            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-            AnchorPane.topAnchor="341.0">
+      <HBox layoutX="111.0" layoutY="341.0" prefHeight="159.0" prefWidth="450.0" stylesheets="@../hub_settings.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="341.0">
          <AnchorPane prefHeight="159.0" prefWidth="462.0">
             <HBox.margin>
-               <Insets left="15.0"/>
+               <Insets left="15.0" />
             </HBox.margin>
-            <MFXButton fx:id="BT_delete" buttonType="RAISED" depthLevel="LEVEL1" layoutX="297.0" layoutY="64.0"
-                       onMouseClicked="#delete" rippleColor="#745eca"
-                       style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="ELIMINA">
+            <MFXButton fx:id="BT_delete" buttonType="RAISED" depthLevel="LEVEL1" layoutX="297.0" layoutY="64.0" onMouseClicked="#delete" rippleColor="#745eca" style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="ELIMINA">
                <font>
-                  <Font name="System Bold" size="14.0"/>
+                  <Font name="System Bold" size="14.0" />
                </font>
                <cursor>
-                  <Cursor fx:constant="HAND"/>
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </MFXButton>
             <Label layoutX="225.0" prefHeight="27.0" prefWidth="223.0" text="Per eliminare l'account clicca qui:">
                <font>
-                  <Font name="System Bold" size="14.0"/>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <Label prefHeight="27.0" prefWidth="223.0" text="Cambia password:">
                <font>
-                  <Font name="System Bold" size="14.0"/>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <MFXButton fx:id="BT_confirm_old_pwd" layoutX="39.0" layoutY="119.0"
-                       onMouseClicked="#confirm_old_password" prefHeight="26.0" prefWidth="90.0"
-                       style="-fx-background-color: #05BDF2;" text="CONFERMA"/>
-            <MFXButton fx:id="BT_confirm_new_pwd" layoutX="39.0" layoutY="119.0"
-                       onMouseClicked="#confirm_new_password" prefHeight="26.0" prefWidth="90.0"
-                       style="-fx-background-color: #05BDF2;" text="CONFERMA" visible="false"/>
-            <MFXTextField fx:id="TF_new_password" layoutY="38.0" promptText="Nuova password" visible="false"/>
-            <MFXTextField fx:id="TF_old_password" layoutY="38.0" promptText="Vecchia password"/>
-            <MFXTextField fx:id="TF_confirm_password" layoutY="80.0" promptText="Conferma password" visible="false"/>
+            <MFXButton fx:id="BT_confirm_old_pwd" layoutX="39.0" layoutY="119.0" onMouseClicked="#confirm_old_password" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #05BDF2;" text="CONFERMA" />
+            <MFXButton fx:id="BT_confirm_new_pwd" layoutX="39.0" layoutY="119.0" onMouseClicked="#confirm_new_password" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #05BDF2;" text="CONFERMA" visible="false" />
+            <MFXTextField fx:id="TF_new_password" layoutY="38.0" promptText="Nuova password" visible="false" />
+            <MFXTextField fx:id="TF_old_password" layoutY="38.0" promptText="Vecchia password" />
+            <MFXTextField fx:id="TF_confirm_password" layoutY="80.0" promptText="Conferma password" visible="false" />
          </AnchorPane>
       </HBox>
    </AnchorPane>

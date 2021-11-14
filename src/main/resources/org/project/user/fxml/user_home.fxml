@@ -26,7 +26,7 @@
                     <Insets top="10.0"/>
                 </padding>
                 <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../drawable/hospital_icon_0.png"/>
+                    <Image url="@../../drawable/hospital_icon_1.png"/>
                 </ImageView>
                 <Label text="OSPEDALE" textAlignment="CENTER" wrapText="true">
                     <font>
