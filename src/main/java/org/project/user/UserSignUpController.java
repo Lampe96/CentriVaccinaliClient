@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -29,7 +30,10 @@ import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
 import org.project.utils.WindowUtil;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -80,6 +84,9 @@ public class UserSignUpController implements Initializable {
 
     @FXML
     private ImageView IV_check_fiscal_code;
+
+    @FXML
+    private ImageView IV_calculator_fiscal_code;
 
     @FXML
     private Label LB_error_code;
@@ -208,17 +215,20 @@ public class UserSignUpController implements Initializable {
             if (RegistrationUtil.checkDuplicateFiscalCode(value)) {
                 LB_error_code.setVisible(false);
                 IV_check_fiscal_code.setVisible(true);
+                IV_calculator_fiscal_code.setVisible(false);
                 saveOk.put("fiscalCode", true);
             } else {
                 LB_error_code.setText("Questo codice fiscale è già in uso");
                 LB_error_code.setVisible(true);
                 IV_check_fiscal_code.setVisible(false);
+                IV_calculator_fiscal_code.setVisible(true);
                 saveOk.put("fiscalCode", false);
             }
         } else {
             LB_error_code.setText("Questo codice fiscale non è valido");
             LB_error_code.setVisible(true);
             IV_check_fiscal_code.setVisible(false);
+            IV_calculator_fiscal_code.setVisible(true);
             saveOk.put("fiscalCode", false);
         }
     }
@@ -360,6 +370,33 @@ public class UserSignUpController implements Initializable {
 
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
+    }
+
+    @FXML
+    public void calculateWebFiscalCode() {
+        try {
+            browseCalcFiscalCode();
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void browseCalcFiscalCode() throws URISyntaxException, IOException {
+        URI uri = new URI("https://www.codicefiscaleonline.com/");
+        Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+            desktop.browse(uri);
+        }
+    }
+
+    @FXML
+    public void darkStyleCalculator() {
+        setDarkHover(IV_calculator_fiscal_code);
+    }
+
+    @FXML
+    public void restoreStyleCalculator() {
+        resetDarkExit(IV_calculator_fiscal_code);
     }
 
     @FXML

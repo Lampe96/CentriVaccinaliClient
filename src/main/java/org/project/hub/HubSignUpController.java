@@ -337,6 +337,11 @@ public class HubSignUpController implements Initializable {
                 saveOk.put("cap", false);
             }
         });
+
+        CB_province.setOnKeyReleased(keyEvent -> {
+            SingleSelectionModel<String> sm = CB_province.getSelectionModel();
+            sm.select(20);
+        });
     }
 
     /**
