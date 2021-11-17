@@ -2,12 +2,10 @@ package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.password4j.Password;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -28,7 +26,6 @@ import org.project.models.Address;
 import org.project.models.Hub;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
-import org.project.utils.WindowUtil;
 
 import java.io.IOException;
 import java.net.URL;
@@ -145,6 +142,9 @@ public class HubSignUpController implements Initializable {
     private JFXComboBox<String> CB_province;
 
     @FXML
+    private MFXFilterComboBox<String> FCB_province;
+
+    @FXML
     private Label LB_error_province;
 
     @FXML
@@ -169,11 +169,15 @@ public class HubSignUpController implements Initializable {
     private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
+    private Scene scene;
     private int countOk = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
+            scene = AP_ext.getScene();
+        });
 
         for (String s : hubField) {
             saveOk.put(s, false);
@@ -184,6 +188,9 @@ public class HubSignUpController implements Initializable {
                 TF_cap.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+
+        //todo guardare qui e sistemare fxml
+        FCB_province.getItems().addAll(PROVINCES);
 
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
@@ -350,7 +357,7 @@ public class HubSignUpController implements Initializable {
     @FXML
     private void back() {
         try {
-            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -503,7 +510,7 @@ public class HubSignUpController implements Initializable {
             PS_spinner.setVisible(false);
         } else if (countOk == hubField.length) {
             try {
-                WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+                scene.setRoot(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

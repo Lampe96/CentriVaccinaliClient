@@ -66,17 +66,30 @@ public class UserVerifyEmailController implements Initializable {
 
     private Stage stage;
     private int countdown;
+    private String email;
+    private String nickname;
+    private boolean isVerified;
+
+    void setUserData(String email, String nickname) {
+        this.email = email;
+        this.nickname = nickname;
+    }
+
+    boolean getIsVerified() {
+        return isVerified;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
 
-        try {
-            ServerReference.getServer().sendVerifyEmail(TempUser.getEmail(), TempUser.getNickname());
-        } catch (NotBoundException | RemoteException e) {
-            e.printStackTrace();
-        }
-
-        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+            try {
+                ServerReference.getServer().sendVerifyEmail(email, nickname);
+            } catch (NotBoundException | RemoteException e) {
+                e.printStackTrace();
+            }
+        });
 
         TF_one.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -127,9 +140,9 @@ public class UserVerifyEmailController implements Initializable {
 
     @FXML
     private void quit() {
-        TempUser.setEmailIsVerified(false);
+        isVerified = false;
         try {
-            ServerReference.getServer().deleteReferenceVerifyEmail(TempUser.getEmail());
+            ServerReference.getServer().deleteReferenceVerifyEmail(email);
             VISIBLETIMER.cancel();
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
@@ -160,9 +173,9 @@ public class UserVerifyEmailController implements Initializable {
         try {
             int code = Integer.parseInt(TF_one.getText() + TF_two.getText() + TF_three.getText() + TF_four.getText() + TF_five.getText() + TF_six.getText());
             try {
-                boolean verified = ServerReference.getServer().verifyCodeEmail(TempUser.getEmail(), code);
+                boolean verified = ServerReference.getServer().verifyCodeEmail(email, code);
                 if (verified) {
-                    TempUser.setEmailIsVerified(true);
+                    isVerified = true;
                     VISIBLETIMER.cancel();
                     stage.hide();
                 } else {
@@ -194,8 +207,8 @@ public class UserVerifyEmailController implements Initializable {
             TF_six.setText("");
 
             try {
-                ServerReference.getServer().deleteReferenceVerifyEmail(TempUser.getEmail());
-                ServerReference.getServer().sendVerifyEmail(TempUser.getEmail(), TempUser.getNickname());
+                ServerReference.getServer().deleteReferenceVerifyEmail(email);
+                ServerReference.getServer().sendVerifyEmail(email, nickname);
                 resend = false;
 
                 HIDDENTIMER.schedule(new TimerTask() {

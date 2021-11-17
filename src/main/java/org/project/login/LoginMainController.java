@@ -5,8 +5,10 @@ import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
@@ -28,11 +30,9 @@ import org.project.UserType;
 import org.project.guest.GuestHomeController;
 import org.project.hub.HubHomeController;
 import org.project.hub.HubSignUpController;
-import org.project.hub.TempHub;
 import org.project.server.ServerReference;
 import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
-import org.project.utils.WindowUtil;
 
 import java.awt.*;
 import java.io.*;
@@ -78,6 +78,7 @@ public class LoginMainController implements Initializable {
     private Label BT_signUp;
 
     private Stage stage;
+    private Scene scene;
     private double xPos = 0;
     private double yPos = 0;
     private double xOffset, yOffset;
@@ -87,6 +88,7 @@ public class LoginMainController implements Initializable {
         startUpLocation(AP_ext.getPrefWidth(), AP_ext.getPrefHeight());
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
+            scene = AP_ext.getScene();
             if (xPos == 0.0 && yPos == 0.0) {
                 stage.centerOnScreen();
             } else {
@@ -212,7 +214,6 @@ public class LoginMainController implements Initializable {
             LB_error_password.setVisible(true);
         } else if (userHub == UserType.HUB) {
             try {
-                TempHub.setHubName(TF_email.getText().strip());
                 startRightHomeStage(UserType.HUB);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -229,9 +230,15 @@ public class LoginMainController implements Initializable {
     private void startRightHomeStage(UserType userType) throws IOException {
         Scene scene;
         if (userType == UserType.HUB) {
-            scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home.fxml")));
+            FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home.fxml"));
+            Parent root = loader.load();
+            HubHomeController hubHomeController = loader.getController();
+            hubHomeController.setNameHub(TF_email.getText().strip());
+            scene = new Scene(root);
         } else {
-            scene = new Scene(WindowUtil.newScene(UserHomeController.class.getResource("fxml/user_home.fxml")));
+            FXMLLoader loader = new FXMLLoader(UserHomeController.class.getResource("fxml/user_home.fxml"));
+            Parent root = loader.load();
+            scene = new Scene(root);
         }
 
         Stage stage = new Stage();
@@ -263,7 +270,7 @@ public class LoginMainController implements Initializable {
     @FXML
     private void loginGuest() {
         try {
-            WindowUtil.setRoot(GuestHomeController.class.getResource("fxml/guest_home.fxml"), AP_ext.getScene());
+            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(GuestHomeController.class.getResource("fxml/guest_home.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -274,13 +281,13 @@ public class LoginMainController implements Initializable {
         UserType userType = choiceAlert();
         if (userType == UserType.HUB) {
             try {
-                WindowUtil.setRoot(HubSignUpController.class.getResource("fxml/hub_sign_up.fxml"), AP_ext.getScene());
+                scene.setRoot(FXMLLoader.load(Objects.requireNonNull(HubSignUpController.class.getResource("fxml/hub_sign_up.fxml"))));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (userType == UserType.USER) {
             try {
-                WindowUtil.setRoot(UserSignUpController.class.getResource("fxml/user_sign_up.fxml"), AP_ext.getScene());
+                scene.setRoot(FXMLLoader.load(Objects.requireNonNull(UserSignUpController.class.getResource("fxml/user_sign_up.fxml"))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -8,8 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.hub.HubSignUpController">
@@ -54,7 +53,7 @@
                         style="-fx-background-color: #4243ce; -fx-background-radius: 3em;"/>
             <MFXScrollPane layoutX="32.0" layoutY="102.0" prefWidth="280.0" stylesheets="@../hub_sign_up.css"
                            thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887"
-                           AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0"
+                           AnchorPane.bottomAnchor="-300.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0"
                            AnchorPane.topAnchor="102.0">
                 <AnchorPane prefHeight="550.0" prefWidth="252.0" style="-fx-background-color: white;">
                     <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="12.0" layoutY="18.0" preserveRatio="true">
@@ -250,6 +249,8 @@
             </MFXButton>
             <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="348.0" prefHeight="24.0"
                                 prefWidth="24.0" stylesheets="@../hub_sign_up.css" visible="false"/>
+            <MFXFilterComboBox fx:id="FCB_province" forceFieldFocusOnShow="true" layoutX="104.0" layoutY="26.0"
+                               promptText="Provincia"/>
         </AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="21.0" prefHeight="450.0" prefWidth="320.0"
                     style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-background-radius: 3em;"

@@ -72,6 +72,47 @@ public class HubHomeSettingsController implements Initializable {
     private int selectedImage;
     private Stage stage;
 
+    private void setDarkStyle() {
+        switch (selectedImage) {
+            case 1:
+                setDarkHover(IV_one);
+                break;
+            case 2:
+                setDarkHover(IV_two);
+                break;
+            case 3:
+                setDarkHover(IV_three);
+                break;
+            case 4:
+                setDarkHover(IV_four);
+                break;
+            case 5:
+                setDarkHover(IV_five);
+                break;
+            case 6:
+                setDarkHover(IV_six);
+                break;
+            case 7:
+                setDarkHover(IV_seven);
+                break;
+            case 8:
+                setDarkHover(IV_eight);
+                break;
+            case 9:
+                setDarkHover(IV_nine);
+                break;
+        }
+    }
+
+    int getSelectedImage() {
+        return selectedImage;
+    }
+
+    void setSelectedImage(int selectedImage) {
+        this.selectedImage = selectedImage;
+        setDarkStyle();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
@@ -129,8 +170,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageOne() {
-        setDarkHover(IV_one);
-        selectedImage = 1;
+        if (selectedImage != 1) {
+            resetStyle();
+            setDarkHover(IV_one);
+            selectedImage = 1;
+        }
     }
 
     @FXML
@@ -147,8 +191,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageTwo() {
-        setDarkHover(IV_two);
-        selectedImage = 2;
+        if (selectedImage != 2) {
+            resetStyle();
+            setDarkHover(IV_two);
+            selectedImage = 2;
+        }
     }
 
     @FXML
@@ -165,8 +212,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageThree() {
-        setDarkHover(IV_three);
-        selectedImage = 3;
+        if (selectedImage != 3) {
+            resetStyle();
+            setDarkHover(IV_three);
+            selectedImage = 3;
+        }
     }
 
     @FXML
@@ -183,8 +233,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageFour() {
-        setDarkHover(IV_four);
-        selectedImage = 4;
+        if (selectedImage != 4) {
+            resetStyle();
+            setDarkHover(IV_four);
+            selectedImage = 4;
+        }
     }
 
     @FXML
@@ -201,8 +254,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageFive() {
-        setDarkHover(IV_five);
-        selectedImage = 5;
+        if (selectedImage != 5) {
+            resetStyle();
+            setDarkHover(IV_five);
+            selectedImage = 5;
+        }
     }
 
     @FXML
@@ -219,8 +275,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageSix() {
-        setDarkHover(IV_six);
-        selectedImage = 6;
+        if (selectedImage != 6) {
+            resetStyle();
+            setDarkHover(IV_six);
+            selectedImage = 6;
+        }
     }
 
     @FXML
@@ -237,8 +296,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageSeven() {
-        setDarkHover(IV_seven);
-        selectedImage = 7;
+        if (selectedImage != 7) {
+            resetStyle();
+            setDarkHover(IV_seven);
+            selectedImage = 7;
+        }
     }
 
     @FXML
@@ -255,8 +317,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageEight() {
-        setDarkHover(IV_eight);
-        selectedImage = 8;
+        if (selectedImage != 8) {
+            resetStyle();
+            setDarkHover(IV_eight);
+            selectedImage = 8;
+        }
     }
 
     @FXML
@@ -273,8 +338,11 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void selectImageNine() {
-        setDarkHover(IV_nine);
-        selectedImage = 9;
+        if (selectedImage != 9) {
+            resetStyle();
+            setDarkHover(IV_nine);
+            selectedImage = 9;
+        }
     }
 
     private void resetStyle() {
@@ -285,31 +353,24 @@ public class HubHomeSettingsController implements Initializable {
             case 2:
                 resetDarkExit(IV_two);
                 break;
-
             case 3:
                 resetDarkExit(IV_three);
                 break;
-
             case 4:
                 resetDarkExit(IV_four);
                 break;
-
             case 5:
                 resetDarkExit(IV_five);
                 break;
-
             case 6:
                 resetDarkExit(IV_six);
                 break;
-
             case 7:
                 resetDarkExit(IV_seven);
                 break;
-
             case 8:
                 resetDarkExit(IV_eight);
                 break;
-
             case 9:
                 resetDarkExit(IV_nine);
                 break;

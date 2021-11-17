@@ -1,6 +1,7 @@
 package org.project.login;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -9,7 +10,6 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.server.ServerReference;
-import org.project.utils.WindowUtil;
 
 import java.io.IOException;
 import java.rmi.NotBoundException;
@@ -33,7 +33,7 @@ public class LoginMain extends Application {
 
     @Override
     public void start(@NotNull Stage stage) throws IOException {
-        Scene scene = new Scene(WindowUtil.newScene(LoginMain.class.getResource("fxml/login.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(LoginMain.class.getResource("fxml/login.fxml"))));
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);

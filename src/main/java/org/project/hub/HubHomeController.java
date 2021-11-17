@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
@@ -29,7 +30,6 @@ import org.project.UserType;
 import org.project.login.LoginMainController;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
-import org.project.utils.WindowUtil;
 
 import java.awt.*;
 import java.io.IOException;
@@ -45,6 +45,9 @@ public class HubHomeController implements Initializable {
 
     @FXML
     private AnchorPane AP_ext;
+
+    @FXML
+    private ImageView IV_hub;
 
     @FXML
     private Label LB_hub_name;
@@ -95,7 +98,14 @@ public class HubHomeController implements Initializable {
     private double xPos = 0;
     private double yPos = 0;
     private double xOffset, yOffset;
+    private int hubImage;
+    private String hubName;
     private ArrayList<VaccinatedUser> avu;
+    private HubHomeSettingsController hubHomeSettingsController;
+
+    public void setNameHub(String hubName) {
+        this.hubName = hubName;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,10 +119,11 @@ public class HubHomeController implements Initializable {
                 stage.setY(yPos);
             }
 
-            String hubName = TempHub.getHubName();
             LB_hub_name.setText(hubName);
 
             try {
+                hubImage = ServerReference.getServer().getImage(hubName);
+                IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
                 LB_hub_address.setText(ServerReference.getServer().getAddress(hubName).toStringCustom());
             } catch (NotBoundException | RemoteException e) {
                 e.printStackTrace();
@@ -179,13 +190,13 @@ public class HubHomeController implements Initializable {
     }
 
     private void loadVaccinatedUserRow(VaccinatedUser vu, boolean applyGrey) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
 
-            HBox hBox = fxmlLoader.load();
-            HubHomeItemRowController hirc = fxmlLoader.getController();
-            hirc.setData(vu, applyGrey);
-            VB_vaccinated_layout.getChildren().add(hBox);
+        HBox hBox = fxmlLoader.load();
+        HubHomeItemRowController hirc = fxmlLoader.getController();
+        hirc.setData(vu, applyGrey);
+        VB_vaccinated_layout.getChildren().add(hBox);
     }
 
     @FXML
@@ -230,13 +241,25 @@ public class HubHomeController implements Initializable {
     private void openSetting() {
         try {
             startSetting();
-        } catch (IOException e) {
+
+            int newSelectedImage = hubHomeSettingsController.getSelectedImage();
+            if (newSelectedImage != hubImage) {
+                hubImage = newSelectedImage;
+                IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
+                ServerReference.getServer().changeImageHub(hubImage, hubName);
+            }
+        } catch (IOException | NotBoundException e) {
             e.printStackTrace();
         }
     }
 
     private void startSetting() throws IOException {
-        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_settings.fxml")));
+        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_settings.fxml"));
+        Parent root = loader.load();
+        hubHomeSettingsController = loader.getController();
+        hubHomeSettingsController.setSelectedImage(hubImage);
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -246,7 +269,6 @@ public class HubHomeController implements Initializable {
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
-        stage.show();
 
         scene.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX();
@@ -257,6 +279,8 @@ public class HubHomeController implements Initializable {
             stage.setX(mouseEvent.getScreenX() - xOffset);
             stage.setY(mouseEvent.getScreenY() - yOffset);
         });
+
+        stage.showAndWait();
     }
 
     @FXML
@@ -314,7 +338,7 @@ public class HubHomeController implements Initializable {
     }
 
     private void startLogin() throws IOException {
-        Scene scene = new Scene(WindowUtil.newScene(LoginMainController.class.getResource("fxml/login.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -346,7 +370,7 @@ public class HubHomeController implements Initializable {
     }
 
     private void startAbout() throws IOException {
-        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_about.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HubHomeController.class.getResource("fxml/hub_home_about.fxml"))));
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -379,7 +403,12 @@ public class HubHomeController implements Initializable {
     }
 
     private void startChart() throws IOException {
-        Scene scene = new Scene(WindowUtil.newScene(HubHomeController.class.getResource("fxml/hub_home_chart.fxml")));
+        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_chart.fxml"));
+        Parent root = loader.load();
+        //HubHomeChartController hubHomeChartController = loader.getController();
+        //hubHomeChartController.setData();
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("Grafico vaccinazioni");

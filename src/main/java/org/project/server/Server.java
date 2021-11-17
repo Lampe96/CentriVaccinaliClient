@@ -24,6 +24,10 @@ public interface Server extends Remote {
 
     Address getAddress(String hubName) throws RemoteException;
 
+    void changeImageHub(int selectedImage, String hubName) throws RemoteException;
+
+    int getImage(String hubName) throws RemoteException;
+
     boolean checkDuplicateNickname(String nick) throws RemoteException;
 
     boolean checkDuplicateEmail(String email) throws RemoteException;

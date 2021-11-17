@@ -7,10 +7,12 @@ import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -28,7 +30,6 @@ import org.project.login.LoginMainController;
 import org.project.models.User;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
-import org.project.utils.WindowUtil;
 
 import java.awt.*;
 import java.io.IOException;
@@ -134,11 +135,16 @@ public class UserSignUpController implements Initializable {
     private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
+    private Scene scene;
     private int countOk = 0;
+    private UserVerifyEmailController userVerifyEmailController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
+            scene = AP_ext.getScene();
+        });
 
         for (String s : userField) {
             saveOk.put(s, false);
@@ -194,7 +200,6 @@ public class UserSignUpController implements Initializable {
             IV_check_name.setVisible(false);
             saveOk.put("name", false);
         }
-
     }
 
     private void checkSurname(String value) {
@@ -318,7 +323,7 @@ public class UserSignUpController implements Initializable {
     @FXML
     private void back() {
         try {
-            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -425,9 +430,9 @@ public class UserSignUpController implements Initializable {
             if (countOk == userField.length) {
                 if (!ServerReference.getServer().checkDuplicateTempEmail(email)) {
                     verifyEmail();
-                    if (TempUser.getEmailIsVerified()) {
+                    if (userVerifyEmailController.getIsVerified()) {
                         try {
-                            WindowUtil.setRoot(LoginMainController.class.getResource("fxml/login.fxml"), AP_ext.getScene());
+                            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -508,10 +513,13 @@ public class UserSignUpController implements Initializable {
     }
 
     private void verifyEmail() throws IOException {
-        TempUser.setEmail(TF_email.getText().strip());
-        TempUser.setNickname(TF_nickname.getText().strip());
+        FXMLLoader loader = new FXMLLoader(UserVerifyEmailController.class.getResource("fxml/verify_email.fxml"));
+        Parent root = loader.load();
 
-        Scene scene = new Scene(WindowUtil.newScene(UserHomeController.class.getResource("fxml/verify_email.fxml")));
+        userVerifyEmailController = loader.getController();
+        userVerifyEmailController.setUserData(TF_email.getText().strip(), TF_nickname.getText().strip());
+
+        Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
