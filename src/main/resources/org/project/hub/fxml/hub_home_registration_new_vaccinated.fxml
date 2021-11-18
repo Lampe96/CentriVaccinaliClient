@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeRegistrationNewVaccinatedController">
+   <AnchorPane layoutX="77.0" layoutY="99.0" prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="BT_quit" layoutX="282.0" layoutY="23.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="347.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="23.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <Image url="@../../drawable/quit.png" />
+      </ImageView>
+      <Label id="welcome" layoutX="69.0" layoutY="61.0" prefWidth="207.0" stylesheets="@../../user/user_sign_up.css" text="REGISTRAZIONE">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
+      <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
+         <AnchorPane prefHeight="290.0" prefWidth="252.0" style="-fx-background-color: white;">
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="18.0" preserveRatio="true">
+               <Image url="@../../drawable/user.png" />
+            </ImageView>
+            <MFXTextField id="promptTextColor" fx:id="TF_name" layoutX="43.0" layoutY="14.0" lineColor="#886bf2" prefWidth="189.0" promptText="Nome" textLimit="25" validatorTitle="Non vuoto">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </MFXTextField>
+            <Label fx:id="LB_error_name" layoutX="43.0" layoutY="45.0" text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="73.0" preserveRatio="true">
+               <Image url="@../../drawable/user.png" />
+            </ImageView>
+            <MFXTextField id="promptTextColor" fx:id="TF_surname" layoutX="43.0" layoutY="69.0" lineColor="#886bf2" prefWidth="189.0" promptText="Cognome" textLimit="25" validatorTitle="Non vuoto">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </MFXTextField>
+            <Label fx:id="LB_error_surname" layoutX="43.0" layoutY="99.0" text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="128.0" preserveRatio="true">
+               <Image url="@../../drawable/card.png" />
+            </ImageView>
+            <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" layoutX="43.0" layoutY="123.0" lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale" textLimit="16">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </MFXTextField>
+            <ImageView fx:id="IV_calculator_fiscal_code" fitHeight="18.0" fitWidth="25.0" layoutX="212.0" layoutY="131.0" onMouseClicked="#calculateWebFiscalCode" onMouseEntered="#darkStyleCalculator" onMouseExited="#restoreStyleCalculator" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <Image url="@../../drawable/calculator.png" />
+            </ImageView>
+            <Label fx:id="LB_error_code" layoutX="43.0" layoutY="156.0" text="Il codice fiscale non è valido" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="183.0" preserveRatio="true">
+               <Image url="@../../drawable/calendar.png" />
+            </ImageView>
+            <MFXDatePicker fx:id="DP_dateDosingVaccine" layoutX="46.0" layoutY="178.0" lineColor="#4d4d4d" pickerColor="#4ded31" prefWidth="180.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXDatePicker>
+            <Label fx:id="LB_error_email" layoutX="43.0" layoutY="211.0" text="Questa mail non è valida!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="238.0" preserveRatio="true">
+               <Image url="@../../drawable/vaccine.png" />
+            </ImageView>
+            <JFXComboBox id="typology" fx:id="CB_vaccine" focusColor="#886bf2" layoutX="43.0" layoutY="233.0" prefWidth="195.0" promptText="Qualificatore indirizzo" stylesheets="@../hub_sign_up.css" />
+            <Label fx:id="LB_error_nickname" layoutX="43.0" layoutY="268.0" text="Questo nickname è già in uso!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </AnchorPane>
+      </MFXScrollPane>
+      <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#signUp" rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRATI" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MFXButton>
+      <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="355.0" prefHeight="24.0" prefWidth="24.0" stylesheets="@../../user/user_sign_up.css" visible="false" />
+   </AnchorPane>
+</AnchorPane>

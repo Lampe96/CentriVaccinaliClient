@@ -248,6 +248,10 @@ public class HubHomeController implements Initializable {
                 IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
                 ServerReference.getServer().changeImageHub(hubImage, hubName);
             }
+            if (hubHomeSettingsController.getDeleteAccSettings()){
+                ServerReference.getServer().deleteHub(hubName);
+                startLogin();
+            }
         } catch (IOException | NotBoundException e) {
             e.printStackTrace();
         }
@@ -258,6 +262,7 @@ public class HubHomeController implements Initializable {
         Parent root = loader.load();
         hubHomeSettingsController = loader.getController();
         hubHomeSettingsController.setSelectedImage(hubImage);
+        hubHomeSettingsController.setHubName(hubName);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -415,5 +420,44 @@ public class HubHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.show();
+    }
+    
+    @FXML
+    private void openRegisterVaccinatedUser(){
+        try {
+            startRegister();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void startRegister() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_registration_new_vaccinated.fxml"));
+        Parent root = loader.load();
+        hubHomeSettingsController = loader.getController();
+        hubHomeSettingsController.setHubName(hubName);
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("Registra nuovo vaccinato");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
+
+        stage.showAndWait();
     }
 }

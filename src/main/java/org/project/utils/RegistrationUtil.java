@@ -1,5 +1,6 @@
 package org.project.utils;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.project.server.ServerReference;
 
@@ -61,6 +62,10 @@ public class RegistrationUtil {
 
     public static boolean checkPassword(@NotNull String password) {
         return password.matches(RX_PWD);
+    }
+
+    public static boolean checkChangePwd(@NotNull String newPwd, String oldPwd) {
+        return !newPwd.equals(oldPwd);
     }
 
     public static boolean checkPasswordConfirmed(@NotNull String password, String confirmedPassword) {

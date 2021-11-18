@@ -42,6 +42,12 @@ public interface Server extends Remote {
 
     UserType checkCredential(String email, String pwd) throws RemoteException;
 
+    boolean checkPasswordHub(String hubName, String pwd) throws RemoteException;
+
+    void changePwd(String hubName, String newPwd) throws RemoteException;
+
+    void deleteHub(String hubName) throws RemoteException;
+
     void sendVerifyEmail(String email, String nickname) throws RemoteException;
 
     boolean verifyCodeEmail(String email, int code) throws RemoteException;

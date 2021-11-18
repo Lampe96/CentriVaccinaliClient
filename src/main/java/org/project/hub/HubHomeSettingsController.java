@@ -1,22 +1,42 @@
 package org.project.hub;
 
+import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
+import org.project.UserType;
+import org.project.server.ServerReference;
+import org.project.utils.RegistrationUtil;
 
+import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HubHomeSettingsController implements Initializable {
+
+    private static final Timer TIMER = new Timer();
 
     @FXML
     public AnchorPane AP_ext;
@@ -55,13 +75,19 @@ public class HubHomeSettingsController implements Initializable {
     private MFXButton BT_delete;
 
     @FXML
-    private MFXTextField TF_old_password;
+    private MFXPasswordField TF_old_password;
 
     @FXML
-    private MFXTextField TF_new_password;
+    private Label LB_error_password;
 
     @FXML
-    private MFXTextField TF_confirm_password;
+    public Label LB_success_change;
+
+    @FXML
+    private MFXPasswordField TF_new_password;
+
+    @FXML
+    private MFXPasswordField TF_confirm_password;
 
     @FXML
     private MFXButton BT_confirm_old_pwd;
@@ -69,8 +95,19 @@ public class HubHomeSettingsController implements Initializable {
     @FXML
     private MFXButton BT_confirm_new_pwd;
 
+    private double xOffset, yOffset;
     private int selectedImage;
     private Stage stage;
+    private String hubName;
+    private  HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
+
+    void setHubName(String hubName) {
+        this.hubName = hubName;
+    }
+
+    boolean getDeleteAccSettings(){
+        return hubHomeSettingsDeleteController.getDeleteAccPopUp();
+    }
 
     private void setDarkStyle() {
         switch (selectedImage) {
@@ -120,21 +157,115 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     private void confirm_new_password() {
+        String newPwd = TF_new_password.getPassword().strip();
+        String confirmNewPwd = TF_confirm_password.getPassword().strip();
+        String oldPwd = TF_old_password.getPassword().strip();
 
+        if (RegistrationUtil.checkPassword(newPwd)) {
+            if (RegistrationUtil.checkPasswordConfirmed(newPwd, confirmNewPwd)) {
+                if (RegistrationUtil.checkChangePwd(newPwd, oldPwd)) {
+                    String cryptPwd = Password.hash(newPwd).addRandomSalt().withArgon2().getResult();
+                    try {
+                        ServerReference.getServer().changePwd(hubName, cryptPwd);
+                        LB_error_password.setVisible(false);
+                        TF_new_password.setVisible(false);
+                        BT_confirm_new_pwd.setVisible(false);
+                        TF_confirm_password.setVisible(false);
+                        LB_success_change.setVisible(true);
+
+                        TIMER.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                TF_old_password.setVisible(true);
+                                BT_confirm_old_pwd.setVisible(true);
+                                LB_success_change.setVisible(false);
+                                //TODO settare vuoti text pwd
+                            }
+                        }, 5 * 1000);
+                    } catch (RemoteException | NotBoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    LB_error_password.setText("La nuova password è uguale alla precedente");
+                    LB_error_password.setVisible(true);
+                }
+            } else {
+                LB_error_password.setText("Le password non coincidono");
+                LB_error_password.setVisible(true);
+            }
+        } else {
+            LB_error_password.setText("Minimo 6 caratteri, 1 speciale, 1 minuscolo, 1 maiuscolo, 1 numero");
+            LB_error_password.setVisible(true);
+        }
     }
 
     @FXML
     private void confirm_old_password() {
-
+        String pwd = TF_old_password.getPassword().strip();
+        try {
+            boolean checkPwd = ServerReference.getServer().checkPasswordHub(hubName, pwd);
+            if (checkPwd) {
+                TF_old_password.setVisible(false);
+                LB_error_password.setVisible(false);
+                TF_new_password.setVisible(true);
+                BT_confirm_old_pwd.setVisible(false);
+                BT_confirm_new_pwd.setVisible(true);
+                TF_confirm_password.setVisible(true);
+            } else {
+                LB_error_password.setText("Password non corretta");
+                BT_confirm_old_pwd.setVisible(true);
+                BT_confirm_new_pwd.setVisible(false);
+                LB_error_password.setVisible(true);
+            }
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void delete() {
+        try {
+            openDeletePopUp();
+            if (hubHomeSettingsDeleteController.getDeleteAccPopUp()){
+                stage.hide();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void openDeletePopUp() throws IOException {
+        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_settings_delete.fxml"));
+        Parent root = loader.load();
+        hubHomeSettingsDeleteController = loader.getController();
+        hubHomeSettingsDeleteController.setHubName(hubName);
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("Cancella account");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset = mouseEvent.getSceneX();
+            yOffset = mouseEvent.getSceneY();
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset);
+            stage.setY(mouseEvent.getScreenY() - yOffset);
+        });
+        stage.showAndWait();
     }
 
     @FXML
     private void quit() {
+        TIMER.cancel();
         stage.hide();
     }
 
@@ -376,6 +507,10 @@ public class HubHomeSettingsController implements Initializable {
                 break;
         }
     }
+
+//    private boolean deleteAlert() {
+//
+//        }
 }
 
 

@@ -189,9 +189,6 @@ public class HubSignUpController implements Initializable {
             }
         });
 
-        //todo guardare qui e sistemare fxml
-        FCB_province.getItems().addAll(PROVINCES);
-
         CB_qualificator.getItems().addAll(QUALIFICATOR);
         CB_province.getItems().addAll(PROVINCES);
         CB_typology.getItems().addAll(TYPOLOGY);
