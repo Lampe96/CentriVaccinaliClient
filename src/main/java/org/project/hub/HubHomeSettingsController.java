@@ -3,7 +3,6 @@ package org.project.hub;
 import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
-import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -99,14 +98,17 @@ public class HubHomeSettingsController implements Initializable {
     private int selectedImage;
     private Stage stage;
     private String hubName;
-    private  HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
+    private HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
 
     void setHubName(String hubName) {
         this.hubName = hubName;
     }
 
-    boolean getDeleteAccSettings(){
-        return hubHomeSettingsDeleteController.getDeleteAccPopUp();
+    boolean getDeleteAccSettings() {
+        if (hubHomeSettingsDeleteController.getDeleteAccPopUp() != null) {
+            return hubHomeSettingsDeleteController.getDeleteAccPopUp().equals("ok");
+        }
+        return false;
     }
 
     private void setDarkStyle() {
@@ -226,7 +228,7 @@ public class HubHomeSettingsController implements Initializable {
     private void delete() {
         try {
             openDeletePopUp();
-            if (hubHomeSettingsDeleteController.getDeleteAccPopUp()){
+            if (hubHomeSettingsDeleteController.getDeleteAccPopUp().equals("ok")) {
                 stage.hide();
             }
         } catch (IOException e) {

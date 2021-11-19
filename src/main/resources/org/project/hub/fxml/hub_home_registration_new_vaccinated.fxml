@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
@@ -21,12 +20,12 @@
          </cursor>
          <Image url="@../../drawable/quit.png" />
       </ImageView>
-      <Label id="welcome" layoutX="69.0" layoutY="61.0" prefWidth="207.0" stylesheets="@../../user/user_sign_up.css" text="REGISTRAZIONE">
+      <Label id="welcome" layoutX="62.0" layoutY="61.0" prefWidth="240.0" stylesheets="@../../user/user_sign_up.css" text="REGISTRA VACCINATO">
          <font>
-            <Font size="26.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="69.0" layoutY="94.0" prefHeight="3.0" prefWidth="207.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
+      <AnchorPane layoutX="59.0" layoutY="87.0" prefHeight="3.0" prefWidth="227.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" />
       <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#00c402" thumbHoverColor="#745eca" trackColor="#96f887" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
          <AnchorPane prefHeight="290.0" prefWidth="252.0" style="-fx-background-color: white;">
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="18.0" preserveRatio="true">
@@ -37,11 +36,6 @@
                   <Font size="15.0" />
                </font>
             </MFXTextField>
-            <Label fx:id="LB_error_name" layoutX="43.0" layoutY="45.0" text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="73.0" preserveRatio="true">
                <Image url="@../../drawable/user.png" />
             </ImageView>
@@ -50,11 +44,6 @@
                   <Font size="15.0" />
                </font>
             </MFXTextField>
-            <Label fx:id="LB_error_surname" layoutX="43.0" layoutY="99.0" text="Questo campo deve essere compilato!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="128.0" preserveRatio="true">
                <Image url="@../../drawable/card.png" />
             </ImageView>
@@ -69,36 +58,17 @@
                </cursor>
                <Image url="@../../drawable/calculator.png" />
             </ImageView>
-            <Label fx:id="LB_error_code" layoutX="43.0" layoutY="156.0" text="Il codice fiscale non è valido" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="183.0" preserveRatio="true">
                <Image url="@../../drawable/calendar.png" />
             </ImageView>
-            <MFXDatePicker fx:id="DP_dateDosingVaccine" layoutX="46.0" layoutY="178.0" lineColor="#4d4d4d" pickerColor="#4ded31" prefWidth="180.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </MFXDatePicker>
-            <Label fx:id="LB_error_email" layoutX="43.0" layoutY="211.0" text="Questa mail non è valida!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
+            <MFXTextField fx:id="TF_date" layoutX="43.0" layoutY="178.0" prefWidth="189.0" />
             <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="238.0" preserveRatio="true">
                <Image url="@../../drawable/vaccine.png" />
             </ImageView>
-            <JFXComboBox id="typology" fx:id="CB_vaccine" focusColor="#886bf2" layoutX="43.0" layoutY="233.0" prefWidth="195.0" promptText="Qualificatore indirizzo" stylesheets="@../hub_sign_up.css" />
-            <Label fx:id="LB_error_nickname" layoutX="43.0" layoutY="268.0" text="Questo nickname è già in uso!" textFill="RED" visible="false" wrapText="true" AnchorPane.leftAnchor="43.0" AnchorPane.rightAnchor="20.0">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
+            <JFXComboBox id="typology" fx:id="CB_vaccine" focusColor="#886bf2" layoutX="43.0" layoutY="233.0" prefWidth="195.0" promptText="Vaccino" stylesheets="@../hub_sign_up.css" />
          </AnchorPane>
       </MFXScrollPane>
-      <MFXButton fx:id="BT_sing_up" buttonType="RAISED" onMouseClicked="#signUp" rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRATI" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0">
+      <MFXButton fx:id="BT_sing_up_new_vaccinated" buttonType="RAISED" onMouseClicked="#registerNewVaccinated" rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="REGISTRA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

@@ -434,8 +434,8 @@ public class HubHomeController implements Initializable {
     private void startRegister() throws IOException {
         FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_registration_new_vaccinated.fxml"));
         Parent root = loader.load();
-        hubHomeSettingsController = loader.getController();
-        hubHomeSettingsController.setHubName(hubName);
+        HubHomeRegistrationNewVaccinatedController hubHomeRegistrationNewVaccinatedController = loader.getController();
+        hubHomeRegistrationNewVaccinatedController.setHubName(hubName);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();

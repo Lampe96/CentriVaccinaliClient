@@ -39,13 +39,13 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     private Stage stage;
     private String hubName;
-    boolean deleteAcc = false;
+    String deleteAcc = null;
 
     void setHubName(String hubName) {
         this.hubName = hubName;
     }
 
-    boolean getDeleteAccPopUp() {
+    String getDeleteAccPopUp() {
         return deleteAcc;
     }
 
@@ -69,7 +69,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
         try {
             if ((ServerReference.getServer().checkPasswordHub(hubName, pwd))) {
                 LB_error_pwd.setVisible(false);
-                deleteAcc = true;
+                deleteAcc = "ok";
                 stage.hide();
             } else {
                 LB_error_pwd.setVisible(true);
@@ -86,7 +86,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     @FXML
     void quit() {
-        deleteAcc = false;
+        deleteAcc = "notOk";
         stage.hide();
     }
 

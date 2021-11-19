@@ -39,7 +39,7 @@ public class HubHomeItemRowController {
         LB_surname.setText(vaccinatedUser.getSurname());
         LB_nickname.setText(vaccinatedUser.getNickname());
 
-        if (vaccinatedUser.getId().startsWith("1")) {
+        if (vaccinatedUser.getId().startsWith("1") || vaccinatedUser.getId().startsWith("2") || vaccinatedUser.getId().startsWith("3")) {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_1.png"))));
         } else {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_2.png"))));
