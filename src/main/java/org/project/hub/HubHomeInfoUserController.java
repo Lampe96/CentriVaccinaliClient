@@ -1,9 +1,7 @@
 package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
-import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,12 +14,14 @@ import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
+import org.project.utils.UIdGenerator;
 
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -45,7 +45,7 @@ public class HubHomeInfoUserController implements Initializable {
     private MFXTextField TF_fiscal_code;
 
     @FXML
-    private MFXTextField TF_date;
+    private MFXDatePicker DP_date;
 
     @FXML
     private JFXComboBox<String> CB_vaccine;
@@ -61,6 +61,7 @@ public class HubHomeInfoUserController implements Initializable {
 
     private Stage stage;
     private VaccinatedUser vu;
+    private Date date;
 
     void setVaccinatedUserInfo(VaccinatedUser vu) {
         this.vu = vu;
@@ -75,12 +76,14 @@ public class HubHomeInfoUserController implements Initializable {
             TF_name.setText(vu.getName());
             TF_surname.setText(vu.getSurname());
             TF_fiscal_code.setText(vu.getFiscalCode());
-            TF_date.setText(formatter.format(vu.getVaccineDate()));
+            DP_date.setDateFormatter(DateTimeFormatter.ofPattern(formatter.format(vu.getVaccineDate())));
             CB_vaccine.setValue(vu.getVaccineType());
             TF_name_hub.setText(vu.getHubName());
         });
 
         CB_vaccine.getItems().addAll(VACCINETYPE);
+
+        //DP_date
     }
 
     @FXML
@@ -107,17 +110,25 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     @FXML
+    private void openDatePicker(){
+
+    }
+
+    @FXML
     private void updateVaccinated() {
         //todo if data giusta
-        //Date date = TF_date.getText();
+//        Date date = date;
         String type = CB_vaccine.getValue();
         String nameHub = TF_name_hub.getText().strip();
-        //todo id univoco
+
         try {
-            ServerReference.getServer().updateVaccinatedUser((short) 55, nameHub, type, new Date(System.currentTimeMillis()), vu.getFiscalCode());
+            vu.setDose((short) 2);
+            ServerReference.getServer().updateVaccinatedUser(vu.getId(), nameHub, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
             stage.close();
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
     }
+
+
 }

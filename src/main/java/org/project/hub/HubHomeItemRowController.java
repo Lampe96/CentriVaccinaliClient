@@ -103,13 +103,9 @@ public class HubHomeItemRowController implements Initializable {
             FXMLLoader loader = new FXMLLoader(HubHomeInfoUserController.class.getResource("fxml/hub_home_info_user.fxml"));
             Parent root = loader.load();
             HubHomeInfoUserController hubHomeInfoUserController = loader.getController();
-            System.out.println(vu);
             VaccinatedUser vuExtra = ServerReference.getServer().fetchHubVaccinatedInfo(vu.getId(), hubName);
-            System.out.println(vuExtra);
             VaccinatedUser vuComplete = new VaccinatedUser(vu.getName(), vu.getSurname(), vu.getNickname(), vu.getEvent(),
-                    vuExtra.getId(), vuExtra.getHubName(), vuExtra.getFiscalCode(), vuExtra.getVaccineDate(), vuExtra.getVaccineType());
-
-            System.out.println(vuComplete);
+                    vuExtra.getId(), vuExtra.getHubName(), vuExtra.getFiscalCode(), vuExtra.getVaccineDate(), vuExtra.getVaccineType(), vuExtra.getDose());
 
             hubHomeInfoUserController.setVaccinatedUserInfo(vuComplete);
 

@@ -63,5 +63,5 @@ public interface Server extends Remote {
 
     ArrayList<VaccinatedUser> fetchHubVaccinatedUser(String hubName) throws RemoteException;
 
-    void updateVaccinatedUser(short idUnivoco, String hubName, String vaccineType, Date newDate, String fiscalCode) throws RemoteException;
+    void updateVaccinatedUser(short idUnivoco, String hubName, String vaccineType, Date newDate, String fiscalCode, int newDose) throws RemoteException;
 }

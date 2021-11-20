@@ -509,7 +509,11 @@ public class HubSignUpController implements Initializable {
 
             String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
             Address finalAddress = new Address(quali, address, number, city, cap, prov);
-            Hub hub = new Hub(hubName, cryptPwd, finalAddress, typology);
+            Hub hub = new Hub();
+            hub.setNameHub(hubName);
+            hub.setPassword(cryptPwd);
+            hub.setAddress(finalAddress);
+            hub.setType(typology);
             System.out.println(hub);
 
             try {
