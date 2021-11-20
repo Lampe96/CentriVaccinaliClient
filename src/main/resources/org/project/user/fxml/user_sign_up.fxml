@@ -109,8 +109,8 @@
                                layoutY="131.0" preserveRatio="true" visible="false">
                         <Image url="@../../drawable/valid_check.png"/>
                     </ImageView>
-                    <ImageView fx:id="IV_calculator_fiscal_code" fitHeight="18.0" fitWidth="25.0" layoutX="212.0"
-                               layoutY="131.0" onMouseClicked="#calculateWebFiscalCode"
+                    <ImageView fx:id="IV_calculator_fiscal_code" fitHeight="21.0" fitWidth="28.0" layoutX="210.0"
+                               layoutY="128.0" onMouseClicked="#calculateWebFiscalCode"
                                onMouseEntered="#darkStyleCalculator" onMouseExited="#restoreStyleCalculator"
                                preserveRatio="true">
                         <cursor>

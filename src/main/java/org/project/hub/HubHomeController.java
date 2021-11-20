@@ -7,10 +7,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
@@ -21,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.commons.lang3.StringUtils;
@@ -31,13 +28,14 @@ import org.project.login.LoginMainController;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.List;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -95,8 +93,6 @@ public class HubHomeController implements Initializable {
     private VBox VB_vaccinated_layout;
 
     private Stage stage;
-    private double xPos = 0;
-    private double yPos = 0;
     private double xOffset, yOffset;
     private int hubImage;
     private String hubName;
@@ -109,15 +105,8 @@ public class HubHomeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        startUpLocation(AP_ext.getPrefWidth(), AP_ext.getPrefHeight());
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
-            if (xPos == 0.0 && yPos == 0.0) {
-                stage.centerOnScreen();
-            } else {
-                stage.setX(xPos);
-                stage.setY(yPos);
-            }
 
             LB_hub_name.setText(hubName);
 
@@ -174,21 +163,6 @@ public class HubHomeController implements Initializable {
         });
     }
 
-    private void startUpLocation(double windowWidth, double windowHeight) {
-        Point p = MouseInfo.getPointerInfo().getLocation();
-        List<Screen> screens = Screen.getScreens();
-        if (p != null && screens != null && screens.size() > 1) {
-            Rectangle2D screenBounds;
-            for (Screen screen : screens) {
-                screenBounds = screen.getVisualBounds();
-                if (screenBounds.contains(p.x, p.y)) {
-                    xPos = screenBounds.getMinX() + ((screenBounds.getMaxX() - screenBounds.getMinX() - windowWidth) / 2);
-                    yPos = screenBounds.getMinY() + ((screenBounds.getMaxY() - screenBounds.getMinY() - windowHeight) / 2);
-                }
-            }
-        }
-    }
-
     private void loadVaccinatedUserRow(VaccinatedUser vu, boolean applyGrey) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
@@ -196,6 +170,7 @@ public class HubHomeController implements Initializable {
         HBox hBox = fxmlLoader.load();
         HubHomeItemRowController hirc = fxmlLoader.getController();
         hirc.setData(vu, applyGrey);
+        hirc.setHubName(hubName);
         VB_vaccinated_layout.getChildren().add(hBox);
     }
 
@@ -248,7 +223,8 @@ public class HubHomeController implements Initializable {
                 IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
                 ServerReference.getServer().changeImageHub(hubImage, hubName);
             }
-            if (hubHomeSettingsController.getDeleteAccSettings()){
+
+            if (hubHomeSettingsController.getDeleteAccSettings()) {
                 ServerReference.getServer().deleteHub(hubName);
                 startLogin();
             }
@@ -351,7 +327,7 @@ public class HubHomeController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("CVI");
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
-        this.stage.hide();
+        this.stage.close();
         stage.show();
 
         scene.setOnMousePressed(mouseEvent -> {
@@ -385,7 +361,6 @@ public class HubHomeController implements Initializable {
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
-        stage.show();
 
         scene.setOnMousePressed(mouseEvent -> {
             xOffset = mouseEvent.getSceneX();
@@ -396,6 +371,8 @@ public class HubHomeController implements Initializable {
             stage.setX(mouseEvent.getScreenX() - xOffset);
             stage.setY(mouseEvent.getScreenY() - yOffset);
         });
+
+        stage.show();
     }
 
     @FXML
@@ -421,16 +398,18 @@ public class HubHomeController implements Initializable {
         stage.initOwner(this.stage);
         stage.show();
     }
-    
+
     @FXML
-    private void openRegisterVaccinatedUser(){
+    private void openRegisterVaccinatedUser() {
         try {
             startRegister();
+            VB_vaccinated_layout.getChildren().clear();
+            initialize(null, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
+
     private void startRegister() throws IOException {
         FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_registration_new_vaccinated.fxml"));
         Parent root = loader.load();

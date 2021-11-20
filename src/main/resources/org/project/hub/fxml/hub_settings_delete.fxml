@@ -2,51 +2,61 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane fx:id="AP_ext" prefHeight="240.0" prefWidth="294.0" style="-fx-background-radius: 1em; -fx-background-color: #999999;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.hub.HubHomeSettingsDeleteController">
-    <Label alignment="CENTER" layoutX="79.0" layoutY="20.0" text="Elimina account" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" prefHeight="240.0"
+            prefWidth="294.0" style="-fx-background-radius: 1em; -fx-background-color: #999999;"
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.hub.HubHomeSettingsDeleteController">
+    <Label alignment="CENTER" layoutX="79.0" layoutY="20.0" text="Elimina account" AnchorPane.leftAnchor="60.0"
+           AnchorPane.rightAnchor="60.0">
         <graphic>
             <ImageView fitHeight="52.0" fitWidth="27.0" preserveRatio="true">
-                <Image url="@../../drawable/primula.png" />
+                <Image url="@../../drawable/primula.png"/>
             </ImageView>
         </graphic>
         <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="18.0"/>
         </font>
     </Label>
-    <ImageView fx:id="BT_quit" layoutX="256.0" layoutY="14.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true">
+    <ImageView fx:id="BT_quit" layoutX="256.0" layoutY="14.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
+               onMouseExited="#restoreStyleQuit" preserveRatio="true">
         <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="HAND"/>
         </cursor>
-        <Image url="@../../drawable/quit.png" />
+        <Image url="@../../drawable/quit.png"/>
     </ImageView>
-    <Label alignment="CENTER" layoutX="15.0" layoutY="60.0" text="Sei sicuro di voler eliminare l'account? L'operazione non è reversibile. Inserisci la password per confermare." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+    <Label alignment="CENTER" layoutX="15.0" layoutY="60.0"
+           text="Sei sicuro di voler eliminare l'account? L'operazione non è reversibile. Inserisci la password per confermare."
+           textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
         <font>
-            <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
     </Label>
-   <AnchorPane layoutX="-1.0" layoutY="128.0" prefHeight="30.0" prefWidth="237.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="27.0">
-      <children>
-         <MFXPasswordField fx:id="PF_pwd" lineColor="#886bf2" prefHeight="30.0" prefWidth="202.0">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </MFXPasswordField>
-      </children>
-   </AnchorPane>
-    <Label fx:id="LB_error_pwd" alignment="CENTER" layoutX="112.0" layoutY="162.0" text="Password errata" textFill="RED" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-    <MFXButton fx:id="BT_confirmed" buttonType="RAISED" depthLevel="LEVEL1" layoutX="85.0" layoutY="185.0" onMouseClicked="#confirmed" rippleColor="#745eca" style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="CONFERMA" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
+    <AnchorPane layoutX="-1.0" layoutY="128.0" prefHeight="30.0" prefWidth="237.0" style="-fx-background-color: white;"
+                AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="27.0">
+        <children>
+            <MFXPasswordField fx:id="PF_pwd" lineColor="#886bf2" prefHeight="30.0" prefWidth="202.0">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </MFXPasswordField>
+        </children>
+    </AnchorPane>
+    <Label fx:id="LB_error_pwd" alignment="CENTER" layoutX="112.0" layoutY="162.0" text="Password errata" textFill="RED"
+           visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+    <MFXButton fx:id="BT_confirmed" buttonType="RAISED" depthLevel="LEVEL1" layoutX="85.0" layoutY="185.0"
+               onMouseClicked="#confirmed" rippleColor="#745eca"
+               style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="CONFERMA"
+               AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
         <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="14.0"/>
         </font>
         <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="HAND"/>
         </cursor>
     </MFXButton>
 </AnchorPane>

@@ -147,7 +147,7 @@ public class UserVerifyEmailController implements Initializable {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-        stage.hide();
+        stage.close();
     }
 
     @FXML
@@ -177,7 +177,7 @@ public class UserVerifyEmailController implements Initializable {
                 if (verified) {
                     isVerified = true;
                     VISIBLETIMER.cancel();
-                    stage.hide();
+                    stage.close();
                 } else {
                     LB_error_code.setVisible(true);
                     TF_one.setText("");

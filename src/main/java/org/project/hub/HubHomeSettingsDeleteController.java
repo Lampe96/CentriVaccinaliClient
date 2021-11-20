@@ -39,20 +39,19 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     private Stage stage;
     private String hubName;
-    String deleteAcc = null;
+    private boolean deleteAcc = false;
 
     void setHubName(String hubName) {
         this.hubName = hubName;
     }
 
-    String getDeleteAccPopUp() {
+    boolean getDeleteAccPopUp() {
         return deleteAcc;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() ->
-                stage = (Stage) AP_ext.getScene().getWindow());
+        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
     }
 
     private void setDarkHover(@NotNull ImageView iv) {
@@ -69,8 +68,8 @@ public class HubHomeSettingsDeleteController implements Initializable {
         try {
             if ((ServerReference.getServer().checkPasswordHub(hubName, pwd))) {
                 LB_error_pwd.setVisible(false);
-                deleteAcc = "ok";
-                stage.hide();
+                deleteAcc = true;
+                stage.close();
             } else {
                 LB_error_pwd.setVisible(true);
             }
@@ -86,8 +85,8 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     @FXML
     void quit() {
-        deleteAcc = "notOk";
-        stage.hide();
+        deleteAcc = false;
+        stage.close();
     }
 
     @FXML

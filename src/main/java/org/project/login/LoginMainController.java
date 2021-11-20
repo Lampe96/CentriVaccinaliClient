@@ -248,7 +248,8 @@ public class LoginMainController implements Initializable {
         stage.setResizable(false);
         stage.setTitle("CVI");
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
-        this.stage.hide();
+        stage.initOwner(this.stage);
+        this.stage.close();
         stage.show();
 
         scene.setOnMousePressed(mouseEvent -> {

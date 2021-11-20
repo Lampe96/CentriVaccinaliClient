@@ -7,11 +7,9 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/15.0.1"
-            fx:controller="org.project.hub.HubHomeRegistrationNewVaccinatedController">
+            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.hub.HubHomeInfoUserController">
     <AnchorPane layoutX="77.0" layoutY="99.0" prefHeight="350.0" prefWidth="300.0"
                 style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;"
                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -24,23 +22,24 @@
             </cursor>
             <Image url="@../../drawable/quit.png"/>
         </ImageView>
-        <Label id="welcome" layoutX="62.0" layoutY="61.0" prefWidth="240.0" stylesheets="@../../user/user_sign_up.css"
-               text="REGISTRA VACCINATO">
+        <Label id="welcome" layoutX="88.0" layoutY="61.0" stylesheets="@../../user/user_sign_up.css"
+               text="info VACCINATO">
             <font>
                 <Font size="20.0"/>
             </font>
         </Label>
-        <AnchorPane layoutX="59.0" layoutY="87.0" prefHeight="3.0" prefWidth="227.0"
+        <AnchorPane layoutX="82.0" layoutY="86.0" prefHeight="3.0" prefWidth="180.0"
                     style="-fx-background-color: #4243ce; -fx-background-radius: 3em;"/>
         <MFXScrollPane layoutX="40.0" layoutY="110.0" prefHeight="423.0" thumbColor="#00c402" thumbHoverColor="#745eca"
                        trackColor="#96f887" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="32.0"
                        AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="102.0">
-            <AnchorPane prefHeight="290.0" prefWidth="252.0" style="-fx-background-color: white;">
+            <AnchorPane prefHeight="330.0" prefWidth="252.0" style="-fx-background-color: white;">
                 <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="18.0" preserveRatio="true">
                     <Image url="@../../drawable/user.png"/>
                 </ImageView>
-                <MFXTextField id="promptTextColor" fx:id="TF_name" layoutX="43.0" layoutY="14.0" lineColor="#886bf2"
-                              prefWidth="189.0" promptText="Nome" textLimit="25" validatorTitle="Non vuoto">
+                <MFXTextField id="promptTextColor" fx:id="TF_name" editable="false" layoutX="43.0" layoutY="14.0"
+                              lineColor="#886bf2" prefWidth="189.0" promptText="Nome" textLimit="25"
+                              validatorTitle="Non vuoto">
                     <font>
                         <Font size="15.0"/>
                     </font>
@@ -48,8 +47,9 @@
                 <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="73.0" preserveRatio="true">
                     <Image url="@../../drawable/user.png"/>
                 </ImageView>
-                <MFXTextField id="promptTextColor" fx:id="TF_surname" layoutX="43.0" layoutY="69.0" lineColor="#886bf2"
-                              prefWidth="189.0" promptText="Cognome" textLimit="25" validatorTitle="Non vuoto">
+                <MFXTextField id="promptTextColor" fx:id="TF_surname" editable="false" layoutX="43.0" layoutY="69.0"
+                              lineColor="#886bf2" prefWidth="189.0" promptText="Cognome" textLimit="25"
+                              validatorTitle="Non vuoto">
                     <font>
                         <Font size="15.0"/>
                     </font>
@@ -57,26 +57,19 @@
                 <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="128.0" preserveRatio="true">
                     <Image url="@../../drawable/card.png"/>
                 </ImageView>
-                <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" layoutX="43.0" layoutY="123.0"
-                              lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale" textLimit="16">
+                <MFXTextField id="promptTextColor" fx:id="TF_fiscal_code" editable="false" layoutX="43.0"
+                              layoutY="123.0" lineColor="#886bf2" prefWidth="189.0" promptText="Codice Fiscale"
+                              textLimit="16">
                     <font>
                         <Font size="15.0"/>
                     </font>
                 </MFXTextField>
-                <ImageView fx:id="IV_calculator_fiscal_code" fitHeight="18.0" fitWidth="25.0" layoutX="212.0"
-                           layoutY="131.0" onMouseClicked="#calculateWebFiscalCode"
-                           onMouseEntered="#darkStyleCalculator" onMouseExited="#restoreStyleCalculator"
-                           preserveRatio="true">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <Image url="@../../drawable/calculator.png"/>
-                </ImageView>
+                <Label layoutX="43.0" layoutY="167.0" text="Data ultima vaccinazione" textFill="#4d4d4d"/>
                 <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="183.0" preserveRatio="true">
                     <Image url="@../../drawable/calendar.png"/>
                 </ImageView>
-                <MFXTextField fx:id="TF_date" editable="false" layoutX="43.0" layoutY="178.0" lineColor="#886bf2"
-                              prefWidth="189.0">
+                <MFXTextField fx:id="TF_date" layoutX="43.0" layoutY="178.0" lineColor="#886bf2" prefWidth="189.0"
+                              promptText="11/11/1990">
                     <font>
                         <Font size="15.0"/>
                     </font>
@@ -85,12 +78,21 @@
                     <Image url="@../../drawable/vaccine.png"/>
                 </ImageView>
                 <JFXComboBox id="typology" fx:id="CB_vaccine" focusColor="#886bf2" layoutX="43.0" layoutY="233.0"
-                             prefWidth="195.0" promptText="Vaccino" stylesheets="@../hub_sign_up.css"/>
+                             prefWidth="195.0" promptText="Tipo vaccino" stylesheets="@../hub_sign_up.css"/>
+                <ImageView fitHeight="26.0" fitWidth="23.0" layoutX="11.0" layoutY="291.0" preserveRatio="true">
+                    <Image url="@../../drawable/home.png"/>
+                </ImageView>
+                <MFXTextField id="promptTextColor" fx:id="TF_name_hub" editable="false" layoutX="43.0" layoutY="287.0"
+                              lineColor="#886bf2" prefWidth="189.0" promptText="Nome hub" textLimit="50">
+                    <font>
+                        <Font size="15.0"/>
+                    </font>
+                </MFXTextField>
             </AnchorPane>
         </MFXScrollPane>
-        <MFXButton fx:id="BT_sing_up_new_vaccinated" buttonType="RAISED" onMouseClicked="#registerNewVaccinated"
+        <MFXButton fx:id="BT_update_vaccinated" buttonType="RAISED" onMouseClicked="#updateVaccinated"
                    rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;"
-                   text="REGISTRA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0"
+                   text="AGGIORNA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0"
                    AnchorPane.rightAnchor="100.0">
             <font>
                 <Font name="System Bold" size="14.0"/>

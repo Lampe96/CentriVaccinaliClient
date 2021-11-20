@@ -16,7 +16,6 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -28,6 +27,7 @@ import org.project.UserType;
 import org.project.login.LoginMainController;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
+import org.project.utils.RegistrationUtil;
 
 import java.awt.*;
 import java.io.IOException;
@@ -47,6 +47,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeRegistrationNewVaccinatedController implements Initializable {
 
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
+    private final VaccinatedUser vaccinatedUser = new VaccinatedUser();
+    short a = 0;
 
     @FXML
     private AnchorPane AP_ext;
@@ -70,18 +72,15 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     private JFXComboBox<String> CB_vaccine;
 
     @FXML
-    public MFXTextField TF_date;
+    private MFXTextField TF_date;
 
     @FXML
-    public MFXButton BT_sing_up_new_vaccinated;
+    private MFXButton BT_sing_up_new_vaccinated;
 
     @FXML
     private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
-
-    protected VaccinatedUser vaccinatedUser;
-
     private String hubName;
 
     void setHubName(String hubName) {
@@ -90,11 +89,8 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-            stage = (Stage) AP_ext.getScene().getWindow();
-        });
+        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
         TF_date.setText(String.valueOf(LocalDate.now()));
-        TF_date.setEditable(false);
         CB_vaccine.getItems().addAll(VACCINETYPE);
     }
 
@@ -140,7 +136,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     @FXML
     private void quit() {
-        stage.hide();
+        stage.close();
     }
 
     @FXML
@@ -148,29 +144,33 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         resetDarkExit(IV_calculator_fiscal_code);
     }
 
-
-    public void registerNewVaccinated(MouseEvent mouseEvent) {
+    @FXML
+    private void registerNewVaccinated() {
         String name = StringUtils.capitalize(TF_name.getText().strip());
         String surname = StringUtils.capitalize(TF_surname.getText().strip());
         String fiscalCode = TF_fiscal_code.getText().strip().toUpperCase(Locale.ROOT);
         String vaccineType = CB_vaccine.getValue();
-        String idUser = getRandomNumberString();
         try {
-            if (ServerReference.getServer().checkIfUserExist(name, surname, fiscalCode)) {
-                if (ServerReference.getServer().checkIfFirstDose(fiscalCode)) {
-                    vaccinatedUser.setId("111111");
-                    vaccinatedUser.setName(name);
-                    vaccinatedUser.setSurname(surname);
-                    vaccinatedUser.setFiscalCode(fiscalCode);
-                    vaccinatedUser.setHubName(hubName);
-                    vaccinatedUser.setVaccineDate(Date.valueOf(LocalDate.now()));
-                    vaccinatedUser.setVaccineType(vaccineType);
-                    ServerReference.getServer().insertNewVaccinated(vaccinatedUser);
+            if (RegistrationUtil.checkName(name) && RegistrationUtil.checkName(surname) && RegistrationUtil.checkFiscalCode(fiscalCode) && vaccineType != null) {
+                if (ServerReference.getServer().checkIfUserExist(name, surname, fiscalCode)) {
+                    if (ServerReference.getServer().checkIfFirstDose(fiscalCode)) {
+                        vaccinatedUser.setId((short) (a + 1));
+                        vaccinatedUser.setName(name);
+                        vaccinatedUser.setSurname(surname);
+                        vaccinatedUser.setFiscalCode(fiscalCode);
+                        vaccinatedUser.setHubName(hubName);
+                        vaccinatedUser.setVaccineDate(Date.valueOf(LocalDate.now()));
+                        vaccinatedUser.setVaccineType(vaccineType);
+                        ServerReference.getServer().insertNewVaccinated(vaccinatedUser);
+                        stage.close();
+                    } else {
+                        errorAlert(1);
+                    }
                 } else {
-                    errorAlert(1);
+                    errorAlert(2);
                 }
             } else {
-                errorAlert(2);
+                errorAlert(3);
             }
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
@@ -179,12 +179,13 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     private void errorAlert(int typeError) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Errore");
         if (typeError == 1) {
-            alert.setHeaderText("Errore");
             alert.setContentText("Questo utente ha già ricevuto la prima dose.");
-        } else {
-            alert.setHeaderText("Errore");
+        } else if (typeError == 2) {
             alert.setContentText("I dati inseriti non corrispondono a nessun utente.");
+        } else {
+            alert.setContentText("Uno o più campi non sono compilati correttamente.");
         }
 
         alert.initStyle(StageStyle.TRANSPARENT);
@@ -218,14 +219,14 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
         Stage dialogStage = (Stage) dialogScene.getWindow();
         dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
         alert.showAndWait();
     }
 
-    public static String getRandomNumberString() {
-
+    private String getRandomId() {
         Random rnd = new Random();
         int number = rnd.nextInt(499999);
 
-        return String.format("%15d", number);
+        return String.format("%d", number);
     }
 }

@@ -2,7 +2,10 @@ package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.password4j.Password;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -140,9 +143,6 @@ public class HubSignUpController implements Initializable {
 
     @FXML
     private JFXComboBox<String> CB_province;
-
-    @FXML
-    private MFXFilterComboBox<String> FCB_province;
 
     @FXML
     private Label LB_error_province;
@@ -340,11 +340,6 @@ public class HubSignUpController implements Initializable {
                 IV_check_cap.setVisible(false);
                 saveOk.put("cap", false);
             }
-        });
-
-        CB_province.setOnKeyReleased(keyEvent -> {
-            SingleSelectionModel<String> sm = CB_province.getSelectionModel();
-            sm.select(20);
         });
     }
 

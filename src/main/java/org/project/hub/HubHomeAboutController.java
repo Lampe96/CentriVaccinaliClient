@@ -55,7 +55,7 @@ public class HubHomeAboutController implements Initializable {
 
     @FXML
     private void quit() {
-        stage.hide();
+        stage.close();
     }
 
     @FXML
@@ -68,11 +68,11 @@ public class HubHomeAboutController implements Initializable {
         resetDarkExit(BT_quit);
     }
 
-    private void setDarkHover(@NotNull javafx.scene.image.ImageView iv) {
+    private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
-    private void resetDarkExit(@NotNull javafx.scene.image.ImageView iv) {
+    private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 

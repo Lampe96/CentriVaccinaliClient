@@ -39,61 +39,43 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     public AnchorPane AP_ext;
-
+    boolean openDelete = false;
     @FXML
     private ImageView BT_quit;
-
     @FXML
     private ImageView IV_one;
-
     @FXML
     private ImageView IV_two;
-
     @FXML
     private ImageView IV_three;
-
     @FXML
     private ImageView IV_four;
-
     @FXML
     private ImageView IV_five;
-
     @FXML
     private ImageView IV_six;
-
     @FXML
     private ImageView IV_seven;
-
     @FXML
     private ImageView IV_eight;
-
     @FXML
     private ImageView IV_nine;
-
     @FXML
     private MFXButton BT_delete;
-
     @FXML
     private MFXPasswordField TF_old_password;
-
     @FXML
     private Label LB_error_password;
-
     @FXML
-    public Label LB_success_change;
-
+    private Label LB_success_change;
     @FXML
     private MFXPasswordField TF_new_password;
-
     @FXML
     private MFXPasswordField TF_confirm_password;
-
     @FXML
     private MFXButton BT_confirm_old_pwd;
-
     @FXML
     private MFXButton BT_confirm_new_pwd;
-
     private double xOffset, yOffset;
     private int selectedImage;
     private Stage stage;
@@ -105,8 +87,8 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     boolean getDeleteAccSettings() {
-        if (hubHomeSettingsDeleteController.getDeleteAccPopUp() != null) {
-            return hubHomeSettingsDeleteController.getDeleteAccPopUp().equals("ok");
+        if (openDelete) {
+            return hubHomeSettingsDeleteController.getDeleteAccPopUp();
         }
         return false;
     }
@@ -228,8 +210,9 @@ public class HubHomeSettingsController implements Initializable {
     private void delete() {
         try {
             openDeletePopUp();
-            if (hubHomeSettingsDeleteController.getDeleteAccPopUp().equals("ok")) {
-                stage.hide();
+            openDelete = true;
+            if (hubHomeSettingsDeleteController.getDeleteAccPopUp()) {
+                stage.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -268,7 +251,7 @@ public class HubHomeSettingsController implements Initializable {
     @FXML
     private void quit() {
         TIMER.cancel();
-        stage.hide();
+        stage.close();
     }
 
     @FXML
@@ -509,10 +492,6 @@ public class HubHomeSettingsController implements Initializable {
                 break;
         }
     }
-
-//    private boolean deleteAlert() {
-//
-//        }
 }
 
 
