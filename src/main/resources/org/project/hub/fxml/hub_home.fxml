@@ -7,8 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.hub.HubHomeController">
@@ -37,15 +36,15 @@
                         <Insets bottom="5.0" top="15.0"/>
                     </VBox.margin>
                     <Label fx:id="LB_hub_name" alignment="CENTER" text="OSPEDALE" textAlignment="CENTER" wrapText="true"
-                           AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                           AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0"
                            AnchorPane.topAnchor="0.0">
                         <font>
                             <Font name="System Bold Italic" size="15.0"/>
                         </font>
                     </Label>
                     <Label fx:id="LB_hub_address" alignment="CENTER" text="INDIRIZZO" wrapText="true"
-                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                           AnchorPane.topAnchor="52.0">
+                           AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0"
+                           AnchorPane.topAnchor="53.0">
                         <font>
                             <Font name="System Italic" size="13.0"/>
                         </font>

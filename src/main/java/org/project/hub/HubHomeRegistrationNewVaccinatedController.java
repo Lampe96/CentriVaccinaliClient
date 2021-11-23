@@ -41,7 +41,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -49,7 +48,6 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
     private final VaccinatedUser vaccinatedUser = new VaccinatedUser();
-    short a = 0;
 
     @FXML
     private AnchorPane AP_ext;
@@ -223,12 +221,5 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
 
         alert.showAndWait();
-    }
-
-    private String getRandomId() {
-        Random rnd = new Random();
-        int number = rnd.nextInt(499999);
-
-        return String.format("%d", number);
     }
 }

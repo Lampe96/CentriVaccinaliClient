@@ -63,7 +63,7 @@ public class HubHomeItemRowController implements Initializable {
         LB_surname.setText(vaccinatedUser.getSurname());
         LB_nickname.setText(vaccinatedUser.getNickname());
 
-        if (vaccinatedUser.getId() < Short.MAX_VALUE / 2) {
+        if (vaccinatedUser.getDose() == 1) {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_1.png"))));
         } else {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_2.png"))));
@@ -104,8 +104,19 @@ public class HubHomeItemRowController implements Initializable {
             Parent root = loader.load();
             HubHomeInfoUserController hubHomeInfoUserController = loader.getController();
             VaccinatedUser vuExtra = ServerReference.getServer().fetchHubVaccinatedInfo(vu.getId(), hubName);
-            VaccinatedUser vuComplete = new VaccinatedUser(vu.getName(), vu.getSurname(), vu.getNickname(), vu.getEvent(),
-                    vuExtra.getId(), vuExtra.getHubName(), vuExtra.getFiscalCode(), vuExtra.getVaccineDate(), vuExtra.getVaccineType(), vuExtra.getDose());
+
+            VaccinatedUser vuComplete = new VaccinatedUser(
+                    vu.getName(),
+                    vu.getSurname(),
+                    vu.getNickname(),
+                    vu.getEvent(),
+                    vuExtra.getId(),
+                    vuExtra.getHubName(),
+                    vuExtra.getFiscalCode(),
+                    vuExtra.getVaccineDate(),
+                    vuExtra.getVaccineType(),
+                    vuExtra.getDose()
+            );
 
             hubHomeInfoUserController.setVaccinatedUserInfo(vuComplete);
 

@@ -1,20 +1,32 @@
 package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
-import io.github.palexdev.materialfx.controls.*;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
+import org.project.UserType;
+import org.project.login.LoginMainController;
 import org.project.models.VaccinatedUser;
 import org.project.server.ServerReference;
-import org.project.utils.UIdGenerator;
 
 import java.net.URL;
 import java.rmi.NotBoundException;
@@ -23,7 +35,9 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HubHomeInfoUserController implements Initializable {
 
@@ -73,12 +87,19 @@ public class HubHomeInfoUserController implements Initializable {
 
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
+
             TF_name.setText(vu.getName());
             TF_surname.setText(vu.getSurname());
             TF_fiscal_code.setText(vu.getFiscalCode());
             DP_date.setDateFormatter(DateTimeFormatter.ofPattern(formatter.format(vu.getVaccineDate())));
             CB_vaccine.setValue(vu.getVaccineType());
             TF_name_hub.setText(vu.getHubName());
+
+            if (vu.getDose() > 1) {
+                CB_vaccine.disableProperty().setValue(true);
+                TF_name_hub.disableProperty().setValue(true);
+                BT_update_vaccinated.disableProperty().setValue(true);
+            }
         });
 
         CB_vaccine.getItems().addAll(VACCINETYPE);
@@ -110,25 +131,72 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     @FXML
-    private void openDatePicker(){
-
-    }
-
-    @FXML
     private void updateVaccinated() {
         //todo if data giusta
-//        Date date = date;
+//      Date date = date;
         String type = CB_vaccine.getValue();
-        String nameHub = TF_name_hub.getText().strip();
+        String hubName = TF_name_hub.getText().strip();
 
-        try {
-            vu.setDose((short) 2);
-            ServerReference.getServer().updateVaccinatedUser(vu.getId(), nameHub, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
-            stage.close();
-        } catch (RemoteException | NotBoundException e) {
-            e.printStackTrace();
+        if (hubName.equals(vu.getHubName())) {
+            try {
+                vu.setDose((short) 2);
+                ServerReference.getServer().updateVaccinatedUser(vu.getId(), hubName, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
+                stage.close();
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                if (ServerReference.getServer().checkIfHubExist(hubName)) {
+                    vu.setDose((short) 2);
+                    ServerReference.getServer().updateVaccinatedUser(vu.getId(), hubName, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
+                    stage.close();
+                } else {
+                    errorAlert();
+                }
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    private void errorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Errore");
+        alert.setContentText("Questo centro vaccinale non esiste.");
 
+        alert.initStyle(StageStyle.TRANSPARENT);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+        ButtonType buttonTypeCancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeCancel);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(300, 0);
+        dialogPane.lookupButton(buttonTypeCancel).setId("btnCancel");
+        dialogPane.getStylesheets().add(Objects.requireNonNull(LoginMainController.class.getResource("alert_choice.css")).toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Scene dialogScene = dialogPane.getScene();
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        dialogScene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        dialogScene.setOnMouseDragged(mouseEvent -> {
+            dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
+            dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
+        alert.showAndWait();
+    }
 }
