@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
-import org.project.models.VaccinatedUser;
+import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.io.IOException;
@@ -84,6 +84,9 @@ public class HubHomeController implements Initializable {
     private MFXButton BT_open_chart;
 
     @FXML
+    private ImageView IV_refresh;
+
+    @FXML
     private MFXTextField TF_search_citizen;
 
     @FXML
@@ -96,7 +99,7 @@ public class HubHomeController implements Initializable {
     private double xOffset, yOffset;
     private int hubImage;
     private String hubName;
-    private ArrayList<VaccinatedUser> avu;
+    private ArrayList<User> avu;
     private HubHomeSettingsController hubHomeSettingsController;
 
     public void setNameHub(String hubName) {
@@ -135,7 +138,7 @@ public class HubHomeController implements Initializable {
         TF_search_citizen.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip().replaceAll("\\s+", "");
             if (!value.equals("")) {
-                ArrayList<VaccinatedUser> vuf = (ArrayList<VaccinatedUser>) avu.stream().filter(vu ->
+                ArrayList<User> vuf = (ArrayList<User>) avu.stream().filter(vu ->
                         StringUtils.containsIgnoreCase(vu.getSurname() + vu.getName() + vu.getNickname(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getSurname() + vu.getNickname() + vu.getName(), (value)) ||
                                 StringUtils.containsIgnoreCase(vu.getName() + vu.getSurname() + vu.getNickname(), (value)) ||
@@ -163,7 +166,7 @@ public class HubHomeController implements Initializable {
         });
     }
 
-    private void loadVaccinatedUserRow(VaccinatedUser vu, boolean applyGrey) throws IOException {
+    private void loadVaccinatedUserRow(User vu, boolean applyGrey) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
 
@@ -210,6 +213,22 @@ public class HubHomeController implements Initializable {
 
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
+    }
+
+    @FXML
+    private void refreshVaccinatedList() {
+        VB_vaccinated_layout.getChildren().clear();
+        initialize(null, null);
+    }
+
+    @FXML
+    private void darkStyleRefresh() {
+        setDarkHover(IV_refresh);
+    }
+
+    @FXML
+    private void restoreStyleRefresh() {
+        resetDarkExit(IV_refresh);
     }
 
     @FXML

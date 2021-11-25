@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
-import org.project.models.VaccinatedUser;
+import org.project.models.User;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
 import org.project.utils.UIdGenerator;
@@ -39,6 +39,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -47,7 +48,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeRegistrationNewVaccinatedController implements Initializable {
 
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
-    private final VaccinatedUser vaccinatedUser = new VaccinatedUser();
+    private final User vaccinatedUser = new User();
 
     @FXML
     private AnchorPane AP_ext;
@@ -88,8 +89,10 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
-        TF_date.setText(String.valueOf(LocalDate.now()));
+        TF_date.setText(LocalDate.now().format(formatter));
         CB_vaccine.getItems().addAll(VACCINETYPE);
     }
 
@@ -149,31 +152,27 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         String surname = StringUtils.capitalize(TF_surname.getText().strip());
         String fiscalCode = TF_fiscal_code.getText().strip().toUpperCase(Locale.ROOT);
         String vaccineType = CB_vaccine.getValue();
-        try {
-            if (RegistrationUtil.checkName(name) && RegistrationUtil.checkName(surname) && RegistrationUtil.checkFiscalCode(fiscalCode) && vaccineType != null) {
-                if (ServerReference.getServer().checkIfUserExist(name, surname, fiscalCode)) {
-                    if (ServerReference.getServer().checkIfFirstDose(fiscalCode)) {
-                        vaccinatedUser.setId(UIdGenerator.generateUId(fiscalCode));
-                        vaccinatedUser.setName(name);
-                        vaccinatedUser.setSurname(surname);
-                        vaccinatedUser.setFiscalCode(fiscalCode);
-                        vaccinatedUser.setHubName(hubName);
-                        vaccinatedUser.setVaccineDate(Date.valueOf(LocalDate.now()));
-                        vaccinatedUser.setVaccineType(vaccineType);
-                        vaccinatedUser.setDose((short) 1);
-                        ServerReference.getServer().insertNewVaccinated(vaccinatedUser);
-                        stage.close();
-                    } else {
-                        errorAlert(1);
-                    }
+        if (RegistrationUtil.checkName(name) && RegistrationUtil.checkName(surname) && RegistrationUtil.checkFiscalCode(fiscalCode) && vaccineType != null) {
+            try {
+                if (ServerReference.getServer().checkIfFirstDose(fiscalCode) == 0) {
+                    vaccinatedUser.setId(UIdGenerator.generateUId(fiscalCode));
+                    vaccinatedUser.setName(name);
+                    vaccinatedUser.setSurname(surname);
+                    vaccinatedUser.setFiscalCode(fiscalCode);
+                    vaccinatedUser.setHubName(hubName);
+                    vaccinatedUser.setVaccineDate(Date.valueOf(LocalDate.now()));
+                    vaccinatedUser.setVaccineType(vaccineType);
+                    vaccinatedUser.setDose((short) 1);
+                    ServerReference.getServer().insertNewVaccinated(vaccinatedUser);
+                    stage.close();
                 } else {
-                    errorAlert(2);
+                    errorAlert(1);
                 }
-            } else {
-                errorAlert(3);
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
             }
-        } catch (RemoteException | NotBoundException e) {
-            e.printStackTrace();
+        } else {
+            errorAlert(2);
         }
     }
 
@@ -182,8 +181,6 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         alert.setHeaderText("Errore");
         if (typeError == 1) {
             alert.setContentText("Questo utente ha già ricevuto la prima dose.");
-        } else if (typeError == 2) {
-            alert.setContentText("I dati inseriti non corrispondono a nessun utente.");
         } else {
             alert.setContentText("Uno o più campi non sono compilati correttamente.");
         }

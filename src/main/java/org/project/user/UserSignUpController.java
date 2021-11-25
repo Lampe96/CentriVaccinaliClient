@@ -46,7 +46,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class UserSignUpController implements Initializable {
 
-    private final static String[] userField = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
+    private final static String[] USERFIELD = {"name", "surname", "fiscalCode", "email", "nickname", "password", "confirm_password"};
 
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
 
@@ -138,15 +138,38 @@ public class UserSignUpController implements Initializable {
     private Scene scene;
     private int countOk = 0;
     private UserVerifyEmailController userVerifyEmailController;
+    private UserAlreadyVaccinatedController userAlreadyVaccinatedController;
+    private boolean alreadyVaccinated = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
             scene = AP_ext.getScene();
+            try {
+                openPopUpAlreadyVaccinated();
+                User vu = userAlreadyVaccinatedController.getVaccinatedUser();
+                if (vu != null) {
+                    alreadyVaccinated = true;
+                    TF_name.setText(vu.getName());
+                    TF_surname.setText(vu.getSurname());
+                    TF_fiscal_code.setText(vu.getFiscalCode());
+
+                    TF_name.setDisable(true);
+                    TF_surname.setDisable(true);
+                    TF_fiscal_code.setDisable(true);
+                    LB_error_code.setVisible(false);
+                    saveOk.put("name", true);
+                    saveOk.put("surname", true);
+                    saveOk.put("fiscalCode", true);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
-        for (String s : userField) {
+
+        for (String s : USERFIELD) {
             saveOk.put(s, false);
         }
 
@@ -160,13 +183,16 @@ public class UserSignUpController implements Initializable {
             checkSurname(value);
         });
 
-        TF_fiscal_code.textProperty().addListener((observable, oldValue, newValue) -> {
-            String value = newValue.strip();
-            checkFiscalCode(value);
-        });
+        if (!alreadyVaccinated) {
+            TF_fiscal_code.textProperty().addListener((observable, oldValue, newValue) -> {
+                String value = newValue.strip();
+                checkFiscalCode(value);
+            });
+        }
 
         TF_email.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
+            System.out.println(value);
             checkEmail(value);
         });
 
@@ -416,18 +442,20 @@ public class UserSignUpController implements Initializable {
         String nickname = TF_nickname.getText().strip();
         String pwd = PF_password.getPassword().strip();
 
-        checkFiscalCode(fiscalCode);
+        if (!alreadyVaccinated) {
+            checkFiscalCode(fiscalCode);
+        }
         checkEmail(email);
         checkNickname(nickname);
 
-        for (String s : userField) {
+        for (String s : USERFIELD) {
             if (saveOk.get(s)) {
                 countOk++;
             }
         }
 
         try {
-            if (countOk == userField.length) {
+            if (countOk == USERFIELD.length) {
                 if (!ServerReference.getServer().checkDuplicateTempEmail(email)) {
                     verifyEmail();
                     if (userVerifyEmailController.getIsVerified()) {
@@ -438,14 +466,37 @@ public class UserSignUpController implements Initializable {
                         }
 
                         String cryptPwd = Password.hash(pwd).addRandomSalt().withArgon2().getResult();
-                        User user = new User(name, surname, fiscalCode.toUpperCase(Locale.ROOT), email, nickname, cryptPwd);
-                        System.out.println(user);
+                        User user = new User();
+                        if (!alreadyVaccinated) {
+                            user.setName(name);
+                            user.setSurname(surname);
+                            user.setFiscalCode(fiscalCode.toUpperCase(Locale.ROOT));
+                            user.setEmail(email);
+                            user.setNickname(nickname);
+                            user.setPassword(cryptPwd);
 
-                        try {
-                            ServerReference.getServer().insertDataUser(user);
-                        } catch (RemoteException | NotBoundException e) {
-                            e.printStackTrace();
+                            System.out.println(user);
+
+                            try {
+                                ServerReference.getServer().insertDataUser(user);
+                            } catch (RemoteException | NotBoundException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            user.setEmail(email);
+                            user.setNickname(nickname);
+                            user.setPassword(cryptPwd);
+                            user.setFiscalCode(fiscalCode);
+
+                            System.out.println(user);
+
+                            try {
+                                ServerReference.getServer().changeDataUser(user);
+                            } catch (RemoteException | NotBoundException e) {
+                                e.printStackTrace();
+                            }
                         }
+
                     } else {
                         countOk = 0;
                         BT_sing_up.setText("REGISTRATI");
@@ -544,4 +595,38 @@ public class UserSignUpController implements Initializable {
 
         stage.showAndWait();
     }
+
+    private void openPopUpAlreadyVaccinated() throws IOException {
+        FXMLLoader loader = new FXMLLoader(UserSignUpController.class.getResource("fxml/user_already_vaccinated.fxml"));
+        Parent root = loader.load();
+        userAlreadyVaccinatedController = loader.getController();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("Impostazioni");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        stage.showAndWait();
+    }
 }
+
+

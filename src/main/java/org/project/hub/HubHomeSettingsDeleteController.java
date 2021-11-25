@@ -2,6 +2,7 @@ package org.project.hub;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -93,4 +94,8 @@ public class HubHomeSettingsDeleteController implements Initializable {
     void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
+
+
+
+
 }

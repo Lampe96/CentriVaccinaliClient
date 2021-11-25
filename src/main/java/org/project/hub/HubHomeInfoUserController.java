@@ -2,7 +2,6 @@ package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
@@ -25,7 +24,7 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
-import org.project.models.VaccinatedUser;
+import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.net.URL;
@@ -59,7 +58,7 @@ public class HubHomeInfoUserController implements Initializable {
     private MFXTextField TF_fiscal_code;
 
     @FXML
-    private MFXDatePicker DP_date;
+    private MFXTextField TF_date;
 
     @FXML
     private JFXComboBox<String> CB_vaccine;
@@ -74,16 +73,15 @@ public class HubHomeInfoUserController implements Initializable {
     private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
-    private VaccinatedUser vu;
-    private Date date;
+    private User vu;
 
-    void setVaccinatedUserInfo(VaccinatedUser vu) {
+    void setVaccinatedUserInfo(User vu) {
         this.vu = vu;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
@@ -91,7 +89,7 @@ public class HubHomeInfoUserController implements Initializable {
             TF_name.setText(vu.getName());
             TF_surname.setText(vu.getSurname());
             TF_fiscal_code.setText(vu.getFiscalCode());
-            DP_date.setDateFormatter(DateTimeFormatter.ofPattern(formatter.format(vu.getVaccineDate())));
+            TF_date.setText(vu.getVaccineDate().toLocalDate().format(formatter));
             CB_vaccine.setValue(vu.getVaccineType());
             TF_name_hub.setText(vu.getHubName());
 
@@ -104,7 +102,6 @@ public class HubHomeInfoUserController implements Initializable {
 
         CB_vaccine.getItems().addAll(VACCINETYPE);
 
-        //DP_date
     }
 
     @FXML
@@ -132,15 +129,18 @@ public class HubHomeInfoUserController implements Initializable {
 
     @FXML
     private void updateVaccinated() {
-        //todo if data giusta
-//      Date date = date;
         String type = CB_vaccine.getValue();
         String hubName = TF_name_hub.getText().strip();
+        String name = TF_name.getText().strip();
+        String surname = TF_surname.getText().strip();
 
+        vu.setDose((short) 2);
+        vu.setVaccineDate(new Date(System.currentTimeMillis()));
+        vu.setVaccineType(type);
         if (hubName.equals(vu.getHubName())) {
             try {
-                vu.setDose((short) 2);
-                ServerReference.getServer().updateVaccinatedUser(vu.getId(), hubName, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
+                vu.setHubName(hubName);
+                ServerReference.getServer().updateVaccinatedUser(vu);
                 stage.close();
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
@@ -148,8 +148,10 @@ public class HubHomeInfoUserController implements Initializable {
         } else {
             try {
                 if (ServerReference.getServer().checkIfHubExist(hubName)) {
-                    vu.setDose((short) 2);
-                    ServerReference.getServer().updateVaccinatedUser(vu.getId(), hubName, type, new Date(System.currentTimeMillis()), vu.getFiscalCode(), vu.getDose());
+                    vu.setHubName(hubName);
+                    vu.setName(name);
+                    vu.setSurname(surname);
+                    ServerReference.getServer().insertVaccinatedUserInNewHub(vu);
                     stage.close();
                 } else {
                     errorAlert();

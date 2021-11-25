@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.models.VaccinatedUser;
+import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.io.IOException;
@@ -55,9 +55,9 @@ public class HubHomeItemRowController implements Initializable {
     private Stage stage;
     private double xOffset, yOffset;
     private String hubName;
-    private VaccinatedUser vu;
+    private User vu;
 
-    void setData(@NotNull VaccinatedUser vaccinatedUser, boolean applyGrey) {
+    void setData(@NotNull User vaccinatedUser, boolean applyGrey) {
         vu = vaccinatedUser;
         LB_name.setText(vaccinatedUser.getName());
         LB_surname.setText(vaccinatedUser.getSurname());
@@ -103,20 +103,22 @@ public class HubHomeItemRowController implements Initializable {
             FXMLLoader loader = new FXMLLoader(HubHomeInfoUserController.class.getResource("fxml/hub_home_info_user.fxml"));
             Parent root = loader.load();
             HubHomeInfoUserController hubHomeInfoUserController = loader.getController();
-            VaccinatedUser vuExtra = ServerReference.getServer().fetchHubVaccinatedInfo(vu.getId(), hubName);
+            User vuExtra = ServerReference.getServer().fetchHubVaccinatedInfo(vu.getId(), hubName);
 
-            VaccinatedUser vuComplete = new VaccinatedUser(
-                    vu.getName(),
-                    vu.getSurname(),
-                    vu.getNickname(),
-                    vu.getEvent(),
-                    vuExtra.getId(),
-                    vuExtra.getHubName(),
-                    vuExtra.getFiscalCode(),
-                    vuExtra.getVaccineDate(),
-                    vuExtra.getVaccineType(),
-                    vuExtra.getDose()
+            User vuComplete = new User(
+
             );
+
+            vuComplete.setName(vu.getName());
+            vuComplete.setSurname(vu.getSurname());
+            vuComplete.setNickname(vu.getNickname());
+            vuComplete.setEvent(vu.getEvent());
+            vuComplete.setId(vuExtra.getId());
+            vuComplete.setHubName(vuExtra.getHubName());
+            vuComplete.setFiscalCode(vuExtra.getFiscalCode());
+            vuComplete.setVaccineDate(vuExtra.getVaccineDate());
+            vuComplete.setVaccineType(vuExtra.getVaccineType());
+            vuComplete.setDose(vuExtra.getDose());
 
             hubHomeInfoUserController.setVaccinatedUserInfo(vuComplete);
 
