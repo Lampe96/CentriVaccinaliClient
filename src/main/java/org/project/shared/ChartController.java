@@ -1,4 +1,4 @@
-package org.project.hub;
+package org.project.shared;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +8,7 @@ import javafx.scene.chart.XYChart;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HubHomeChartController implements Initializable {
+public class ChartController implements Initializable {
 
     @FXML
     private StackedBarChart<String, Integer> barChart;

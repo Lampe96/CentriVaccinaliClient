@@ -26,7 +26,7 @@
         </cursor>
         <Image url="@../../drawable/quit.png" />
     </ImageView>
-    <Label alignment="CENTER" layoutX="20.0" layoutY="60.0" text="Compila i seguenti campi se sei già vaccinato, altrimenti chiudi questa fienstra." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+    <Label alignment="CENTER" layoutX="20.0" layoutY="60.0" text="Compila i seguenti campi se sei già vaccinato, altrimenti chiudi questa finestra." textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
         <font>
             <Font size="14.0" />
         </font>

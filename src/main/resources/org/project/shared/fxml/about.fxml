@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" prefHeight="350.0" prefWidth="450.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
-            fx:controller="org.project.hub.HubHomeAboutController">
+            fx:controller="org.project.shared.AboutController">
     <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #eeeeee;"
                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                 AnchorPane.topAnchor="0.0">
-        <AnchorPane id="header_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css"
+        <AnchorPane id="header_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../hub/hub_about.css"
                     AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0">
             <ImageView fitHeight="110.0" fitWidth="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
@@ -33,7 +33,7 @@
                 <Image url="@../../drawable/quit.png"/>
             </ImageView>
         </AnchorPane>
-        <AnchorPane id="text_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../hub_about.css"
+        <AnchorPane id="text_anchor" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../hub/hub_about.css"
                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="120.0">
             <Label layoutX="35.0" layoutY="14.0"

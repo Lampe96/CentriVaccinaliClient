@@ -192,7 +192,6 @@ public class UserSignUpController implements Initializable {
 
         TF_email.textProperty().addListener((observable, oldValue, newValue) -> {
             String value = newValue.strip();
-            System.out.println(value);
             checkEmail(value);
         });
 

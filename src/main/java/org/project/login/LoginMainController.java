@@ -238,6 +238,8 @@ public class LoginMainController implements Initializable {
         } else {
             FXMLLoader loader = new FXMLLoader(UserHomeController.class.getResource("fxml/user_home.fxml"));
             Parent root = loader.load();
+            UserHomeController userHomeController = loader.getController();
+            userHomeController.setEmail(TF_email.getText().strip());
             scene = new Scene(root);
         }
 

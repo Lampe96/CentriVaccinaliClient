@@ -3,6 +3,9 @@ package org.project.hub;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXLabel;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.util.Duration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,8 +28,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
+import org.project.models.Hub;
 import org.project.models.User;
 import org.project.server.ServerReference;
+import org.project.shared.AboutController;
+import org.project.shared.ChartController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -101,6 +107,7 @@ public class HubHomeController implements Initializable {
     private String hubName;
     private ArrayList<User> avu;
     private HubHomeSettingsController hubHomeSettingsController;
+    private int[] vcn;
 
     public void setNameHub(String hubName) {
         this.hubName = hubName;
@@ -114,9 +121,20 @@ public class HubHomeController implements Initializable {
             LB_hub_name.setText(hubName);
 
             try {
-                hubImage = ServerReference.getServer().getImage(hubName);
+                vcn = ServerReference.getServer().getNumberVaccinated(hubName);
+                LB_total_vaccinated.setText(String.valueOf(vcn[0]));
+                LB_vaccinated_first.setText(String.valueOf(vcn[1]));
+                LB_vaccinated_second.setText(String.valueOf(vcn[2]));
+                LB_total_vaccinated_center.setText(String.valueOf(vcn[3]));
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Hub hub = ServerReference.getServer().getHub(hubName);
+                hubImage = hub.getImage();
                 IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
-                LB_hub_address.setText(ServerReference.getServer().getAddress(hubName).toStringCustom());
+                LB_hub_address.setText(hub.getAddress().toStringCustom());
             } catch (NotBoundException | RemoteException e) {
                 e.printStackTrace();
             }
@@ -217,6 +235,11 @@ public class HubHomeController implements Initializable {
 
     @FXML
     private void refreshVaccinatedList() {
+        RotateTransition rt = new RotateTransition(Duration.seconds(2), IV_refresh);
+        rt.setToAngle(360);
+        rt.setInterpolator(Interpolator.LINEAR);
+        rt.play();
+
         VB_vaccinated_layout.getChildren().clear();
         initialize(null, null);
     }
@@ -370,7 +393,7 @@ public class HubHomeController implements Initializable {
     }
 
     private void startAbout() throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(HubHomeController.class.getResource("fxml/hub_home_about.fxml"))));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(AboutController.class.getResource("fxml/about.fxml"))));
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -404,7 +427,7 @@ public class HubHomeController implements Initializable {
     }
 
     private void startChart() throws IOException {
-        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_chart.fxml"));
+        FXMLLoader loader = new FXMLLoader(ChartController.class.getResource("fxml/chart.fxml"));
         Parent root = loader.load();
         //HubHomeChartController hubHomeChartController = loader.getController();
         //hubHomeChartController.setData();

@@ -1,4 +1,4 @@
-package org.project.hub;
+package org.project.shared;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,7 +19,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HubHomeAboutController implements Initializable {
+public class AboutController implements Initializable {
 
     private static final String[] LINKGIT = {
             "https://github.com/Fede22dev",

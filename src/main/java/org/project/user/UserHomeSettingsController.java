@@ -1,4 +1,4 @@
-package org.project.hub;
+package org.project.user;
 
 import com.password4j.Password;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
+import org.project.hub.HubHomeController;
+import org.project.hub.HubHomeSettingsDeleteController;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
 
@@ -33,7 +35,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HubHomeSettingsController implements Initializable {
+public class UserHomeSettingsController implements Initializable {
 
     private static final Timer TIMER = new Timer();
 
@@ -512,6 +514,4 @@ public class HubHomeSettingsController implements Initializable {
         }
     }
 }
-
-
 
