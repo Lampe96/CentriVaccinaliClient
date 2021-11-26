@@ -92,11 +92,9 @@ public class UserAlreadyVaccinatedController implements Initializable {
 
         try {
             //todo MODIFICARE STO CAZZO DI OBJVACCINERED
-
             Object[] objVaccinated = Arrays.copyOf(ServerReference.getServer().checkIfUserIsVaccinated(hubName, fiscalCode), 2);
-            System.out.println(Arrays.toString(objVaccinated));
+
             if (objVaccinated[0].equals(1)) {
-                System.out.println("AAAAAAAAAAAAAAAAA");
                 vu = (User) objVaccinated[1];
                 vu.setFiscalCode(fiscalCode);
                 stage.close();

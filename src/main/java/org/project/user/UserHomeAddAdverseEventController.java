@@ -58,11 +58,11 @@ public class UserHomeAddAdverseEventController implements Initializable {
     private String nick;
     private Hub hub;
 
-    void setNick(String nick){
+    void setNick(String nick) {
         this.nick = nick;
     }
 
-    void setHubData(Hub hub){
+    void setHubData(Hub hub) {
         this.hub = hub;
     }
 
@@ -99,7 +99,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     @FXML
-    void addAdverseEvent() {
+    private void addAdverseEvent() {
         AdverseEvent ae = new AdverseEvent();
         ae.setEventType(CB_event_type.getValue());
         ae.setGravity((short) R_severity.getRating());
@@ -108,7 +108,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
         ae.setNickname(nick);
 
         try {
-            if (ServerReference.getServer().addAdverseEvent(ae)){
+            if (ServerReference.getServer().addAdverseEvent(ae)) {
                 //popup altro evento
                 System.out.println("aaaaaaaaaaaaaaaaaaa");
             } else {

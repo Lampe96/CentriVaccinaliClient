@@ -7,8 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.hub.HubHomeInfoUserController">
     <AnchorPane layoutX="77.0" layoutY="99.0" prefHeight="350.0" prefWidth="300.0"
@@ -102,7 +101,5 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </MFXButton>
-        <MFXProgressSpinner id="spinner" fx:id="PS_spinner" layoutX="164.0" layoutY="355.0" prefHeight="24.0"
-                            prefWidth="24.0" stylesheets="@../../user/user_sign_up.css" visible="false"/>
     </AnchorPane>
 </AnchorPane>

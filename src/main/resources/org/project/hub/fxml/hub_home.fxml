@@ -7,8 +7,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
             style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.hub.HubHomeController">
@@ -72,6 +71,17 @@
                 <AnchorPane layoutY="54.0" prefHeight="4.0"
                             style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+                <MFXButton fx:id="BT_logout" buttonType="RAISED" depthLevel="LEVEL1" layoutY="57.0"
+                           onMouseClicked="#logout" prefHeight="50.0" rippleColor="#745eca"
+                           style="-fx-background-color: transparent;" text="LOGOUT" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXButton>
                 <AnchorPane layoutY="107.0" prefHeight="4.0"
                             style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
@@ -89,17 +99,6 @@
                 <AnchorPane layoutY="160.0" prefHeight="4.0"
                             style="-fx-background-color: linear-gradient(to right top,#00c402, #4ded31, #96f887);"
                             AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-                <MFXButton fx:id="BT_logout" buttonType="RAISED" depthLevel="LEVEL1" layoutY="57.0"
-                           onMouseClicked="#logout" prefHeight="50.0" rippleColor="#745eca"
-                           style="-fx-background-color: transparent;" text="LOGOUT" AnchorPane.leftAnchor="0.0"
-                           AnchorPane.rightAnchor="0.0">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </MFXButton>
                 <Label layoutX="13.0" layoutY="296.0" text="CENTRI VACCINALI ITALIANI">
                     <font>
                         <Font name="System Bold Italic" size="11.0"/>
@@ -120,14 +119,6 @@
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <AnchorPane layoutX="175.0" layoutY="34.0" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="0.0"
                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <ImageView fx:id="BT_quit" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
-                           onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.rightAnchor="10.0"
-                           AnchorPane.topAnchor="10.0">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <Image url="@../../drawable/quit.png"/>
-                </ImageView>
                 <ImageView fx:id="BT_minimize" onMouseClicked="#minimize" onMouseEntered="#darkStyleMinimize"
                            onMouseExited="#restoreStyleMinimize" preserveRatio="true" AnchorPane.rightAnchor="40.0"
                            AnchorPane.topAnchor="10.0">
@@ -135,6 +126,14 @@
                         <Cursor fx:constant="HAND"/>
                     </cursor>
                     <Image url="@../../drawable/minimize.png"/>
+                </ImageView>
+                <ImageView fx:id="BT_quit" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
+                           onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.rightAnchor="10.0"
+                           AnchorPane.topAnchor="10.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <Image url="@../../drawable/quit.png"/>
                 </ImageView>
                 <Label layoutX="14.0" layoutY="36.0" text="Totale vaccinati:" AnchorPane.leftAnchor="14.0"
                        AnchorPane.topAnchor="36.0">

@@ -38,7 +38,7 @@
     </Label>
     <AnchorPane layoutX="-1.0" layoutY="128.0" prefHeight="30.0" prefWidth="237.0" style="-fx-background-color: white;"
                 AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="27.0">
-        <MFXPasswordField fx:id="PF_pwd" lineColor="#886bf2" prefHeight="30.0" prefWidth="202.0">
+        <MFXPasswordField fx:id="PF_pwd" lineColor="#886bf2" prefHeight="30.0" prefWidth="202.0" promptText="Password">
             <font>
                 <Font size="14.0"/>
             </font>

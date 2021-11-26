@@ -2,7 +2,6 @@ package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -66,9 +65,6 @@ public class HubHomeInfoUserController implements Initializable {
 
     @FXML
     private MFXButton BT_update_vaccinated;
-
-    @FXML
-    private MFXProgressSpinner PS_spinner;
 
     private Stage stage;
     private User vu;

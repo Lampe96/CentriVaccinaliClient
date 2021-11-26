@@ -26,7 +26,6 @@ import org.project.models.Hub;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.NotBoundException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -138,6 +137,5 @@ public class UserHomeItemRowController implements Initializable {
                 break;
         }
     }
-
 }
 

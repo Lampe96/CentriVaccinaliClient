@@ -142,42 +142,28 @@
                 <HBox.margin>
                     <Insets left="15.0"/>
                 </HBox.margin>
-                <MFXButton fx:id="BT_delete" buttonType="RAISED" depthLevel="LEVEL1" layoutX="297.0" layoutY="64.0"
-                           onMouseClicked="#delete" rippleColor="#745eca"
-                           style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="ELIMINA">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </MFXButton>
-                <Label layoutX="225.0" prefHeight="27.0" prefWidth="223.0" text="Per eliminare l'account clicca qui:">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="LB_error_password" layoutY="57.0" text="Password non corretta" textFill="RED"
-                       visible="false" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0">
-                    <font>
-                        <Font size="10.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="LB_success_change" layoutY="57.0" text="Password aggiornata" textFill="#2eff00"
-                       visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0">
-                    <font>
-                        <Font name="System Bold" size="18.0"/>
-                    </font>
-                </Label>
                 <Label prefHeight="27.0" prefWidth="223.0" text="Cambia password:">
                     <font>
                         <Font name="System Bold" size="14.0"/>
                     </font>
                 </Label>
                 <MFXPasswordField fx:id="TF_new_password" layoutY="30.0" promptText="Nuova password" visible="false"/>
+                <Label fx:id="LB_error_password" layoutY="57.0" text="Password non corretta" textFill="RED"
+                       visible="false" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0">
+                    <font>
+                        <Font size="10.0"/>
+                    </font>
+                </Label>
                 <MFXPasswordField fx:id="TF_old_password" layoutY="30.0" promptText="Vecchia password"/>
                 <MFXPasswordField fx:id="TF_confirm_password" layoutY="80.0" promptText="Conferma nuova password"
                                   visible="false"/>
+                <Label fx:id="LB_success_change" alignment="CENTER" layoutY="42.0" text="Password aggiornata"
+                       textAlignment="CENTER" textFill="#2eff00" visible="false" wrapText="true"
+                       AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="270.0">
+                    <font>
+                        <Font name="System Bold" size="20.0"/>
+                    </font>
+                </Label>
                 <MFXButton fx:id="BT_confirm_old_pwd" buttonType="RAISED" layoutX="40.0" layoutY="120.0"
                            onMouseClicked="#confirm_old_password" rippleColor="#745eca"
                            style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;" text="CONFERMA">
@@ -192,6 +178,21 @@
                            onMouseClicked="#confirm_new_password" rippleColor="#745eca"
                            style="-fx-background-color: #05BDF2; -fx-background-radius: 0.4em;" text="CONFERMA"
                            visible="false">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </MFXButton>
+                <Label layoutX="225.0" prefHeight="27.0" prefWidth="223.0" text="Per eliminare l'account clicca qui:">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+                <MFXButton fx:id="BT_delete" buttonType="RAISED" depthLevel="LEVEL1" layoutX="297.0" layoutY="64.0"
+                           onMouseClicked="#delete" rippleColor="#745eca"
+                           style="-fx-background-color: #EE4D39; -fx-background-radius: 0.4em;" text="ELIMINA">
                     <font>
                         <Font name="System Bold" size="14.0"/>
                     </font>

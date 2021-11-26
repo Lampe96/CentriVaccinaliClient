@@ -2,7 +2,6 @@ package org.project.hub;
 
 import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXProgressSpinner;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -49,37 +48,24 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
     private final User vaccinatedUser = new User();
-
     @FXML
     private AnchorPane AP_ext;
-
     @FXML
     private ImageView BT_quit;
-
     @FXML
     private MFXTextField TF_name;
-
     @FXML
     private MFXTextField TF_surname;
-
     @FXML
     private MFXTextField TF_fiscal_code;
-
     @FXML
     private ImageView IV_calculator_fiscal_code;
-
     @FXML
     private JFXComboBox<String> CB_vaccine;
-
     @FXML
     private MFXTextField TF_date;
-
     @FXML
     private MFXButton BT_sing_up_new_vaccinated;
-
-    @FXML
-    private MFXProgressSpinner PS_spinner;
-
     private Stage stage;
     private String hubName;
 

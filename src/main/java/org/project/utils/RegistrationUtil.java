@@ -86,7 +86,6 @@ public class RegistrationUtil {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -105,7 +104,6 @@ public class RegistrationUtil {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
@@ -115,7 +113,6 @@ public class RegistrationUtil {
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 }

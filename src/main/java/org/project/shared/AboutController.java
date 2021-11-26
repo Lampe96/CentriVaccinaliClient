@@ -120,4 +120,3 @@ public class AboutController implements Initializable {
         }
     }
 }
-

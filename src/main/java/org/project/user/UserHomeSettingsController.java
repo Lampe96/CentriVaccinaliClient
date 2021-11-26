@@ -496,4 +496,3 @@ public class UserHomeSettingsController implements Initializable {
         }
     }
 }
-

@@ -93,6 +93,4 @@ public class HubHomeSettingsDeleteController implements Initializable {
     void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
-
-
 }

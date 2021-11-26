@@ -403,7 +403,7 @@ public class UserSignUpController implements Initializable {
     }
 
     @FXML
-    public void calculateWebFiscalCode() {
+    private void calculateWebFiscalCode() {
         try {
             browseCalcFiscalCode();
         } catch (URISyntaxException | IOException e) {
@@ -420,12 +420,12 @@ public class UserSignUpController implements Initializable {
     }
 
     @FXML
-    public void darkStyleCalculator() {
+    private void darkStyleCalculator() {
         setDarkHover(IV_calculator_fiscal_code);
     }
 
     @FXML
-    public void restoreStyleCalculator() {
+    private void restoreStyleCalculator() {
         resetDarkExit(IV_calculator_fiscal_code);
     }
 

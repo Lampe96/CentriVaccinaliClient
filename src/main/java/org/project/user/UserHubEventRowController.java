@@ -1,7 +1,6 @@
 package org.project.user;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
@@ -17,9 +16,6 @@ import javafx.scene.paint.Paint;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.AdverseEvent;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class UserHubEventRowController {
 
@@ -56,17 +52,17 @@ public class UserHubEventRowController {
     }
 
     @FXML
-    void darkStyleRow() {
+    private void darkStyleRow() {
         HB_ext.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     @FXML
-    void restoreStyleRow() {
+    private void restoreStyleRow() {
         HB_ext.setEffect(null);
     }
 
     @FXML
-    void openInfoVaccinated() {
+    private void openInfoVaccinated() {
 
     }
 }

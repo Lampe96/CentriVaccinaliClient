@@ -234,8 +234,10 @@ public class HubHomeController implements Initializable {
 
     @FXML
     private void refreshVaccinatedList() {
-        RotateTransition rt = new RotateTransition(Duration.seconds(2), IV_refresh);
-        rt.setToAngle(360);
+        RotateTransition rt = new RotateTransition(Duration.seconds(1), IV_refresh);
+        rt.setFromAngle(360);
+        rt.setToAngle(0);
+        rt.setCycleCount(2);
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
 

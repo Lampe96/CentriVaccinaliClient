@@ -4,6 +4,7 @@ import javafx.scene.control.TextField;
 import org.jetbrains.annotations.NotNull;
 
 public class TextFieldLimited extends TextField {
+
     private int maxLength;
 
     public TextFieldLimited() {

@@ -81,7 +81,6 @@ public class LoginMainController implements Initializable {
     private Scene scene;
     private double xPos = 0;
     private double yPos = 0;
-    private double xOffset, yOffset;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -252,17 +251,21 @@ public class LoginMainController implements Initializable {
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initOwner(this.stage);
         this.stage.close();
-        stage.show();
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
 
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
+
+        stage.show();
     }
 
     @NotNull

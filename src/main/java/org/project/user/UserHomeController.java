@@ -17,7 +17,6 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -205,8 +204,10 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private void refreshVaccinatedList() {
-        RotateTransition rt = new RotateTransition(Duration.seconds(2), IV_refresh);
-        rt.setToAngle(360);
+        RotateTransition rt = new RotateTransition(Duration.seconds(1), IV_refresh);
+        rt.setFromAngle(360);
+        rt.setToAngle(0);
+        rt.setCycleCount(2);
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
 
@@ -316,7 +317,7 @@ public class UserHomeController implements Initializable {
     }
 
     @FXML
-    void openAbout() {
+    private void openAbout() {
         try {
             startAbout();
         } catch (IOException e) {
@@ -353,7 +354,7 @@ public class UserHomeController implements Initializable {
     }
 
     @FXML
-    void openChart() {
+    private void openChart() {
         try {
             startChart();
         } catch (IOException e) {
@@ -396,7 +397,7 @@ public class UserHomeController implements Initializable {
     }
 
     @FXML
-    void openSetting() {
+    private void openSetting() {
         try {
             startSetting();
 

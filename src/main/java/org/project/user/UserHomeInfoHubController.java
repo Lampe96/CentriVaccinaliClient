@@ -15,7 +15,6 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,12 +25,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.hub.HubHomeController;
-import org.project.hub.HubHomeItemRowController;
-import org.project.hub.HubHomeRegistrationNewVaccinatedController;
 import org.project.models.AdverseEvent;
 import org.project.models.Hub;
-import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.awt.*;
@@ -168,8 +163,10 @@ public class UserHomeInfoHubController implements Initializable {
 
     @FXML
     private void refreshVaccinatedList() {
-        RotateTransition rt = new RotateTransition(Duration.seconds(2), IV_refresh);
-        rt.setToAngle(360);
+        RotateTransition rt = new RotateTransition(Duration.seconds(1), IV_refresh);
+        rt.setFromAngle(360);
+        rt.setToAngle(0);
+        rt.setCycleCount(2);
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
 
@@ -188,7 +185,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     @FXML
-    void addAdverseEvent() {
+    private void addAdverseEvent() {
         try {
             startAddAdverseEvent();
         } catch (IOException e) {
@@ -231,12 +228,18 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     @FXML
-    void openMaps() {
-        String city = hub.getAddress().getCity().replaceAll("\\s+", "+");
+    private void openMaps() {
         String address = hub.getAddress().getAddress().replaceAll("\\s+", "+");
+        String city = hub.getAddress().getCity().replaceAll("\\s+", "+");
+
         try {
-            browse("https://www.google.it/maps/place/" + hub.getAddress().getQualificator() + "+" + address + ",+" +
-                    hub.getAddress().getNumber() + ",+" + hub.getAddress().getCap() + "+" + city + "+" + hub.getAddress().getProvince());
+            browse("https://www.google.it/maps/place/" +
+                    hub.getAddress().getQualificator() + "+" +
+                    address + ",+" +
+                    hub.getAddress().getNumber() + ",+" +
+                    hub.getAddress().getCap() + "+" +
+                    city + "+" +
+                    hub.getAddress().getProvince());
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
         }

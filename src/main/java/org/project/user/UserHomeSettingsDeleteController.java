@@ -63,7 +63,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     @FXML
-    void confirmed() {
+    private void confirmed() {
         String pwd = PF_pwd.getPassword().strip();
         try {
             if ((ServerReference.getServer().checkPassword("", email, pwd))) {
@@ -79,18 +79,18 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     @FXML
-    void darkStyleQuit() {
+    private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
     @FXML
-    void quit() {
+    private void quit() {
         deleteAcc = false;
         stage.close();
     }
 
     @FXML
-    void restoreStyleQuit() {
+    private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 }

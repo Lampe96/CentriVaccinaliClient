@@ -497,6 +497,3 @@ public class HubHomeSettingsController implements Initializable {
         }
     }
 }
-
-
-
