@@ -1,4 +1,4 @@
-package org.project.hub;
+package org.project.user;
 
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
@@ -20,7 +20,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 
-public class HubHomeSettingsDeleteController implements Initializable {
+public class UserHomeSettingsDeleteController implements Initializable {
 
     @FXML
     private AnchorPane AP_ext;
@@ -38,11 +38,11 @@ public class HubHomeSettingsDeleteController implements Initializable {
     private MFXButton BT_confirmed;
 
     private Stage stage;
-    private String hubName;
+    private String email;
     private boolean deleteAcc = false;
 
-    void setHubName(String hubName) {
-        this.hubName = hubName;
+    void setEmail(String email) {
+        this.email = email;
     }
 
     boolean getDeleteAccPopUp() {
@@ -66,7 +66,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
     void confirmed() {
         String pwd = PF_pwd.getPassword().strip();
         try {
-            if ((ServerReference.getServer().checkPassword(hubName, "", pwd))) {
+            if ((ServerReference.getServer().checkPassword("", email, pwd))) {
                 LB_error_pwd.setVisible(false);
                 deleteAcc = true;
                 stage.close();
@@ -93,6 +93,4 @@ public class HubHomeSettingsDeleteController implements Initializable {
     void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
-
-
 }

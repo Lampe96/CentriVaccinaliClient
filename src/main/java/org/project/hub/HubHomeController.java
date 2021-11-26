@@ -5,7 +5,6 @@ import io.github.palexdev.materialfx.controls.MFXLabel;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
-import javafx.util.Duration;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
@@ -102,7 +102,6 @@ public class HubHomeController implements Initializable {
     private VBox VB_vaccinated_layout;
 
     private Stage stage;
-    private double xOffset, yOffset;
     private int hubImage;
     private String hubName;
     private ArrayList<User> avu;
@@ -263,11 +262,11 @@ public class HubHomeController implements Initializable {
             if (newSelectedImage != hubImage) {
                 hubImage = newSelectedImage;
                 IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hubImage + ".png"))));
-                ServerReference.getServer().changeImageHub(hubImage, hubName);
+                ServerReference.getServer().changeImage(hubImage, hubName, "");
             }
 
             if (hubHomeSettingsController.getDeleteAccSettings()) {
-                ServerReference.getServer().deleteHub(hubName);
+                ServerReference.getServer().deleteAccount(hubName, "");
                 startLogin();
             }
         } catch (IOException | NotBoundException e) {
@@ -293,14 +292,17 @@ public class HubHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
 
         stage.showAndWait();
@@ -370,17 +372,21 @@ public class HubHomeController implements Initializable {
         stage.setTitle("CVI");
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         this.stage.close();
-        stage.show();
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
 
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
+
+        stage.show();
     }
 
     @FXML
@@ -404,14 +410,17 @@ public class HubHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
 
         stage.show();
@@ -429,15 +438,34 @@ public class HubHomeController implements Initializable {
     private void startChart() throws IOException {
         FXMLLoader loader = new FXMLLoader(ChartController.class.getResource("fxml/chart.fxml"));
         Parent root = loader.load();
-        //HubHomeChartController hubHomeChartController = loader.getController();
-        //hubHomeChartController.setData();
+        ChartController chartController = loader.getController();
+        chartController.setData(vcn);
+        chartController.setUserType(UserType.HUB);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Grafico vaccinazioni");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("Andamento vaccinazioni");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
         stage.show();
     }
 
@@ -469,14 +497,17 @@ public class HubHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
 
         stage.showAndWait();

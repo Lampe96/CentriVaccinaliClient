@@ -2,7 +2,6 @@ package org.project.user;
 
 import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXLabel;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.application.Platform;
@@ -104,10 +103,12 @@ public class UserHomeController implements Initializable {
     private VBox VB_hub_layout;
 
     private Stage stage;
-    private double xOffset, yOffset;
-    private ArrayList<Hub> ahub;
-    private int[] vcn;
+    private int userImage;
     private String email;
+    private User us;
+    private ArrayList<Hub> ahub;
+    private UserHomeSettingsController userHomeSettingsController;
+    private int[] vcn;
 
     public void setEmail(String email) {
         this.email = email;
@@ -119,7 +120,7 @@ public class UserHomeController implements Initializable {
             stage = (Stage) AP_ext.getScene().getWindow();
 
             try {
-                User us = ServerReference.getServer().getUser(email);
+                us = ServerReference.getServer().getUser(email);
                 LB_user_name.setText(us.getName() + " " + us.getSurname());
                 LB_user_nickname.setText(us.getNickname());
             } catch (RemoteException | NotBoundException e) {
@@ -130,7 +131,6 @@ public class UserHomeController implements Initializable {
 
             try {
                 ahub = ServerReference.getServer().fetchAllHub();
-                System.out.println(ahub);
                 ahub.forEach(hub -> {
                     try {
                         loadHubRow(hub, ahub.indexOf(hub) % 2 == 0);
@@ -260,18 +260,21 @@ public class UserHomeController implements Initializable {
         stage.setTitle("CVI");
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         this.stage.close();
-        stage.show();
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
 
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
+
+        stage.show();
     }
 
     private void loadHubRow(Hub hub, boolean applyGrey) throws IOException {
@@ -305,14 +308,17 @@ public class UserHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
 
         stage.show();
@@ -330,15 +336,34 @@ public class UserHomeController implements Initializable {
     private void startChart() throws IOException {
         FXMLLoader loader = new FXMLLoader(ChartController.class.getResource("fxml/chart.fxml"));
         Parent root = loader.load();
-        //HubHomeChartController hubHomeChartController = loader.getController();
-        //hubHomeChartController.setData();
+        ChartController chartController = loader.getController();
+        chartController.setData(vcn);
+        chartController.setUserType(UserType.USER);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Grafico vaccinazioni");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setTitle("Andamento vaccinazioni");
+        stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        scene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        scene.setOnMouseDragged(mouseEvent -> {
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
         stage.show();
     }
 
@@ -346,17 +371,29 @@ public class UserHomeController implements Initializable {
     void openSetting() {
         try {
             startSetting();
-        } catch (IOException e) {
+
+            int newSelectedImage = userHomeSettingsController.getSelectedImage();
+            if (newSelectedImage != userImage) {
+                userImage = newSelectedImage;
+                IV_user.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/user_icon_" + userImage + ".png"))));
+                ServerReference.getServer().changeImage(userImage, "", us.getFiscalCode());
+            }
+
+            if (userHomeSettingsController.getDeleteAccSettings()) {
+                ServerReference.getServer().deleteAccount("", email);
+                startLogin();
+            }
+        } catch (IOException | NotBoundException e) {
             e.printStackTrace();
         }
     }
 
     private void startSetting() throws IOException {
-        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_settings.fxml"));
+        FXMLLoader loader = new FXMLLoader(UserHomeSettingsController.class.getResource("fxml/user_home_settings.fxml"));
         Parent root = loader.load();
-//        hubHomeSettingsController = loader.getController();
-//        hubHomeSettingsController.setSelectedImage(hubImage);
-//        hubHomeSettingsController.setHubName(hubName);
+        userHomeSettingsController = loader.getController();
+        userHomeSettingsController.setSelectedImage(userImage);
+        userHomeSettingsController.setEmail(email);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -369,14 +406,17 @@ public class UserHomeController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
 
         stage.showAndWait();

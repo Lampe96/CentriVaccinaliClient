@@ -1,6 +1,15 @@
-#combo_box{
--fx-alignment: center;
+#left_anchor {
+   -fx-background-radius: 10 0 0 10;
 }
-#combo_box .list-cell{
--fx-alignment: center;
+
+#right_anchor{
+    -fx-background-radius: 0 10 10 0;
+}
+
+#top_vBox {
+    -fx-background-radius: 10 0 0 0;
+}
+
+#bottom_anchor {
+    -fx-background-radius: 0 0 0 10;
 }

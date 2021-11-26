@@ -71,8 +71,8 @@ public class UserHomeItemRowController implements Initializable {
 
     }
 
-    private void checkType(@NotNull String type){
-        switch (type){
+    private void checkType(@NotNull String type) {
+        switch (type) {
             case "OSPEDALIERO":
                 LB_typology.setText("OSPED");
                 break;

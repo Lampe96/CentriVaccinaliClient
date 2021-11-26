@@ -3,26 +3,43 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="400.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.shared.ChartController">
-    <StackedBarChart fx:id="barChart" animated="false" title="Riepilogo" AnchorPane.bottomAnchor="0.0"
-                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <xAxis>
-            <CategoryAxis side="BOTTOM" tickLabelGap="1.0" tickLength="6.0">
-                <tickLabelFont>
-                    <Font size="12.0"/>
-                </tickLabelFont>
-            </CategoryAxis>
-        </xAxis>
-        <yAxis>
-            <NumberAxis label="Numero di vaccinazioni" minorTickLength="4.0" side="LEFT" tickLabelGap="1.0"
-                        tickLength="6.0" upperBound="30.0">
-                <tickLabelFont>
-                    <Font name="System Italic" size="14.0"/>
-                </tickLabelFont>
-            </NumberAxis>
-        </yAxis>
-    </StackedBarChart>
+    <AnchorPane prefHeight="400.0" prefWidth="500.0"
+                style="-fx-background-color: #eeeeee; -fx-border-color: linear-gradient(to right top, #fc4a1a, #ffdf00); -fx-border-width: 4; -fx-border-radius: 1.8em; -fx-background-radius: 2em;">
+        <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="14.0" layoutY="14.0" preserveRatio="true">
+            <Image url="@../../drawable/primula.png"/>
+        </ImageView>
+        <ImageView fx:id="BT_quit" layoutX="460.0" layoutY="16.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
+                   onMouseExited="#restoreStyleQuit" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <Image url="@../../drawable/quit.png"/>
+        </ImageView>
+        <StackedBarChart fx:id="barChart" animated="false" stylesheets="@../chart.css" title="Andamento vaccianzioni"
+                         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                         AnchorPane.topAnchor="25.0">
+            <xAxis>
+                <CategoryAxis side="BOTTOM" tickLabelGap="1.0" tickLength="6.0">
+                    <tickLabelFont>
+                        <Font size="12.0"/>
+                    </tickLabelFont>
+                </CategoryAxis>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Numero di vaccinazioni" minorTickLength="4.0" side="LEFT" tickLabelGap="1.0"
+                            tickLength="6.0" upperBound="30.0">
+                    <tickLabelFont>
+                        <Font name="System Italic" size="14.0"/>
+                    </tickLabelFont>
+                </NumberAxis>
+            </yAxis>
+        </StackedBarChart>
+    </AnchorPane>
 </AnchorPane>

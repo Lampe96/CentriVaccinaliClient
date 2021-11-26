@@ -5,10 +5,10 @@ import org.jetbrains.annotations.NotNull;
 public class UIdGenerator {
 
     public static short generateUId(@NotNull String fiscalCode) {
-        short uid = 0;
+        short UId = 0;
         for (int i = 0; i < fiscalCode.length(); i++) {
-            uid += fiscalCode.charAt(i);
+            UId += fiscalCode.charAt(i);
         }
-        return uid;
+        return UId;
     }
 }

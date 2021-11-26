@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.hub.HubHomeController;
-import org.project.hub.HubHomeSettingsDeleteController;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
 
@@ -34,82 +32,63 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class UserHomeSettingsController implements Initializable {
 
-    private static final Timer TIMER = new Timer();
+    private final Timer TIMER = new Timer();
 
     @FXML
     public AnchorPane AP_ext;
-
+    boolean openDelete = false;
     @FXML
     private ImageView BT_quit;
-
     @FXML
     private ImageView IV_one;
-
     @FXML
     private ImageView IV_two;
-
     @FXML
     private ImageView IV_three;
-
     @FXML
     private ImageView IV_four;
-
     @FXML
     private ImageView IV_five;
-
     @FXML
     private ImageView IV_six;
-
     @FXML
     private ImageView IV_seven;
-
     @FXML
     private ImageView IV_eight;
-
     @FXML
     private ImageView IV_nine;
-
     @FXML
     private MFXButton BT_delete;
-
     @FXML
     private MFXPasswordField TF_old_password;
-
     @FXML
     private Label LB_error_password;
-
     @FXML
     private Label LB_success_change;
-
     @FXML
     private MFXPasswordField TF_new_password;
-
     @FXML
     private MFXPasswordField TF_confirm_password;
-
     @FXML
     private MFXButton BT_confirm_old_pwd;
-
     @FXML
     private MFXButton BT_confirm_new_pwd;
-
-    private double xOffset, yOffset;
-    private int selectedImage;
     private Stage stage;
-    private String hubName;
-    private HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
-    boolean openDelete = false;
+    private int selectedImage;
+    private String email;
+    private UserHomeSettingsDeleteController userHomeSettingsDeleteController;
 
-    void setHubName(String hubName) {
-        this.hubName = hubName;
+    void setEmail(String email) {
+        this.email = email;
     }
 
     boolean getDeleteAccSettings() {
         if (openDelete) {
-            return hubHomeSettingsDeleteController.getDeleteAccPopUp();
+            return userHomeSettingsDeleteController.getDeleteAccPopUp();
         }
         return false;
     }
@@ -171,7 +150,7 @@ public class UserHomeSettingsController implements Initializable {
                 if (RegistrationUtil.checkChangePwd(newPwd, oldPwd)) {
                     String cryptPwd = Password.hash(newPwd).addRandomSalt().withArgon2().getResult();
                     try {
-                        ServerReference.getServer().changePwd(hubName, cryptPwd);
+                        ServerReference.getServer().changePwd("", email, cryptPwd);
                         LB_error_password.setVisible(false);
                         TF_new_password.setVisible(false);
                         BT_confirm_new_pwd.setVisible(false);
@@ -208,7 +187,7 @@ public class UserHomeSettingsController implements Initializable {
     private void confirm_old_password() {
         String pwd = TF_old_password.getPassword().strip();
         try {
-            boolean checkPwd = ServerReference.getServer().checkPasswordHub(hubName, pwd);
+            boolean checkPwd = ServerReference.getServer().checkPassword("", email, pwd);
             if (checkPwd) {
                 TF_old_password.setVisible(false);
                 LB_error_password.setVisible(false);
@@ -232,7 +211,7 @@ public class UserHomeSettingsController implements Initializable {
         try {
             openDeletePopUp();
             openDelete = true;
-            if (hubHomeSettingsDeleteController.getDeleteAccPopUp()) {
+            if (userHomeSettingsDeleteController.getDeleteAccPopUp()) {
                 stage.close();
             }
         } catch (IOException e) {
@@ -241,10 +220,10 @@ public class UserHomeSettingsController implements Initializable {
     }
 
     private void openDeletePopUp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_settings_delete.fxml"));
+        FXMLLoader loader = new FXMLLoader(UserHomeSettingsDeleteController.class.getResource("fxml/user_settings_delete.fxml"));
         Parent root = loader.load();
-        hubHomeSettingsDeleteController = loader.getController();
-        hubHomeSettingsDeleteController.setHubName(hubName);
+        userHomeSettingsDeleteController = loader.getController();
+        userHomeSettingsDeleteController.setEmail(email);
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -257,14 +236,17 @@ public class UserHomeSettingsController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
         stage.showAndWait();
     }
