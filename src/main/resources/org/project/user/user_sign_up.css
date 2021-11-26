@@ -18,3 +18,8 @@
 #spinner .track{
     -fx-stroke: #ffdf00;
 }
+
+.jfx-combo-box{
+    -fx-prompt-text-fill: #4d4d4d;
+    -fx-font-size: 17;
+}

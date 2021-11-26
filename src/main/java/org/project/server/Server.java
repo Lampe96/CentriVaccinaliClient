@@ -65,15 +65,15 @@ public interface Server extends Remote {
 
     ArrayList<Hub> fetchAllHub() throws RemoteException;
 
-    ArrayList<AdverseEvent> fetchAllAdverseEvent() throws RemoteException;
+    ArrayList<AdverseEvent> fetchAllAdverseEvent(String hubName) throws RemoteException;
 
     void updateVaccinatedUser(User vaccinatedUser) throws RemoteException;
+
+    boolean addAdverseEvent(AdverseEvent adverseEvent) throws RemoteException;
 
     int[] getNumberVaccinated(String hubName) throws RemoteException;
 
     float getAvgAdverseEvent(String hubName) throws RemoteException;
-
-    ArrayList<AdverseEvent> getAllAdverseEvent() throws RemoteException;
 
     User getUser(String email) throws RemoteException;
 

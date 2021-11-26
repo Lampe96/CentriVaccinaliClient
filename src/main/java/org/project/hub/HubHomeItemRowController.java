@@ -105,9 +105,7 @@ public class HubHomeItemRowController implements Initializable {
             HubHomeInfoUserController hubHomeInfoUserController = loader.getController();
             User vuExtra = ServerReference.getServer().fetchHubVaccinatedInfo(vu.getId(), hubName);
 
-            User vuComplete = new User(
-
-            );
+            User vuComplete = new User();
 
             vuComplete.setName(vu.getName());
             vuComplete.setSurname(vu.getSurname());

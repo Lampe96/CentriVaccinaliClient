@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXLabel;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
@@ -95,6 +99,9 @@ public class UserHomeController implements Initializable {
 
     @FXML
     private MFXTextField TF_search_hub;
+
+    @FXML
+    private ImageView IV_refresh;
 
     @FXML
     private JFXComboBox<String> CB_filter;
@@ -197,6 +204,27 @@ public class UserHomeController implements Initializable {
     }
 
     @FXML
+    private void refreshVaccinatedList() {
+        RotateTransition rt = new RotateTransition(Duration.seconds(2), IV_refresh);
+        rt.setToAngle(360);
+        rt.setInterpolator(Interpolator.LINEAR);
+        rt.play();
+
+        VB_hub_layout.getChildren().clear();
+        initialize(null, null);
+    }
+
+    @FXML
+    private void darkStyleRefresh() {
+        setDarkHover(IV_refresh);
+    }
+
+    @FXML
+    private void restoreStyleRefresh() {
+        resetDarkExit(IV_refresh);
+    }
+
+    @FXML
     private void logout() {
         if (logoutAlert()) {
             try {
@@ -283,7 +311,7 @@ public class UserHomeController implements Initializable {
 
         HBox hBox = fxmlLoader.load();
         UserHomeItemRowController uhirc = fxmlLoader.getController();
-        uhirc.setData(hub, applyGrey);
+        uhirc.setData(hub, us.getNickname(), applyGrey);
         VB_hub_layout.getChildren().add(hBox);
     }
 
