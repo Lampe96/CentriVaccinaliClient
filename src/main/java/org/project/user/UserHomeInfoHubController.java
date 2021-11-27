@@ -2,7 +2,7 @@ package org.project.user;
 
 import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
-import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXLabel;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
@@ -23,6 +23,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.AdverseEvent;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class UserHomeInfoHubController implements Initializable {
 
@@ -61,13 +63,13 @@ public class UserHomeInfoHubController implements Initializable {
     private ImageView BT_quit;
 
     @FXML
-    private MFXTextField TF_hub_name;
+    private MFXLabel TF_hub_name;
 
     @FXML
-    private MFXTextField TF_type;
+    private MFXLabel TF_type;
 
     @FXML
-    private MFXTextField TF_address;
+    private MFXLabel TF_address;
 
     @FXML
     private ImageView IV_maps;
@@ -108,24 +110,29 @@ public class UserHomeInfoHubController implements Initializable {
             TF_hub_name.setText(hub.getNameHub());
             TF_type.setText(hub.getType());
             TF_address.setText(hub.getAddress().toStringCustom());
-            System.out.println(hub.getImage());
             IV_hub.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/hospital_icon_" + hub.getImage() + ".png"))));
 
-            try {
-                aae = ServerReference.getServer().fetchAllAdverseEvent(hub.getNameHub());
-                aae.forEach(ae -> {
-                    try {
-                        loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (RemoteException | NotBoundException e) {
-                e.printStackTrace();
-            }
+            fillRow();
 
             CB_filter.getItems().addAll(FILTER);
+
+            CB_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterSelection(CB_filter.getValue()));
         });
+    }
+
+    private void fillRow() {
+        try {
+            aae = ServerReference.getServer().fetchAllAdverseEvent(hub.getNameHub());
+            aae.forEach(ae -> {
+                try {
+                    loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadAdverseEvent(AdverseEvent ae, boolean applyGrey) throws IOException {
@@ -170,8 +177,9 @@ public class UserHomeInfoHubController implements Initializable {
         rt.setInterpolator(Interpolator.LINEAR);
         rt.play();
 
+        CB_filter.setValue("");
         VB_adverse_event_layout.getChildren().clear();
-        initialize(null, null);
+        fillRow();
     }
 
     @FXML
@@ -225,6 +233,9 @@ public class UserHomeInfoHubController implements Initializable {
         });
 
         stage.showAndWait();
+
+        VB_adverse_event_layout.getChildren().clear();
+        fillRow();
     }
 
     @FXML
@@ -259,5 +270,62 @@ public class UserHomeInfoHubController implements Initializable {
         if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
             desktop.browse(uri);
         }
+    }
+
+
+    private void filterSelection(@NotNull String value) {
+        switch (value) {
+            case "MAL DI TESTA":
+                filterList(0);
+                break;
+
+            case "FEBBRE":
+                filterList(1);
+                break;
+
+            case "DOLORI MUSCOLARI":
+                filterList(2);
+                break;
+
+            case "DOLORI ARTICOLARI":
+                filterList(3);
+                break;
+
+            case "LINFOADENOPATIA":
+                filterList(4);
+                break;
+
+            case "TACHICARDIA":
+                filterList(5);
+                break;
+
+            case "CRISI IPERTENSIVA":
+                filterList(6);
+                break;
+
+            case "NO FILTRO":
+                VB_adverse_event_layout.getChildren().clear();
+                aae.forEach(ae -> {
+                    try {
+                        loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+        }
+    }
+
+    private void filterList(int type) {
+        ArrayList<AdverseEvent> aaef = (ArrayList<AdverseEvent>) aae.stream().filter(ae ->
+                StringUtils.containsIgnoreCase(ae.getEventType(), (FILTER[type]))).collect(Collectors.toList());
+        VB_adverse_event_layout.getChildren().clear();
+
+        aaef.forEach(ae -> {
+            try {
+                loadAdverseEvent(ae, aaef.indexOf(ae) % 2 == 0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

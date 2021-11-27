@@ -23,9 +23,12 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.Hub;
+import org.project.server.ServerReference;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -58,7 +61,6 @@ public class UserHomeItemRowController implements Initializable {
         LB_hub_name.setText(hub.getNameHub());
         checkType(hub.getType());
         LB_city.setText(hub.getAddress().getCity());
-        //TODO query con media
         LB_avg_adverse_event.setText(String.valueOf(0));
 
         if (applyGrey) {
@@ -68,7 +70,15 @@ public class UserHomeItemRowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
+        Platform.runLater(() -> {
+            stage = (Stage) HB_ext.getScene().getWindow();
+
+            try {
+                LB_avg_adverse_event.setText(String.valueOf(ServerReference.getServer().getAvgAdverseEvent(hub.getNameHub())));
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML

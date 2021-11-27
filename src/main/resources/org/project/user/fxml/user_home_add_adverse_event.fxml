@@ -3,71 +3,59 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.user.UserHomeAddAdverseEventController">
-    <AnchorPane layoutX="77.0" layoutY="17.0" prefHeight="460.0" prefWidth="350.0"
-                style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;"
-                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                AnchorPane.topAnchor="0.0">
-        <ImageView fx:id="BT_quit" layoutX="299.0" layoutY="14.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
-                   onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="364.4"
-                   AnchorPane.leftAnchor="299.0" AnchorPane.rightAnchor="20.19999999999999" AnchorPane.topAnchor="14.0">
+
+<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.user.UserHomeAddAdverseEventController">
+    <AnchorPane layoutX="77.0" layoutY="17.0" prefHeight="460.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 2em; -fx-border-color: linear-gradient(to right top,#00c402, #4ded31, #96f887); -fx-border-radius: 1.8em; -fx-border-width: 4;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="BT_quit" layoutX="299.0" layoutY="14.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit" onMouseExited="#restoreStyleQuit" preserveRatio="true" AnchorPane.bottomAnchor="364.4" AnchorPane.leftAnchor="299.0" AnchorPane.rightAnchor="20.19999999999999" AnchorPane.topAnchor="14.0">
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@../../drawable/quit.png"/>
+            <Image url="@../../drawable/quit.png" />
         </ImageView>
-        <Label id="welcome" alignment="CENTER" layoutX="30.0" layoutY="55.0" prefHeight="26.0" prefWidth="291.0"
-               stylesheets="@../../user/user_sign_up.css" text="AGGIUNGI EVENTO AVVERSO" AnchorPane.leftAnchor="0.0"
-               AnchorPane.rightAnchor="0.0">
+        <Label id="welcome" alignment="CENTER" layoutX="30.0" layoutY="55.0" prefHeight="26.0" prefWidth="291.0" stylesheets="@../../user/user_sign_up.css" text="AGGIUNGI EVENTO AVVERSO" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <font>
-                <Font size="20.0"/>
+                <Font size="20.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="47.0" layoutY="81.0" prefHeight="3.0" prefWidth="285.0"
-                    style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" AnchorPane.leftAnchor="28.0"/>
-        <AnchorPane layoutX="37.0" layoutY="85.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="33.0"
-                    AnchorPane.rightAnchor="25.0">
-            <JFXComboBox fx:id="CB_event_type" focusColor="#886bf2" layoutX="30.0" layoutY="25.0" prefWidth="198.0"
-                         promptText="Tipologia" stylesheets="@../user_sign_up.css" visibleRowCount="5"/>
+        <AnchorPane layoutX="47.0" layoutY="81.0" prefHeight="3.0" prefWidth="285.0" style="-fx-background-color: #4243ce; -fx-background-radius: 3em;" AnchorPane.leftAnchor="28.0" />
+        <AnchorPane layoutX="37.0" layoutY="85.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="25.0">
+            <JFXComboBox fx:id="CB_event_type" focusColor="#886bf2" layoutX="30.0" layoutY="25.0" prefWidth="198.0" promptText="Tipologia" stylesheets="@../user_sign_up.css" visibleRowCount="5" />
             <Label layoutX="30.0" layoutY="73.0" text="Severità">
                 <font>
-                    <Font name="System Italic" size="18.0"/>
+                    <Font name="System Italic" size="18.0" />
                 </font>
             </Label>
-            <Rating fx:id="R_severity" layoutX="30.0" layoutY="100.0"/>
-            <AnchorPane layoutX="30.0" layoutY="137.0" prefHeight="1.0" prefWidth="180.0"
-                        style="-fx-background-color: #4d4d4d; -fx-background-radius: 3em;"/>
+            <Rating fx:id="R_severity" layoutX="30.0" layoutY="100.0" rating="0.0" />
+            <AnchorPane layoutX="30.0" layoutY="137.0" prefHeight="1.0" prefWidth="180.0" style="-fx-background-color: #4d4d4d; -fx-background-radius: 3em;" />
             <Label layoutX="30.0" layoutY="150.0" text="Note aggiuntive">
                 <font>
-                    <Font name="System Italic" size="18.0"/>
+                    <Font name="System Italic" size="18.0" />
                 </font>
             </Label>
-            <JFXTextArea fx:id="TA_text" focusColor="#886bf2" layoutX="30.0" layoutY="177.0" prefHeight="129.0"
-                         prefWidth="234.0" promptText="Scrivi qui i tuoi sintomi" style="-fx-background-color: #eeeeee;"
-                         AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+         <Label fx:id="LB_char_counter" layoutX="215.0" layoutY="164.0" text="0 / 255" textFill="#4d4d4d">
+            <font>
+               <Font size="10.0" />
+            </font>
+         </Label>
+            <JFXTextArea fx:id="TA_text" focusColor="#886bf2" layoutX="30.0" layoutY="177.0" prefHeight="129.0" prefWidth="234.0" promptText="Scrivi qui i tuoi sintomi" style="-fx-background-color: #eeeeee;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                 <font>
-                    <Font size="13.0"/>
+                    <Font size="13.0" />
                 </font>
             </JFXTextArea>
         </AnchorPane>
-        <MFXButton fx:id="BT_add_adverse_event" buttonType="RAISED" onMouseClicked="#addAdverseEvent"
-                   rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;"
-                   text="AGGIUNGI" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0"
-                   AnchorPane.rightAnchor="100.0">
+        <MFXButton fx:id="BT_add_adverse_event" buttonType="RAISED" onMouseClicked="#addAdverseEvent" rippleColor="#745eca" style="-fx-background-color: #00c402; -fx-background-radius: 0.4em;" text="AGGIUNGI" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="100.0">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font name="System Bold" size="14.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
         </MFXButton>
     </AnchorPane>
