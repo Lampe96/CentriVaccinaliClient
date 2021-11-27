@@ -91,7 +91,6 @@ public class UserAlreadyVaccinatedController implements Initializable {
         String hubName = TF_hub_name.getText().strip();
 
         try {
-            //todo MODIFICARE STO CAZZO DI OBJVACCINERED
             Object[] objVaccinated = Arrays.copyOf(ServerReference.getServer().checkIfUserIsVaccinated(hubName, fiscalCode), 2);
 
             if (objVaccinated[0].equals(1)) {
