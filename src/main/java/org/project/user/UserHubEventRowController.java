@@ -24,13 +24,9 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.AdverseEvent;
-import org.project.server.ServerReference;
-import org.project.shared.ChartController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
@@ -53,7 +49,7 @@ public class UserHubEventRowController implements Initializable {
 
     private Stage stage;
 
-    public void setData(@NotNull AdverseEvent ae, boolean applyGrey) {
+    public void setData(@NotNull AdverseEvent ae, boolean applyGrey, boolean isUserEvent) {
         this.ae = ae;
 
         LB_typology.setText(ae.getEventType());
@@ -65,9 +61,14 @@ public class UserHubEventRowController implements Initializable {
             IV_text.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/x_button.png"))));
         }
 
-        if (applyGrey) {
-            HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#eeeeee"), CornerRadii.EMPTY, Insets.EMPTY)));
+        if (!isUserEvent) {
+            if (applyGrey) {
+                HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#eeeeee"), CornerRadii.EMPTY, Insets.EMPTY)));
+            }
+        }else{
+            HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#90ee90"), CornerRadii.EMPTY, Insets.EMPTY)));
         }
+
     }
 
     @Override
@@ -87,7 +88,7 @@ public class UserHubEventRowController implements Initializable {
 
     @FXML
     private void openInfoAdverseEvent() {
-        if(!ae.getText().equals("")){
+        if (!ae.getText().equals("")) {
             try {
                 startInfoAdverseEvent();
             } catch (IOException e) {

@@ -86,12 +86,11 @@ public class UserHomeAddAdverseEventController implements Initializable {
             stage = (Stage) AP_ext.getScene().getWindow();
 
             TA_text.textProperty().addListener((observable, oldValue, newValue) -> {
-                String value = newValue.strip();
-                LB_char_counter.setText(value.length() + " / 255");
-                if(value.length() >= 255){
+                LB_char_counter.setText(newValue.length() + " / 255");
+                if (newValue.length() >= 255) {
                     LB_char_counter.setTextFill(Paint.valueOf("#FF0000"));
                     TA_text.setText(TA_text.getText(0, 255));
-                }else {
+                } else {
                     LB_char_counter.setTextFill(Paint.valueOf("#4d4d4d"));
                 }
             });
@@ -125,7 +124,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     @FXML
     private void addAdverseEvent() {
-        if(CB_event_type.getValue() != null && R_severity.getRating() != 0){
+        if (CB_event_type.getValue() != null && R_severity.getRating() != 0) {
 
             AdverseEvent ae = new AdverseEvent();
             ae.setEventType(CB_event_type.getValue());
@@ -136,14 +135,14 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
             try {
                 if (ServerReference.getServer().addAdverseEvent(ae)) {
-                   addOtherEvent();
+                    addOtherEvent();
                 } else {
                     errorAlert(2);
                 }
             } catch (NotBoundException | RemoteException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             errorAlert(1);
         }
     }
@@ -187,12 +186,12 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
 
-        if(result.orElse(null) == buttonTypeContinue){
+        if (result.orElse(null) == buttonTypeContinue) {
             CB_event_type.setValue("");
             R_severity.setRating(0);
             TA_text.setText("");
             initialize(null, null);
-        }else{
+        } else {
             stage.close();
         }
     }

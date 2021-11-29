@@ -312,7 +312,7 @@ public class UserHomeController implements Initializable {
 
         HBox hBox = fxmlLoader.load();
         UserHomeItemRowController uhirc = fxmlLoader.getController();
-        uhirc.setData(hub, us.getNickname(), applyGrey);
+        uhirc.setData(hub, us, applyGrey);
         VB_hub_layout.getChildren().add(hBox);
     }
 

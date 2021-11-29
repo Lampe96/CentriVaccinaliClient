@@ -23,6 +23,7 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.Hub;
+import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.io.IOException;
@@ -52,11 +53,11 @@ public class UserHomeItemRowController implements Initializable {
 
     private Stage stage;
     private Hub hub;
-    private String nick;
+    private User us;
 
-    void setData(@NotNull Hub hub, String nick, boolean applyGrey) {
+    void setData(@NotNull Hub hub, User us, boolean applyGrey) {
         this.hub = hub;
-        this.nick = nick;
+        this.us = us;
 
         LB_hub_name.setText(hub.getNameHub());
         checkType(hub.getType());
@@ -99,7 +100,7 @@ public class UserHomeItemRowController implements Initializable {
             UserHomeInfoHubController userHomeInfoHubController = loader.getController();
 
             userHomeInfoHubController.setData(hub);
-            userHomeInfoHubController.setNick(nick);
+            userHomeInfoHubController.setUser(us);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();

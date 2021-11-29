@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.AdverseEvent;
 import org.project.models.Hub;
+import org.project.models.User;
 import org.project.server.ServerReference;
 
 import java.awt.*;
@@ -92,14 +93,16 @@ public class UserHomeInfoHubController implements Initializable {
     private Stage stage;
     private ArrayList<AdverseEvent> aae;
     private Hub hub;
-    private String nick;
+    private User us;
+    private boolean userEvent = false;
 
     void setData(Hub hub) {
         this.hub = hub;
+
     }
 
-    void setNick(String nick) {
-        this.nick = nick;
+    void setUser(User us) {
+        this.us = us;
     }
 
     @Override
@@ -117,6 +120,14 @@ public class UserHomeInfoHubController implements Initializable {
             CB_filter.getItems().addAll(FILTER);
 
             CB_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterSelection(CB_filter.getValue()));
+
+            try {
+                if (!ServerReference.getServer().checkBeforeAddEvent(hub.getNameHub(), us.getFiscalCode())) {
+                    BT_add_adverse_event.setDisable(true);
+                }
+            } catch (RemoteException | NotBoundException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -125,23 +136,25 @@ public class UserHomeInfoHubController implements Initializable {
             aae = ServerReference.getServer().fetchAllAdverseEvent(hub.getNameHub());
             aae.forEach(ae -> {
                 try {
-                    loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0);
+                    userEvent = ae.getNickname().equals(us.getNickname());
+                    loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0, userEvent);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             });
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadAdverseEvent(AdverseEvent ae, boolean applyGrey) throws IOException {
+    private void loadAdverseEvent(AdverseEvent ae, boolean applyGrey, boolean isUserEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(UserHomeController.class.getResource("fxml/user_hub_event_row.fxml"));
 
         HBox hBox = fxmlLoader.load();
         UserHubEventRowController uherc = fxmlLoader.getController();
-        uherc.setData(ae, applyGrey);
+        uherc.setData(ae, applyGrey, isUserEvent);
         VB_adverse_event_layout.getChildren().add(hBox);
     }
 
@@ -205,7 +218,7 @@ public class UserHomeInfoHubController implements Initializable {
         FXMLLoader loader = new FXMLLoader(UserHomeController.class.getResource("fxml/user_home_add_adverse_event.fxml"));
         Parent root = loader.load();
         UserHomeAddAdverseEventController userHomeAddAdverseEventController = loader.getController();
-        userHomeAddAdverseEventController.setNick(nick);
+        userHomeAddAdverseEventController.setNick(us.getNickname());
         userHomeAddAdverseEventController.setHubData(hub);
 
         Scene scene = new Scene(root);
@@ -307,7 +320,8 @@ public class UserHomeInfoHubController implements Initializable {
                 VB_adverse_event_layout.getChildren().clear();
                 aae.forEach(ae -> {
                     try {
-                        loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0);
+                        userEvent = ae.getNickname().equals(us.getNickname());
+                        loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0, userEvent);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -322,7 +336,8 @@ public class UserHomeInfoHubController implements Initializable {
 
         aaef.forEach(ae -> {
             try {
-                loadAdverseEvent(ae, aaef.indexOf(ae) % 2 == 0);
+                userEvent = ae.getNickname().equals(us.getNickname());
+                loadAdverseEvent(ae, aae.indexOf(ae) % 2 == 0, userEvent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
