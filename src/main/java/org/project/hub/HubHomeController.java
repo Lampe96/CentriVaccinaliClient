@@ -161,15 +161,15 @@ public class HubHomeController implements Initializable {
         });
 
         TF_search_citizen.textProperty().addListener((observable, oldValue, newValue) -> {
-            String value = newValue.strip().replaceAll("\\s+", "");
+            String value = newValue.strip();
             if (!value.equals("")) {
                 ArrayList<User> vuf = (ArrayList<User>) avu.stream().filter(vu ->
-                        StringUtils.containsIgnoreCase(vu.getSurname() + vu.getName() + vu.getNickname(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getSurname() + vu.getNickname() + vu.getName(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getName() + vu.getSurname() + vu.getNickname(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getName() + vu.getNickname() + vu.getSurname(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getNickname() + vu.getSurname() + vu.getName(), (value)) ||
-                                StringUtils.containsIgnoreCase(vu.getNickname() + vu.getName() + vu.getSurname(), (value))).collect(Collectors.toList());
+                        StringUtils.containsIgnoreCase(vu.getSurname() + " " + vu.getName() + " " + vu.getNickname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getSurname() + " " + vu.getNickname() + " " + vu.getName(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getName() + " " + vu.getSurname() + " " + vu.getNickname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getName() + " " + vu.getNickname() + " " + vu.getSurname(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getNickname() + " " + vu.getSurname() + " " + vu.getName(), (value)) ||
+                                StringUtils.containsIgnoreCase(vu.getNickname() + " " + vu.getName() + " " + vu.getSurname(), (value))).collect(Collectors.toList());
                 VB_vaccinated_layout.getChildren().clear();
                 vuf.forEach(vu -> {
                     try {

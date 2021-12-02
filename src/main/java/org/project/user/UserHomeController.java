@@ -142,19 +142,7 @@ public class UserHomeController implements Initializable {
             }
 
             CB_filter.getItems().addAll(FILTER);
-
-            try {
-                ahub = ServerReference.getServer().fetchAllHub();
-                ahub.forEach(hub -> {
-                    try {
-                        loadHubRow(hub, ahub.indexOf(hub) % 2 == 0);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (RemoteException | NotBoundException e) {
-                e.printStackTrace();
-            }
+            fillRow();
 
             try {
                 vcn = ServerReference.getServer().getNumberVaccinated("CITTADINO");
@@ -193,6 +181,21 @@ public class UserHomeController implements Initializable {
                 });
             }
         });
+    }
+
+    private void fillRow() {
+        try {
+            ahub = ServerReference.getServer().fetchAllHub();
+            ahub.forEach(hub -> {
+                try {
+                    loadHubRow(hub, ahub.indexOf(hub) % 2 == 0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -243,7 +246,7 @@ public class UserHomeController implements Initializable {
         rt.play();
 
         VB_hub_layout.getChildren().clear();
-        initialize(null, null);
+        fillRow();
     }
 
     @FXML
