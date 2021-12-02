@@ -33,47 +33,114 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella
+ * visualizzazione delle info dell'utente e relativo aggiornamento
+ * della dose.
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico Coglione 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class HubHomeInfoUserController implements Initializable {
 
+    /**
+     * Array utilizzato per riempire la comboBox
+     */
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
 
+    /**
+     * AnchorPane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * Immagine che funge da quit dall'applicazione
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * Field contente il nome del vaccinato
+     */
     @FXML
     private MFXTextField TF_name;
 
+    /**
+     * Field contente il cognome del vaccinato
+     */
     @FXML
     private MFXTextField TF_surname;
 
+    /**
+     * Field contente il codice fiscale del vaccinato
+     */
     @FXML
     private MFXTextField TF_fiscal_code;
 
+    /**
+     * Field contente la data di vaccinazione
+     */
     @FXML
     private MFXTextField TF_date;
 
+    /**
+     * ComboBox contente le diverse tipologie di vaccino
+     */
     @FXML
     private JFXComboBox<String> CB_vaccine;
 
+    /**
+     * Field contente il nome del centro vaccinale
+     * in cui viene vaccinato il cittadino
+     */
     @FXML
     private MFXTextField TF_name_hub;
 
+    /**
+     * AnchorPane utilizzato per inserire un tooltip
+     * sul bottone {@link #BT_update_vaccinated}
+     */
     @FXML
     private AnchorPane AP_tooltip_btn;
 
+    /**
+     * Bottone per l'aggiornamento della dose somministrata
+     */
     @FXML
     private MFXButton BT_update_vaccinated;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Informazioni dell'utente che sto visualizzando
+     */
     private User vu;
 
+    /**
+     * Utilizzato per settare l'utente di cui si vuole vizualizzare
+     * le informazioni
+     *
+     * @param vu User
+     */
     void setVaccinatedUserInfo(User vu) {
         this.vu = vu;
     }
 
+    /**
+     * Serve per inizializzare l'interfaccia riempiendo
+     * varie label tra cui: nome, cognome, codice fiscale, data,
+     * tipologia di vaccino e nome hub.
+     * Serve inoltre per riempire la combo box con le diverse tipologie
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -102,29 +169,56 @@ public class HubHomeInfoUserController implements Initializable {
         CB_vaccine.getItems().addAll(VACCINETYPE);
     }
 
+    /**
+     * Quanto premuto, il tasto exit chiude il programma
+     */
     @FXML
     private void quit() {
         stage.close();
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Legato al bottone {@link #BT_update_vaccinated} che
+     * effettua l'aggiornamento, quando consentito, dell'user settando
+     * la dose ricevuta a 2
+     */
     @FXML
     private void updateVaccinated() {
         String type = CB_vaccine.getValue();
@@ -160,6 +254,11 @@ public class HubHomeInfoUserController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per far apparire un pop-up di errore
+     * nel caso in cui modificando le informazioni si
+     * inserisca qualcosa di non valido
+     */
     private void errorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Errore");

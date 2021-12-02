@@ -45,73 +45,180 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella home del
+ * centro vaccinale.
+ * <br>
+ * Viene gestito l'avvio di altri {@link Stage} ovvero:
+ * <uo>
+ * <li>Impostazioni ({@link #startSetting()})</li>
+ * <li>About ({@link #startAbout()})</li>
+ * <li>Logout ({@link #startLogin()})</li>
+ * <li>Chart ({@link #startChart()})</li>
+ * <li>Registra nuovo vaccinato ({@link #startRegister()})</li>
+ * <li>Visualizza info vaccinato ({@link #openRegisterVaccinatedUser()})</li>
+ * </uo>
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico Coglione 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class HubHomeController implements Initializable {
 
+    /**
+     * AnchorPane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * Immagine del centro vaccinale
+     */
     @FXML
     private ImageView IV_hub;
 
+    /**
+     * Label nome del centro vaccinale
+     */
     @FXML
     private Label LB_hub_name;
 
+    /**
+     * Label indirizzo del centro vaccinale
+     */
     @FXML
     private Label LB_hub_address;
 
+    /**
+     * Bottone per aprire le impostazioni
+     */
     @FXML
     private MFXButton BT_setting;
 
+    /**
+     * Bottone per aprire la schermata about
+     */
     @FXML
     private MFXButton BT_about;
 
+    /**
+     * Bottone per eseguire il logout
+     */
     @FXML
     private MFXButton BT_logout;
 
+    /**
+     * Immagine che funge da quit dall'applicazione
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * Immagine che funge per minimizzare l'applicazione
+     */
     @FXML
     private ImageView BT_minimize;
 
+    /**
+     * Label per indicare il totale dei vaccinati
+     */
     @FXML
     private MFXLabel LB_total_vaccinated;
 
+    /**
+     * Label per indicare il totale dei vaccinati presso uno specifico centro vaccinale
+     */
     @FXML
     private MFXLabel LB_total_vaccinated_center;
 
+    /**
+     * Label per indicare il totale dei vaccinati con prima dose
+     */
     @FXML
     private MFXLabel LB_vaccinated_first;
 
+    /**
+     * Label per indicare il totale dei vaccinati con seconda dose
+     */
     @FXML
     private MFXLabel LB_vaccinated_second;
 
+    /**
+     * Bottone che apre il grafico dell'andamento vaccinale
+     */
     @FXML
     private MFXButton BT_open_chart;
 
+    /**
+     * Immagine utilizzata per ricaricare l'elenco dei vaccinati
+     */
     @FXML
     private ImageView IV_refresh;
 
+    /**
+     * Field adibito alla ricerca tra i cittadini vaccinati
+     */
     @FXML
     private MFXTextField TF_search_citizen;
 
+    /**
+     * Bottone per registrare nuovi vaccinati
+     */
     @FXML
     private MFXButton BT_registration_citizen;
 
+    /**
+     * VBox utilizzata per caricare tutti i cittadini vaccinati
+     */
     @FXML
     private VBox VB_vaccinated_layout;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+    /**
+     * Immagine selezionata per questo centro vaccinale
+     */
     private int hubImage;
+    /**
+     * Stringa utilizzata per settare il nome del centro vaccinale
+     */
     private String hubName;
+    /**
+     * Array usato per caricare tutti gli utenti vaccinati presi dal DB
+     */
     private ArrayList<User> avu;
+    /**
+     * Controller utilizzato per passare dati all'interfaccia delle impostazioni
+     */
     private HubHomeSettingsController hubHomeSettingsController;
+    /**
+     * Array utilizzato per monitorare l'andamento delle vaccinazioni
+     */
     private int[] vcn;
 
+    /**
+     * Utilizzato per settare il nome del centro
+     * vaccinale in questo controller
+     *
+     * @param hubName nome del centro vaccinale
+     */
     public void setNameHub(String hubName) {
         this.hubName = hubName;
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia riempiendo
+     * varie label tra cui: nome, indirizzo, totale vaccinati, totale
+     * prima dose, totale seconda dose, vaccinati presso il centro.
+     * Serve inoltre ad eseguire la query per ottenere la lista completa
+     * dei vaccinati presso il centro.
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
@@ -138,18 +245,7 @@ public class HubHomeController implements Initializable {
                 e.printStackTrace();
             }
 
-            try {
-                avu = ServerReference.getServer().fetchHubVaccinatedUser(hubName);
-                avu.forEach(vu -> {
-                    try {
-                        loadVaccinatedUserRow(vu, avu.indexOf(vu) % 2 == 0);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (RemoteException | NotBoundException e) {
-                e.printStackTrace();
-            }
+            getListUser();
 
             Tooltip tool = new Tooltip("Visualizza andamento vaccinazioni");
             tool.setShowDelay(new Duration(500));
@@ -191,6 +287,31 @@ public class HubHomeController implements Initializable {
         });
     }
 
+    /**
+     * Utilizzato per caricare la lista degli utenti vaccinati
+     */
+    private void getListUser() {
+        try {
+            avu = ServerReference.getServer().fetchHubVaccinatedUser(hubName);
+            avu.forEach(vu -> {
+                try {
+                    loadVaccinatedUserRow(vu, avu.indexOf(vu) % 2 == 0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Utilizzato per caricare nel VB_box le righe con i dati dei cittadini vaccinati
+     *
+     * @param vu        info per settare i campi presenti nella riga
+     * @param applyGrey usato per colorare le righe
+     * @throws IOException IOException
+     */
     private void loadVaccinatedUserRow(User vu, boolean applyGrey) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(HubHomeController.class.getResource("fxml/hub_home_row.fxml"));
@@ -202,44 +323,80 @@ public class HubHomeController implements Initializable {
         VB_vaccinated_layout.getChildren().add(hBox);
     }
 
+    /**
+     * Utilizzato per ridurre la finestra ad icona
+     */
     @FXML
     private void minimize() {
         stage.setIconified(true);
     }
 
+    /**
+     * Utilizzato per scurire l'icona minimize
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleMinimize() {
         setDarkHover(BT_minimize);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleMinimize() {
         resetDarkExit(BT_minimize);
     }
 
+    /**
+     * Quanto premuto, il tasto exit chiude il programma
+     */
     @FXML
     private void quit() {
         System.exit(0);
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Utilizzato per ricaricare la lista dei vaccinati, andando a richiamare il metodo
+     */
     @FXML
     private void refreshVaccinatedList() {
         RotateTransition rt = new RotateTransition(Duration.seconds(1), IV_refresh);
@@ -250,19 +407,33 @@ public class HubHomeController implements Initializable {
         rt.play();
 
         VB_vaccinated_layout.getChildren().clear();
-        initialize(null, null);
+        TF_search_citizen.setText("");
+        getListUser();
     }
 
+    /**
+     * Utilizzato per scurire l'icona refresh
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleRefresh() {
         setDarkHover(IV_refresh);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleRefresh() {
         resetDarkExit(IV_refresh);
     }
 
+    /**
+     * Dopo aver chiamato il metodo startSetting, rimane in attesa. Una volta
+     * chiuso lo stage setting, va ad aggiornare le eventuali modifiche o a eliminare
+     * l'account che richiama {@link #startSetting()}
+     */
     @FXML
     private void openSetting() {
         try {
@@ -284,6 +455,9 @@ public class HubHomeController implements Initializable {
         }
     }
 
+    /**
+     * Avvia l'interfaccia delle impostazioni
+     */
     private void startSetting() throws IOException {
         FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_settings.fxml"));
         Parent root = loader.load();
@@ -318,6 +492,9 @@ public class HubHomeController implements Initializable {
         stage.showAndWait();
     }
 
+    /**
+     * Utilizzato per effettuare il logout e tornare alla schermata di login
+     */
     @FXML
     private void logout() {
         if (logoutAlert()) {
@@ -329,6 +506,12 @@ public class HubHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per chiedere all'utente attraverso un Alert se è sicuro di voler
+     * effettuare il logout
+     *
+     * @return true se l'utente clicca su ok
+     */
     private boolean logoutAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
@@ -372,6 +555,11 @@ public class HubHomeController implements Initializable {
         return result.orElse(null) == buttonTypeOk;
     }
 
+    /**
+     * Utilizzato per mostrare la schermata di login
+     *
+     * @throws IOException IOException
+     */
     private void startLogin() throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
         Stage stage = new Stage();
@@ -399,6 +587,10 @@ public class HubHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per mostrare la schermata dell'about
+     * che richiama {@link #startAbout()}
+     */
     @FXML
     private void openAbout() {
         try {
@@ -408,6 +600,11 @@ public class HubHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per mostrare l'about
+     *
+     * @throws IOException IOException
+     */
     private void startAbout() throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(AboutController.class.getResource("fxml/about.fxml"))));
         Stage stage = new Stage();
@@ -436,6 +633,10 @@ public class HubHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per mostrare la schermata del chart
+     * che richiama {@link #startChart()}
+     */
     @FXML
     private void openChart() {
         try {
@@ -445,6 +646,11 @@ public class HubHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per mostrare il grafico dell'andamento vaccinale
+     *
+     * @throws IOException IOException
+     */
     private void startChart() throws IOException {
         FXMLLoader loader = new FXMLLoader(ChartController.class.getResource("fxml/chart.fxml"));
         Parent root = loader.load();
@@ -479,6 +685,9 @@ public class HubHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per mostrare la schermata per registrare un nuovo vaccinato
+     */
     @FXML
     private void openRegisterVaccinatedUser() {
         try {
@@ -490,6 +699,13 @@ public class HubHomeController implements Initializable {
         }
     }
 
+
+    /**
+     * Avvia la schermata di registrazione di un nuovo
+     * vaccinato
+     *
+     * @throws IOException IOException
+     */
     private void startRegister() throws IOException {
         FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_registration_new_vaccinated.fxml"));
         Parent root = loader.load();
