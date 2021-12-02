@@ -8,9 +8,10 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.user.UserHomeController">
     <AnchorPane layoutX="178.0" layoutY="79.0" prefHeight="650.0" prefWidth="900.0"
                 style="-fx-background-radius: 3em; -fx-border-color: linear-gradient(to right top, #fc4a1a, #ffdf00); -fx-border-width: 20; -fx-border-radius: 2em; -fx-background-color: white;"
@@ -47,8 +48,7 @@
                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                            AnchorPane.topAnchor="52.0">
                         <font>
-                            <Font name="System Bold Italic"
-                                  size="13.0"/>
+                            <Font name="System Bold Italic" size="13.0"/>
                         </font>
                     </Label>
                 </AnchorPane>
@@ -141,9 +141,7 @@
                 <Label layoutX="14.0" layoutY="36.0" text="Totale vaccinati:" AnchorPane.leftAnchor="14.0"
                        AnchorPane.topAnchor="36.0">
                     <font>
-                        <Font
-                                name="System Italic"
-                                size="16.0"/>
+                        <Font name="System Italic" size="16.0"/>
                     </font>
                 </Label>
                 <MFXLabel fx:id="LB_total_vaccinated" labelStyle="STYLE2" layoutX="270.0" layoutY="35.0"
@@ -151,8 +149,7 @@
                 <Label layoutX="14.0" layoutY="76.0" text="Vaccinati prima dose:" AnchorPane.leftAnchor="14.0"
                        AnchorPane.topAnchor="76.0">
                     <font>
-                        <Font name="System Italic"
-                              size="16.0"/>
+                        <Font name="System Italic" size="16.0"/>
                     </font>
                 </Label>
                 <MFXLabel fx:id="LB_vaccinated_first" labelStyle="STYLE2" layoutX="270.0" layoutY="76.0"
@@ -160,8 +157,7 @@
                 <Label layoutX="14.0" layoutY="117.0" text="Vaccinati seconda dose:" AnchorPane.leftAnchor="14.0"
                        AnchorPane.topAnchor="117.0">
                     <font>
-                        <Font  name="System Italic"
-                               size="16.0"/>
+                        <Font name="System Italic" size="16.0"/>
                     </font>
                 </Label>
                 <MFXLabel fx:id="LB_vaccinated_second" labelStyle="STYLE2" layoutX="270.0" layoutY="117.0"

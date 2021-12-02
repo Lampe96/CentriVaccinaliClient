@@ -38,7 +38,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
     private Stage stage;
     private AdverseEvent ae;
 
-    void setData(AdverseEvent ae){
+    void setData(AdverseEvent ae) {
         this.ae = ae;
     }
 
@@ -75,4 +75,3 @@ public class UserHomeShowAdverseEventController implements Initializable {
         iv.setEffect(null);
     }
 }
-

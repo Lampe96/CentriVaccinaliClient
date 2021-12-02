@@ -12,16 +12,6 @@
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.shared.ChartController">
     <AnchorPane prefHeight="400.0" prefWidth="500.0"
                 style="-fx-background-color: #eeeeee; -fx-border-color: linear-gradient(to right top, #fc4a1a, #ffdf00); -fx-border-width: 4; -fx-border-radius: 1.8em; -fx-background-radius: 2em;">
-        <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="14.0" layoutY="14.0" preserveRatio="true">
-            <Image url="@../../drawable/primula.png"/>
-        </ImageView>
-        <ImageView fx:id="BT_quit" layoutX="460.0" layoutY="16.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
-                   onMouseExited="#restoreStyleQuit" preserveRatio="true">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-            <Image url="@../../drawable/quit.png"/>
-        </ImageView>
         <StackedBarChart fx:id="barChart" animated="false" stylesheets="@../chart.css" title="Andamento vaccianzioni"
                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                          AnchorPane.topAnchor="25.0">
@@ -41,5 +31,15 @@
                 </NumberAxis>
             </yAxis>
         </StackedBarChart>
+        <ImageView fitHeight="40.0" fitWidth="45.0" layoutX="14.0" layoutY="14.0" preserveRatio="true">
+            <Image url="@../../drawable/primula.png"/>
+        </ImageView>
+        <ImageView fx:id="BT_quit" layoutX="460.0" layoutY="16.0" onMouseClicked="#quit" onMouseEntered="#darkStyleQuit"
+                   onMouseExited="#restoreStyleQuit" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <Image url="@../../drawable/quit.png"/>
+        </ImageView>
     </AnchorPane>
 </AnchorPane>

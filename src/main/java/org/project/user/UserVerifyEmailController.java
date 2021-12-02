@@ -26,30 +26,43 @@ public class UserVerifyEmailController implements Initializable {
 
     private final Timer HIDDENTIMER = new Timer();
     private final Timer VISIBLETIMER = new Timer();
+
     @FXML
     private AnchorPane AP_ext;
+
     @FXML
     private ImageView BT_quit;
+
     @FXML
     private TextField TF_one;
+
     @FXML
     private TextField TF_two;
+
     @FXML
     private TextField TF_three;
+
     @FXML
     private TextField TF_four;
+
     @FXML
     private TextField TF_five;
+
     @FXML
     private TextField TF_six;
+
     @FXML
     private MFXButton BT_confirmed;
+
     @FXML
     private Label BT_new_code;
+
     @FXML
     private Label LB_error_code;
+
     @FXML
     private Label LB_timer;
+
     private Stage stage;
     private boolean resend = true;
     private int countdown;

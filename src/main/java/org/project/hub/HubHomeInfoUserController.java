@@ -7,10 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -20,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.login.LoginMainController;
@@ -64,6 +62,9 @@ public class HubHomeInfoUserController implements Initializable {
     private MFXTextField TF_name_hub;
 
     @FXML
+    private AnchorPane AP_tooltip_btn;
+
+    @FXML
     private MFXButton BT_update_vaccinated;
 
     private Stage stage;
@@ -88,14 +89,17 @@ public class HubHomeInfoUserController implements Initializable {
             TF_name_hub.setText(vu.getHubName());
 
             if (vu.getDose() > 1) {
-                CB_vaccine.disableProperty().setValue(true);
-                TF_name_hub.disableProperty().setValue(true);
-                BT_update_vaccinated.disableProperty().setValue(true);
+                CB_vaccine.setDisable(true);
+                TF_name_hub.setDisable(true);
+                BT_update_vaccinated.setDisable(true);
+
+                Tooltip tool = new Tooltip("Questo cittadino ha completato\nil ciclo vaccinale");
+                tool.setShowDelay(new Duration(500));
+                Tooltip.install(AP_tooltip_btn, tool);
             }
         });
 
         CB_vaccine.getItems().addAll(VACCINETYPE);
-
     }
 
     @FXML

@@ -7,10 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
+import javafx.scene.control.*;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -20,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
@@ -48,24 +46,34 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
     private final User vaccinatedUser = new User();
+
     @FXML
     private AnchorPane AP_ext;
+
     @FXML
     private ImageView BT_quit;
+
     @FXML
     private MFXTextField TF_name;
+
     @FXML
     private MFXTextField TF_surname;
+
     @FXML
     private MFXTextField TF_fiscal_code;
+
     @FXML
     private ImageView IV_calculator_fiscal_code;
+
     @FXML
     private JFXComboBox<String> CB_vaccine;
+
     @FXML
     private MFXTextField TF_date;
+
     @FXML
     private MFXButton BT_sing_up_new_vaccinated;
+
     private Stage stage;
     private String hubName;
 
@@ -75,11 +83,18 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         TF_date.setText(LocalDate.now().format(formatter));
+
         CB_vaccine.getItems().addAll(VACCINETYPE);
+
+        BT_sing_up_new_vaccinated.requestFocus();
+
+        Tooltip tool = new Tooltip("Calcola codice fiscale");
+        tool.setShowDelay(new Duration(500));
+        Tooltip.install(IV_calculator_fiscal_code, tool);
     }
 
     @FXML

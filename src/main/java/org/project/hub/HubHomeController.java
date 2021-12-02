@@ -150,6 +150,14 @@ public class HubHomeController implements Initializable {
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
             }
+
+            Tooltip tool = new Tooltip("Visualizza andamento vaccinazioni");
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(BT_open_chart, tool);
+
+            Tooltip tool1 = new Tooltip("Registra nuovo vaccinato");
+            tool1.setShowDelay(new Duration(500));
+            Tooltip.install(BT_registration_citizen, tool1);
         });
 
         TF_search_citizen.textProperty().addListener((observable, oldValue, newValue) -> {

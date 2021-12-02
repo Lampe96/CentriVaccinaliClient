@@ -27,7 +27,6 @@ import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.project.UserType;
-import org.project.guest.GuestHomeController;
 import org.project.hub.HubHomeController;
 import org.project.hub.HubSignUpController;
 import org.project.server.ServerReference;
@@ -94,6 +93,8 @@ public class LoginMainController implements Initializable {
                 stage.setX(xPos);
                 stage.setY(yPos);
             }
+
+            initializeServer();
         });
 
         File rememberMe = new File(getPathRememberMe());
@@ -130,6 +131,15 @@ public class LoginMainController implements Initializable {
                     yPos = screenBounds.getMinY() + ((screenBounds.getMaxY() - screenBounds.getMinY() - windowHeight) / 2);
                 }
             }
+        }
+    }
+
+    private void initializeServer() {
+        try {
+            ServerReference.initializeServer();
+        } catch (NotBoundException | RemoteException e) {
+            e.printStackTrace();
+            errorNoConnection();
         }
     }
 
@@ -234,11 +244,17 @@ public class LoginMainController implements Initializable {
             HubHomeController hubHomeController = loader.getController();
             hubHomeController.setNameHub(TF_email.getText().strip());
             scene = new Scene(root);
-        } else {
+        } else if (userType == UserType.USER) {
             FXMLLoader loader = new FXMLLoader(UserHomeController.class.getResource("fxml/user_home.fxml"));
             Parent root = loader.load();
             UserHomeController userHomeController = loader.getController();
             userHomeController.setEmail(TF_email.getText().strip());
+            scene = new Scene(root);
+        } else {
+            FXMLLoader loader = new FXMLLoader(UserHomeController.class.getResource("fxml/user_home.fxml"));
+            Parent root = loader.load();
+            UserHomeController userHomeController = loader.getController();
+            userHomeController.setEmail("Guest");
             scene = new Scene(root);
         }
 
@@ -276,7 +292,7 @@ public class LoginMainController implements Initializable {
     @FXML
     private void loginGuest() {
         try {
-            scene.setRoot(FXMLLoader.load(Objects.requireNonNull(GuestHomeController.class.getResource("fxml/guest_home.fxml"))));
+            startRightHomeStage(UserType.GUEST);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -298,6 +314,48 @@ public class LoginMainController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void errorNoConnection() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Connessione assente");
+        alert.setHeaderText("Connessione assente");
+        alert.setContentText("Nessuna connessione riprova");
+        alert.initStyle(StageStyle.TRANSPARENT);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.initOwner(stage);
+
+        ButtonType buttonTypeQuit = new ButtonType("Esci", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeQuit);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.setPrefSize(290, 125);
+        dialogPane.lookupButton(buttonTypeQuit).setId("btnCancel");
+        dialogPane.getStylesheets().add(Objects.requireNonNull(HubSignUpController.class.getResource("alert_error.css")).toExternalForm());
+        dialogPane.getStyleClass().add("alert");
+
+        Scene dialogScene = dialogPane.getScene();
+        dialogScene.setFill(Color.TRANSPARENT);
+
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
+        dialogScene.setOnMousePressed(mouseEvent -> {
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
+        });
+
+        dialogScene.setOnMouseDragged(mouseEvent -> {
+            dialogScene.getWindow().setX(mouseEvent.getScreenX() - xOffset.get());
+            dialogScene.getWindow().setY(mouseEvent.getScreenY() - yOffset.get());
+        });
+
+        Stage dialogStage = (Stage) dialogScene.getWindow();
+        dialogStage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
+
+        alert.showAndWait();
+        System.exit(0);
     }
 
     @Nullable

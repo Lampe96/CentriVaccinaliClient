@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.User;
@@ -31,6 +33,7 @@ import java.net.URL;
 import java.rmi.NotBoundException;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class HubHomeItemRowController implements Initializable {
 
@@ -53,7 +56,6 @@ public class HubHomeItemRowController implements Initializable {
     private ImageView IV_event;
 
     private Stage stage;
-    private double xOffset, yOffset;
     private String hubName;
     private User vu;
 
@@ -65,8 +67,14 @@ public class HubHomeItemRowController implements Initializable {
 
         if (vaccinatedUser.getDose() == 1) {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_1.png"))));
+            Tooltip tool = new Tooltip("Registra seconda dose");
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(HB_ext, tool);
         } else {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_2.png"))));
+            Tooltip tool1 = new Tooltip("Visualizza info cittadino");
+            tool1.setShowDelay(new Duration(500));
+            Tooltip.install(HB_ext, tool1);
         }
 
         if (vaccinatedUser.getEvent() == null) {
@@ -131,14 +139,17 @@ public class HubHomeItemRowController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
 
+            AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+            AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
             scene.setOnMousePressed(mouseEvent -> {
-                xOffset = mouseEvent.getSceneX();
-                yOffset = mouseEvent.getSceneY();
+                xOffset.set(mouseEvent.getSceneX());
+                yOffset.set(mouseEvent.getSceneY());
             });
 
             scene.setOnMouseDragged(mouseEvent -> {
-                stage.setX(mouseEvent.getScreenX() - xOffset);
-                stage.setY(mouseEvent.getScreenY() - yOffset);
+                stage.setX(mouseEvent.getScreenX() - xOffset.get());
+                stage.setY(mouseEvent.getScreenY() - yOffset.get());
             });
 
             stage.showAndWait();

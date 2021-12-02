@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -85,6 +86,9 @@ public class UserHomeInfoHubController implements Initializable {
     private JFXComboBox<String> CB_filter;
 
     @FXML
+    private AnchorPane AP_tooltip_btn;
+
+    @FXML
     private MFXButton BT_add_adverse_event;
 
     @FXML
@@ -98,7 +102,6 @@ public class UserHomeInfoHubController implements Initializable {
 
     void setData(Hub hub) {
         this.hub = hub;
-
     }
 
     void setUser(User us) {
@@ -122,12 +125,34 @@ public class UserHomeInfoHubController implements Initializable {
             CB_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterSelection(CB_filter.getValue()));
 
             try {
-                if (!ServerReference.getServer().checkBeforeAddEvent(hub.getNameHub(), us.getFiscalCode())) {
+                if (us.getName().equals("Guest")) {
                     BT_add_adverse_event.setDisable(true);
+
+                    Tooltip tool3 = new Tooltip("Registrati per poter\nusare questa funzione");
+                    tool3.setShowDelay(new Duration(500));
+                    Tooltip.install(AP_tooltip_btn, tool3);
+                } else if (!ServerReference.getServer().checkBeforeAddEvent(hub.getNameHub(), us.getFiscalCode())) {
+                    BT_add_adverse_event.setDisable(true);
+
+                    Tooltip tool3 = new Tooltip("Non sei stato vaccinato\npresso questo centro");
+                    tool3.setShowDelay(new Duration(500));
+                    Tooltip.install(AP_tooltip_btn, tool3);
                 }
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
             }
+
+            Tooltip tool = new Tooltip(hub.getNameHub());
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(TF_hub_name, tool);
+
+            Tooltip tool1 = new Tooltip(hub.getAddress().toStringCustom());
+            tool1.setShowDelay(new Duration(500));
+            Tooltip.install(TF_address, tool1);
+
+            Tooltip tool2 = new Tooltip("Visualizza sulla mappa");
+            tool2.setShowDelay(new Duration(500));
+            Tooltip.install(IV_maps, tool2);
         });
     }
 

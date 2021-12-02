@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class UserHomeAddAdverseEventController implements Initializable {
 
-    private final static String[] TYPE = {
+    private final static String[] TYPEAE = {
             "MAL DI TESTA",
             "FEBBRE",
             "DOLORI MUSCOLARI",
@@ -85,17 +85,19 @@ public class UserHomeAddAdverseEventController implements Initializable {
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
 
+            CB_event_type.getItems().addAll(TYPEAE);
+
             TA_text.textProperty().addListener((observable, oldValue, newValue) -> {
-                LB_char_counter.setText(newValue.length() + " / 255");
-                if (newValue.length() >= 255) {
+                String value = newValue.strip();
+                int vLength = value.length();
+                LB_char_counter.setText(vLength + " / 255");
+                if (vLength >= 255) {
                     LB_char_counter.setTextFill(Paint.valueOf("#FF0000"));
                     TA_text.setText(TA_text.getText(0, 255));
                 } else {
                     LB_char_counter.setTextFill(Paint.valueOf("#4d4d4d"));
                 }
             });
-
-            CB_event_type.getItems().addAll(TYPE);
         });
     }
 

@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.AdverseEvent;
@@ -45,9 +47,8 @@ public class UserHubEventRowController implements Initializable {
     @FXML
     private ImageView IV_text;
 
-    private AdverseEvent ae;
-
     private Stage stage;
+    private AdverseEvent ae;
 
     public void setData(@NotNull AdverseEvent ae, boolean applyGrey, boolean isUserEvent) {
         this.ae = ae;
@@ -57,6 +58,9 @@ public class UserHubEventRowController implements Initializable {
 
         if (!ae.getText().equals("")) {
             IV_text.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/checkAe.png"))));
+            Tooltip tool = new Tooltip("Visualizza questo evento avverso");
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(HB_ext, tool);
         } else {
             IV_text.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/x_button.png"))));
         }
@@ -65,10 +69,9 @@ public class UserHubEventRowController implements Initializable {
             if (applyGrey) {
                 HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#eeeeee"), CornerRadii.EMPTY, Insets.EMPTY)));
             }
-        }else{
+        } else {
             HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#90ee90"), CornerRadii.EMPTY, Insets.EMPTY)));
         }
-
     }
 
     @Override

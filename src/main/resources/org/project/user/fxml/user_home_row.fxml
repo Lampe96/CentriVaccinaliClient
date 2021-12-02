@@ -31,9 +31,9 @@
         </font>
     </Label>
     <Label fx:id="LB_avg_adverse_event" alignment="CENTER" layoutX="381.0" layoutY="11.0" prefWidth="100.0"
-           style="-fx-background-color: transparent;" text="Provaaaaaaaaaaaaaaaaaa">
+           style="-fx-background-color: transparent;" text="4.5">
         <font>
-            <Font name="Corbel" size="16.0"/>
+            <Font size="16.0"/>
         </font>
     </Label>
     <cursor>

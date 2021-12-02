@@ -9,26 +9,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
-import org.project.server.ServerReference;
 
 import java.io.IOException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class LoginMain extends Application {
 
-    private double xOffset, yOffset;
-
     public static void main(String[] args) {
-        try {
-            ServerReference.initializeServer();
-            launch();
-        } catch (RemoteException | NotBoundException e) {
-            e.printStackTrace();
-            //TODO poi togliere questo launch dal catch e mettere un alert per no connessione
-            launch();
-        }
+        launch();
     }
 
     @Override
@@ -42,14 +31,17 @@ public class LoginMain extends Application {
         stage.getIcons().add(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/primula.png"))));
         stage.show();
 
+        AtomicReference<Double> xOffset = new AtomicReference<>((double) 0);
+        AtomicReference<Double> yOffset = new AtomicReference<>((double) 0);
+
         scene.setOnMousePressed(mouseEvent -> {
-            xOffset = mouseEvent.getSceneX();
-            yOffset = mouseEvent.getSceneY();
+            xOffset.set(mouseEvent.getSceneX());
+            yOffset.set(mouseEvent.getSceneY());
         });
 
         scene.setOnMouseDragged(mouseEvent -> {
-            stage.setX(mouseEvent.getScreenX() - xOffset);
-            stage.setY(mouseEvent.getScreenY() - yOffset);
+            stage.setX(mouseEvent.getScreenX() - xOffset.get());
+            stage.setY(mouseEvent.getScreenY() - yOffset.get());
         });
     }
 }

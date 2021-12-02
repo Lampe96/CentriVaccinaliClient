@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
@@ -166,8 +167,11 @@ public class UserSignUpController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
 
+            Tooltip tool = new Tooltip("Calcola codice fiscale");
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(IV_calculator_fiscal_code, tool);
+        });
 
         for (String s : USERFIELD) {
             saveOk.put(s, false);
@@ -627,5 +631,3 @@ public class UserSignUpController implements Initializable {
         stage.showAndWait();
     }
 }
-
-

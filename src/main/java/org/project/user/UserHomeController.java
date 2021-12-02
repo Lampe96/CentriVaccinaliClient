@@ -125,12 +125,20 @@ public class UserHomeController implements Initializable {
         Platform.runLater(() -> {
             stage = (Stage) AP_ext.getScene().getWindow();
 
-            try {
-                us = ServerReference.getServer().getUser(email);
-                LB_user_name.setText(us.getName() + " " + us.getSurname());
-                LB_user_nickname.setText(us.getNickname());
-            } catch (RemoteException | NotBoundException e) {
-                e.printStackTrace();
+            if (!email.equals("Guest")) {
+                try {
+                    us = ServerReference.getServer().getUser(email);
+                    LB_user_name.setText(us.getName() + " " + us.getSurname());
+                    LB_user_nickname.setText(us.getNickname());
+                    IV_user.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/user_icon_" + us.getImage() + ".png"))));
+                } catch (RemoteException | NotBoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                LB_user_name.setText("Ospite");
+                LB_user_nickname.setText("");
+                IV_user.setImage(new Image(Objects.requireNonNull(UserType.class.getResourceAsStream("drawable/user_icon_placeholder.png"))));
+                BT_setting.setDisable(true);
             }
 
             CB_filter.getItems().addAll(FILTER);
@@ -156,11 +164,34 @@ public class UserHomeController implements Initializable {
             } catch (RemoteException | NotBoundException e) {
                 e.printStackTrace();
             }
+
+            Tooltip tool = new Tooltip("Visualizza andamento vaccinazioni");
+            tool.setShowDelay(new Duration(500));
+            Tooltip.install(BT_open_chart, tool);
         });
 
         TF_search_hub.textProperty().addListener((observable, oldValue, newValue) -> {
-            String value = newValue.strip().replaceAll("\\s+", "");
-            filterSelection(CB_filter.getValue(), value);
+            String value = newValue.strip();
+            if (CB_filter.getValue() != null) {
+                filterSelection(CB_filter.getValue(), value);
+            } else {
+                ArrayList<Hub> vuf = (ArrayList<Hub>) ahub.stream().filter(hub ->
+                        StringUtils.containsIgnoreCase(hub.getNameHub() + " " + hub.getAddress().getCity() + " " + hub.getType(), (value)) ||
+                                StringUtils.containsIgnoreCase(hub.getNameHub() + " " + hub.getType() + " " + hub.getAddress().getCity(), (value)) ||
+                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + " " + hub.getNameHub() + " " + hub.getType(), (value)) ||
+                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + " " + hub.getType() + " " + hub.getNameHub(), (value)) ||
+                                StringUtils.containsIgnoreCase(hub.getType() + " " + hub.getNameHub() + " " + hub.getAddress().getCity(), (value)) ||
+                                StringUtils.containsIgnoreCase(hub.getType() + " " + hub.getAddress().getCity() + " " + hub.getNameHub(), (value))).collect(Collectors.toList());
+                VB_hub_layout.getChildren().clear();
+
+                vuf.forEach(vu -> {
+                    try {
+                        loadHubRow(vu, ahub.indexOf(vu) % 2 == 0);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         });
     }
 
@@ -312,7 +343,13 @@ public class UserHomeController implements Initializable {
 
         HBox hBox = fxmlLoader.load();
         UserHomeItemRowController uhirc = fxmlLoader.getController();
-        uhirc.setData(hub, us, applyGrey);
+        if (!email.equals("Guest")) {
+            uhirc.setData(hub, us, applyGrey);
+        } else {
+            User guest = new User();
+            guest.setName("Guest");
+            uhirc.setData(hub, guest, applyGrey);
+        }
         VB_hub_layout.getChildren().add(hBox);
     }
 
@@ -474,19 +511,19 @@ public class UserHomeController implements Initializable {
 
             case "COMUNE-TIPOLOGIA":
                 vuf = (ArrayList<Hub>) ahub.stream().filter(hub ->
-                        StringUtils.containsIgnoreCase(hub.getAddress().getCity() + hub.getType(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getType() + hub.getAddress().getCity(), (TFvalue))).collect(Collectors.toList());
+                        StringUtils.containsIgnoreCase(hub.getAddress().getCity() + " " + hub.getType(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getType() + " " + hub.getAddress().getCity(), (TFvalue))).collect(Collectors.toList());
                 VB_hub_layout.getChildren().clear();
                 break;
 
             default:
                 vuf = (ArrayList<Hub>) ahub.stream().filter(hub ->
-                        StringUtils.containsIgnoreCase(hub.getNameHub() + hub.getAddress().getCity() + hub.getType(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getNameHub() + hub.getType() + hub.getAddress().getCity(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + hub.getNameHub() + hub.getType(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + hub.getType() + hub.getNameHub(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getType() + hub.getNameHub() + hub.getAddress().getCity(), (TFvalue)) ||
-                                StringUtils.containsIgnoreCase(hub.getType() + hub.getAddress().getCity() + hub.getNameHub(), (TFvalue))).collect(Collectors.toList());
+                        StringUtils.containsIgnoreCase(hub.getNameHub() + " " + hub.getAddress().getCity() + " " + hub.getType(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getNameHub() + " " + hub.getType() + " " + hub.getAddress().getCity(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + " " + hub.getNameHub() + " " + hub.getType(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getAddress().getCity() + " " + hub.getType() + " " + hub.getNameHub(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getType() + " " + hub.getNameHub() + hub.getAddress().getCity(), (TFvalue)) ||
+                                StringUtils.containsIgnoreCase(hub.getType() + " " + hub.getAddress().getCity() + " " + hub.getNameHub(), (TFvalue))).collect(Collectors.toList());
                 VB_hub_layout.getChildren().clear();
                 break;
         }

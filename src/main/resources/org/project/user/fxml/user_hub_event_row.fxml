@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
-<HBox fx:id="HB_ext" alignment="CENTER_LEFT" onMouseClicked="#openInfoAdverseEvent" onMouseEntered="#darkStyleRow" onMouseExited="#restoreStyleRow" prefWidth="430.0" style="-fx-border-color: #4d4d4d; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.project.user.UserHubEventRowController">
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="HB_ext" alignment="CENTER_LEFT" onMouseClicked="#openInfoAdverseEvent"
+      onMouseEntered="#darkStyleRow" onMouseExited="#restoreStyleRow" prefWidth="430.0"
+      style="-fx-border-color: #4d4d4d; -fx-border-radius: 5;" xmlns="http://javafx.com/javafx/15.0.1"
+      fx:controller="org.project.user.UserHubEventRowController">
     <cursor>
-        <Cursor fx:constant="HAND" />
+        <Cursor fx:constant="HAND"/>
     </cursor>
-    <Label fx:id="LB_typology" prefWidth="220.0" style="-fx-background-color: transparent;" text="Provaaaaaaaaaaaaaaaaaa">
+    <Label fx:id="LB_typology" prefWidth="220.0" style="-fx-background-color: transparent;"
+           text="Provaaaaaaaaaaaaaaaaaa">
         <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Corbel" size="16.0"/>
         </font>
         <HBox.margin>
-            <Insets left="10.0" />
+            <Insets left="10.0"/>
         </HBox.margin>
     </Label>
-    <Label fx:id="LB_severity" prefWidth="120.0" style="-fx-background-color: transparent;" text="Provaaaaaaaaaaaaaaaaaa">
+    <Label fx:id="LB_severity" prefWidth="120.0" style="-fx-background-color: transparent;"
+           text="Provaaaaaaaaaaaaaaaaaa">
         <font>
-            <Font name="Corbel" size="16.0" />
+            <Font name="Corbel" size="16.0"/>
         </font>
     </Label>
     <HBox alignment="CENTER" prefWidth="120.0" style="-fx-background-color: transparent;">
         <HBox.margin>
-            <Insets />
+            <Insets/>
         </HBox.margin>
         <padding>
-            <Insets bottom="3.0" top="3.0" />
+            <Insets bottom="3.0" top="3.0"/>
         </padding>
         <ImageView fx:id="IV_text" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
             <HBox.margin>
-                <Insets left="2.0" />
+                <Insets left="2.0"/>
             </HBox.margin>
-            <Image url="@../../drawable/warn.png" />
+            <Image url="@../../drawable/warn.png"/>
         </ImageView>
     </HBox>
 </HBox>

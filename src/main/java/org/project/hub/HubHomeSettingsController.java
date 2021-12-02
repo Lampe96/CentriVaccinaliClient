@@ -40,46 +40,65 @@ public class HubHomeSettingsController implements Initializable {
 
     @FXML
     public AnchorPane AP_ext;
-    boolean openDelete = false;
+
     @FXML
     private ImageView BT_quit;
+
     @FXML
     private ImageView IV_one;
+
     @FXML
     private ImageView IV_two;
+
     @FXML
     private ImageView IV_three;
+
     @FXML
     private ImageView IV_four;
+
     @FXML
     private ImageView IV_five;
+
     @FXML
     private ImageView IV_six;
+
     @FXML
     private ImageView IV_seven;
+
     @FXML
     private ImageView IV_eight;
+
     @FXML
     private ImageView IV_nine;
+
     @FXML
     private MFXButton BT_delete;
+
     @FXML
     private MFXPasswordField TF_old_password;
+
     @FXML
     private Label LB_error_password;
+
     @FXML
     private Label LB_success_change;
+
     @FXML
     private MFXPasswordField TF_new_password;
+
     @FXML
     private MFXPasswordField TF_confirm_password;
+
     @FXML
     private MFXButton BT_confirm_old_pwd;
+
     @FXML
     private MFXButton BT_confirm_new_pwd;
+
     private Stage stage;
     private int selectedImage;
     private String hubName;
+    private boolean openDelete = false;
     private HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
 
     void setHubName(String hubName) {
@@ -136,7 +155,10 @@ public class HubHomeSettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
+            BT_confirm_old_pwd.requestFocus();
+        });
     }
 
     @FXML

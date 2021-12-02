@@ -57,14 +57,16 @@ public class UserAlreadyVaccinatedController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
+        Platform.runLater(() -> {
+            stage = (Stage) AP_ext.getScene().getWindow();
+            BT_confirmed.requestFocus();
+        });
     }
 
     @FXML
     private void quit() {
         stage.close();
     }
-
 
     @FXML
     private void darkStyleQuit() {

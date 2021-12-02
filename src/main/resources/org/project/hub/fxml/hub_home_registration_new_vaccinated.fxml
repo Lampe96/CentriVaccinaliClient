@@ -7,7 +7,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="AP_ext" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity"
             minWidth="-Infinity" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/15.0.1"
             fx:controller="org.project.hub.HubHomeRegistrationNewVaccinatedController">
@@ -84,7 +85,7 @@
                     <Image url="@../../drawable/vaccine.png"/>
                 </ImageView>
                 <JFXComboBox fx:id="CB_vaccine" focusColor="#886bf2" layoutX="43.0" layoutY="233.0" prefWidth="195.0"
-                             promptText="Vaccino"/>
+                             promptText="Vaccino" stylesheets="@../hub_sign_up.css"/>
             </AnchorPane>
         </MFXScrollPane>
         <MFXButton fx:id="BT_sing_up_new_vaccinated" buttonType="RAISED" onMouseClicked="#registerNewVaccinated"

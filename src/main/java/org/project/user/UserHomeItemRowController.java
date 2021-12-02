@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
 import org.project.UserType;
 import org.project.models.Hub;
@@ -62,7 +64,17 @@ public class UserHomeItemRowController implements Initializable {
         LB_hub_name.setText(hub.getNameHub());
         checkType(hub.getType());
         LB_city.setText(hub.getAddress().getCity());
-        LB_avg_adverse_event.setText(String.valueOf(0));
+
+        try {
+            double avg = Math.round(ServerReference.getServer().getAvgAdverseEvent(hub.getNameHub()) * 10.0) / 10.0;
+            if (avg > 0.0) {
+                LB_avg_adverse_event.setText(String.valueOf(avg));
+            } else {
+                LB_avg_adverse_event.setText("Nessun e.a.");
+            }
+        } catch (RemoteException | NotBoundException e) {
+            e.printStackTrace();
+        }
 
         if (applyGrey) {
             HB_ext.setBackground(new Background(new BackgroundFill(Paint.valueOf("#eeeeee"), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -71,15 +83,11 @@ public class UserHomeItemRowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Platform.runLater(() -> {
-            stage = (Stage) HB_ext.getScene().getWindow();
+        Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
 
-            try {
-                LB_avg_adverse_event.setText(String.valueOf(ServerReference.getServer().getAvgAdverseEvent(hub.getNameHub())));
-            } catch (RemoteException | NotBoundException e) {
-                e.printStackTrace();
-            }
-        });
+        Tooltip tool = new Tooltip("Visualizza info centro vaccinale");
+        tool.setShowDelay(new Duration(500));
+        Tooltip.install(HB_ext, tool);
     }
 
     @FXML
@@ -149,4 +157,3 @@ public class UserHomeItemRowController implements Initializable {
         }
     }
 }
-
