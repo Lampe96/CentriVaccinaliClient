@@ -1,9 +1,9 @@
 package org.project.server;
 
+import java.net.MalformedURLException;
+import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 public class ServerReference {
 
@@ -11,9 +11,12 @@ public class ServerReference {
 
     public static void initializeServer() throws RemoteException, NotBoundException {
         if (server == null) {
-            Registry reg = LocateRegistry.getRegistry(Server.PORT);
-            server = (Server) reg.lookup(Server.NAME);
-            System.out.println("SERVER CONNESSO");
+            try {
+                server = (Server) Naming.lookup("rmi://localhost:" + Server.PORT + "/" + Server.NAME);
+                System.out.println("SERVER CONNESSO");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
