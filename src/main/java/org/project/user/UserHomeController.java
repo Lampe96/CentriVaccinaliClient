@@ -32,6 +32,7 @@ import org.project.hub.HubHomeController;
 import org.project.login.LoginMainController;
 import org.project.models.Hub;
 import org.project.models.User;
+import org.project.server.Server;
 import org.project.server.ServerReference;
 import org.project.shared.AboutController;
 import org.project.shared.ChartController;
@@ -47,8 +48,30 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella home del
+ * utente.
+ * <br>
+ * Viene gestito l'avvio di altri {@link Stage} ovvero:
+ * <uo>
+ * <li>Impostazioni ({@link UserHomeSettingsController})</li>
+ * <li>About ({@link AboutController})</li>
+ * <li>Info hub ({@link UserHomeInfoHubController})</li>
+ * <li>Logout ({@link #startLogin()})</li>
+ * <li>Chart ({@link #startChart()})</li>
+ * </uo>
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class UserHomeController implements Initializable {
 
+    /**
+     * Array utilizzato per inserire i diversi filtri
+     * nella combobox
+     */
     private final static String[] FILTER = {
             "NOME",
             "COMUNE",
@@ -57,69 +80,160 @@ public class UserHomeController implements Initializable {
             "NO FILTRO"
     };
 
+    /**
+     * AnchorPane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * Immagine dell'utente
+     */
     @FXML
     private ImageView IV_user;
 
+    /**
+     * Label per il nome dell'utente
+     */
     @FXML
     private Label LB_user_name;
 
+    /**
+     * Label per il nickname dell'utente
+     */
     @FXML
     private Label LB_user_nickname;
 
+    /**
+     * Bottone per aprire le impostazioni
+     */
     @FXML
     private MFXButton BT_setting;
 
+    /**
+     * Bottone per effettuare il log-out
+     */
     @FXML
     private MFXButton BT_logout;
 
+    /**
+     * Bottone per aprire l'about
+     */
     @FXML
     private MFXButton BT_about;
 
+    /**
+     * Immagine che funge da quit dal programma
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * Immagine che funge per minimizzare l'applicazione
+     */
     @FXML
     private ImageView BT_minimize;
 
+    /**
+     * Label per indicare il totale dei vaccinati
+     */
     @FXML
     private MFXLabel LB_total_vaccinated;
 
+    /**
+     * Label per indicare il totale dei vaccinati con prima dose
+     */
     @FXML
     private MFXLabel LB_vaccinated_first;
 
+    /**
+     * Label per indicare il totale dei vaccinati con seconda dose
+     */
     @FXML
     private MFXLabel LB_vaccinated_second;
 
+    /**
+     * Bottone che apre il grafico dell'andamento vaccinale
+     */
     @FXML
     private MFXButton BT_open_chart;
 
+    /**
+     * Field per cercare il centro vaccinale desiderato
+     */
     @FXML
     private MFXTextField TF_search_hub;
 
+    /**
+     * Immagine per poter aggiornare l'interfaccia
+     */
     @FXML
     private ImageView IV_refresh;
 
+    /**
+     * ComboBox utilizzata per selezionare il filtro desiderato
+     */
     @FXML
     private JFXComboBox<String> CB_filter;
 
+    /**
+     * VBox per contenere la lista di centri vaccinali
+     */
     @FXML
     private VBox VB_hub_layout;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Immagine del utente
+     */
     private int userImage;
+
+    /**
+     * Email dell'utente
+     */
     private String email;
+
+    /**
+     * Utente
+     */
     private User us;
+
+    /**
+     * Lista di centri vaccinali
+     */
     private ArrayList<Hub> ahub;
+
+    /**
+     * Controller delle impostazioni
+     */
     private UserHomeSettingsController userHomeSettingsController;
+
+    /**
+     * Totali vaccinati
+     */
     private int[] vcn;
 
+    /**
+     * Utilizzato per settare l'email dell'utente
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia riempiendo
+     * varie label tra cui: nome, indirizzo, totale vaccinati, totale
+     * prima dose, totale seconda dose.
+     * Serve inoltre ad eseguire la query per ottenere la lista completa
+     * dei centri vaccinali presenti nel DB.
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
@@ -183,6 +297,11 @@ public class UserHomeController implements Initializable {
         });
     }
 
+    /**
+     * Utilizzato per riempire le righe del {@link #VB_hub_layout}
+     *
+     * @see Server#fetchAllHub()
+     */
     private void fillRow() {
         try {
             ahub = ServerReference.getServer().fetchAllHub();
@@ -198,46 +317,83 @@ public class UserHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per ridurre la finestra ad icona
+     */
     @FXML
     private void minimize() {
         stage.setIconified(true);
     }
 
+    /**
+     * Utilizzato per scurire l'icona minimize
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleMinimize() {
         setDarkHover(BT_minimize);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleMinimize() {
         resetDarkExit(BT_minimize);
     }
 
+    /**
+     * Quando premuto, il tasto exit chiude il programma
+     */
     @FXML
     private void quit() {
         System.exit(0);
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Utilizzato per ricaricare la lista dei centri vaccinali,
+     * andando a richiamare il metodo
+     */
     @FXML
-    private void refreshVaccinatedList() {
+    private void refreshHubList() {
         RotateTransition rt = new RotateTransition(Duration.seconds(1), IV_refresh);
         rt.setFromAngle(360);
         rt.setToAngle(0);
@@ -249,16 +405,27 @@ public class UserHomeController implements Initializable {
         fillRow();
     }
 
+    /**
+     * Utilizzato per scurire l'icona refresh
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleRefresh() {
         setDarkHover(IV_refresh);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleRefresh() {
         resetDarkExit(IV_refresh);
     }
 
+    /**
+     * Utilizzato per effettuare il logout e tornare alla schermata di login
+     */
     @FXML
     private void logout() {
         if (logoutAlert()) {
@@ -270,6 +437,12 @@ public class UserHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per chiedere all'utente attraverso un Alert se è sicuro di voler
+     * effettuare il logout
+     *
+     * @return true se l'utente clicca su ok
+     */
     private boolean logoutAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
@@ -313,6 +486,11 @@ public class UserHomeController implements Initializable {
         return result.orElse(null) == buttonTypeOk;
     }
 
+    /**
+     * Utilizzato per mostrare la schermata di login
+     *
+     * @throws IOException IOException
+     */
     private void startLogin() throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(LoginMainController.class.getResource("fxml/login.fxml"))));
         Stage stage = new Stage();
@@ -340,6 +518,14 @@ public class UserHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per caricare nel VB_box le righe con i dati dei centri
+     * vaccinali registrati
+     *
+     * @param hub       info per settare i campi presenti nella riga
+     * @param applyGrey usato per colorare le righe
+     * @throws IOException IOException
+     */
     private void loadHubRow(Hub hub, boolean applyGrey) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(UserHomeController.class.getResource("fxml/user_home_row.fxml"));
@@ -356,6 +542,10 @@ public class UserHomeController implements Initializable {
         VB_hub_layout.getChildren().add(hBox);
     }
 
+    /**
+     * Utilizzato per mostrare la schermata dell'about
+     * che richiama {@link #startAbout()}
+     */
     @FXML
     private void openAbout() {
         try {
@@ -365,6 +555,11 @@ public class UserHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per mostrare l'about
+     *
+     * @throws IOException IOException
+     */
     private void startAbout() throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(AboutController.class.getResource("fxml/about.fxml"))));
         Stage stage = new Stage();
@@ -393,6 +588,10 @@ public class UserHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per mostrare la schermata del chart
+     * che richiama {@link #startChart()}
+     */
     @FXML
     private void openChart() {
         try {
@@ -402,6 +601,11 @@ public class UserHomeController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per mostrare il grafico dell'andamento vaccinale
+     *
+     * @throws IOException IOException
+     */
     private void startChart() throws IOException {
         FXMLLoader loader = new FXMLLoader(ChartController.class.getResource("fxml/chart.fxml"));
         Parent root = loader.load();
@@ -436,6 +640,15 @@ public class UserHomeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Si occupa dell'apertura delle impostazioni tramite {@link #startSetting()},
+     * se alla chiusura dello stage delle impostazioni risulta confermata
+     * l'eliminazione viene eliminato l'account da DB e viene avviata la login
+     * tramite {@link #startLogin()}
+     *
+     * @see UserHomeSettingsController#getDeleteAccSettings()
+     * @see org.project.server.Server#deleteAccount(String, String)
+     */
     @FXML
     private void openSetting() {
         try {
@@ -457,6 +670,12 @@ public class UserHomeController implements Initializable {
         }
     }
 
+    /**
+     * Chiamato dal metodo {@link #openSetting()}, si occupa
+     * dell'apertura dello stage gestito da {@link UserHomeSettingsController}
+     *
+     * @throws IOException IOException
+     */
     private void startSetting() throws IOException {
         FXMLLoader loader = new FXMLLoader(UserHomeSettingsController.class.getResource("fxml/user_home_settings.fxml"));
         Parent root = loader.load();
@@ -491,6 +710,14 @@ public class UserHomeController implements Initializable {
         stage.showAndWait();
     }
 
+    /**
+     * Utilizzato nella {@link #initialize(URL, ResourceBundle)}, viene
+     * usato per effettuare il filtro sulla lista dei centri vaccinali,
+     * va a ricaricare la lista nella {@link #VB_hub_layout}
+     *
+     * @param CBvalue valore selezionato nella {@link #CB_filter}
+     * @param TFvalue testo inserito dal cittadino
+     */
     private void filterSelection(@NotNull String CBvalue, String TFvalue) {
         ArrayList<Hub> vuf;
         switch (CBvalue) {

@@ -42,45 +42,110 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella
+ * fase di creazione di un nuovo  cittadino vaccinato, quindi
+ * attivabile dal bottone presente nella classe
+ * {@link HubHomeController}
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class HubHomeRegistrationNewVaccinatedController implements Initializable {
 
+    /**
+     * Array utilizzato per riempire {@link #CB_vaccine}
+     */
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
+    /**
+     * sUser vaccinato
+     */
     private final User vaccinatedUser = new User();
 
+    /**
+     * Anchor pane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * Immagine che funge da quit dall'applicazione
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * TextField per indicare il nome del vaccinato
+     */
     @FXML
     private MFXTextField TF_name;
 
+    /**
+     * TextField per indicare il cognome del vaccinato
+     */
     @FXML
     private MFXTextField TF_surname;
 
+    /**
+     * TextField per indicare il codice fiscale del vaccinato
+     */
     @FXML
     private MFXTextField TF_fiscal_code;
 
+    /**
+     * Immagine per aprire un collegamento internet per calcolare
+     * il codice fiscale
+     */
     @FXML
     private ImageView IV_calculator_fiscal_code;
 
+    /**
+     * ComboBox per selezionare la tipologi del vaccino
+     */
     @FXML
     private JFXComboBox<String> CB_vaccine;
 
+    /**
+     * TextField per indicare la data della somministrazione
+     * del vaccinato
+     */
     @FXML
     private MFXTextField TF_date;
 
+    /**
+     * Bottone per registrare il nuovo vaccinato
+     */
     @FXML
     private MFXButton BT_sing_up_new_vaccinated;
 
+    /**
+     * Stage riferito a questa classe
+     */
     private Stage stage;
+
+    /**
+     * Nome del centro vaccinale
+     */
     private String hubName;
 
+    /**
+     * Utilizzato per settare il nome del centro vaccinale
+     *
+     * @param hubName nome centro vacinale
+     */
     void setHubName(String hubName) {
         this.hubName = hubName;
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia
+     * prendendo la scena
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) AP_ext.getScene().getWindow());
@@ -97,6 +162,10 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         Tooltip.install(IV_calculator_fiscal_code, tool);
     }
 
+    /**
+     * Utilizzato per richiamare il metodo {@link #browseCalcFiscalCode()}
+     * che porta al calcolatore del codice fiscale online
+     */
     @FXML
     private void calculateWebFiscalCode() {
         try {
@@ -106,6 +175,12 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         }
     }
 
+    /**
+     * Apre connessione alla pagina del calcolatore del codice fiscale sul web
+     *
+     * @throws URISyntaxException URISyntaxException
+     * @throws IOException        IOException
+     */
     private void browseCalcFiscalCode() throws URISyntaxException, IOException {
         URI uri = new URI("https://www.codicefiscaleonline.com/");
         Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
@@ -114,39 +189,79 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         }
     }
 
+    /**
+     * Utilizzato per scurire l'icona della calcolatrice
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleCalculator() {
         setDarkHover(IV_calculator_fiscal_code);
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Quando premuto, il tasto exit chiude lo stage
+     */
     @FXML
     private void quit() {
         stage.close();
     }
 
+    /**
+     * Utilizzato per riportare alla normalità l'effeto applicato
+     * precedentemente all'immagine della calcolatrice
+     */
     @FXML
     private void restoreStyleCalculator() {
         resetDarkExit(IV_calculator_fiscal_code);
     }
 
+    /**
+     * Utilizzato per gestire la registrazione di nuovi vaccinati, viene effettuato
+     * un controllo per verificare la correttezza dei campi inseriti (se sono vuoti o meno).
+     * Se il controllo viene superato si verifica, tramite chiamata al server, se il
+     * cittadino non ha ancora ricevuto la prima dose.
+     *
+     * @see org.project.utils.RegistrationUtil#checkName(String)
+     * @see org.project.utils.RegistrationUtil#checkFiscalCode(String)
+     * @see org.project.server.Server#checkIfFirstDose(String)
+     */
     @FXML
     private void registerNewVaccinated() {
         String name = StringUtils.capitalize(TF_name.getText().strip());
@@ -177,6 +292,13 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         }
     }
 
+    /**
+     * Alert per controllare eventuali errori occorsi in fase
+     * di digitazione o per verificare che l'utente sia alla sua
+     * prima dose.
+     *
+     * @param typeError intero per identificare il tipo di errore verificatosi
+     */
     private void errorAlert(int typeError) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Errore");

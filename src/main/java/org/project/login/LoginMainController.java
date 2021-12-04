@@ -44,43 +44,121 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella
+ * schermata di login, da qui verrà poi reindirizzato
+ * l'utente. In base alla scelta effettuata puo' esser indirizzato
+ * alle schermate di:
+ * <br>
+ * Viene gestito l'avvio di altri {@link Stage} ovvero:
+ * <uo>
+ * <li>Home centro vaccinale {@link HubHomeController}</li>
+ * <li>Registrazione centro vaccinale {@link HubSignUpController}</li>
+ * <li>Home cittadini {@link UserHomeController}</li>
+ * <li>Registrazione cittadini {@link UserSignUpController}</li>
+ * </uo>
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class LoginMainController implements Initializable {
 
+    /**
+     * AnchorPane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * Immagine utilizzata per minimizzare l'applicazione
+     */
     @FXML
     private ImageView BT_minimize;
 
+    /**
+     * Immagine che funge da quit dall'applicazione
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * Field per l'inserimento dell'email
+     * o il nome del centro vaccinale
+     */
     @FXML
     private MFXTextField TF_email;
 
+    /**
+     * Label di errore per il campo email
+     */
     @FXML
     private Label LB_error_email;
 
+    /**
+     * Field per l'inserimento della password
+     */
     @FXML
     private MFXPasswordField PF_password;
 
+    /**
+     * Label di errore per il campo password
+     */
     @FXML
     private Label LB_error_password;
 
+    /**
+     * Bottone per loggarsi nell'applicazione
+     */
     @FXML
     private MFXButton BT_login;
 
+    /**
+     * Label per entrare nell'applicazione
+     * senza loggarsi
+     */
     @FXML
     private Label BT_login_guest;
 
+    /**
+     * Label per accedere alla schermata di
+     * registrazione
+     */
     @FXML
     private Label BT_signUp;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Scena riferito a questo controller
+     */
     private Scene scene;
+
+    /**
+     * Variabile uilizzata gestire
+     * l'apertura dell'applicazione dove
+     * si ha il puntatore del mouse
+     */
     private double xPos = 0;
+
+    /**
+     * Variabile uilizzata gestire
+     * l'apertura dell'applicazione dove
+     * si ha il puntatore del mouse
+     */
     private double yPos = 0;
 
+    /**
+     * Utilizzato per inizializzare lo stage e creare
+     * i field per la login con i propri listener
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         startUpLocation(AP_ext.getPrefWidth(), AP_ext.getPrefHeight());
@@ -119,6 +197,14 @@ public class LoginMainController implements Initializable {
         });
     }
 
+    /**
+     * Utilizzato per tener traccia dello schermo
+     * in cui il mouse è situato,
+     * nel caso si avessero più schermi
+     *
+     * @param windowWidth  grandezza della schermata
+     * @param windowHeight altezza della schermata
+     */
     private void startUpLocation(double windowWidth, double windowHeight) {
         Point p = MouseInfo.getPointerInfo().getLocation();
         List<Screen> screens = Screen.getScreens();
@@ -134,6 +220,10 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per stabilire la connessione con il server
+     * utilizzando il metodo contenuto nella classe {@link ServerReference}
+     */
     private void initializeServer() {
         try {
             ServerReference.initializeServer();
@@ -143,44 +233,83 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Quando premuto, minimizza la schermata
+     */
     @FXML
     private void minimize() {
         stage.setIconified(true);
     }
 
+    /**
+     * Utilizzato per scurire l'icona minimize
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleMinimize() {
         setDarkHover(BT_minimize);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleMinimize() {
         resetDarkExit(BT_minimize);
     }
 
+    /**
+     * Quando premuto, il tasto exit chiude il programma
+     */
     @FXML
     private void quit() {
         System.exit(0);
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Utilizzato per loggare premendo
+     * il tasto invio
+     *
+     * @param keyEvent evento della tastiera da gestire
+     */
     @FXML
     private void pressEnter(@NotNull KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
@@ -188,6 +317,17 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per caricare nel campo {@link #BT_login} la stringa contenuta nel file
+     * remember_me, il quale contiene l'email o il nome dell'ultimo
+     * utente o centro vaccinale che ha effettuato la login.
+     * Quando premuto il bottone di login viene richiamato il metodo remoto
+     * per verificare le credenziali, se queste sono correte viene restituito il tipo
+     * di utente (User o centro vaccinale); con questa informazione viene avviata la
+     * schermata home corretta
+     *
+     * @see org.project.server.Server#checkCredential(String, String)
+     */
     @FXML
     private void login() {
         String email = TF_email.getText().strip();
@@ -236,6 +376,13 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per aprire la schermata corretta in base altipo di utente
+     * passato come parametro
+     *
+     * @param userType tipo di utente (User o centro vaccinale)
+     * @throws IOException IOException
+     */
     private void startRightHomeStage(UserType userType) throws IOException {
         Scene scene;
         if (userType == UserType.HUB) {
@@ -284,11 +431,22 @@ public class LoginMainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Utilizzato per ottrnere la path del file remember_me
+     *
+     * @return la path del file remember_me
+     */
     @NotNull
     private String getPathRememberMe() {
         return System.getProperty("user.dir") + File.separator + "Remember_me";
     }
 
+    /**
+     * Funzione associata al {@link #BT_login_guest},
+     * permette l'accesso in modalita' ospite, in questo
+     * modo viene avviata {@link UserHomeController} con
+     * alcune funzionalita' in meno
+     */
     @FXML
     private void loginGuest() {
         try {
@@ -298,6 +456,10 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Funzione associata al {@link #BT_signUp},
+     * va a smistare gli utenti in base al tipo
+     */
     @FXML
     private void signUp() {
         UserType userType = choiceAlert();
@@ -316,6 +478,10 @@ public class LoginMainController implements Initializable {
         }
     }
 
+    /**
+     * Alert mostrato in caso di mancata connessione con il server, viene
+     * richiamato da {@link #initializeServer}
+     */
     private void errorNoConnection() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Connessione assente");
@@ -358,6 +524,14 @@ public class LoginMainController implements Initializable {
         System.exit(0);
     }
 
+    /**
+     * Viene aperto nel momento in qui viene premuto {@link #BT_signUp},
+     * l'utente puo' scegliere di aprire {@link HubSignUpController} o
+     * {@link UserSignUpController}
+     *
+     * @return il tipo selezionato dall'utente, fra centro vaccinale e
+     * cittadino
+     */
     @Nullable
     private UserType choiceAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

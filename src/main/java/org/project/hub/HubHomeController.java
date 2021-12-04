@@ -33,6 +33,7 @@ import org.project.models.User;
 import org.project.server.ServerReference;
 import org.project.shared.AboutController;
 import org.project.shared.ChartController;
+import org.project.user.UserHomeSettingsController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,7 +61,7 @@ import java.util.stream.Collectors;
  * </uo>
  *
  * @author Federico Mainini 740691 (VA)
- * @author Gianluca Latronico Coglione 739893 (VA)
+ * @author Gianluca Latronico 739893 (VA)
  * @author Marc Alexander Orlando 741473 (VA)
  * @author Enrico Luigi Lamperti 740612 (VA)
  */
@@ -178,22 +179,27 @@ public class HubHomeController implements Initializable {
      * Stage riferito a questo controller
      */
     private Stage stage;
+    
     /**
      * Immagine selezionata per questo centro vaccinale
      */
     private int hubImage;
+    
     /**
      * Stringa utilizzata per settare il nome del centro vaccinale
      */
     private String hubName;
+    
     /**
      * Array usato per caricare tutti gli utenti vaccinati presi dal DB
      */
     private ArrayList<User> avu;
+    
     /**
      * Controller utilizzato per passare dati all'interfaccia delle impostazioni
      */
     private HubHomeSettingsController hubHomeSettingsController;
+    
     /**
      * Array utilizzato per monitorare l'andamento delle vaccinazioni
      */
@@ -350,7 +356,7 @@ public class HubHomeController implements Initializable {
     }
 
     /**
-     * Quanto premuto, il tasto exit chiude il programma
+     * Quando premuto, il tasto exit chiude il programma
      */
     @FXML
     private void quit() {
@@ -430,9 +436,13 @@ public class HubHomeController implements Initializable {
     }
 
     /**
-     * Dopo aver chiamato il metodo startSetting, rimane in attesa. Una volta
-     * chiuso lo stage setting, va ad aggiornare le eventuali modifiche o a eliminare
-     * l'account che richiama {@link #startSetting()}
+     * Si occupa dell'apertura delle impostazioni tramite {@link #startSetting()},
+     * se alla chiusura dello stage delle impostazioni risulta confermata
+     * l'eliminazione viene eliminato l'account da DB e viene avviata la login
+     * tramite {@link #startLogin()}
+     *
+     * @see HubHomeSettingsController#getDeleteAccSettings() 
+     * @see org.project.server.Server#deleteAccount(String, String)
      */
     @FXML
     private void openSetting() {
@@ -456,7 +466,10 @@ public class HubHomeController implements Initializable {
     }
 
     /**
-     * Avvia l'interfaccia delle impostazioni
+     * Chiamato dal metodo {@link #openSetting()}, si occupa
+     * dell'apertura dello stage gestito da {@link UserHomeSettingsController}
+     *
+     * @throws IOException IOException
      */
     private void startSetting() throws IOException {
         FXMLLoader loader = new FXMLLoader(HubHomeController.class.getResource("fxml/hub_home_settings.fxml"));

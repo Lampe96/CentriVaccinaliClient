@@ -36,17 +36,17 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Questa classe gestisce tutti i componenti presenti nella
  * visualizzazione delle info dell'utente e relativo aggiornamento
- * della dose.
+ * della dose
  *
  * @author Federico Mainini 740691 (VA)
- * @author Gianluca Latronico Coglione 739893 (VA)
+ * @author Gianluca Latronico 739893 (VA)
  * @author Marc Alexander Orlando 741473 (VA)
  * @author Enrico Luigi Lamperti 740612 (VA)
  */
 public class HubHomeInfoUserController implements Initializable {
 
     /**
-     * Array utilizzato per riempire la comboBox
+     * Array utilizzato per riempire {@link #CB_vaccine}
      */
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
 
@@ -57,7 +57,7 @@ public class HubHomeInfoUserController implements Initializable {
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dallo stage
      */
     @FXML
     private ImageView BT_quit;
@@ -170,7 +170,7 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     /**
-     * Quanto premuto, il tasto exit chiude il programma
+     * Quando premuto, il tasto exit chiude lo stage
      */
     @FXML
     private void quit() {

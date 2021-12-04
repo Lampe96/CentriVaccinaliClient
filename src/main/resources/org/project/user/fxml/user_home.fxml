@@ -189,7 +189,7 @@
                         </font>
                     </Label>
                     <ImageView fx:id="IV_refresh" fitHeight="24.0" fitWidth="24.0" layoutX="14.0" layoutY="44.0"
-                               onMouseClicked="#refreshVaccinatedList" onMouseEntered="#darkStyleRefresh"
+                               onMouseClicked="#refreshHubList" onMouseEntered="#darkStyleRefresh"
                                onMouseExited="#restoreStyleRefresh" pickOnBounds="true" preserveRatio="true">
                         <cursor>
                             <Cursor fx:constant="HAND"/>

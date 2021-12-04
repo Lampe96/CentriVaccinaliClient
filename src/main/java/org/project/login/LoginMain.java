@@ -14,12 +14,30 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * In questa classe e' contenuto il main del client
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class LoginMain extends Application {
 
+    /**
+     * Main dell'applicazione, il cui chiama il metodo {@link #start}
+     */
     public static void main(String[] args) {
         launch();
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia inziale,
+     * ovvero la schermata di login
+     *
+     * @param stage stage iniziale
+     * @throws IOException IOException
+     */
     @Override
     public void start(@NotNull Stage stage) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(LoginMain.class.getResource("fxml/login.fxml"))));

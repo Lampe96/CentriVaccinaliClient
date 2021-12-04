@@ -35,30 +35,76 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce le funzionalita' della row
+ * presente nella home dei centri vaccinali
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class HubHomeItemRowController implements Initializable {
 
+    /**
+     * HBox esterno
+     */
     @FXML
     private HBox HB_ext;
 
+    /**
+     * Label per il cognome del cittadino
+     */
     @FXML
     private Label LB_surname;
 
+    /**
+     * Label per il nome del cittadino
+     */
     @FXML
     private Label LB_name;
 
+    /**
+     * Label per il nickname del cittadino
+     */
     @FXML
     private Label LB_nickname;
 
+    /**
+     * Immagine per identificare il numero di dosi ricevute
+     */
     @FXML
     private ImageView IV_dose;
 
+    /**
+     * Immagine per segnalare la presenza di eventi avversi
+     */
     @FXML
     private ImageView IV_event;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Nome del centro vaccinale
+     */
     private String hubName;
+
+    /**
+     * Informazioni dell'utente che sto visualizzando
+     */
     private User vu;
 
+    /**
+     * Utilizzato per impostare le informazioni dei singoli cittadini,
+     * per gestire i tooltip, in base al numero di dosi
+     * ricevute e gli eventuali eventi avversi
+     * 
+     * @param vaccinatedUser informazioni del cittadino
+     * @param applyGrey per colorare la riga
+     */
     void setData(@NotNull User vaccinatedUser, boolean applyGrey) {
         vu = vaccinatedUser;
         LB_name.setText(vaccinatedUser.getName());
@@ -86,25 +132,48 @@ public class HubHomeItemRowController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per settare il nome del centro vaccinale passato dal controller
+     *
+     * @param hubName nome del centro vaccinale
+     */
     void setHubName(String hubName) {
         this.hubName = hubName;
     }
 
+    /**
+        * Utilizzato per inizializzare l'interfaccia 
+        * prendendo la scena
+        *
+        * @param url            url
+        * @param resourceBundle resourceBundle
+        */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
     }
 
+    /**
+     *  Utilizzato per scurire la row selezionata
+     */
     @FXML
     private void darkStyleRow() {
         HB_ext.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato per riportare alla normalità l'effeto applicato
+     * precedentemente alla row selezionata 
+     */
     @FXML
     private void restoreStyleRow() {
         HB_ext.setEffect(null);
     }
 
+    /**
+     * Utilizzato per visualizzare la schermata di informazioni 
+     * del cittadino ed effettuare la seconda vaccinazione  
+     */
     @FXML
     private void openInfoVaccinated() {
         try {

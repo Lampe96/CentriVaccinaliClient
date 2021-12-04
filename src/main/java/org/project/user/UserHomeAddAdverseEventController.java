@@ -35,8 +35,22 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce tutti i componenti presenti nella
+ * schermata di aggiunta eventi avversi {@link UserHomeAddAdverseEventController},
+ * accessibile da {@link UserHomeInfoHubController}.In caso di aggiunta con successo,
+ * l'evento viene inserito nel DB tramite metodo remoto
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class UserHomeAddAdverseEventController implements Initializable {
 
+    /**
+     * Array utilizzato per riempire {@link #CB_event_type}
+     */
     private final static String[] TYPEAE = {
             "MAL DI TESTA",
             "FEBBRE",
@@ -47,39 +61,86 @@ public class UserHomeAddAdverseEventController implements Initializable {
             "CRISI IPERTENSIVA"
     };
 
+    /**
+     * AnchorPane esterno
+     */
     @FXML
     private AnchorPane AP_ext;
 
+    /**
+     * ComboBox per selezionare il tipo
+     * dell'evento avverso
+     */
     @FXML
     private JFXComboBox<String> CB_event_type;
 
+    /**
+     * Field con le stelle da 1 a 5
+     */
     @FXML
     private Rating R_severity;
 
+    /**
+     * Label per conteggio dei caratteri nel commento
+     */
     @FXML
     private Label LB_char_counter;
 
+    /**
+     * Area di testo in cui lasciareuna nota
+     */
     @FXML
     private JFXTextArea TA_text;
 
+    /**
+     * Immagine che funge da quit da questo stage
+     */
     @FXML
     private ImageView BT_quit;
 
+    /**
+     * Bottone per aggiungere l'evento avverso
+     */
     @FXML
     private MFXButton BT_add_adverse_event;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Variabile per il nickname
+     */
     private String nick;
+
+    /**
+     * Dati necessari nella classe
+     * dei centri vaccinali
+     */
     private Hub hub;
 
+    /**
+     * Utilizzato per settare il nickname nel controller
+     */
     void setNick(String nick) {
         this.nick = nick;
     }
 
+    /**
+     * Utilizzato per settare i dati dei centri vaccinali
+     */
     void setHubData(Hub hub) {
         this.hub = hub;
     }
 
+    /**
+     * Utilizzato per riempire la combo box dei tipi di malesseri
+     * e per verificare la lunghezza della nota
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> {
@@ -101,29 +162,61 @@ public class UserHomeAddAdverseEventController implements Initializable {
         });
     }
 
+    /**
+     * Quando premuto, il tasto exit chiude lo stage
+     */
     @FXML
     private void quit() {
         stage.close();
     }
 
+    /**
+     * Utilizzato per scurire l'icona quit
+     * quando il cursore entra
+     */
     @FXML
     private void darkStyleQuit() {
         setDarkHover(BT_quit);
     }
 
+    /**
+     * Utilizzato per riportare l'immagine alla normalità
+     * una volta uscito il cursore
+     */
     @FXML
     private void restoreStyleQuit() {
         resetDarkExit(BT_quit);
     }
 
+    /**
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
+    /**
+     * Collegato al bottone {@link #BT_add_adverse_event}, viene
+     * verificata la correttezza dei campi e successivamente viene
+     * effettuata l'aggiunta dell'evento su DB. Se il processo termina con
+     * successo viene mostrato il pop-up {@link #addOtherEvent}, in caso
+     * contrario il pop-up {@link #errorAlert(int)}, con 1 si indica un errore
+     * nella compilazione dei campi, con 2 un evento avverso doppio
+     *
+     * @see org.project.server.Server#addAdverseEvent(AdverseEvent)
+     */
     @FXML
     private void addAdverseEvent() {
         if (CB_event_type.getValue() != null && R_severity.getRating() != 0) {
@@ -149,6 +242,11 @@ public class UserHomeAddAdverseEventController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per far apparire un pop-up
+     * che chiedera' all'utente se vuole inserire un altro
+     * evento avverso oppure uscire
+     */
     private void addOtherEvent() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("Evento aggiunto con successo, vuoi aggiungerne altri?");
@@ -198,6 +296,12 @@ public class UserHomeAddAdverseEventController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per mostrare un pop-up di errore
+     * (tipologia non selezionata o evento duplicato)
+     *
+     * @param typeError intero che indica la tipologia di errore da mostrare
+     */
     private void errorAlert(int typeError) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Errore");
