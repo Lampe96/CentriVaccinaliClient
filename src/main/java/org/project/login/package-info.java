@@ -1,6 +1,6 @@
 /**
  * Questo package include le classi necessarie per lo
- * svolgimento di tutte le funzioni svolte nel lato dedicato 
+ * svolgimento di tutte le funzioni svolte nel lato dedicato
  * alla login
  *
  * @author Federico Mainini 740691 (VA)

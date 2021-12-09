@@ -36,27 +36,76 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce le funzionalita' della row
+ * presente nella home dei cittadini
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class UserHomeItemRowController implements Initializable {
 
+    /**
+     * HBox esterno
+     */
     @FXML
     private HBox HB_ext;
 
+    /**
+     * Label per il nome del centro vaccinale
+     */
     @FXML
     private Label LB_hub_name;
 
+    /**
+     * Label per la tipologia del centro vaccinale
+     */
     @FXML
     private Label LB_typology;
 
+    /**
+     * Label per il comune del centro vaccinale
+     */
     @FXML
     private Label LB_city;
 
+    /**
+     * Label per la media degli eventi segnalati presso quel centro
+     */
     @FXML
     private Label LB_avg_adverse_event;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Oggetto scaricato dal DB e passato dal controller
+     * {@link UserHomeController}, utilizzato per riempire le row
+     * con i dati del centro vaccinali
+     */
     private Hub hub;
+
+    /**
+     * Oggetto scaricato dal DB e passato dal controller
+     * {@link UserHomeController}
+     */
     private User us;
 
+    /**
+     * Utilizzato per impostare i dati dei centri vaccinali e degli utenti.
+     * Inoltre riempe alcune label come: nome del centro vaccinale e citta'.
+     * Utilizzato anche per fare il controllo e impostare la tipologia del centro
+     * vaccinale
+     *
+     * @param hub       centro vaccinale
+     * @param us        utente
+     * @param applyGrey se true imposta il background della riga di un altro colore
+     * @see org.project.server.Server#getAvgAdverseEvent(String)
+     */
     void setData(@NotNull Hub hub, User us, boolean applyGrey) {
         this.hub = hub;
         this.us = us;
@@ -81,6 +130,13 @@ public class UserHomeItemRowController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia
+     * prendendo la scena e impostare il tooltip sulle righe
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
@@ -90,16 +146,26 @@ public class UserHomeItemRowController implements Initializable {
         Tooltip.install(HB_ext, tool);
     }
 
+    /**
+     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa riga
+     */
     @FXML
     private void darkStyleRow() {
         HB_ext.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato per resettare lo stile di questa riga all'uscita del cursore
+     */
     @FXML
     private void restoreStyleRow() {
         HB_ext.setEffect(null);
     }
 
+    /**
+     * Utilizzato per caricare lo stagee la scena dell'{@link UserHomeInfoHubController} e impostare
+     * i dati relativi a centri vaccinali e i dati degli utenti
+     */
     @FXML
     private void openInfoHub() {
         try {
@@ -141,6 +207,16 @@ public class UserHomeItemRowController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per impostare nella label della tipologia l'abbreviazione della tipologia
+     * |       Key      |    Value   |
+     * |----------------|------------|
+     * | OSPEDALIERO    | OSPED      |
+     * | AZIENDALE      | AZIEND     |
+     * | HUB            | HUB        |
+     *
+     * @param type tipologia di centro vaccinale
+     */
     private void checkType(@NotNull String type) {
         switch (type) {
             case "OSPEDALIERO":

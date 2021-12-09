@@ -53,13 +53,13 @@ import java.util.stream.Collectors;
  * utente.
  * <br>
  * Viene gestito l'avvio di altri {@link Stage} ovvero:
- * <uo>
+ * <ul>
  * <li>Impostazioni ({@link UserHomeSettingsController})</li>
  * <li>About ({@link AboutController})</li>
  * <li>Info hub ({@link UserHomeInfoHubController})</li>
  * <li>Logout ({@link #startLogin()})</li>
  * <li>Chart ({@link #startChart()})</li>
- * </uo>
+ * </ul>
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -219,6 +219,8 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per settare l'email dell'utente
+     *
+     * @param email email
      */
     public void setEmail(String email) {
         this.email = email;

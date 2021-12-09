@@ -51,14 +51,14 @@ import java.util.stream.Collectors;
  * centro vaccinale.
  * <br>
  * Viene gestito l'avvio di altri {@link Stage} ovvero:
- * <uo>
+ * <ul>
  * <li>Impostazioni ({@link #startSetting()})</li>
  * <li>About ({@link #startAbout()})</li>
  * <li>Logout ({@link #startLogin()})</li>
  * <li>Chart ({@link #startChart()})</li>
  * <li>Registra nuovo vaccinato ({@link #startRegister()})</li>
  * <li>Visualizza info vaccinato ({@link #openRegisterVaccinatedUser()})</li>
- * </uo>
+ * </ul>
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -179,27 +179,27 @@ public class HubHomeController implements Initializable {
      * Stage riferito a questo controller
      */
     private Stage stage;
-    
+
     /**
      * Immagine selezionata per questo centro vaccinale
      */
     private int hubImage;
-    
+
     /**
      * Stringa utilizzata per settare il nome del centro vaccinale
      */
     private String hubName;
-    
+
     /**
      * Array usato per caricare tutti gli utenti vaccinati presi dal DB
      */
     private ArrayList<User> avu;
-    
+
     /**
      * Controller utilizzato per passare dati all'interfaccia delle impostazioni
      */
     private HubHomeSettingsController hubHomeSettingsController;
-    
+
     /**
      * Array utilizzato per monitorare l'andamento delle vaccinazioni
      */
@@ -441,7 +441,7 @@ public class HubHomeController implements Initializable {
      * l'eliminazione viene eliminato l'account da DB e viene avviata la login
      * tramite {@link #startLogin()}
      *
-     * @see HubHomeSettingsController#getDeleteAccSettings() 
+     * @see HubHomeSettingsController#getDeleteAccSettings()
      * @see org.project.server.Server#deleteAccount(String, String)
      */
     @FXML

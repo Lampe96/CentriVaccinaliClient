@@ -101,9 +101,9 @@ public class HubHomeItemRowController implements Initializable {
      * Utilizzato per impostare le informazioni dei singoli cittadini,
      * per gestire i tooltip, in base al numero di dosi
      * ricevute e gli eventuali eventi avversi
-     * 
+     *
      * @param vaccinatedUser informazioni del cittadino
-     * @param applyGrey per colorare la riga
+     * @param applyGrey      per colorare la riga
      */
     void setData(@NotNull User vaccinatedUser, boolean applyGrey) {
         vu = vaccinatedUser;
@@ -142,19 +142,19 @@ public class HubHomeItemRowController implements Initializable {
     }
 
     /**
-        * Utilizzato per inizializzare l'interfaccia 
-        * prendendo la scena
-        *
-        * @param url            url
-        * @param resourceBundle resourceBundle
-        */
+     * Utilizzato per inizializzare l'interfaccia
+     * prendendo la scena
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
     }
 
     /**
-     *  Utilizzato per scurire la row selezionata
+     * Utilizzato per scurire la row selezionata
      */
     @FXML
     private void darkStyleRow() {
@@ -163,7 +163,7 @@ public class HubHomeItemRowController implements Initializable {
 
     /**
      * Utilizzato per riportare alla normalità l'effeto applicato
-     * precedentemente alla row selezionata 
+     * precedentemente alla row selezionata
      */
     @FXML
     private void restoreStyleRow() {
@@ -171,8 +171,8 @@ public class HubHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per visualizzare la schermata di informazioni 
-     * del cittadino ed effettuare la seconda vaccinazione  
+     * Utilizzato per visualizzare la schermata di informazioni
+     * del cittadino ed effettuare la seconda vaccinazione
      */
     @FXML
     private void openInfoVaccinated() {

@@ -29,8 +29,8 @@ public interface Server extends Remote {
      * Porta di utilizzata dal server
      */
     int PORT = 8000;
-    
-    
+
+
     //METODI LATO USER
 
     /**
@@ -71,8 +71,11 @@ public interface Server extends Remote {
     boolean checkDuplicateEmail(String email) throws RemoteException;
 
     /**
+     * Utilizzato per controllare se un altro utente sta effettuando la verifica
+     * della email, con la stessa email utilizzata dal secondo utente
+     *
      * @param email email
-     * @return
+     * @return true se l'email non è disponibile, false in caso contrario
      * @throws RemoteException RemoteException
      */
     boolean checkDuplicateTempEmail(String email) throws RemoteException;

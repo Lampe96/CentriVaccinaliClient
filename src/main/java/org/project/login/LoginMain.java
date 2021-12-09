@@ -26,6 +26,8 @@ public class LoginMain extends Application {
 
     /**
      * Main dell'applicazione, il cui chiama il metodo {@link #start}
+     * 
+     * @param args args
      */
     public static void main(String[] args) {
         launch();

@@ -88,7 +88,18 @@ public class HubSignUpController implements Initializable {
     /**
      * Array utilizzato salavare i diversi campi dei centri vaccinali
      */
-    private final static String[] hubField = {"name", "pwd", "confirmedPwd", "quali", "address", "number", "city", "prov", "cap", "typology"};
+    private final static String[] hubField = {
+            "name",
+            "pwd",
+            "confirmedPwd",
+            "quali",
+            "address",
+            "number",
+            "city",
+            "prov",
+            "cap",
+            "typology"
+    };
 
     /**
      * HashMap per il controllo della correttezza dei campi
@@ -127,7 +138,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo name visivamene
+     * correttezza del campo name visivamente
      */
     @FXML
     private ImageView IV_check_name;
@@ -146,7 +157,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo password visivamene
+     * correttezza del campo password visivamente
      */
     @FXML
     private ImageView IV_check_password;
@@ -165,7 +176,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo confirm password visivamene
+     * correttezza del campo confirm password visivamente
      */
     @FXML
     private ImageView IV_check_confirmed_password;
@@ -196,7 +207,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo address visivamene
+     * correttezza del campo address visivamente
      */
     @FXML
     private ImageView IV_check_address;
@@ -215,7 +226,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo number visivamene
+     * correttezza del campo number visivamente
      */
     @FXML
     private ImageView IV_check_number;
@@ -234,7 +245,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo city visivamene
+     * correttezza del campo city visivamente
      */
     @FXML
     private ImageView IV_check_city;
@@ -265,7 +276,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo cap visivamene
+     * correttezza del campo cap visivamente
      */
     @FXML
     private ImageView IV_check_cap;

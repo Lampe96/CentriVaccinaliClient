@@ -95,6 +95,8 @@ public class UserAlreadyVaccinatedController implements Initializable {
 
     /**
      * Utilizzato per settare l'utente vaccinato
+     * 
+     * @return l'utente vaccinato
      */
     User getVaccinatedUser() {
         return vu;
@@ -166,7 +168,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
      * registrazione
      *
      * @param event event
-     * @see org.project.server.Server#checkIfUserIsVaccinated(String, String) 
+     * @see org.project.server.Server#checkIfUserIsVaccinated(String, String)
      */
     @FXML
     private void confirmed(MouseEvent event) {

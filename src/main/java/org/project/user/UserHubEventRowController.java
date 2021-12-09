@@ -33,23 +33,61 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Questa classe gestisce le funzionalita' della row
+ * presente nella visualizzazione delle info del centro
+ * vaccinale
+ *
+ * @author Federico Mainini 740691 (VA)
+ * @author Gianluca Latronico 739893 (VA)
+ * @author Marc Alexander Orlando 741473 (VA)
+ * @author Enrico Luigi Lamperti 740612 (VA)
+ */
 public class UserHubEventRowController implements Initializable {
 
+    /**
+     * Hbox con la row degli eventi avversi
+     */
     @FXML
     private HBox HB_ext;
 
+    /**
+     * Label per il tipo di evento avverso
+     */
     @FXML
     private Label LB_typology;
 
+    /**
+     * Label per la severita' dell'evento avverso
+     */
     @FXML
     private Label LB_severity;
 
+    /**
+     * Immagine per tener traccia della
+     */
     @FXML
     private ImageView IV_text;
 
+    /**
+     * Stage riferito a questo controller
+     */
     private Stage stage;
+
+    /**
+     * Oggetto scaricato dal DB e passato dal controller
+     * {@link UserHomeInfoHubController}, utilizzato per riempire le row
+     * con i dati dell'evento in questione
+     */
     private AdverseEvent ae;
 
+    /**
+     * Utilizzato per impostare i dati degli eventi avversi.
+     *
+     * @param ae          evento avverso
+     * @param isUserEvent se true imposta il background della riga a verde
+     * @param applyGrey   se true imposta il background della riga di un altro colore
+     */
     public void setData(@NotNull AdverseEvent ae, boolean applyGrey, boolean isUserEvent) {
         this.ae = ae;
 
@@ -74,21 +112,38 @@ public class UserHubEventRowController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per inizializzare l'interfaccia
+     * prendendo la scena
+     *
+     * @param url            url
+     * @param resourceBundle resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Platform.runLater(() -> stage = (Stage) HB_ext.getScene().getWindow());
     }
 
+    /**
+     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa riga
+     */
     @FXML
     private void darkStyleRow() {
         HB_ext.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
+    /**
+     * Utilizzato per resettare lo stile di questa riga all'uscita del cursore
+     */
     @FXML
     private void restoreStyleRow() {
         HB_ext.setEffect(null);
     }
 
+    /**
+     * Utilizzato per richiamare il metodo {@link #startInfoAdverseEvent}
+     * se l'evento avverso contiene del testo
+     */
     @FXML
     private void openInfoAdverseEvent() {
         if (!ae.getText().equals("")) {
@@ -100,6 +155,12 @@ public class UserHubEventRowController implements Initializable {
         }
     }
 
+    /**
+     * Utilizzato per aprire la schermata in cui visualizzare le info dell'evento avverso
+     * preso in considerazione, richiamato da {@link #openInfoAdverseEvent}
+     * 
+     * @throws IOException IOException
+     */
     private void startInfoAdverseEvent() throws IOException {
         FXMLLoader loader = new FXMLLoader(UserHomeShowAdverseEventController.class.getResource("fxml/user_home_show_adverse_event.fxml"));
         Parent root = loader.load();

@@ -36,11 +36,11 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Questa classe gestisce tutti i componenti presenti nella
- * schermata delle impostazioni, eseguibile dal bottone presente 
- * nella classe {@link HubHomeController}. Gestisce l'eliminazione 
- * dell'account tramite il bottone che richiama la classe 
+ * schermata delle impostazioni, eseguibile dal bottone presente
+ * nella classe {@link HubHomeController}. Gestisce l'eliminazione
+ * dell'account tramite il bottone che richiama la classe
  * {@link HubHomeSettingsDeleteController}
- * 
+ *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
  * @author Marc Alexander Orlando 741473 (VA)
@@ -112,7 +112,6 @@ public class HubHomeSettingsController implements Initializable {
      */
     @FXML
     private ImageView IV_eight;
-
 
     /**
      * Immagine profilo 9
@@ -207,7 +206,7 @@ public class HubHomeSettingsController implements Initializable {
      * Utilizzato per ottenere l'esito di eliminazione dell'account dal
      * controller {@link HubHomeSettingsDeleteController}
      *
-     * @return true se la schermata per eliminare l'accont e' stata aperta e
+     * @return true se la schermata per eliminare l'accuont e' stata aperta e
      * l'eliminazione ha avuto esito positivo, false in caso contrario
      */
     boolean getDeleteAccSettings() {
@@ -298,7 +297,7 @@ public class HubHomeSettingsController implements Initializable {
      * @see org.project.utils.RegistrationUtil#checkPassword(String)
      * @see org.project.utils.RegistrationUtil#checkPasswordConfirmed(String, String)
      * @see org.project.utils.RegistrationUtil#checkChangePwd(String, String)
-     * @see org.project.server.Server#changePwd(String, String, String);
+     * @see org.project.server.Server#changePwd(String, String, String)
      */
     @FXML
     private void confirm_new_password() {
@@ -393,7 +392,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Viene aperto il pop per la delete
+     * Viene aperto il pop per la delete account
      *
      * @throws IOException IOException
      */
@@ -431,7 +430,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto, il tasto exit chiude lo stage e cancella il timer
      */
     @FXML
     private void quit() {

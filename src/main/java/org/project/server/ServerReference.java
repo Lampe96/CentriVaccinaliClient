@@ -22,6 +22,9 @@ public class ServerReference {
 
     /**
      * Utilizzato per reperire il server dal registro RMI
+     * 
+     * @throws RemoteException RemoteException
+     * @throws NotBoundException NotBoundException
      */
     public static void initializeServer() throws RemoteException, NotBoundException {
         if (server == null) {
@@ -36,6 +39,10 @@ public class ServerReference {
 
     /**
      * Metodo pubblico che restituisce la referenza del server e viene inizializzata se a null
+     * 
+     * @return referenza del server
+     * @throws NotBoundException NotBoundException
+     * @throws RemoteException RemoteException
      */
     public static Server getServer() throws NotBoundException, RemoteException {
         initializeServer();

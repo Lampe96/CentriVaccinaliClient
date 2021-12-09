@@ -122,6 +122,8 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per settare il nickname nel controller
+     * 
+     * @param nick nickname
      */
     void setNick(String nick) {
         this.nick = nick;
@@ -129,6 +131,8 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per settare i dati dei centri vaccinali
+     *
+     * @param hub hub
      */
     void setHubData(Hub hub) {
         this.hub = hub;

@@ -1,5 +1,5 @@
 /**
- * Questo package include le classi necessarie alla 
+ * Questo package include le classi necessarie alla
  * creazione degli oggetti utilizzati nel programma
  *
  * @author Federico Mainini 740691 (VA)

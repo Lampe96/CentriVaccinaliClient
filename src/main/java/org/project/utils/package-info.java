@@ -1,6 +1,6 @@
 /**
- * Questo package include le classi necessarie per lo
- * 
+ * Questo package include le classi necessarie per i diversi
+ * controlli a livello sia dei cittadini sia dei centri vaccinali
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)

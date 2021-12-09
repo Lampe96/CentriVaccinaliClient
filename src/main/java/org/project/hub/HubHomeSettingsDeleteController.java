@@ -79,7 +79,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
     private boolean deleteAcc = false;
 
     /**
-     * Utilizzao per settare il nome
+     * Utilizzao per impostare il nome
      * di centro vaccinale
      *
      * @param hubName nome centro vaccinale
@@ -111,20 +111,20 @@ public class HubHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-         * Utilizzato da certe immagini per scurire l'interno
-         *
-         * @param iv ImageView che si vuole scurire
-         */
+     * Utilizzato da certe immagini per scurire l'interno
+     *
+     * @param iv ImageView che si vuole scurire
+     */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     /**
-         * Utilizzato da certe immagini per portare alla normalità
-         * l'effetto interno di scurimento
-         *
-         * @param iv ImageView che si vuole portare alla normalità
-         */
+     * Utilizzato da certe immagini per portare alla normalità
+     * l'effetto interno di scurimento
+     *
+     * @param iv ImageView che si vuole portare alla normalità
+     */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }

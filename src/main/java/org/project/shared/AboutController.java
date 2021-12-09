@@ -121,7 +121,7 @@ public class AboutController implements Initializable {
     }
 
     /**
-     *  Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -130,7 +130,7 @@ public class AboutController implements Initializable {
     }
 
     /**
-     *  Utilizzato da certe immagini per portare alla normalità
+     * Utilizzato da certe immagini per portare alla normalità
      * l'effetto interno di scurimento
      *
      * @param iv ImageView che si vuole portare alla normalità
@@ -193,10 +193,10 @@ public class AboutController implements Initializable {
 
     /**
      * Metodo utilizzato per caricare la pagina internet
-     * 
+     *
      * @param link link di git corretto
      * @throws URISyntaxException URISyntaxException
-     * @throws IOException IOException
+     * @throws IOException        IOException
      */
     private void browse(String link) throws URISyntaxException, IOException {
         URI uri = new URI(link);

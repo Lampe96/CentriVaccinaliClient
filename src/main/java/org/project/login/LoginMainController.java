@@ -51,12 +51,12 @@ import java.util.concurrent.atomic.AtomicReference;
  * alle schermate di:
  * <br>
  * Viene gestito l'avvio di altri {@link Stage} ovvero:
- * <uo>
+ * <ul>
  * <li>Home centro vaccinale {@link HubHomeController}</li>
  * <li>Registrazione centro vaccinale {@link HubSignUpController}</li>
  * <li>Home cittadini {@link UserHomeController}</li>
  * <li>Registrazione cittadini {@link UserSignUpController}</li>
- * </uo>
+ * </ul>
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
