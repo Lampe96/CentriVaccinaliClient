@@ -1,6 +1,6 @@
 /**
  * Questo package include le classi condivise tra
- * i cittadini e i centri vaccinali
+ * i cittadini e i centri vaccinali.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)

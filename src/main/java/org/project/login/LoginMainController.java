@@ -46,11 +46,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Questa classe gestisce tutti i componenti presenti nella
- * schermata di login, da qui verrà poi reindirizzato
+ * schermata di login, da qui verra' poi reindirizzato
  * l'utente. In base alla scelta effettuata puo' esser indirizzato
  * alle schermate di:
  * <br>
- * Viene gestito l'avvio di altri {@link Stage} ovvero:
  * <ul>
  * <li>Home centro vaccinale {@link HubHomeController}</li>
  * <li>Registrazione centro vaccinale {@link HubSignUpController}</li>
@@ -66,95 +65,95 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LoginMainController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine utilizzata per minimizzare l'applicazione
+     * Immagine utilizzata per minimizzare l'applicazione.
      */
     @FXML
     private ImageView BT_minimize;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
      * Field per l'inserimento dell'email
-     * o il nome del centro vaccinale
+     * o il nome del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_email;
 
     /**
-     * Label di errore per il campo email
+     * Label di errore per il campo email.
      */
     @FXML
     private Label LB_error_email;
 
     /**
-     * Field per l'inserimento della password
+     * Field per l'inserimento della password.
      */
     @FXML
     private MFXPasswordField PF_password;
 
     /**
-     * Label di errore per il campo password
+     * Label di errore per il campo password.
      */
     @FXML
     private Label LB_error_password;
 
     /**
-     * Bottone per loggarsi nell'applicazione
+     * Bottone per loggarsi nell'applicazione.
      */
     @FXML
     private MFXButton BT_login;
 
     /**
      * Label per entrare nell'applicazione
-     * senza loggarsi
+     * senza loggarsi.
      */
     @FXML
     private Label BT_login_guest;
 
     /**
      * Label per accedere alla schermata di
-     * registrazione
+     * registrazione.
      */
     @FXML
     private Label BT_signUp;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Scena riferito a questo controller
+     * Scena riferito a questo controller.
      */
     private Scene scene;
 
     /**
      * Variabile uilizzata gestire
      * l'apertura dell'applicazione dove
-     * si ha il puntatore del mouse
+     * si ha il puntatore del mouse.
      */
     private double xPos = 0;
 
     /**
      * Variabile uilizzata gestire
      * l'apertura dell'applicazione dove
-     * si ha il puntatore del mouse
+     * si ha il puntatore del mouse.
      */
     private double yPos = 0;
 
     /**
      * Utilizzato per inizializzare lo stage e creare
-     * i field per la login con i propri listener
+     * i field per la login con i propri listener.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -199,8 +198,8 @@ public class LoginMainController implements Initializable {
 
     /**
      * Utilizzato per tener traccia dello schermo
-     * in cui il mouse è situato,
-     * nel caso si avessero più schermi
+     * in cui il mouse e' situato,
+     * nel caso si avessero piu' schermi.
      *
      * @param windowWidth  grandezza della schermata
      * @param windowHeight altezza della schermata
@@ -222,7 +221,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Utilizzato per stabilire la connessione con il server
-     * utilizzando il metodo contenuto nella classe {@link ServerReference}
+     * utilizzando il metodo contenuto nella classe {@link ServerReference}.
      */
     private void initializeServer() {
         try {
@@ -234,7 +233,7 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Quando premuto, minimizza la schermata
+     * Quando premuto, minimizza la schermata.
      */
     @FXML
     private void minimize() {
@@ -243,7 +242,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona minimize
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleMinimize() {
@@ -251,8 +250,8 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleMinimize() {
@@ -260,7 +259,7 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude il programma
+     * Quando premuto il tasto exit chiude il programma.
      */
     @FXML
     private void quit() {
@@ -269,7 +268,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -277,8 +276,8 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -286,7 +285,7 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -295,10 +294,10 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -306,7 +305,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Utilizzato per loggare premendo
-     * il tasto invio
+     * il tasto invio.
      *
      * @param keyEvent evento della tastiera da gestire
      */
@@ -324,7 +323,7 @@ public class LoginMainController implements Initializable {
      * Quando premuto il bottone di login viene richiamato il metodo remoto
      * per verificare le credenziali, se queste sono correte viene restituito il tipo
      * di utente (User o centro vaccinale); con questa informazione viene avviata la
-     * schermata home corretta
+     * schermata home corretta.
      *
      * @see org.project.server.Server#checkCredential(String, String)
      */
@@ -377,8 +376,8 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato per aprire la schermata corretta in base altipo di utente
-     * passato come parametro
+     * Utilizzato per aprire la schermata corretta in base al tipo di utente
+     * passato come parametro.
      *
      * @param userType tipo di utente (User o centro vaccinale)
      * @throws IOException IOException
@@ -432,7 +431,7 @@ public class LoginMainController implements Initializable {
     }
 
     /**
-     * Utilizzato per ottrnere la path del file remember_me
+     * Utilizzato per ottrnere la path del file remember_me.
      *
      * @return la path del file remember_me
      */
@@ -445,7 +444,7 @@ public class LoginMainController implements Initializable {
      * Funzione associata al {@link #BT_login_guest},
      * permette l'accesso in modalita' ospite, in questo
      * modo viene avviata {@link UserHomeController} con
-     * alcune funzionalita' in meno
+     * alcune funzionalita' in meno.
      */
     @FXML
     private void loginGuest() {
@@ -458,7 +457,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Funzione associata al {@link #BT_signUp},
-     * va a smistare gli utenti in base al tipo
+     * va a smistare gli utenti in base al tipo.
      */
     @FXML
     private void signUp() {
@@ -480,7 +479,7 @@ public class LoginMainController implements Initializable {
 
     /**
      * Alert mostrato in caso di mancata connessione con il server, viene
-     * richiamato da {@link #initializeServer}
+     * richiamato da {@link #initializeServer}.
      */
     private void errorNoConnection() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -527,7 +526,7 @@ public class LoginMainController implements Initializable {
     /**
      * Viene aperto nel momento in qui viene premuto {@link #BT_signUp},
      * l'utente puo' scegliere di aprire {@link HubSignUpController} o
-     * {@link UserSignUpController}
+     * {@link UserSignUpController}.
      *
      * @return il tipo selezionato dall'utente, fra centro vaccinale e
      * cittadino

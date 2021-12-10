@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * Questa classe gestisce tutti i componenti presenti nella schermata
  * di visualizzazione degli eventi avversi segnalati presso quel centro.
- * Eseguibile selezionando una riga presente in {@link UserHomeInfoHubController}
+ * Eseguibile selezionando una riga presente in {@link UserHomeInfoHubController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -31,47 +31,47 @@ import java.util.ResourceBundle;
 public class UserHomeShowAdverseEventController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dal programma
+     * Immagine che funge da quit dal programma.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field con le stelle da 1 a 5
+     * Field con le stelle da 1 a 5.
      */
     @FXML
     private Rating R_severity;
 
     /**
-     * Area di testo in cui visualizzare la nota
+     * Area di testo in cui visualizzare la nota.
      */
     @FXML
     private JFXTextArea TA_text;
 
     /**
-     * Label con il tipo dell'evento avveros
+     * Label con il tipo dell'evento avverso.
      */
     @FXML
     private MFXLabel LB_type;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Uvento avverso
+     * Evento avverso.
      */
     private AdverseEvent ae;
 
     /**
-     * Utilizzato per settare l'evento avverso in questo controller
+     * Utilizzato per settare l'evento avverso in questo controller.
      * 
      * @param ae evento avverso
      */
@@ -83,7 +83,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
      * Utilizzato per inizializzare l'interfaccia
      * prendendo la scena e impostando i componenti
      * presenti nella schermata, tra cui {@link #LB_type}
-     * {@link #R_severity} e {@link #TA_text}
+     * {@link #R_severity} e {@link #TA_text}.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -99,7 +99,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -108,7 +108,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -116,8 +116,8 @@ public class UserHomeShowAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -125,7 +125,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -134,10 +134,10 @@ public class UserHomeShowAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);

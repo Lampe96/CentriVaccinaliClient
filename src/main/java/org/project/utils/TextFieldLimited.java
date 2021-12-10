@@ -6,7 +6,7 @@ import org.project.user.UserVerifyEmailController;
 
 /**
  * Classe utilizzata per impostare la lunghezza massima accettata
- * dalle textField. Utilizzata nel {@link UserVerifyEmailController}
+ * dalle textField. Utilizzata nel {@link UserVerifyEmailController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -16,19 +16,19 @@ import org.project.user.UserVerifyEmailController;
 public class TextFieldLimited extends TextField {
 
     /**
-     * Lunghezza massima accettata
+     * Lunghezza massima accettata.
      */
     private int maxLength;
 
     /**
-     * Costruttore
+     * Costruttore.
      */
     public TextFieldLimited() {
         this.maxLength = 1;
     }
 
     /**
-     * Impostazione della lunghezza massima
+     * Impostazione della lunghezza massima.
      *
      * @param maxLength maxLenght
      */
@@ -56,7 +56,7 @@ public class TextFieldLimited extends TextField {
 
     /**
      * Gestisce l'eventuale copia di testo dall'esterno, andando
-     * a troncarlo in caso sia piu' lungo della lunghezza massima
+     * a troncarlo in caso sia piu' lungo della lunghezza massima.
      *
      * @param text testo
      */

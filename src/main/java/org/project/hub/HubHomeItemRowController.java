@@ -37,7 +37,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Questa classe gestisce le funzionalita' della row
- * presente nella home dei centri vaccinali
+ * presente nella home dei centri vaccinali.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -47,60 +47,60 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeItemRowController implements Initializable {
 
     /**
-     * HBox esterno
+     * HBox esterno.
      */
     @FXML
     private HBox HB_ext;
 
     /**
-     * Label per il cognome del cittadino
+     * Label per il cognome del cittadino.
      */
     @FXML
     private Label LB_surname;
 
     /**
-     * Label per il nome del cittadino
+     * Label per il nome del cittadino.
      */
     @FXML
     private Label LB_name;
 
     /**
-     * Label per il nickname del cittadino
+     * Label per il nickname del cittadino.
      */
     @FXML
     private Label LB_nickname;
 
     /**
-     * Immagine per identificare il numero di dosi ricevute
+     * Immagine per identificare il numero di dosi ricevute.
      */
     @FXML
     private ImageView IV_dose;
 
     /**
-     * Immagine per segnalare la presenza di eventi avversi
+     * Immagine per segnalare la presenza di eventi avversi.
      */
     @FXML
     private ImageView IV_event;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Nome del centro vaccinale
+     * Nome del centro vaccinale.
      */
     private String hubName;
 
     /**
-     * Informazioni dell'utente che sto visualizzando
+     * Informazioni dell'utente che sto visualizzando.
      */
     private User vu;
 
     /**
      * Utilizzato per impostare le informazioni dei singoli cittadini,
      * per gestire i tooltip, in base al numero di dosi
-     * ricevute e gli eventuali eventi avversi
+     * ricevute e gli eventuali eventi avversi.
      *
      * @param vaccinatedUser informazioni del cittadino
      * @param applyGrey      per colorare la riga
@@ -133,7 +133,7 @@ public class HubHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare il nome del centro vaccinale passato dal controller
+     * Utilizzato per settare il nome del centro vaccinale passato dal controller.
      *
      * @param hubName nome del centro vaccinale
      */
@@ -143,7 +143,7 @@ public class HubHomeItemRowController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena
+     * prendendo la scena.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -154,7 +154,7 @@ public class HubHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per scurire la row selezionata
+     * Utilizzato per scurire la row selezionata.
      */
     @FXML
     private void darkStyleRow() {
@@ -162,8 +162,8 @@ public class HubHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare alla normalità l'effeto applicato
-     * precedentemente alla row selezionata
+     * Utilizzato per riportare alla normalita' l'effetto applicato
+     * precedentemente alla row selezionata.
      */
     @FXML
     private void restoreStyleRow() {
@@ -172,7 +172,7 @@ public class HubHomeItemRowController implements Initializable {
 
     /**
      * Utilizzato per visualizzare la schermata di informazioni
-     * del cittadino ed effettuare la seconda vaccinazione
+     * del cittadino ed effettuare la seconda vaccinazione.
      */
     @FXML
     private void openInfoVaccinated() {

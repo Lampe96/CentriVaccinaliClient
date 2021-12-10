@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
 /**
  * Questa classe gestisce tutti i componenti presenti nella visualizzazione
  * delle informazioni del centro vaccinale preso in considerazione. Per
- * questo avra' bisogno di un oggetto centro vaccinale passato da {@link UserHomeItemRowController}
+ * questo avra' bisogno di un oggetto centro vaccinale passato da {@link UserHomeItemRowController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -58,7 +58,7 @@ import java.util.stream.Collectors;
 public class UserHomeInfoHubController implements Initializable {
 
     /**
-     * Array utilizzato per riempire la ComboBox filtri
+     * Array utilizzato per riempire la ComboBox filtri.
      */
     private final static String[] FILTER = {
             "MAL DI TESTA",
@@ -72,105 +72,105 @@ public class UserHomeInfoHubController implements Initializable {
     };
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dal programma
+     * Immagine che funge da quit dal programma.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Label per il nome dell'hub
+     * Label per il nome dell'hub.
      */
     @FXML
     private MFXLabel TF_hub_name;
 
     /**
-     * Label per il tipo evento avverso
+     * Label per il tipo dell' evento avverso.
      */
     @FXML
     private MFXLabel TF_type;
 
     /**
-     * Label per l'indirizzo
+     * Label per l'indirizzo.
      */
     @FXML
     private MFXLabel TF_address;
 
     /**
-     * Immagine per aprire la mappa all'indirizzo del centro vaccinale
+     * Immagine per aprire la mappa all'indirizzo del centro vaccinale.
      */
     @FXML
     private ImageView IV_maps;
 
     /**
-     * Immagine del centro vaccinale
+     * Immagine del centro vaccinale.
      */
     @FXML
     private ImageView IV_hub;
 
     /**
-     * Immagine per refreshare la pagina
+     * Immagine per ricaricare la pagina.
      */
     @FXML
     private ImageView IV_refresh;
 
     /**
-     * ComboBox per i filtri
+     * ComboBox per i filtri.
      */
     @FXML
     private JFXComboBox<String> CB_filter;
 
     /**
-     * Anchor per mettere la tooltip
+     * Anchor per mettere la tooltip.
      */
     @FXML
     private AnchorPane AP_tooltip_btn;
 
     /**
-     * Bottone per aggiungere evnto avverso
+     * Bottone per aggiungere evento avverso.
      */
     @FXML
     private MFXButton BT_add_adverse_event;
 
     /**
-     * Vbox per mostrare gli eventi avversi
+     * Vbox per mostrare gli eventi avversi.
      */
     @FXML
     private VBox VB_adverse_event_layout;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * ArrayList per i dati riguardanti gli eventi avversi
+     * ArrayList per i dati riguardanti gli eventi avversi.
      */
     private ArrayList<AdverseEvent> aae;
 
     /**
-     * Dati dei centri vaccinali
+     * Dati dei centri vaccinali.
      */
     private Hub hub;
 
     /**
-     * Dati degli utenti
+     * Dati degli utenti.
      */
     private User us;
 
     /**
      * Boolean per verificare se l'evento e'
-     * stato inserito dall'utente
+     * stato inserito dall'utente.
      */
     private boolean userEvent = false;
 
     /**
-     * Utilizzato per settare i dati dei centri vaccinali
+     * Utilizzato per impostare i dati dei centri vaccinali.
      *
      * @param hub centro vaccinale
      */
@@ -179,7 +179,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare i dati degli Utenti
+     * Utilizzato per impostare i dati degli Utenti.
      *
      * @param us Utenti
      */
@@ -192,7 +192,7 @@ public class UserHomeInfoHubController implements Initializable {
      * varie label tra cui: nome centro vaccinale, tipo evento avverso, indirizzo centro vaccinale e l'immagine
      * del centro vaccinale.
      * Inoltre carica la row degli eventi avversi e riempe la combobox con i filtri, infine aggiunge
-     * i tooltip
+     * i tooltip.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -249,7 +249,7 @@ public class UserHomeInfoHubController implements Initializable {
     /**
      * Utilizzato per riempire le righe con tutti gli eventi avversi
      * riferiti al centro vaccinale selezionato. Viene chiamato in
-     * {@link #initialize} e {@link #refreshVaccinatedList}
+     * {@link #initialize} e {@link #refreshVaccinatedList}.
      *
      * @see org.project.server.Server#fetchAllAdverseEvent(String)
      */
@@ -271,7 +271,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per caricare le righe degli eventi avversi di un centro vaccinale
+     * Utilizzato per caricare le righe degli eventi avversi di un centro vaccinale.
      *
      * @param ae          evento avverso
      * @param applyGrey   se true imposta il background della riga di un altro colore
@@ -289,7 +289,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per chiudere questo stage
+     * Utilizzato per chiudere questo stage.
      */
     @FXML
     private void quit() {
@@ -297,7 +297,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa icona
+     * Utilizzato per impostare un'ombra interna durante il passaggio del cursore di questa icona.
      */
     @FXML
     private void darkStyleQuit() {
@@ -305,7 +305,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per resettare lo stile di questa icona all'uscita del cursore
+     * Utilizzato per azzerare lo stile di questa icona all'uscita del cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -313,25 +313,25 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare un ombra interna su una image view
+     * Utilizzato per impostare un'ombra interna su una imageview.
      *
-     * @param iv image view da scurire
+     * @param iv imageview da scurire
      */
     private void setDarkHover(@NotNull ImageView iv) {
         iv.setEffect(new InnerShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 10, 0, 5, 5));
     }
 
     /**
-     * Utilizzato per resettare l'effetto su una image view
+     * Utilizzato per azzerare l'effetto su una imageview.
      *
-     * @param iv image view in cui resettare lo stile
+     * @param iv imageview in cui azzerare lo stile
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Utilizzato per aggiornare la lista degli eventi avversi
+     * Utilizzato per aggiornare la lista degli eventi avversi.
      */
     @FXML
     private void refreshVaccinatedList() {
@@ -348,7 +348,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa icona
+     * Utilizzato per impostare un'ombra interna durante il passaggio del cursore di questa icona.
      */
     @FXML
     private void darkStyleRefresh() {
@@ -356,7 +356,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per resettare lo stile di questa icona all'uscita del cursore
+     * Utilizzato per azzerare lo stile di questa icona all'uscita del cursore.
      */
     @FXML
     private void restoreStyleRefresh() {
@@ -365,7 +365,7 @@ public class UserHomeInfoHubController implements Initializable {
 
     /**
      * Utilizzato per visualizzare la schermata di aggiunta di un evento avverso attraverso questo
-     * metodo {@link #startAddAdverseEvent}
+     * metodo {@link #startAddAdverseEvent}.
      */
     @FXML
     private void addAdverseEvent() {
@@ -377,7 +377,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per visualizzare la schermata di aggiunta di un evento avverso
+     * Utilizzato per visualizzare la schermata di aggiunta di un evento avverso.
      *
      * @throws IOException IOException
      */
@@ -419,7 +419,7 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per comporre il link per poi aprirlo sul browser utilizzando google maps
+     * Utilizzato per comporre il link per poi aprirlo sul browser utilizzando google maps.
      */
     @FXML
     private void openMaps() {
@@ -440,21 +440,21 @@ public class UserHomeInfoHubController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa icona
+     * Utilizzato per impostare un'ombra interna durante il passaggio del cursore di questa icona.
      */
     public void darkStyleMaps() {
         setDarkHover(IV_maps);
     }
 
     /**
-     * Utilizzato per resettare lo stile di questa icona all'uscita del cursore
+     * Utilizzato per azzerare lo stile di questa icona all'uscita del cursore.
      */
     public void restoreStyleMaps() {
         resetDarkExit(IV_maps);
     }
 
     /**
-     * Utilizzato per aprire il browser e navigare nel link passato
+     * Utilizzato per aprire il browser e navigare nel link passato.
      *
      * @param link link per aprire le mappe
      * @throws URISyntaxException URISyntaxException
@@ -470,7 +470,7 @@ public class UserHomeInfoHubController implements Initializable {
 
     /**
      * Viene chiamato nel metodo {@link #initialize}, viene associato
-     * a {@link #FILTER} e gestisce la selezione del malessere
+     * a {@link #FILTER} e gestisce la selezione del malessere.
      *
      * @param value tipologia di malessere
      */
@@ -521,7 +521,7 @@ public class UserHomeInfoHubController implements Initializable {
      * Utilizzato nel metodo {@link #filterSelection}, va a
      * filtrare in base all'intero passato, il quale si riferisce
      * alla posizione corrispondente al malessere presente nell'array
-     * {@link #FILTER}
+     * {@link #FILTER}.
      *
      * @param type tipo di filtro
      */

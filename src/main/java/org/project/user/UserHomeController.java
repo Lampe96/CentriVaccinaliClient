@@ -70,7 +70,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Array utilizzato per inserire i diversi filtri
-     * nella combobox
+     * nella combobox.
      */
     private final static String[] FILTER = {
             "NOME",
@@ -81,144 +81,144 @@ public class UserHomeController implements Initializable {
     };
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine dell'utente
+     * Immagine dell'utente.
      */
     @FXML
     private ImageView IV_user;
 
     /**
-     * Label per il nome dell'utente
+     * Label per il nome dell'utente.
      */
     @FXML
     private Label LB_user_name;
 
     /**
-     * Label per il nickname dell'utente
+     * Label per il nickname dell'utente.
      */
     @FXML
     private Label LB_user_nickname;
 
     /**
-     * Bottone per aprire le impostazioni
+     * Bottone per aprire le impostazioni.
      */
     @FXML
     private MFXButton BT_setting;
 
     /**
-     * Bottone per effettuare il log-out
+     * Bottone per effettuare il log-out.
      */
     @FXML
     private MFXButton BT_logout;
 
     /**
-     * Bottone per aprire l'about
+     * Bottone per aprire l'about.
      */
     @FXML
     private MFXButton BT_about;
 
     /**
-     * Immagine che funge da quit dal programma
+     * Immagine che funge da quit dal programma.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Immagine che funge per minimizzare l'applicazione
+     * Immagine che funge per minimizzare l'applicazione.
      */
     @FXML
     private ImageView BT_minimize;
 
     /**
-     * Label per indicare il totale dei vaccinati
+     * Label per indicare il totale dei vaccinati.
      */
     @FXML
     private MFXLabel LB_total_vaccinated;
 
     /**
-     * Label per indicare il totale dei vaccinati con prima dose
+     * Label per indicare il totale dei vaccinati con prima dose.
      */
     @FXML
     private MFXLabel LB_vaccinated_first;
 
     /**
-     * Label per indicare il totale dei vaccinati con seconda dose
+     * Label per indicare il totale dei vaccinati con seconda dose.
      */
     @FXML
     private MFXLabel LB_vaccinated_second;
 
     /**
-     * Bottone che apre il grafico dell'andamento vaccinale
+     * Bottone che apre il grafico dell'andamento vaccinale.
      */
     @FXML
     private MFXButton BT_open_chart;
 
     /**
-     * Field per cercare il centro vaccinale desiderato
+     * Field per cercare il centro vaccinale desiderato.
      */
     @FXML
     private MFXTextField TF_search_hub;
 
     /**
-     * Immagine per poter aggiornare l'interfaccia
+     * Immagine per poter aggiornare l'interfaccia.
      */
     @FXML
     private ImageView IV_refresh;
 
     /**
-     * ComboBox utilizzata per selezionare il filtro desiderato
+     * ComboBox utilizzata per selezionare il filtro desiderato.
      */
     @FXML
     private JFXComboBox<String> CB_filter;
 
     /**
-     * VBox per contenere la lista di centri vaccinali
+     * VBox per contenere la lista di centri vaccinali.
      */
     @FXML
     private VBox VB_hub_layout;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Immagine del utente
+     * Immagine del utente.
      */
     private int userImage;
 
     /**
-     * Email dell'utente
+     * Email dell'utente.
      */
     private String email;
 
     /**
-     * Utente
+     * Utente.
      */
     private User us;
 
     /**
-     * Lista di centri vaccinali
+     * Lista di centri vaccinali.
      */
     private ArrayList<Hub> ahub;
 
     /**
-     * Controller delle impostazioni
+     * Controller delle impostazioni.
      */
     private UserHomeSettingsController userHomeSettingsController;
 
     /**
-     * Totali vaccinati
+     * Totali vaccinati.
      */
     private int[] vcn;
 
     /**
-     * Utilizzato per settare l'email dell'utente
+     * Utilizzato per settare l'email dell'utente.
      *
      * @param email email
      */
@@ -229,7 +229,7 @@ public class UserHomeController implements Initializable {
     /**
      * Utilizzato per inizializzare l'interfaccia riempiendo
      * varie label tra cui: nome, indirizzo, totale vaccinati, totale
-     * prima dose, totale seconda dose.
+     * prima dose e totale seconda dose.
      * Serve inoltre ad eseguire la query per ottenere la lista completa
      * dei centri vaccinali presenti nel DB.
      *
@@ -300,7 +300,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per riempire le righe del {@link #VB_hub_layout}
+     * Utilizzato per riempire le righe del {@link #VB_hub_layout}.
      *
      * @see Server#fetchAllHub()
      */
@@ -320,7 +320,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per ridurre la finestra ad icona
+     * Utilizzato per ridurre la finestra ad icona.
      */
     @FXML
     private void minimize() {
@@ -329,7 +329,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona minimize
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleMinimize() {
@@ -337,8 +337,8 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleMinimize() {
@@ -346,7 +346,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude il programma
+     * Quando premuto il tasto exit chiude il programma.
      */
     @FXML
     private void quit() {
@@ -355,7 +355,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -363,8 +363,8 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -372,7 +372,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -381,10 +381,10 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -392,7 +392,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per ricaricare la lista dei centri vaccinali,
-     * andando a richiamare il metodo
+     * andando a richiamare il metodo.
      */
     @FXML
     private void refreshHubList() {
@@ -409,7 +409,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona refresh
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleRefresh() {
@@ -417,8 +417,8 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleRefresh() {
@@ -426,7 +426,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per effettuare il logout e tornare alla schermata di login
+     * Utilizzato per effettuare il logout e tornare alla schermata di login.
      */
     @FXML
     private void logout() {
@@ -440,8 +440,8 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per chiedere all'utente attraverso un Alert se è sicuro di voler
-     * effettuare il logout
+     * Utilizzato per chiedere all'utente attraverso un Alert se e' sicuro di voler
+     * effettuare il logout.
      *
      * @return true se l'utente clicca su ok
      */
@@ -489,7 +489,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per mostrare la schermata di login
+     * Utilizzato per mostrare la schermata di login.
      *
      * @throws IOException IOException
      */
@@ -522,7 +522,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per caricare nel VB_box le righe con i dati dei centri
-     * vaccinali registrati
+     * vaccinali registrati.
      *
      * @param hub       info per settare i campi presenti nella riga
      * @param applyGrey usato per colorare le righe
@@ -546,7 +546,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per mostrare la schermata dell'about
-     * che richiama {@link #startAbout()}
+     * che richiama {@link #startAbout()}.
      */
     @FXML
     private void openAbout() {
@@ -558,7 +558,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per mostrare l'about
+     * Utilizzato per mostrare l'about.
      *
      * @throws IOException IOException
      */
@@ -592,7 +592,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Utilizzato per mostrare la schermata del chart
-     * che richiama {@link #startChart()}
+     * che richiama {@link #startChart()}.
      */
     @FXML
     private void openChart() {
@@ -604,7 +604,7 @@ public class UserHomeController implements Initializable {
     }
 
     /**
-     * Utilizzato per mostrare il grafico dell'andamento vaccinale
+     * Utilizzato per mostrare il grafico dell'andamento vaccinale.
      *
      * @throws IOException IOException
      */
@@ -646,7 +646,7 @@ public class UserHomeController implements Initializable {
      * Si occupa dell'apertura delle impostazioni tramite {@link #startSetting()},
      * se alla chiusura dello stage delle impostazioni risulta confermata
      * l'eliminazione viene eliminato l'account da DB e viene avviata la login
-     * tramite {@link #startLogin()}
+     * tramite {@link #startLogin()}.
      *
      * @see UserHomeSettingsController#getDeleteAccSettings()
      * @see org.project.server.Server#deleteAccount(String, String)
@@ -674,7 +674,7 @@ public class UserHomeController implements Initializable {
 
     /**
      * Chiamato dal metodo {@link #openSetting()}, si occupa
-     * dell'apertura dello stage gestito da {@link UserHomeSettingsController}
+     * dell'apertura dello stage gestito da {@link UserHomeSettingsController}.
      *
      * @throws IOException IOException
      */
@@ -715,7 +715,7 @@ public class UserHomeController implements Initializable {
     /**
      * Utilizzato nella {@link #initialize(URL, ResourceBundle)}, viene
      * usato per effettuare il filtro sulla lista dei centri vaccinali,
-     * va a ricaricare la lista nella {@link #VB_hub_layout}
+     * va a ricaricare la lista nella {@link #VB_hub_layout}.
      *
      * @param CBvalue valore selezionato nella {@link #CB_filter}
      * @param TFvalue testo inserito dal cittadino

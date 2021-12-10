@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * schermata delle impostazioni, eseguibile dal bottone presente
  * nella classe {@link HubHomeController}. Gestisce l'eliminazione
  * dell'account tramite il bottone che richiama la classe
- * {@link HubHomeSettingsDeleteController}
+ * {@link HubHomeSettingsDeleteController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -49,152 +49,152 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeSettingsController implements Initializable {
 
     /**
-     * Inzializzazione del timer
+     * Inizializzazione del timer.
      */
     private final Timer TIMER = new Timer();
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
-    public AnchorPane AP_ext;
+    private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Immagine profilo 1
+     * Immagine profilo 1.
      */
     @FXML
     private ImageView IV_one;
 
     /**
-     * Immagine profilo 2
+     * Immagine profilo 2.
      */
     @FXML
     private ImageView IV_two;
 
     /**
-     * Immagine profilo 3
+     * Immagine profilo 3.
      */
     @FXML
     private ImageView IV_three;
 
     /**
-     * Immagine profilo 4
+     * Immagine profilo 4.
      */
     @FXML
     private ImageView IV_four;
 
     /**
-     * Immagine profilo 5
+     * Immagine profilo 5.
      */
     @FXML
     private ImageView IV_five;
 
     /**
-     * Immagine profilo 6
+     * Immagine profilo 6.
      */
     @FXML
     private ImageView IV_six;
 
     /**
-     * Immagine profilo 7
+     * Immagine profilo 7.
      */
     @FXML
     private ImageView IV_seven;
 
     /**
-     * Immagine profilo 8
+     * Immagine profilo 8.
      */
     @FXML
     private ImageView IV_eight;
 
     /**
-     * Immagine profilo 9
+     * Immagine profilo 9.
      */
     @FXML
     private ImageView IV_nine;
 
     /**
-     * Bottone per aprire lo satge del {@link HubHomeSettingsDeleteController }
+     * Bottone per aprire lo satge del {@link HubHomeSettingsDeleteController }.
      */
     @FXML
     private MFXButton BT_delete;
 
     /**
-     * Field utilizzato per inserire la vecchia password per essere verificata
+     * Field utilizzato per inserire la vecchia password per essere verificata.
      */
     @FXML
     private MFXPasswordField TF_old_password;
 
     /**
-     * Label di errore password
+     * Label di errore password.
      */
     @FXML
     private Label LB_error_password;
 
     /**
      * Label per la conferma dell'avvenuto
-     * cambio della password
+     * cambio della password.
      */
     @FXML
     private Label LB_success_change;
 
     /**
-     * Field utilizzato per inserire la nuova password
+     * Field utilizzato per inserire la nuova password.
      */
     @FXML
     private MFXPasswordField TF_new_password;
 
     /**
-     * Field utilizzato per inserire la conferma della nuova password
+     * Field utilizzato per inserire la conferma della nuova password.
      */
     @FXML
     private MFXPasswordField TF_confirm_password;
 
     /**
-     * Bottone per confermare la vecchia password
+     * Bottone per confermare la vecchia password.
      */
     @FXML
     private MFXButton BT_confirm_old_pwd;
 
     /**
-     * Bottone per confermare la nuova password
+     * Bottone per confermare la nuova password.
      */
     @FXML
     private MFXButton BT_confirm_new_pwd;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Immagine selezionata
+     * Immagine selezionata.
      */
     private int selectedImage;
 
     /**
-     * Nome del centro vaccinale
+     * Nome del centro vaccinale.
      */
     private String hubName;
 
     /**
-     * Boolean per verificare l'apertura del {@link HubHomeSettingsDeleteController }
+     * Boolean per verificare l'apertura del {@link HubHomeSettingsDeleteController }.
      */
     private boolean openDelete = false;
 
     /**
-     * Controller utilizzato per scambio dati
+     * Controller utilizzato per scambio dati.
      */
     private HubHomeSettingsDeleteController hubHomeSettingsDeleteController;
 
     /**
-     * Utilizzato per settare il nome del centro vaccinale
+     * Utilizzato per settare il nome del centro vaccinale.
      *
      * @param hubName nome centro vaccinale
      */
@@ -204,7 +204,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per ottenere l'esito di eliminazione dell'account dal
-     * controller {@link HubHomeSettingsDeleteController}
+     * controller {@link HubHomeSettingsDeleteController}.
      *
      * @return true se la schermata per eliminare l'accuont e' stata aperta e
      * l'eliminazione ha avuto esito positivo, false in caso contrario
@@ -218,7 +218,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per scurire le immagini
-     * quando il cursore entra su una di esse
+     * quando il cursore entra su una di esse.
      */
     private void setDarkStyle() {
         switch (selectedImage) {
@@ -254,7 +254,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per prendere il numero
-     * dell'immagine selezionata
+     * dell'immagine selezionata.
      *
      * @return l'immagine selezionato
      */
@@ -263,7 +263,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Assegna alla variabile la nuova immagine selezionata
+     * Assegna alla variabile la nuova immagine selezionata.
      *
      * @param selectedImage l'immagine selezionata al momento
      */
@@ -274,7 +274,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena
+     * prendendo la scena.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -292,7 +292,7 @@ public class HubHomeSettingsController implements Initializable {
      * password e per inserire il cambio della password
      * su db.
      * Se rispetta i diversi controlli fa apparire
-     * una label che ne conferma la riuscita
+     * una label che ne conferma la riuscita.
      *
      * @see org.project.utils.RegistrationUtil#checkPassword(String)
      * @see org.project.utils.RegistrationUtil#checkPasswordConfirmed(String, String)
@@ -346,7 +346,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * Per verificare la correttezza della password inserita.
      * Se corrisponde con quella presente nel DB allora si abilitano i campi
-     * per inserire la nuova password. In caso contrario viene segnalato l'errore
+     * per inserire la nuova password. In caso contrario viene segnalato l'errore.
      *
      * @see org.project.server.Server#checkPassword(String, String, String)
      */
@@ -376,7 +376,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * Attivato quando viene premuto il bottone {@link #BT_delete} e
      * va a richiamare il metodo {@link #openDeletePopUp} che gestisce l'eventuale
-     * eliminazione dell'account
+     * eliminazione dell'account.
      */
     @FXML
     private void delete() {
@@ -392,7 +392,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Viene aperto il pop per la delete account
+     * Viene aperto il pop per la delete account.
      *
      * @throws IOException IOException
      */
@@ -430,7 +430,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage e cancella il timer
+     * Quando premuto il tasto exit chiude lo stage e cancella il timer.
      */
     @FXML
     private void quit() {
@@ -440,7 +440,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -448,8 +448,8 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -457,7 +457,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -466,17 +466,17 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Per scurire l'immagine 1
+     * Per scurire l'immagine 1.
      */
     @FXML
     private void darkStyleIVOne() {
@@ -484,7 +484,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 1
+     * Per ripristinare l'effetto dell'immagine 1.
      */
     @FXML
     private void restoreStyleIVOne() {
@@ -496,7 +496,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageOne() {
@@ -508,7 +508,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 2
+     * Per scurire l'immagine 2.
      */
     @FXML
     private void darkStyleIVTwo() {
@@ -516,7 +516,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 2
+     * Per ripristinare l'effetto dell'immagine 2.
      */
     @FXML
     private void restoreStyleIVTwo() {
@@ -528,7 +528,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageTwo() {
@@ -540,7 +540,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 3
+     * Per scurire l'immagine 3.
      */
     @FXML
     private void darkStyleIVThree() {
@@ -548,7 +548,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 3
+     * Per ripristinare l'effetto dell'immagine 3.
      */
     @FXML
     private void restoreStyleIVThree() {
@@ -560,7 +560,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageThree() {
@@ -572,7 +572,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 4
+     * Per scurire l'immagine 4.
      */
     @FXML
     private void darkStyleIVFour() {
@@ -580,7 +580,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 4
+     * Per ripristinare l'effetto dell'immagine 4.
      */
     @FXML
     private void restoreStyleIVFour() {
@@ -592,7 +592,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageFour() {
@@ -604,7 +604,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 5
+     * Per scurire l'immagine 5.
      */
     @FXML
     private void darkStyleIVFive() {
@@ -612,7 +612,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 5
+     * Per ripristinare l'effetto dell'immagine 5.
      */
     @FXML
     private void restoreStyleIVFive() {
@@ -624,7 +624,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageFive() {
@@ -636,7 +636,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 6
+     * Per scurire l'immagine 6.
      */
     @FXML
     private void darkStyleIVSix() {
@@ -644,7 +644,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 6
+     * Per ripristinare l'effetto dell'immagine 6.
      */
     @FXML
     private void restoreStyleIVSix() {
@@ -656,7 +656,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageSix() {
@@ -668,7 +668,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 7
+     * Per scurire l'immagine 7.
      */
     @FXML
     private void darkStyleIVSeven() {
@@ -676,7 +676,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 7
+     * Per ripristinare l'effetto dell'immagine 7.
      */
     @FXML
     private void restoreStyleIVSeven() {
@@ -688,7 +688,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageSeven() {
@@ -700,7 +700,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 8
+     * Per scurire l'immagine 8.
      */
     @FXML
     private void darkStyleIVEight() {
@@ -708,7 +708,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 8
+     * Per ripristinare l'effetto dell'immagine 8.
      */
     @FXML
     private void restoreStyleIVEight() {
@@ -720,7 +720,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageEight() {
@@ -732,7 +732,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per scurire l'immagine 9
+     * Per scurire l'immagine 9.
      */
     @FXML
     private void darkStyleIVNine() {
@@ -740,7 +740,7 @@ public class HubHomeSettingsController implements Initializable {
     }
 
     /**
-     * Per rifristinare l'effetto dell'immagine 9
+     * Per ripristinare l'effetto dell'immagine 9.
      */
     @FXML
     private void restoreStyleIVNine() {
@@ -752,7 +752,7 @@ public class HubHomeSettingsController implements Initializable {
     /**
      * per deselezionare l'immagine selezionata precedentemente e
      * selezionare quella corrente, utilizza {@link #resetStyle} e
-     * {@link #setDarkHover}
+     * {@link #setDarkHover}.
      */
     @FXML
     private void selectImageNine() {
@@ -765,7 +765,7 @@ public class HubHomeSettingsController implements Initializable {
 
     /**
      * Utilizzato per reimpostare lo stile delle immagini
-     * non piu' selezionate. Per farlo utilizza {@link #resetDarkExit}
+     * non piu' selezionate. Per farlo utilizza {@link #resetDarkExit}.
      */
     private void resetStyle() {
         switch (selectedImage) {

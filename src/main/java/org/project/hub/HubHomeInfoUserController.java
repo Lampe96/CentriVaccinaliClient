@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Questa classe gestisce tutti i componenti presenti nella
  * visualizzazione delle info dell'utente e relativo aggiornamento
- * della dose
+ * della dose.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -46,85 +46,85 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeInfoUserController implements Initializable {
 
     /**
-     * Array utilizzato per riempire {@link #CB_vaccine}
+     * Array utilizzato per riempire {@link #CB_vaccine}.
      */
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dallo stage
+     * Immagine che funge da quit dallo stage.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field contente il nome del vaccinato
+     * Field contente il nome del vaccinato.
      */
     @FXML
     private MFXTextField TF_name;
 
     /**
-     * Field contente il cognome del vaccinato
+     * Field contente il cognome del vaccinato.
      */
     @FXML
     private MFXTextField TF_surname;
 
     /**
-     * Field contente il codice fiscale del vaccinato
+     * Field contente il codice fiscale del vaccinato.
      */
     @FXML
     private MFXTextField TF_fiscal_code;
 
     /**
-     * Field contente la data di vaccinazione
+     * Field contente la data di vaccinazione.
      */
     @FXML
     private MFXTextField TF_date;
 
     /**
-     * ComboBox contente le diverse tipologie di vaccino
+     * ComboBox contente le diverse tipologie di vaccino.
      */
     @FXML
     private JFXComboBox<String> CB_vaccine;
 
     /**
      * Field contente il nome del centro vaccinale
-     * in cui viene vaccinato il cittadino
+     * in cui viene vaccinato il cittadino.
      */
     @FXML
     private MFXTextField TF_name_hub;
 
     /**
      * AnchorPane utilizzato per inserire un tooltip
-     * sul bottone {@link #BT_update_vaccinated}
+     * sul bottone {@link #BT_update_vaccinated}.
      */
     @FXML
     private AnchorPane AP_tooltip_btn;
 
     /**
-     * Bottone per l'aggiornamento della dose somministrata
+     * Bottone per l'aggiornamento della dose somministrata.
      */
     @FXML
     private MFXButton BT_update_vaccinated;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Informazioni dell'utente che sto visualizzando
+     * Informazioni dell'utente che sto visualizzando.
      */
     private User vu;
 
     /**
-     * Utilizzato per settare l'utente di cui si vuole vizualizzare
-     * le informazioni
+     * Utilizzato per settare l'utente di cui si vuole visualizzare
+     * le informazioni.
      *
      * @param vu User
      */
@@ -136,7 +136,7 @@ public class HubHomeInfoUserController implements Initializable {
      * Serve per inizializzare l'interfaccia riempiendo
      * varie label tra cui: nome, cognome, codice fiscale, data,
      * tipologia di vaccino e nome hub.
-     * Serve inoltre per riempire la combo box con le diverse tipologie
+     * Serve inoltre per riempire la combo box con le diverse tipologie.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -170,7 +170,7 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -179,7 +179,7 @@ public class HubHomeInfoUserController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -187,8 +187,8 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -196,7 +196,7 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -205,10 +205,10 @@ public class HubHomeInfoUserController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -217,7 +217,7 @@ public class HubHomeInfoUserController implements Initializable {
     /**
      * Legato al bottone {@link #BT_update_vaccinated} che
      * effettua l'aggiornamento, quando consentito, dell'user settando
-     * la dose ricevuta a 2
+     * la dose ricevuta a 2.
      */
     @FXML
     private void updateVaccinated() {
@@ -257,7 +257,7 @@ public class HubHomeInfoUserController implements Initializable {
     /**
      * Utilizzato per far apparire un pop-up di errore
      * nel caso in cui modificando le informazioni si
-     * inserisca qualcosa di non valido
+     * inserisca qualcosa di non valido.
      */
     private void errorAlert() {
         Alert alert = new Alert(Alert.AlertType.ERROR);

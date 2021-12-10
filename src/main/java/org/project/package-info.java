@@ -1,7 +1,7 @@
 /**
  * Questo package include tutti i package, le classi e
  * l'enum UserType per il corretto funzionamento dell'intero
- * programma
+ * programma.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)

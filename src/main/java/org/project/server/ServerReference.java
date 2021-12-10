@@ -6,7 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 /**
- * Questa classe gestisce la connessione tra client e server utilizzando RMI
+ * Questa classe gestisce la connessione tra client e server utilizzando RMI.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -16,12 +16,12 @@ import java.rmi.RemoteException;
 public class ServerReference {
 
     /**
-     * Referenza del server
+     * Referenza del server.
      */
     private static Server server = null;
 
     /**
-     * Utilizzato per reperire il server dal registro RMI
+     * Utilizzato per reperire il server dal registro RMI.
      * 
      * @throws RemoteException RemoteException
      * @throws NotBoundException NotBoundException
@@ -38,7 +38,7 @@ public class ServerReference {
     }
 
     /**
-     * Metodo pubblico che restituisce la referenza del server e viene inizializzata se a null
+     * Metodo pubblico che restituisce la referenza del server e viene inizializzata se a null.
      * 
      * @return referenza del server
      * @throws NotBoundException NotBoundException

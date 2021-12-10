@@ -5,7 +5,7 @@ import java.sql.Date;
 
 /**
  * In questa classe viene creato l'oggetto user, utilizzato
- * per i passaggio dei dati e per la scrittura su DB
+ * per i passaggio dei dati e per la scrittura su DB.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -26,27 +26,27 @@ public class User implements Serializable {
     private String surname;
 
     /**
-     * codice fiscale del cittadino
+     * Codice fiscale del cittadino
      */
     private String fiscalCode;
 
     /**
-     * email del cittadino
+     * Email del cittadino
      */
     private String email;
 
     /**
-     * nickname del cittadino
+     * Nickname del cittadino
      */
     private String nickname;
 
     /**
-     * password del cittadino
+     * Password del cittadino
      */
     private String password;
 
     /**
-     * parametro utilizzato per controllare se il cittadino
+     * Parametro utilizzato per controllare se il cittadino
      * ha o meno segnalato un evento
      */
     private String event;
@@ -77,7 +77,7 @@ public class User implements Serializable {
     private short dose;
 
     /**
-     * RIferimento dell'immagine scelta dal cittadino
+     * Riferimento dell'immagine scelta dal cittadino
      */
     private short image;
 
@@ -324,9 +324,9 @@ public class User implements Serializable {
     }
 
     /**
-     * Utilizzato per effettuare la concatezione in string
+     * Utilizzato per effettuare la concatenazione in string
      *
-     * @return concatezione di tutti i parametri
+     * @return concatenazione di tutti i parametri
      */
     @Override
     public String toString() {

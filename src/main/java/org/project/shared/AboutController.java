@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * Questa classe gestisce tutti i componenti presenti nella
  * schermata about, condivisa da {@link HubHomeController} e
- * {@link UserHomeController}
+ * {@link UserHomeController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -35,7 +35,7 @@ public class AboutController implements Initializable {
 
     /**
      * Array utilizzato per aprire la pagina git
-     * corretta
+     * corretta.
      */
     private static final String[] LINKGIT = {
             "https://github.com/Fede22dev",
@@ -45,47 +45,47 @@ public class AboutController implements Initializable {
     };
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
      * Label utilizzata per il collegamento web
-     * al github di Federico Mainini
+     * al github di Federico Mainini.
      */
     @FXML
     private Label BT_git_fede;
 
     /**
      * Label utilizzata per il collegamento web
-     * al github di Enrico Luigi Lamperti
+     * al github di Enrico Luigi Lamperti.
      */
     @FXML
     private Label BT_git_enri;
 
     /**
      * Label utilizzata per il collegamento web
-     * al github di Marc Alexander Orlando
+     * al github di Marc Alexander Orlando.
      */
     @FXML
     private Label BT_git_marc;
 
     /**
      * Label utilizzata per il collegamento web
-     * al github di Gianluca Latronico
+     * al github di Gianluca Latronico.
      */
     @FXML
     private Label BT_git_gian;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
@@ -95,7 +95,7 @@ public class AboutController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -104,7 +104,7 @@ public class AboutController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -112,8 +112,8 @@ public class AboutController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -121,7 +121,7 @@ public class AboutController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -130,10 +130,10 @@ public class AboutController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -141,7 +141,7 @@ public class AboutController implements Initializable {
 
     /**
      * Avviato quando premuto {@link #BT_git_fede},
-     * porta alla pagina git di Federico Mainini 740691 (VA)
+     * porta alla pagina git di Federico Mainini 740691 (VA).
      */
     @FXML
     private void gitFede() {
@@ -154,7 +154,7 @@ public class AboutController implements Initializable {
 
     /**
      * Avviato quando premuto {@link #BT_git_enri},
-     * porta alla pagina git di Enrico Luigi Lamperti 740612 (VA)
+     * porta alla pagina git di Enrico Luigi Lamperti 740612 (VA).
      */
     @FXML
     private void gitEnri() {
@@ -167,7 +167,7 @@ public class AboutController implements Initializable {
 
     /**
      * Avviato quando premuto {@link #BT_git_marc},
-     * porta alla pagina git di @author Marc Alex Orlando 741473 (VA)
+     * porta alla pagina git di Marc Alex Orlando 741473 (VA).
      */
     @FXML
     private void gitMarc() {
@@ -180,7 +180,7 @@ public class AboutController implements Initializable {
 
     /**
      * Avviato quando premuto {@link #BT_git_gian},
-     * porta alla pagina git di Gianluca Latronico 739893 (VA)
+     * porta alla pagina git di Gianluca Latronico 739893 (VA).
      */
     @FXML
     private void gitGian() {
@@ -192,7 +192,7 @@ public class AboutController implements Initializable {
     }
 
     /**
-     * Metodo utilizzato per caricare la pagina internet
+     * Utilizzato per caricare la pagina internet.
      *
      * @param link link di git corretto
      * @throws URISyntaxException URISyntaxException

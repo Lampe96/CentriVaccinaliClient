@@ -22,8 +22,8 @@ import java.util.ResourceBundle;
 
 /**
  * Questa classe gestisce tutti i componenti presenti nel pop-up
- * che gestisce l'eliminazione dell'account da DB. eseguibile dal bottone presente
- * nella classe {@link HubHomeSettingsController}
+ * che gestisce l'eliminazione dell'account da DB. Eseguibile dal bottone presente
+ * nella classe {@link HubHomeSettingsController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -33,54 +33,54 @@ import java.util.ResourceBundle;
 public class HubHomeSettingsDeleteController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field per la password
+     * Field per la password.
      */
     @FXML
     private MFXPasswordField PF_pwd;
 
     /**
-     * Label di errore per la password
+     * Label di errore per la password.
      */
     @FXML
     private Label LB_error_pwd;
 
     /**
-     * Bottone per confermare la delete
+     * Bottone per confermare la delete.
      */
     @FXML
     private MFXButton BT_confirmed;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Nome del centro vaccinale
+     * Nome del centro vaccinale.
      */
     private String hubName;
 
     /**
-     * boolean per tener traccia dell'eliminazione
+     * boolean per tener traccia dell'eliminazione.
      * dell'account
      */
     private boolean deleteAcc = false;
 
     /**
      * Utilizzao per impostare il nome
-     * di centro vaccinale
+     * di centro vaccinale.
      *
      * @param hubName nome centro vaccinale
      */
@@ -90,7 +90,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     /**
      * Utilizzato per settare il boolean per la
-     * verifica dell'eliminazione dell'account
+     * verifica dell'eliminazione dell'account.
      *
      * @return true se viene eliminato, false nel caso contrario
      */
@@ -100,7 +100,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena
+     * prendendo la scena.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -111,7 +111,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -120,10 +120,10 @@ public class HubHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -132,7 +132,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
     /**
      * Se viene premuto il tasto {@link #BT_confirmed}
      * viene verificata la password tramite l'apposito metodo e,
-     * se corretta, viene eliminato dal DB l'account
+     * se corretta, viene eliminato dal DB l'account.
      *
      * @see org.project.server.Server#checkPassword(String, String, String)
      */
@@ -154,7 +154,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -162,7 +162,7 @@ public class HubHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -171,8 +171,8 @@ public class HubHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {

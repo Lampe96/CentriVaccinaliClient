@@ -49,7 +49,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Questa classe gestisce tutti i componenti presenti nella
  * schermata di registrazione degi cittadini, avviata dalla
  * classe {@link LoginMainController}. In caso di successo si viene
- * rinviati all'interfaccia di login
+ * rinviati all'interfaccia di login.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -59,7 +59,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UserSignUpController implements Initializable {
 
     /**
-     * Array utilizzato salavare i diversi campi degli utenti
+     * Array utilizzato salavare i diversi campi degli utenti.
      */
     private final static String[] USERFIELD = {
             "name",
@@ -72,223 +72,223 @@ public class UserSignUpController implements Initializable {
     };
 
     /**
-     * HashMap per il controllo della correttezza dei campi
+     * HashMap per il controllo della correttezza dei campi.
      */
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che serve per tornare alla schermata precedente
+     * Immagine che serve per tornare alla schermata precedente.
      */
     @FXML
     private ImageView BT_back;
 
     /**
-     * Immagine che serve per ridurre ad icona l'applicazione
+     * Immagine che serve per ridurre ad icona l'applicazione.
      */
     @FXML
     private ImageView BT_minimize;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field dove inserire il nome dell'utente
+     * Field dove inserire il nome dell'utente.
      */
     @FXML
     private MFXTextField TF_name;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo name visivamente
+     * correttezza del campo name visivamente.
      */
     @FXML
     private ImageView IV_check_name;
 
     /**
-     * Label di errore per il campo name
+     * Label di errore per il campo name.
      */
     @FXML
     private Label LB_error_name;
 
     /**
-     * Field dove inserire il cognome dell'utente
+     * Field dove inserire il cognome dell'utente.
      */
     @FXML
     private MFXTextField TF_surname;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo cognome visivamente
+     * correttezza del campo cognome visivamente.
      */
     @FXML
     private ImageView IV_check_surname;
 
     /**
-     * Label di errore per il campo cognome
+     * Label di errore per il campo cognome.
      */
     @FXML
     private Label LB_error_surname;
 
     /**
-     * Field dove inserire il codice fiscale dell'utente
+     * Field dove inserire il codice fiscale dell'utente.
      */
     @FXML
     private MFXTextField TF_fiscal_code;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo codice fiscale visivamente
+     * correttezza del campo codice fiscale visivamente.
      */
     @FXML
     private ImageView IV_check_fiscal_code;
 
     /**
-     * Immagine utilizzata per poter calcolare il codice fiscale online
+     * Immagine utilizzata per poter calcolare il codice fiscale online.
      */
     @FXML
     private ImageView IV_calculator_fiscal_code;
 
     /**
-     * Label di errore per il campo codice fiscale
+     * Label di errore per il campo codice fiscale.
      */
     @FXML
     private Label LB_error_code;
 
     /**
-     * Field dove inserire l'email dell'utente
+     * Field dove inserire l'email dell'utente.
      */
     @FXML
     private MFXTextField TF_email;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo email visivamente
+     * correttezza del campo email visivamente.
      */
     @FXML
     private ImageView IV_check_email;
 
     /**
-     * Label di errore per il campo email
+     * Label di errore per il campo email.
      */
     @FXML
     private Label LB_error_email;
 
     /**
-     * Field dove inserire il nickname
+     * Field dove inserire il nickname.
      */
     @FXML
     private MFXTextField TF_nickname;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo nickname visivamente
+     * correttezza del campo nickname visivamente.
      */
     @FXML
     private ImageView IV_check_nickname;
 
     /**
-     * Label di errore per il campo nickname
+     * Label di errore per il campo nickname.
      */
     @FXML
     private Label LB_error_nickname;
 
     /**
-     * Field dove inserire la password
+     * Field dove inserire la password.
      */
     @FXML
     private MFXPasswordField PF_password;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo password visivamente
+     * correttezza del campo password visivamente.
      */
     @FXML
     private ImageView IV_check_password;
 
     /**
-     * Label di errore per il password name
+     * Label di errore per il password name.
      */
     @FXML
     private Label LB_error_password;
 
     /**
-     * Field dove inserire la conferma della password
+     * Field dove inserire la conferma della password.
      */
     @FXML
     private MFXPasswordField PF_confirm_pwd;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo confirm password visivamene
+     * correttezza del campo confirm password visivamene.
      */
     @FXML
     private ImageView IV_check_confirmed_password;
 
     /**
-     * Label di errore per il campo confirmed password
+     * Label di errore per il campo confirmed password.
      */
     @FXML
     private Label LB_error_confirmed_password;
 
     /**
      * Bottone che avvia il processo di registrazione,
-     * se avvenuta con successo viene avviata
+     * se avvenuta con successo viene avviata.
      * {@link LoginMainController}
      */
     @FXML
     private MFXButton BT_sing_up;
 
     /**
-     * Spinner avviato sul bottone {@link #BT_sing_up}
+     * Spinner avviato sul bottone {@link #BT_sing_up}.
      */
     @FXML
     private MFXProgressSpinner PS_spinner;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Scena riferito a questo controller
+     * Scena riferito a questo controller.
      */
     private Scene scene;
 
     /**
      * Variabile per controllare se tutti i campi
-     * sono stati inseriti correttamente
+     * sono stati inseriti correttamente.
      */
     private int countOk = 0;
 
     /**
-     * Controller per impostare dati necessari al {@link UserVerifyEmailController}
+     * Controller per impostare dati necessari al {@link UserVerifyEmailController}.
      */
     private UserVerifyEmailController userVerifyEmailController;
 
     /**
-     * Controller per impostare dati necessari al {@link UserAlreadyVaccinatedController}
+     * Controller per impostare dati necessari al {@link UserAlreadyVaccinatedController}.
      */
     private UserAlreadyVaccinatedController userAlreadyVaccinatedController;
 
     /**
      * Boolean per tener traccia della gia' avvenuta vaccinazione
-     * di un utente
+     * di un utente.
      */
     private boolean alreadyVaccinated = false;
 
     /**
      * Utilizzato per inizializzare l'interfaccia prendendo la scena
      * e creare tutti i campi con i relativi listener, che gestiscono la scrittura
-     * in modo dinamico
+     * in modo dinamico.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -371,7 +371,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sul nome dell'utente
+     * Utilizzato per fare i diversi controlli sul nome dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkLength(String)
@@ -390,7 +390,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sul cognome dell'utente
+     * Utilizzato per fare i diversi controlli sul cognome dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkLength(String)
@@ -409,7 +409,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sul codice fiscale dell'utente
+     * Utilizzato per fare i diversi controlli sul codice fiscale dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkFiscalCode(String)
@@ -440,7 +440,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sull'email dell'utente
+     * Utilizzato per fare i diversi controlli sull'email dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkEmail(String)
@@ -468,7 +468,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sul nickname dell'utente
+     * Utilizzato per fare i diversi controlli sul nickname dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkLength(String)
@@ -496,7 +496,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sulla password dell'utente
+     * Utilizzato per fare i diversi controlli sulla password dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkPassword(String)
@@ -524,7 +524,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per fare i diversi controlli sulla conferma della password dell'utente
+     * Utilizzato per fare i diversi controlli sulla conferma della password dell'utente.
      *
      * @param value valore inserito
      * @see org.project.utils.RegistrationUtil#checkLength(String)
@@ -550,7 +550,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per inizializzare la backarrow
+     * Utilizzato per inizializzare la backarrow.
      */
     @FXML
     private void back() {
@@ -562,7 +562,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per scurire il pulsante backarrow quando ci si passa sopra
+     *  Utilizzato per scurire l'icona backarrow
+     *  quando il cursore entra.
      */
     @FXML
     private void darkStyleBack() {
@@ -570,7 +571,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per resettare il colore del pulsante backarrow quando ci si toglie dal pulsante
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleBack() {
@@ -578,7 +580,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per ridurre il programma ad icona
+     * Utilizzato per ridurre il programma ad icona.
      */
     @FXML
     private void minimize() {
@@ -587,7 +589,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona minimize
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleMinimize() {
@@ -595,8 +597,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleMinimize() {
@@ -604,7 +606,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude l'applicazione
+     * Quando premuto il tasto exit chiude l'applicazione.
      */
     @FXML
     private void quit() {
@@ -613,7 +615,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -621,8 +623,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -630,7 +632,7 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -639,17 +641,17 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Utilizzato per richiamare il metodo {@link #browseCalcFiscalCode}
+     * Utilizzato per richiamare il metodo {@link #browseCalcFiscalCode}.
      */
     @FXML
     private void calculateWebFiscalCode() {
@@ -662,7 +664,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Utilizzato per aprire google alla pagina per calcolare il codice
-     * fiscale
+     * fiscale.
      *
      * @throws URISyntaxException URISyntaxException
      * @throws IOException        IOException
@@ -677,7 +679,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona della calcolatrice
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleCalculator() {
@@ -685,8 +687,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleCalculator() {
@@ -697,7 +699,7 @@ public class UserSignUpController implements Initializable {
      * Metodo per gestire la registrazione, andando a controllare tutti i campi tramite i metodi
      * richiamati dalla classe RegistrationUtil. In caso di successo viene creato il centro
      * sul DB tramite l'apposito metodo del server. Se avviene con successo, l'utente
-     * viene mandato al {@link LoginMainController}
+     * viene mandato al {@link LoginMainController}.
      *
      * @see org.project.utils.RegistrationUtil#checkPasswordConfirmed(String, String)
      * @see org.project.server.Server#checkDuplicateEmail(String)
@@ -798,7 +800,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Alert utilizzato per segnalare eventuali errori in fase di registrazione, viene
-     * chiamato dal metodo {@link #signUp}
+     * chiamato dal metodo {@link #signUp}.
      */
     private void errorAlertField() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -882,7 +884,7 @@ public class UserSignUpController implements Initializable {
 
     /**
      * Chiamato nella {@link #initialize}, va a gestire l'eventuale cittadino che
-     * ha gia' ricevuto una o piu' dosi presso un centro
+     * ha gia' ricevuto una o piu' dosi presso un centro.
      *
      * @throws IOException IOException
      */

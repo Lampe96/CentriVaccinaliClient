@@ -24,7 +24,7 @@ import java.util.TimerTask;
 
 /**
  * Classe utilizzata per l'invio della email di verifica all'utente indicato,
- * usato in {@link UserSignUpController}
+ * usato in {@link UserSignUpController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -35,122 +35,122 @@ public class UserVerifyEmailController implements Initializable {
 
     /**
      * Timer utilizzato per impostare il boolean per permettere il
-     * rinvio dell'email con il codice
+     * rinvio dell'email con il codice.
      */
     private final Timer HIDDENTIMER = new Timer();
     /**
      * Timer utilizzato per mostrare il conto alla rovescia per
-     * il rinvio dell'email
+     * il rinvio dell'email.
      */
     private final Timer VISIBLETIMER = new Timer();
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dal programma
+     * Immagine che funge da quit dal programma.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field per il numero del codice 1
+     * Field per il numero del codice 1.
      */
     @FXML
     private TextField TF_one;
 
     /**
-     * Field per il numero del codice 2
+     * Field per il numero del codice 2.
      */
     @FXML
     private TextField TF_two;
 
     /**
-     * Field per il numero del codice 3
+     * Field per il numero del codice 3.
      */
     @FXML
     private TextField TF_three;
 
     /**
-     * Field per il numero del codice 4
+     * Field per il numero del codice 4.
      */
     @FXML
     private TextField TF_four;
 
     /**
-     * Field per il numero del codice 5
+     * Field per il numero del codice 5.
      */
     @FXML
     private TextField TF_five;
 
     /**
-     * Field per il numero del codice 6
+     * Field per il numero del codice 6.
      */
     @FXML
     private TextField TF_six;
 
     /**
-     * Bottone per confermare l'inserimento del codice
+     * Bottone per confermare l'inserimento del codice.
      */
     @FXML
     private MFXButton BT_confirmed;
 
     /**
      * Label per richiedere l'invio di un nuovo
-     * codice
+     * codice.
      */
     @FXML
     private Label BT_new_code;
 
     /**
      * Label di errore per l'inseriemnto errato del
-     * codice
+     * codice.
      */
     @FXML
     private Label LB_error_code;
 
     /**
-     * Label per il conto alla rovescia
+     * Label per il conto alla rovescia.
      */
     @FXML
     private Label LB_timer;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Boolean per il rinvio dell'email
+     * Boolean per il rinvio dell'email.
      */
     private boolean resend = true;
 
     /**
-     * Int per il conto alla rovescia
+     * Int per il conto alla rovescia.
      */
     private int countdown;
 
     /**
-     * Email
+     * Email.
      */
     private String email;
 
     /**
-     * Nickname
+     * Nickname.
      */
     private String nickname;
 
     /**
      * Boolean per la conferma della verifica
-     * dell'email
+     * dell'email.
      */
     private boolean isVerified;
 
     /**
-     * Utilizzato per impostare l'email e il nickname dell'utente
+     * Utilizzato per impostare l'email e il nickname dell'utente.
      *
      * @param email    email
      * @param nickname nickname
@@ -161,9 +161,9 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Utilizzato per impostare il boolean di verifica dell'email
+     * Utilizzato per impostare il boolean di verifica dell'email.
      *
-     * @return true se è verificata, false altrimenti
+     * @return true se e' verificata, false altrimenti
      */
     boolean getIsVerified() {
         return isVerified;
@@ -171,8 +171,8 @@ public class UserVerifyEmailController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia prendendo la scena
-     * e aggiungendo i listener sulle textField far si che si possa solo
-     * scrivere un numero all'interno
+     * e aggiungendo i listener sulle textField per far si che si possa solo
+     * scrivere un numero all'interno.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -238,8 +238,8 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit viene cancellata viene cancellata la referenza
-     * presente sul server per poter verificare il codice e chiuso lo stage
+     * Quando premuto il tasto exit viene cancellata la referenza
+     * presente sul server per poter verificare il codice e chiuso lo stage.
      *
      * @see org.project.server.Server#deleteReferenceVerifyEmail(String)
      */
@@ -257,7 +257,7 @@ public class UserVerifyEmailController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -265,7 +265,7 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
+     * Utilizzato per riportare l'immagine alla normalita'
      * una volta uscito il cursore
      */
     @FXML
@@ -274,7 +274,7 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -283,19 +283,19 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Utilizzato per confeconfermare il codice inserito, nel caso il codice sia correto lo stage viene chiuso
-     * al contrario se false, vengono resettati tutti i campi a vuoti.
-     * Per poter verificare che il codice sia corretto viene utilizzato il metodo remoto presente sul server
+     * Utilizzato per confermare il codice inserito, nel caso il codice sia correto lo stage viene chiuso
+     * al contrario se false, vengono impostati tutti i campi a vuoti.
+     * Per poter verificare che il codice sia corretto viene utilizzato il metodo remoto presente sul server.
      *
      * @see org.project.server.Server#verifyCodeEmail(String, int)
      */
@@ -327,8 +327,8 @@ public class UserVerifyEmailController implements Initializable {
     }
 
     /**
-     * Utilizzato per richiedere un nuovo codice, ma utilizzando un timer non è possibile richiederlo in continuazione,
-     * questo timeout è impostato a 60 secondi
+     * Utilizzato per richiedere un nuovo codice, ma utilizzando un timer non e' possibile richiederlo in continuazione,
+     * questo timeout e' impostato a 60 secondi.
      */
     @FXML
     private void newCode() {

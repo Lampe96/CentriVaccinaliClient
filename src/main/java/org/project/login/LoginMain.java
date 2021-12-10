@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * In questa classe e' contenuto il main del client
+ * In questa classe e' contenuto il main del client.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class LoginMain extends Application {
 
     /**
-     * Main dell'applicazione, il cui chiama il metodo {@link #start}
+     * Main dell'applicazione, il quale chiama il metodo {@link #start}.
      * 
      * @param args args
      */
@@ -34,8 +34,8 @@ public class LoginMain extends Application {
     }
 
     /**
-     * Utilizzato per inizializzare l'interfaccia inziale,
-     * ovvero la schermata di login
+     * Utilizzato per inizializzare l'interfaccia principale,
+     * ovvero la schermata di login.
      *
      * @param stage stage iniziale
      * @throws IOException IOException

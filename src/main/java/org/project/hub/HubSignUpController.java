@@ -44,7 +44,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Questa classe gestisce tutti i componenti presenti nella
  * schermata di registrazione dei centri vaccinali, avviata dalla
  * classe {@link LoginMainController}. In caso di successo si viene
- * rinviati all'interfaccia di login
+ * rinviati all'interfaccia di login.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -54,7 +54,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubSignUpController implements Initializable {
 
     /**
-     * Array utilizzato per riempire la combo box {@link #CB_qualificator}
+     * Array utilizzato per riempire la combo box {@link #CB_qualificator}.
      */
     private final static String[] QUALIFICATOR = {
             "Via",
@@ -64,7 +64,7 @@ public class HubSignUpController implements Initializable {
     };
 
     /**
-     * Array utilizzato per riempire la combo box {@link #CB_province}
+     * Array utilizzato per riempire la combo box {@link #CB_province}.
      */
     private final static String[] PROVINCES = {
             "AG", "AL", "AN", "AO", "AR", "AP", "AT", "AV", "BA", "BT", "BL", "BN", "BG", "BI", "BO", "BZ", "BS",
@@ -77,7 +77,7 @@ public class HubSignUpController implements Initializable {
     };
 
     /**
-     * Array utilizzato per riempire la combo box {@link #CB_typology}
+     * Array utilizzato per riempire la combo box {@link #CB_typology}.
      */
     private final static String[] TYPOLOGY = {
             "OSPEDALIERO",
@@ -86,7 +86,7 @@ public class HubSignUpController implements Initializable {
     };
 
     /**
-     * Array utilizzato salavare i diversi campi dei centri vaccinali
+     * Array utilizzato salavare i diversi campi dei centri vaccinali.
      */
     private final static String[] hubField = {
             "name",
@@ -102,199 +102,199 @@ public class HubSignUpController implements Initializable {
     };
 
     /**
-     * HashMap per il controllo della correttezza dei campi
+     * HashMap per il controllo della correttezza dei campi.
      */
     private final HashMap<String, Boolean> saveOk = new HashMap<>();
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che serve per tornare alla schermata precedente
+     * Immagine che serve per tornare alla schermata precedente.
      */
     @FXML
     private ImageView BT_back;
 
     /**
-     * Immagine che serve per ridurre ad icona l'applicazione
+     * Immagine che serve per ridurre ad icona l'applicazione.
      */
     @FXML
     private ImageView BT_minimize;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field dove inserire il nome del centro vaccinale
+     * Field dove inserire il nome del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_name_hub;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo name visivamente
+     * correttezza del campo name visivamente.
      */
     @FXML
     private ImageView IV_check_name;
 
     /**
-     * Label di errore per il campo name
+     * Label di errore per il campo name.
      */
     @FXML
     private Label LB_error_name;
 
     /**
-     * Field dove inserire la password
+     * Field dove inserire la password.
      */
     @FXML
     private MFXPasswordField PF_password;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo password visivamente
+     * correttezza del campo password visivamente.
      */
     @FXML
     private ImageView IV_check_password;
 
     /**
-     * Label di errore per il password name
+     * Label di errore per il password name.
      */
     @FXML
     private Label LB_error_password;
 
     /**
-     * Field dove inserire la conferma della password
+     * Field dove inserire la conferma della password.
      */
     @FXML
     private MFXPasswordField PF_confirmed_password;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo confirm password visivamente
+     * correttezza del campo confirm password visivamente.
      */
     @FXML
     private ImageView IV_check_confirmed_password;
 
     /**
-     * Label di errore per il campo confirmed password
+     * Label di errore per il campo confirmed password.
      */
     @FXML
     private Label LB_error_confirmed_password;
 
     /**
-     * Combobox utilizzata per scegliere il qualificatore
+     * Combobox utilizzata per scegliere il qualificatore.
      */
     @FXML
     private JFXComboBox<String> CB_qualificator;
 
     /**
-     * Label di errore per la combobox qualificator
+     * Label di errore per la combobox qualificator.
      */
     @FXML
     private Label LB_error_qualificator;
 
     /**
-     * Field dove inserire l'indirizzo del centro vaccinale
+     * Field dove inserire l'indirizzo del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_address;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo address visivamente
+     * correttezza del campo address visivamente.
      */
     @FXML
     private ImageView IV_check_address;
 
     /**
-     * Label di errore per il campo address
+     * Label di errore per il campo address.
      */
     @FXML
     private Label LB_error_address;
 
     /**
-     * Field dove inserire il numero (indirizzo) del centro vaccinale
+     * Field dove inserire il numero (indirizzo) del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_number;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo number visivamente
+     * correttezza del campo number visivamente.
      */
     @FXML
     private ImageView IV_check_number;
 
     /**
-     * Label di errore per il campo number
+     * Label di errore per il campo number.
      */
     @FXML
     private Label LB_error_number;
 
     /**
-     * Field dove inserire la citta' del centro vaccinale
+     * Field dove inserire la citta' del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_city;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo city visivamente
+     * correttezza del campo city visivamente.
      */
     @FXML
     private ImageView IV_check_city;
 
     /**
-     * Label di errore per il campo city
+     * Label di errore per il campo city.
      */
     @FXML
     private Label LB_error_city;
 
     /**
-     * Combobox dove scegliere la provincia
+     * Combobox dove scegliere la provincia.
      */
     @FXML
     private JFXComboBox<String> CB_province;
 
     /**
-     * Label di errore per la combobox province
+     * Label di errore per la combobox province.
      */
     @FXML
     private Label LB_error_province;
 
     /**
-     * Field dove inserire il CAP del centro vaccinale
+     * Field dove inserire il CAP del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_cap;
 
     /**
      * Immagine utilizzata per confermare la
-     * correttezza del campo cap visivamente
+     * correttezza del campo cap visivamente.
      */
     @FXML
     private ImageView IV_check_cap;
 
     /**
-     * Label di errore per il campo cap
+     * Label di errore per il campo cap.
      */
     @FXML
     private Label LB_error_cap;
 
     /**
-     * Combobox per scegliere la tipologia del centro vaccinale
+     * Combobox per scegliere la tipologia del centro vaccinale.
      */
     @FXML
     private JFXComboBox<String> CB_typology;
 
     /**
-     * Label di errore per la combobox tipologia
+     * Label di errore per la combobox tipologia.
      */
     @FXML
     private Label LB_error_typology;
@@ -302,37 +302,37 @@ public class HubSignUpController implements Initializable {
     /**
      * Bottone che avvia il processo di registrazione,
      * se avvenuta con successo viene avviata
-     * {@link LoginMainController}
+     * {@link LoginMainController}.
      */
     @FXML
     private MFXButton BT_sing_up;
 
     /**
-     * Spinner avviato sul bottone {@link #BT_sing_up}
+     * Spinner avviato sul bottone {@link #BT_sing_up}.
      */
     @FXML
     private MFXProgressSpinner PS_spinner;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Scena riferito a questo controller
+     * Scena riferito a questo controller.
      */
     private Scene scene;
 
     /**
      * Variabile per controllare se tutti i campi
-     * sono stati inseriti correttamente
+     * sono stati inseriti correttamente.
      */
     private int countOk = 0;
 
     /**
      * Utilizzato per inizializzare l'interfaccia prendendo la scena
      * e creare tutti i campi con i relativi listener, che gestiscono la scrittura
-     * in modo dinamico
+     * in modo dinamico.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -518,7 +518,7 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per inizializzare la backarrow
+     * Metodo per inizializzare la backarrow.
      */
     @FXML
     private void back() {
@@ -530,7 +530,7 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per scurire il pulsante backarrow quando ci si passa sopra
+     * Utilizzato per scurire l'icona backarrow quando il cursore entra
      */
     @FXML
     private void darkStyleBack() {
@@ -538,7 +538,8 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per resettare il colore del pulsante backarrow quando ci si toglie dal pulsante
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleBack() {
@@ -546,7 +547,7 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Metodo per ridurre il programma ad icona
+     * Utilizzato per ridurre il programma ad icona.
      */
     @FXML
     private void minimize() {
@@ -555,7 +556,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona minimize
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleMinimize() {
@@ -563,8 +564,8 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleMinimize() {
@@ -572,7 +573,7 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude l'applicazione
+     * Quando premuto il tasto exit chiude l'applicazione.
      */
     @FXML
     private void quit() {
@@ -581,7 +582,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -589,8 +590,8 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -598,7 +599,7 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -607,20 +608,20 @@ public class HubSignUpController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Metodo per gestire la registrazione, andando a controllare tutti i campi tramite i metodi
+     * Utilizzato per gestire la registrazione, andando a controllare tutti i campi tramite i metodi
      * richiamati dalla classe RegistrationUtil. In caso di successo viene creato il centro
      * sul DB tramite l'apposito metodo del server. Se avviene con successo, l'utente
-     * viene mandato al {@link LoginMainController}
+     * viene mandato al {@link LoginMainController}.
      *
      * @see org.project.utils.RegistrationUtil#checkPasswordConfirmed(String, String)
      * @see org.project.utils.RegistrationUtil#checkDuplicateAddress(String)
@@ -731,7 +732,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Alert utilizzato per gestire eventuali errori sulle label dedicate
-     * all'indirizzo del centro. Viene chiamato da {@link #signUp}
+     * all'indirizzo del centro. Viene chiamato da {@link #signUp}.
      */
     private void errorAlertAddress() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -776,7 +777,7 @@ public class HubSignUpController implements Initializable {
 
     /**
      * Alert utilizzato per segnalare eventuali errori in fase di registrazione, viene
-     * chiamato dal metodo {@link #signUp}
+     * chiamato dal metodo {@link #signUp}.
      */
     private void errorAlertField() {
         Alert alert = new Alert(Alert.AlertType.ERROR);

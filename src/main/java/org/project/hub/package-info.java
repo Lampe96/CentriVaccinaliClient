@@ -1,7 +1,7 @@
 /**
  * Questo package include le classi necessarie per lo
  * svolgimento di tutte le funzioni svolte nel lato dedicato ai
- * centri vaccinali
+ * centri vaccinali.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)

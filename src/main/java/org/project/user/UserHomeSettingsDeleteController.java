@@ -22,8 +22,8 @@ import java.util.ResourceBundle;
 
 /**
  * Questa classe gestisce tutti i componenti presenti nel pop-up
- * che gestisce l'eliminazione dell'account da DB. eseguibile dal bottone presente
- * nella classe {@link UserHomeSettingsController}
+ * che gestisce l'eliminazione dell'account da DB. Eseguibile dal bottone presente
+ * nella classe {@link UserHomeSettingsController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -33,54 +33,54 @@ import java.util.ResourceBundle;
 public class UserHomeSettingsDeleteController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dal programma
+     * Immagine che funge da quit dal programma.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field per la password
+     * Field per la password.
      */
     @FXML
     private MFXPasswordField PF_pwd;
 
     /**
-     * Label di errore per la paswword
+     * Label di errore per la password.
      */
     @FXML
     private Label LB_error_pwd;
 
     /**
-     * Bottone per confermare l'eliminazione dell'account
+     * Bottone per confermare l'eliminazione dell'account.
      */
     @FXML
     private MFXButton BT_confirmed;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Email
+     * Email.
      */
     private String email;
 
     /**
      * Boolean per tener traccia dell'eliminazione
-     * dell'account
+     * dell'account.
      */
     private boolean deleteAcc = false;
 
     /**
      * Utilizzao per impostare l'email
-     * dell'utente
+     * dell'utente.
      *
      * @param email email
      */
@@ -89,8 +89,8 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare il boolean per la
-     * verifica dell'eliminazione dell'account
+     * Utilizzato per impostare il boolean per la
+     * verifica dell'eliminazione dell'account.
      *
      * @return true se viene eliminato, false nel caso contrario
      */
@@ -100,7 +100,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena
+     * prendendo la scena.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -111,7 +111,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -120,10 +120,10 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -132,7 +132,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
     /**
      * Se viene premuto il tasto {@link #BT_confirmed}
      * viene verificata la password tramite l'apposito metodo e,
-     * se corretta, viene eliminato dal DB l'account
+     * se corretta, viene eliminato dal DB l'account.
      *
      * @see org.project.server.Server#checkPassword(String, String, String)
      */
@@ -154,7 +154,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -162,7 +162,7 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -171,8 +171,8 @@ public class UserHomeSettingsDeleteController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {

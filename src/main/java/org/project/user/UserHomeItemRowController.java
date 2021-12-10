@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Questa classe gestisce le funzionalita' della row
- * presente nella home dei cittadini
+ * presente nella home dei cittadini.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -48,50 +48,50 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UserHomeItemRowController implements Initializable {
 
     /**
-     * HBox esterno
+     * HBox esterno.
      */
     @FXML
     private HBox HB_ext;
 
     /**
-     * Label per il nome del centro vaccinale
+     * Label per il nome del centro vaccinale.
      */
     @FXML
     private Label LB_hub_name;
 
     /**
-     * Label per la tipologia del centro vaccinale
+     * Label per la tipologia del centro vaccinale.
      */
     @FXML
     private Label LB_typology;
 
     /**
-     * Label per il comune del centro vaccinale
+     * Label per il comune del centro vaccinale.
      */
     @FXML
     private Label LB_city;
 
     /**
-     * Label per la media degli eventi segnalati presso quel centro
+     * Label per la media degli eventi segnalati presso quel centro.
      */
     @FXML
     private Label LB_avg_adverse_event;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
      * Oggetto scaricato dal DB e passato dal controller
      * {@link UserHomeController}, utilizzato per riempire le row
-     * con i dati del centro vaccinali
+     * con i dati del centro vaccinali.
      */
     private Hub hub;
 
     /**
      * Oggetto scaricato dal DB e passato dal controller
-     * {@link UserHomeController}
+     * {@link UserHomeController}.
      */
     private User us;
 
@@ -99,7 +99,7 @@ public class UserHomeItemRowController implements Initializable {
      * Utilizzato per impostare i dati dei centri vaccinali e degli utenti.
      * Inoltre riempe alcune label come: nome del centro vaccinale e citta'.
      * Utilizzato anche per fare il controllo e impostare la tipologia del centro
-     * vaccinale
+     * vaccinale.
      *
      * @param hub       centro vaccinale
      * @param us        utente
@@ -132,7 +132,7 @@ public class UserHomeItemRowController implements Initializable {
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena e impostare il tooltip sulle righe
+     * prendendo la scena e impostare il tooltip sulle righe.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -147,7 +147,7 @@ public class UserHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare un ombra interna durante il passaggio del cursore di questa riga
+     * Utilizzato per impostare un'ombra interna durante il passaggio del cursore di questa riga.
      */
     @FXML
     private void darkStyleRow() {
@@ -155,7 +155,7 @@ public class UserHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per resettare lo stile di questa riga all'uscita del cursore
+     * Utilizzato per azzerare lo stile di questa riga all'uscita del cursore.
      */
     @FXML
     private void restoreStyleRow() {
@@ -163,8 +163,8 @@ public class UserHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per caricare lo stagee la scena dell'{@link UserHomeInfoHubController} e impostare
-     * i dati relativi a centri vaccinali e i dati degli utenti
+     * Utilizzato per caricare lo stage la scena dell'{@link UserHomeInfoHubController} e impostare
+     * i dati relativi a centri vaccinali e i dati degli utenti.
      */
     @FXML
     private void openInfoHub() {
@@ -208,12 +208,7 @@ public class UserHomeItemRowController implements Initializable {
     }
 
     /**
-     * Utilizzato per impostare nella label della tipologia l'abbreviazione della tipologia
-     * |       Key      |    Value   |
-     * |----------------|------------|
-     * | OSPEDALIERO    | OSPED      |
-     * | AZIENDALE      | AZIEND     |
-     * | HUB            | HUB        |
+     * Utilizzato per impostare nella label della tipologia l'abbreviazione
      *
      * @param type tipologia di centro vaccinale
      */

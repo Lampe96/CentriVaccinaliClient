@@ -46,7 +46,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Questa classe gestisce tutti i componenti presenti nella
  * fase di creazione di un nuovo  cittadino vaccinato, quindi
  * attivabile dal bottone presente nella classe
- * {@link HubHomeController}
+ * {@link HubHomeController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -56,82 +56,82 @@ import java.util.concurrent.atomic.AtomicReference;
 public class HubHomeRegistrationNewVaccinatedController implements Initializable {
 
     /**
-     * Array utilizzato per riempire {@link #CB_vaccine}
+     * Array utilizzato per riempire {@link #CB_vaccine}.
      */
     private static final String[] VACCINETYPE = {"Pfizer", "Moderna", "AstraZeneca", "J&J"};
     /**
-     * sUser vaccinato
+     * User vaccinato.
      */
     private final User vaccinatedUser = new User();
 
     /**
-     * Anchor pane esterno
+     * Anchor pane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * TextField per indicare il nome del vaccinato
+     * TextField per indicare il nome del vaccinato.
      */
     @FXML
     private MFXTextField TF_name;
 
     /**
-     * TextField per indicare il cognome del vaccinato
+     * TextField per indicare il cognome del vaccinato.
      */
     @FXML
     private MFXTextField TF_surname;
 
     /**
-     * TextField per indicare il codice fiscale del vaccinato
+     * TextField per indicare il codice fiscale del vaccinato.
      */
     @FXML
     private MFXTextField TF_fiscal_code;
 
     /**
      * Immagine per aprire un collegamento internet per calcolare
-     * il codice fiscale
+     * il codice fiscale.
      */
     @FXML
     private ImageView IV_calculator_fiscal_code;
 
     /**
-     * ComboBox per selezionare la tipologi del vaccino
+     * ComboBox per selezionare la tipologia del vaccino.
      */
     @FXML
     private JFXComboBox<String> CB_vaccine;
 
     /**
      * TextField per indicare la data della somministrazione
-     * del vaccinato
+     * del vaccinato.
      */
     @FXML
     private MFXTextField TF_date;
 
     /**
-     * Bottone per registrare il nuovo vaccinato
+     * Bottone per registrare il nuovo vaccinato.
      */
     @FXML
     private MFXButton BT_sing_up_new_vaccinated;
 
     /**
-     * Stage riferito a questa classe
+     * Stage riferito a questa classe.
      */
     private Stage stage;
 
     /**
-     * Nome del centro vaccinale
+     * Nome del centro vaccinale.
      */
     private String hubName;
 
     /**
-     * Utilizzato per settare il nome del centro vaccinale
+     * Utilizzato per settare il nome del centro vaccinale.
      *
      * @param hubName nome centro vacinale
      */
@@ -141,7 +141,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     /**
      * Utilizzato per inizializzare l'interfaccia
-     * prendendo la scena
+     * prendendo la scena.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -164,7 +164,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     /**
      * Utilizzato per richiamare il metodo {@link #browseCalcFiscalCode()}
-     * che porta al calcolatore del codice fiscale online
+     * che porta al calcolatore del codice fiscale online.
      */
     @FXML
     private void calculateWebFiscalCode() {
@@ -176,7 +176,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     }
 
     /**
-     * Apre connessione alla pagina del calcolatore del codice fiscale sul web
+     * Apre connessione alla pagina del calcolatore del codice fiscale sul web.
      *
      * @throws URISyntaxException URISyntaxException
      * @throws IOException        IOException
@@ -191,7 +191,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     /**
      * Utilizzato per scurire l'icona della calcolatrice
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleCalculator() {
@@ -200,7 +200,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -208,8 +208,8 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -217,7 +217,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -226,17 +226,17 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -244,8 +244,8 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
     }
 
     /**
-     * Utilizzato per riportare alla normalità l'effeto applicato
-     * precedentemente all'immagine della calcolatrice
+     * Utilizzato per riportare alla normalità l'effetto applicato
+     * precedentemente all'immagine della calcolatrice.
      */
     @FXML
     private void restoreStyleCalculator() {

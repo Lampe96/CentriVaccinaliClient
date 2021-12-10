@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 /**
  * Questa classe gestisce tutti i componenti presenti nella
  * schermata del grafico che mostra l'andamento della campagna
- * vaccinale, condivisa da {@link HubHomeController} e {@link UserHomeController}
+ * vaccinale, condivisa da {@link HubHomeController} e {@link UserHomeController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -32,40 +32,40 @@ import java.util.ResourceBundle;
 public class ChartController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Grafico di tipo BarChart
+     * Grafico di tipo BarChart.
      */
     @FXML
     private StackedBarChart<String, Integer> barChart;
 
     /**
-     * Stage riferito al controller
+     * Stage riferito al controller.
      */
     private Stage stage;
 
     /**
-     * Array che contiene i dati per riempire il grafico
+     * Array che contiene i dati per riempire il grafico.
      */
     private int[] totals;
 
     /**
-     * Tipo di utente
+     * Tipo di utente.
      */
     private UserType userType;
 
     /**
-     * Utilizzato per settare i totali delle vaccinazioni in questo controller
+     * Utilizzato per settare i totali delle vaccinazioni in questo controller.
      *
      * @param totals totali vaccinazioni
      */
@@ -74,6 +74,8 @@ public class ChartController implements Initializable {
     }
 
     /**
+     * Utilizzato per distinguere l'accesso tra cittadino e centro vaccinale
+     *
      * @param userType tipo di utente, se cittadino verranno create tre
      *                 colonne, se centro vaccinale quattro
      */
@@ -83,7 +85,7 @@ public class ChartController implements Initializable {
 
     /**
      * Utilizzato per prendere lo stage e inizializzare
-     * il grafico
+     * il grafico.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -120,7 +122,7 @@ public class ChartController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -129,7 +131,7 @@ public class ChartController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -137,8 +139,8 @@ public class ChartController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -146,7 +148,7 @@ public class ChartController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -155,10 +157,10 @@ public class ChartController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
+     * Utilizzato da certe immagini per portare alla normalita'
      * l'effetto interno di scurimento
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);

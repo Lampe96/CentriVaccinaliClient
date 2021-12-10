@@ -26,12 +26,12 @@ import java.util.ResourceBundle;
 
 /**
  * Questa classe gestisce il pop-up che viene aperto
- * in fase di registrazione, viene chiesto al cittadino se
+ * in fase di registrazione, nel quale viene chiesto al cittadino se
  * ha gia' ricevuto o meno una dose di vaccino. In caso
  * affermativo viene chiesto di inserire il codice fiscale
  * e il centro vaccinale presso cui e' stato vaccinato e,
  * in caso di controllo eseguito con successo, vengono
- * riempiti i campi della schermata {@link UserSignUpController}
+ * riempiti i campi della schermata {@link UserSignUpController}.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -41,60 +41,60 @@ import java.util.ResourceBundle;
 public class UserAlreadyVaccinatedController implements Initializable {
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
-     * Immagine che funge da quit dall'applicazione
+     * Immagine che funge da quit dall'applicazione.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Field per l'inserimento del codice fiscale
+     * Field per l'inserimento del codice fiscale.
      */
     @FXML
     private MFXTextField TF_fiscal_code;
 
     /**
-     * Field per l'inserimento del nome del centro vaccinale
+     * Field per l'inserimento del nome del centro vaccinale.
      */
     @FXML
     private MFXTextField TF_hub_name;
 
     /**
-     * Bottone per la conferma
+     * Bottone per la conferma.
      */
     @FXML
     private MFXButton BT_confirmed;
 
     /**
-     * Label di errore per il codice fiscale
+     * Label di errore per il codice fiscale.
      */
     @FXML
     private Label LB_error_fiscal_code;
 
     /**
      * Label di errore per il nome
-     * del centro vaccinale
+     * del centro vaccinale.
      */
     @FXML
     private Label LB_error_hub_name;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Dati necessari nella classe
+     * Dati necessari nella classe.
      */
     private User vu;
 
     /**
-     * Utilizzato per settare l'utente vaccinato
+     * Utilizzato per impostare l'utente vaccinato.
      * 
      * @return l'utente vaccinato
      */
@@ -103,7 +103,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
     }
 
     /**
-     * Utilizzato per spostare il focus iniziale sul bottone di conferma
+     * Utilizzato per spostare il focus iniziale sul bottone di conferma.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -117,7 +117,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -126,7 +126,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -134,8 +134,8 @@ public class UserAlreadyVaccinatedController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -143,7 +143,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -152,10 +152,10 @@ public class UserAlreadyVaccinatedController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
+     * Utilizzato da certe immagini per portare alla normalita'
      * l'effetto interno di scurimento
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -165,13 +165,12 @@ public class UserAlreadyVaccinatedController implements Initializable {
      * Azione collegata al bottone {@link #BT_confirmed}, vengono
      * controllati i parametri inseriti nei field tramite un metodo remoto.
      * se il controllo termina con successo vengono compilati alcuni campi della
-     * registrazione
+     * registrazione.
      *
-     * @param event event
      * @see org.project.server.Server#checkIfUserIsVaccinated(String, String)
      */
     @FXML
-    private void confirmed(MouseEvent event) {
+    private void confirmed() {
         String fiscalCode = TF_fiscal_code.getText().strip().toUpperCase(Locale.ROOT);
         String hubName = TF_hub_name.getText().strip();
 

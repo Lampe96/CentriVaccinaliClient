@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Questa classe gestisce tutti i componenti presenti nella
  * schermata di aggiunta eventi avversi {@link UserHomeAddAdverseEventController},
  * accessibile da {@link UserHomeInfoHubController}.In caso di aggiunta con successo,
- * l'evento viene inserito nel DB tramite metodo remoto
+ * l'evento viene inserito nel DB tramite metodo remoto.
  *
  * @author Federico Mainini 740691 (VA)
  * @author Gianluca Latronico 739893 (VA)
@@ -49,7 +49,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
-     * Array utilizzato per riempire {@link #CB_event_type}
+     * Array utilizzato per riempire {@link #CB_event_type}.
      */
     private final static String[] TYPEAE = {
             "MAL DI TESTA",
@@ -62,66 +62,66 @@ public class UserHomeAddAdverseEventController implements Initializable {
     };
 
     /**
-     * AnchorPane esterno
+     * AnchorPane esterno.
      */
     @FXML
     private AnchorPane AP_ext;
 
     /**
      * ComboBox per selezionare il tipo
-     * dell'evento avverso
+     * dell'evento avverso.
      */
     @FXML
     private JFXComboBox<String> CB_event_type;
 
     /**
-     * Field con le stelle da 1 a 5
+     * Field con le stelle da 1 a 5.
      */
     @FXML
     private Rating R_severity;
 
     /**
-     * Label per conteggio dei caratteri nel commento
+     * Label per conteggio dei caratteri nel commento.
      */
     @FXML
     private Label LB_char_counter;
 
     /**
-     * Area di testo in cui lasciareuna nota
+     * Area di testo in cui lasciare una nota.
      */
     @FXML
     private JFXTextArea TA_text;
 
     /**
-     * Immagine che funge da quit da questo stage
+     * Immagine che funge da quit da questo stage.
      */
     @FXML
     private ImageView BT_quit;
 
     /**
-     * Bottone per aggiungere l'evento avverso
+     * Bottone per aggiungere l'evento avverso.
      */
     @FXML
     private MFXButton BT_add_adverse_event;
 
     /**
-     * Stage riferito a questo controller
+     * Stage riferito a questo controller.
      */
     private Stage stage;
 
     /**
-     * Variabile per il nickname
+     * Variabile per il nickname.
      */
     private String nick;
 
     /**
      * Dati necessari nella classe
-     * dei centri vaccinali
+     * dei centri vaccinali.
      */
     private Hub hub;
 
     /**
-     * Utilizzato per settare il nickname nel controller
+     * Utilizzato per settare il nickname nel controller.
      * 
      * @param nick nickname
      */
@@ -130,7 +130,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato per settare i dati dei centri vaccinali
+     * Utilizzato per settare i dati dei centri vaccinali.
      *
      * @param hub hub
      */
@@ -140,7 +140,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per riempire la combo box dei tipi di malesseri
-     * e per verificare la lunghezza della nota
+     * e per verificare la lunghezza della nota.
      *
      * @param url            url
      * @param resourceBundle resourceBundle
@@ -167,7 +167,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     /**
-     * Quando premuto, il tasto exit chiude lo stage
+     * Quando premuto il tasto exit chiude lo stage.
      */
     @FXML
     private void quit() {
@@ -176,7 +176,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per scurire l'icona quit
-     * quando il cursore entra
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleQuit() {
@@ -184,8 +184,8 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato per riportare l'immagine alla normalità
-     * una volta uscito il cursore
+     * Utilizzato per riportare l'immagine alla normalita'
+     * una volta uscito il cursore.
      */
     @FXML
     private void restoreStyleQuit() {
@@ -193,7 +193,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per scurire l'interno
+     * Utilizzato da certe immagini per scurire l'interno.
      *
      * @param iv ImageView che si vuole scurire
      */
@@ -202,10 +202,10 @@ public class UserHomeAddAdverseEventController implements Initializable {
     }
 
     /**
-     * Utilizzato da certe immagini per portare alla normalità
-     * l'effetto interno di scurimento
+     * Utilizzato da certe immagini per portare alla normalita'
+     * l'effetto interno di scurimento.
      *
-     * @param iv ImageView che si vuole portare alla normalità
+     * @param iv ImageView che si vuole portare alla normalita'
      */
     private void resetDarkExit(@NotNull ImageView iv) {
         iv.setEffect(null);
@@ -217,7 +217,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
      * effettuata l'aggiunta dell'evento su DB. Se il processo termina con
      * successo viene mostrato il pop-up {@link #addOtherEvent}, in caso
      * contrario il pop-up {@link #errorAlert(int)}, con 1 si indica un errore
-     * nella compilazione dei campi, con 2 un evento avverso doppio
+     * nella compilazione dei campi, con 2 un evento avverso doppio.
      *
      * @see org.project.server.Server#addAdverseEvent(AdverseEvent)
      */
@@ -249,7 +249,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
     /**
      * Utilizzato per far apparire un pop-up
      * che chiedera' all'utente se vuole inserire un altro
-     * evento avverso oppure uscire
+     * evento avverso oppure uscire.
      */
     private void addOtherEvent() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -302,7 +302,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per mostrare un pop-up di errore
-     * (tipologia non selezionata o evento duplicato)
+     * (tipologia non selezionata o evento duplicato).
      *
      * @param typeError intero che indica la tipologia di errore da mostrare
      */
