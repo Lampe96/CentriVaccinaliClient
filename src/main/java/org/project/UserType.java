@@ -11,8 +11,8 @@ public enum UserType {
     USER,
 
     /**
-    * Centro vaccinale
-    */
+     * Centro vaccinale
+     */
     HUB,
 
     /**

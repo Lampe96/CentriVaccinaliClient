@@ -442,14 +442,16 @@ public class UserHomeInfoHubController implements Initializable {
     /**
      * Utilizzato per impostare un'ombra interna durante il passaggio del cursore di questa icona.
      */
-    public void darkStyleMaps() {
+    @FXML
+    private void darkStyleMaps() {
         setDarkHover(IV_maps);
     }
 
     /**
      * Utilizzato per azzerare lo stile di questa icona all'uscita del cursore.
      */
-    public void restoreStyleMaps() {
+    @FXML
+    private void restoreStyleMaps() {
         resetDarkExit(IV_maps);
     }
 

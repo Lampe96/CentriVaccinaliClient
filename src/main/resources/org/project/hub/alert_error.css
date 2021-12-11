@@ -1,33 +1,33 @@
-.alert{
+.alert {
     -fx-background-color: #999999;
     -fx-background-radius: 1em;
 }
 
-.alert > *.button-bar > *.container > *.button{
+.alert > *.button-bar > *.container > *.button {
     -fx-background-radius: 0.5em;
     -fx-background-color: #05BDF2;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 7);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 7);
     -fx-translate-x: -5;
     -fx-translate-y: -5;
 }
 
-.alert > *.button-bar > *.container > *.button:hover{
+.alert > *.button-bar > *.container > *.button:hover {
     -fx-cursor: hand;
     -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 5, 5);
 }
 
-#btnCancel{
+#btnCancel {
     -fx-background-color: #EE4D39;
 }
 
-.alert:header *.header-panel{
+.alert:header *.header-panel {
     -fx-background-color: #BBBBBB;
     -fx-background-radius: 1em;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 10);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 10, 0, 0, 10);
 }
 
-.alert:header *.header-panel *.label{
+.alert:header *.header-panel *.label {
     -fx-font-size: 20px;
     -fx-text-fill: black;
     -fx-translate-x: 7;

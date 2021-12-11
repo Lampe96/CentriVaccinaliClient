@@ -15,11 +15,11 @@
     -fx-text-fill: #0B0080;
 }
 
-#spinner .track{
+#spinner .track {
     -fx-stroke: #ffdf00;
 }
 
-.jfx-combo-box{
+.jfx-combo-box {
     -fx-prompt-text-fill: #4d4d4d;
     -fx-font-size: 15;
 }

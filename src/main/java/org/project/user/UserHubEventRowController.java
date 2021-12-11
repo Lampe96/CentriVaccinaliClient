@@ -159,7 +159,7 @@ public class UserHubEventRowController implements Initializable {
     /**
      * Utilizzato per aprire la schermata in cui visualizzare le info dell'evento avverso
      * preso in considerazione, richiamato da {@link #openInfoAdverseEvent}.
-     * 
+     *
      * @throws IOException IOException
      */
     private void startInfoAdverseEvent() throws IOException {

@@ -122,7 +122,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per settare il nickname nel controller.
-     * 
+     *
      * @param nick nickname
      */
     void setNick(String nick) {

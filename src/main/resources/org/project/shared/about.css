@@ -1,8 +1,8 @@
-#header_anchor{
+#header_anchor {
     -fx-background-image: url("../drawable/header_about.gif");
 }
 
-#text_anchor{
+#text_anchor {
     -fx-background-image: url("../drawable/text_about.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: 0 40;

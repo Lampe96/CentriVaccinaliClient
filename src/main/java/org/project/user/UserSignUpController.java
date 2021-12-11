@@ -562,8 +562,8 @@ public class UserSignUpController implements Initializable {
     }
 
     /**
-     *  Utilizzato per scurire l'icona backarrow
-     *  quando il cursore entra.
+     * Utilizzato per scurire l'icona backarrow
+     * quando il cursore entra.
      */
     @FXML
     private void darkStyleBack() {

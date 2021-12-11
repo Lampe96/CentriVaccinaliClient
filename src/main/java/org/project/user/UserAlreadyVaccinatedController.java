@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -95,7 +94,7 @@ public class UserAlreadyVaccinatedController implements Initializable {
 
     /**
      * Utilizzato per impostare l'utente vaccinato.
-     * 
+     *
      * @return l'utente vaccinato
      */
     User getVaccinatedUser() {

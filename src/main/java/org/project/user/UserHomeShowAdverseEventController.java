@@ -72,7 +72,7 @@ public class UserHomeShowAdverseEventController implements Initializable {
 
     /**
      * Utilizzato per settare l'evento avverso in questo controller.
-     * 
+     *
      * @param ae evento avverso
      */
     void setData(AdverseEvent ae) {

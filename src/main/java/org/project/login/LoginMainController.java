@@ -32,6 +32,7 @@ import org.project.hub.HubSignUpController;
 import org.project.server.ServerReference;
 import org.project.user.UserHomeController;
 import org.project.user.UserSignUpController;
+import org.project.utils.RegistrationUtil;
 
 import java.awt.*;
 import java.io.*;
@@ -325,7 +326,7 @@ public class LoginMainController implements Initializable {
      * di utente (User o centro vaccinale); con questa informazione viene avviata la
      * schermata home corretta.
      *
-     * @see org.project.server.Server#checkCredential(String, String)
+     * @see org.project.server.Server#checkCredential(String, String, UserType)
      */
     @FXML
     private void login() {
@@ -350,28 +351,46 @@ public class LoginMainController implements Initializable {
             e.printStackTrace();
         }
 
-        UserType userHub = null;
-        try {
-            userHub = ServerReference.getServer().checkCredential(email, pwd);
-        } catch (RemoteException | NotBoundException e) {
-            e.printStackTrace();
-        }
-
-        if (userHub == null) {
-            LB_error_email.setVisible(true);
-            LB_error_password.setVisible(true);
-        } else if (userHub == UserType.HUB) {
-            try {
-                startRightHomeStage(UserType.HUB);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (RegistrationUtil.checkPassword(pwd)) {
+            if (RegistrationUtil.checkEmail(email)) {
+                try {
+                    UserType userHub = ServerReference.getServer().checkCredential(email, pwd, UserType.USER);
+                    if (userHub == null) {
+                        LB_error_email.setVisible(true);
+                        LB_error_password.setVisible(true);
+                    } else {
+                        try {
+                            startRightHomeStage(UserType.USER);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (RemoteException | NotBoundException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                if (!email.equals("")) {
+                    try {
+                        UserType userHub = ServerReference.getServer().checkCredential(email, pwd, UserType.HUB);
+                        if (userHub == null) {
+                            LB_error_email.setVisible(true);
+                            LB_error_password.setVisible(true);
+                        } else {
+                            try {
+                                startRightHomeStage(UserType.HUB);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (RemoteException | NotBoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    LB_error_email.setVisible(true);
+                }
             }
         } else {
-            try {
-                startRightHomeStage(UserType.USER);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            LB_error_password.setVisible(true);
         }
     }
 
