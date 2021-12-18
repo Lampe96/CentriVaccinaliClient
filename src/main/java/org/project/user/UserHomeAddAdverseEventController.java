@@ -258,8 +258,8 @@ public class UserHomeAddAdverseEventController implements Initializable {
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.initOwner(stage);
 
-        ButtonType buttonTypeContinue = new ButtonType("Continua");
-        ButtonType buttonTypeCancel = new ButtonType("Annulla", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType buttonTypeContinue = new ButtonType("SI");
+        ButtonType buttonTypeCancel = new ButtonType("NO", ButtonBar.ButtonData.CANCEL_CLOSE);
 
         alert.getButtonTypes().setAll(buttonTypeContinue, buttonTypeCancel);
 

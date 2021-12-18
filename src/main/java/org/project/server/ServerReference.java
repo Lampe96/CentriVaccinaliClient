@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.Registry;
 
 /**
  * Questa classe gestisce la connessione tra client e server utilizzando RMI.
@@ -30,6 +29,7 @@ public class ServerReference {
     public static void initializeServer() throws RemoteException, NotBoundException {
         if (server == null) {
             try {
+                //Se il server è su un altro pc, al posto di "localhost" mettere l'IP del pc dove sta girando il server
                 server = (Server) Naming.lookup("rmi://localhost:" + Server.PORT + "/" + Server.NAME);
                 System.out.println("SERVER CONNESSO");
             } catch (MalformedURLException e) {
