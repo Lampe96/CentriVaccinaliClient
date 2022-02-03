@@ -12,7 +12,7 @@
             xmlns="http://javafx.com/javafx/15.0.1" fx:controller="org.project.shared.ChartController">
     <AnchorPane prefHeight="400.0" prefWidth="500.0"
                 style="-fx-background-color: #eeeeee; -fx-border-color: linear-gradient(to right top, #fc4a1a, #ffdf00); -fx-border-width: 4; -fx-border-radius: 1.8em; -fx-background-radius: 2em;">
-        <StackedBarChart fx:id="barChart" animated="false" stylesheets="@../chart.css" title="Andamento vaccianzioni"
+        <StackedBarChart fx:id="barChart" animated="false" stylesheets="@../chart.css" title="Andamento vaccinazioni"
                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                          AnchorPane.topAnchor="25.0">
             <xAxis>

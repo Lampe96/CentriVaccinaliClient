@@ -123,6 +123,11 @@ public class HubHomeInfoUserController implements Initializable {
     private User vu;
 
     /**
+     * Nome hub prima vaccinazione.
+     */
+    private String oldNameHub = null;
+
+    /**
      * Utilizzato per settare l'utente di cui si vuole visualizzare
      * le informazioni.
      *
@@ -154,6 +159,8 @@ public class HubHomeInfoUserController implements Initializable {
             TF_date.setText(vu.getVaccineDate().toLocalDate().format(formatter));
             CB_vaccine.setValue(vu.getVaccineType());
             TF_name_hub.setText(vu.getHubName());
+
+            oldNameHub = vu.getHubName();
 
             if (vu.getDose() > 1) {
                 CB_vaccine.setDisable(true);
@@ -243,7 +250,7 @@ public class HubHomeInfoUserController implements Initializable {
                     vu.setHubName(hubName);
                     vu.setName(name);
                     vu.setSurname(surname);
-                    ServerReference.getServer().insertVaccinatedUserInNewHub(vu);
+                    ServerReference.getServer().insertVaccinatedUserInNewHub(vu, oldNameHub);
                     stage.close();
                 } else {
                     errorAlert();
