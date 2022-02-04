@@ -201,7 +201,7 @@ public interface Server extends Remote {
      * precedentemente vaccinati in un altro centro vaccinale.
      *
      * @param vaccinatedUser oggetto contenente tutti i campi da inserire nel DB
-     * @param oldNameHub nome del vecchio centro vaccinale presso cui è stato vaccinato
+     * @param oldNameHub     nome del vecchio centro vaccinale presso cui è stato vaccinato
      * @throws RemoteException RemoteException
      */
     void insertVaccinatedUserInNewHub(User vaccinatedUser, String oldNameHub) throws RemoteException;

@@ -7,8 +7,7 @@ Il progetto centri vaccinali è suddiviso in due parti:
 </ol>
 Questo ReadMe riguarda il lato client.
 
-Le librerie esterne vengono utilizzate sono in gran parte moduli di JavaFX, 
-interne ad openjfx.
+Le librerie esterne vengono utilizzate sono in gran parte moduli di JavaFX, interne ad openjfx.
 
 Altre librerie non appartenenti ai moduli di openjfx sono:
 <ol>
