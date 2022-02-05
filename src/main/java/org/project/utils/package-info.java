@@ -8,6 +8,5 @@
  * @author Enrico Luigi Lamperti 740612 (VA)
  * @see org.project.utils.RegistrationUtil
  * @see org.project.utils.TextFieldLimited
- * @see org.project.utils.UIdGenerator
  */
 package org.project.utils;

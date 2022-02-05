@@ -25,7 +25,6 @@ import org.project.login.LoginMainController;
 import org.project.models.User;
 import org.project.server.ServerReference;
 import org.project.utils.RegistrationUtil;
-import org.project.utils.UIdGenerator;
 
 import java.awt.*;
 import java.io.IOException;
@@ -271,7 +270,7 @@ public class HubHomeRegistrationNewVaccinatedController implements Initializable
         if (RegistrationUtil.checkName(name) && RegistrationUtil.checkName(surname) && RegistrationUtil.checkFiscalCode(fiscalCode) && vaccineType != null) {
             try {
                 if (ServerReference.getServer().checkIfFirstDose(fiscalCode) == 0) {
-                    vaccinatedUser.setId(UIdGenerator.generateUId(fiscalCode));
+                    vaccinatedUser.setId(ServerReference.getServer().getUId());
                     vaccinatedUser.setName(name);
                     vaccinatedUser.setSurname(surname);
                     vaccinatedUser.setFiscalCode(fiscalCode);

@@ -109,7 +109,14 @@ public class HubHomeItemRowController implements Initializable {
         vu = vaccinatedUser;
         LB_name.setText(vaccinatedUser.getName());
         LB_surname.setText(vaccinatedUser.getSurname());
-        LB_nickname.setText(vaccinatedUser.getNickname());
+
+        String nick = vaccinatedUser.getNickname();
+        if (nick.startsWith("Guest")) {
+            LB_nickname.setText(nick.substring(0, 5));
+        } else {
+            LB_nickname.setText(nick);
+        }
+
 
         if (vaccinatedUser.getDose() == 1) {
             IV_dose.setImage(new Image(String.valueOf(UserType.class.getResource("drawable/number_1.png"))));

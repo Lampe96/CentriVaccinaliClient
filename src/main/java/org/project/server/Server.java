@@ -166,6 +166,15 @@ public interface Server extends Remote {
      */
     Hub getHub(String hubName) throws RemoteException;
 
+    /**
+     * Utilizzato per generare l'id univoco basato sull'orario della
+     * somministrazione della prima dose in millisecondi.
+     *
+     * @return Id univoco basato sull'orario in millisecondi
+     * @throws RemoteException RemoteException
+     */
+    long getUId() throws RemoteException;
+
 
     //METODI LATO HUB
 
@@ -275,7 +284,7 @@ public interface Server extends Remote {
      * @return restituisce i dati del cittadino richiesto, in caso di errore restituisce null
      * @throws RemoteException RemoteException
      */
-    User fetchHubVaccinatedInfo(short UId, String hubName) throws RemoteException;
+    User fetchHubVaccinatedInfo(long UId, String hubName) throws RemoteException;
 
     /**
      * Utilizzato per recuperare tutti i dati dello user lato centro vaccinale.
