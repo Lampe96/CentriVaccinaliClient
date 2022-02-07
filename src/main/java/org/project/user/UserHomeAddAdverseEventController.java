@@ -291,7 +291,7 @@ public class UserHomeAddAdverseEventController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
 
         if (result.orElse(null) == buttonTypeContinue) {
-            CB_event_type.setValue("");
+            CB_event_type.getItems().clear();
             R_severity.setRating(0);
             TA_text.setText("");
             initialize(null, null);
